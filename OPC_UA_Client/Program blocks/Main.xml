@@ -2,7 +2,7 @@
 <Document>
   <Engineering version="V17" />
   <DocumentInfo>
-    <Created>2022-07-04T15:11:29.924466Z</Created>
+    <Created>2022-07-04T15:26:01.3791232Z</Created>
     <ExportSetting>WithDefaults</ExportSetting>
     <InstalledProducts>
       <Product>
@@ -234,7 +234,7 @@
     <Access Scope="GlobalVariable" UId="42">
       <Symbol>
         <Component Name="ControllingInterface" />
-        <Component Name="opcUaDone" />
+        <Component Name="opcUaConnected" />
       </Symbol>
     </Access>
     <Access Scope="GlobalVariable" UId="43">
@@ -458,36 +458,25 @@
       <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
         <AttributeList>
           <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
-  <Access Scope="GlobalVariable" UId="21">
-    <Symbol UId="22">
-      <Component Name="ControllingInterface" UId="23" />
-      <Token Text="." UId="24" />
-      <Component Name="new" UId="25" />
+  <NewLine Num="2" UId="21" />
+  <Access Scope="GlobalVariable" UId="22">
+    <Symbol UId="23">
+      <Component Name="ControllingInterface" UId="24" />
+      <Token Text="." UId="25" />
+      <Component Name="new" UId="26" />
     </Symbol>
   </Access>
-  <Blank Num="1" UId="26" />
-  <Token Text=":=" UId="27" />
-  <Blank Num="1" UId="28" />
-  <Access Scope="GlobalVariable" UId="29">
-    <Symbol UId="30">
-      <Component Name="ControllingInterface" UId="31" />
-      <Token Text="." UId="32" />
-      <Component Name="opcUaDone" UId="33" />
+  <Blank Num="1" UId="27" />
+  <Token Text=":=" UId="28" />
+  <Blank Num="1" UId="29" />
+  <Access Scope="GlobalVariable" UId="30">
+    <Symbol UId="31">
+      <Component Name="ControllingInterface" UId="32" />
+      <Token Text="." UId="33" />
+      <Component Name="opcUaDone" UId="34" />
     </Symbol>
   </Access>
-  <Blank Num="1" UId="34" />
-  <Token Text="AND" UId="35" />
-  <Blank Num="1" UId="36" />
-  <Token Text="NOT" UId="37" />
-  <Blank Num="1" UId="38" />
-  <Access Scope="GlobalVariable" UId="39">
-    <Symbol UId="40">
-      <Component Name="ControllingInterface" UId="41" />
-      <Token Text="." UId="42" />
-      <Component Name="opcUaError" UId="43" />
-    </Symbol>
-  </Access>
-  <Token Text=";" UId="44" />
+  <Token Text=";" UId="35" />
 </StructuredText></NetworkSource>
           <ProgrammingLanguage>SCL</ProgrammingLanguage>
         </AttributeList>
