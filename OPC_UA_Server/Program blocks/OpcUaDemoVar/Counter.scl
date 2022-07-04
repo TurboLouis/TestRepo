@@ -1,0 +1,45 @@
+﻿FUNCTION_BLOCK "Counter"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      startCounting { ExternalWritable := 'False'} : Bool;
+      endValue : DInt := 10;
+      frequency : Bool;
+   END_VAR
+
+   VAR_OUTPUT 
+      valueResetted { ExternalWritable := 'False'} : Bool;
+      actValue { ExternalWritable := 'False'} : DInt;
+   END_VAR
+
+   VAR 
+      statValue : DInt;
+      statEndValue : DInt;
+      InstRTrig {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      statFreqTrig : Bool;
+   END_VAR
+
+
+BEGIN
+	IF #startCounting THEN
+	    //start counting after user program triggers
+	    #InstRTrig(CLK:=#frequency,
+	               Q=>#statFreqTrig);
+	    #statEndValue := #endValue;
+	    IF #statValue <= #statEndValue THEN
+	        IF #statFreqTrig THEN
+	            #statValue := #statValue + 1;
+	            #valueResetted := FALSE;
+	        END_IF;
+	    ELSE
+	        #statValue := 0;
+	        #valueResetted := TRUE;
+	    END_IF;
+	ELSE //no counting
+	    //IDLE
+	    ;
+	END_IF;
+	
+	#actValue := #statValue;
+END_FUNCTION_BLOCK
+

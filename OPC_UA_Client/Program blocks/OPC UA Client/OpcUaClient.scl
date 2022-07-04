@@ -1,0 +1,1124 @@
+﻿FUNCTION_BLOCK "OpcUaClient"
+TITLE = OpcUaClient
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : SiemensAG
+VERSION : 1.0
+//OPC UA-Client-Wrapper
+   VAR_INPUT 
+      enable : Bool;   // TRUE: Enable connection to OPC UA server
+      read : Bool;   // TRUE: Execute Read functionality
+      write : Bool;   // TRUE: Execute Write functionality
+      callMethod : Bool;   // TRUE: Execute Method Call
+      methodHdlIndex : SInt;   // Index of method in "methodHdls" that should be called
+      connectionInfo {InstructionName := 'OPC_UA_SessionConnectInfo'; LibVersion := '1.0'} : OPC_UA_SessionConnectInfo;   // Connection Information for session establishment to OPC UA server
+      serverEndpointUrl : String;   // Endpoint of OPC UA server
+   END_VAR
+
+   VAR_OUTPUT 
+      connected { ExternalWritable := 'False'} : Bool;   // TRUE: Connection to OPC UA server is established and valid
+      done { ExternalWritable := 'False'} : Bool;   // TRUE: Functions Read, Write or Method Call were executed successfully
+      busy { ExternalWritable := 'False'} : Bool;   // TRUE: FB is working
+      error { ExternalWritable := 'False'} : Bool;   // TRUE: FB is in faulty state
+      status { ExternalWritable := 'False'} : Word;   // 16#0000 - 16#7FFF: Status of the FB, 16#8000 - 16#FFFF: Error identification
+      diagnostics { ExternalWritable := 'False'} : "typeFbDiagnostics";   // Diagnostics information of FB when error occurs
+      connectionHdl { ExternalWritable := 'False'} : DWord;   // Connection handle which is used for OPC UA connection to the server
+   END_VAR
+
+   VAR_IN_OUT 
+      namespaceUris : Variant;   // Pointer to the Namespace URIs of the OPC UA client interface (NULL if not used)
+      namespaceIndexes : Variant;   // Pointer to the Namespace Indexes of the OPC UA client interface (NULL if not used)
+      readNodeIds : Variant;   // Pointer to the Node-IDs of the nodes to read of the OPC UA client interface (NULL if not used)
+      readNodeHdls : Variant;   // Pointer to the Node handles of the registered nodes to read of the OPC UA client interface (NULL if not used)
+      readData : Variant;   // Pointer to the storage area for read data (NULL if not used)
+      writeNodeIds : Variant;   // Pointer to the Node-IDs of the nodes to write of the OPC UA client interface (NULL if not used)
+      writeNodeHdls : Variant;   // Pointer to the Node handles of the registered nodes to write of the OPC UA client interface (NULL if not used)
+      writeData : Variant;   // Pointer to the storage area for write data (NULL if not used)
+      objNodeIds : Variant;   // Pointer to the Node-IDs of the method objects (instance DB) of the OPC UA client interface (NULL if not used)
+      methodNodeIds : Variant;   // Pointer to the Node-IDs of the methods of the OPC UA client Interface (NULL if not used)
+      methodHdls : Variant;   // Pointer to the Node handles of the registered methods of the OPC UA client interface (NULL if not used)
+      inputArguments : Variant;   // Pointer to the Input Arguments of the called method (NULL if not used)
+      outputArguments : Variant;   // Pointer to the Output Arguments of the called method (NULL if not used)
+   END_VAR
+
+   VAR 
+      instOpcUaConnect {InstructionName := 'OPC_UA_Connect'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_Connect;
+      instOpcUaConnectionGetStatus {InstructionName := 'OPC_UA_ConnectionGetStatus'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_ConnectionGetStatus;
+      instOpcUaNamespaceGIL {InstructionName := 'OPC_UA_NamespaceGetIndexList'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_NamespaceGetIndexList;
+      InstOpcUaGHLRead {InstructionName := 'OPC_UA_NodeGetHandleList'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_NodeGetHandleList;
+      instOpcUaGHLWrite {InstructionName := 'OPC_UA_NodeGetHandleList'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_NodeGetHandleList;
+      instOpcUaGHLMethods {InstructionName := 'OPC_UA_MethodGetHandleList'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_MethodGetHandleList;   // Get node handles for Methods
+      InstOpcUaRHLRead {InstructionName := 'OPC_UA_NodeReleaseHandleList'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_NodeReleaseHandleList;
+      instOpcUaRHLWrite {InstructionName := 'OPC_UA_NodeReleaseHandleList'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_NodeReleaseHandleList;
+      instOpcUaRHLMethods {InstructionName := 'OPC_UA_MethodReleaseHandleList'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_MethodReleaseHandleList;
+      instOpcUaReadList {InstructionName := 'OPC_UA_ReadList'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_ReadList;
+      instOpcUaWriteList {InstructionName := 'OPC_UA_WriteList'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_WriteList;   // Write values of multiple nodes
+      instOpcUaMethodCall {InstructionName := 'OPC_UA_MethodCall'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_MethodCall;
+      instOpcUaDisconnect {InstructionName := 'OPC_UA_Disconnect'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : OPC_UA_Disconnect;
+      statOldTriggers { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Struct   // Internal structure for Trigger handling
+         connect { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Saved Trigger for Connection establishment
+         reconnect { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Saved Trigger for Connection reestablishment
+         disconnect { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; S7_SetPoint := 'True'} : Bool;   // Saved Trigger for disconnecting
+         read { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; S7_SetPoint := 'True'} : Bool;   // Saved Trigger for Read
+         write { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; S7_SetPoint := 'True'} : Bool;   // Saved Trigger for Write
+         callMethod { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Saved Trigger for Method Call
+         clearSession { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Saved Trigger for Session Clearing
+      END_STRUCT;
+      statState { ExternalWritable := 'False'} : Int;   // Actual state of the state machine. 0: connect; 1: get Namespaces; 3: Get List Handles; 4: Connected; 5: Disconnect
+      statDone { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Read, Write, MethodCall finished without error.
+      statConnected { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Connection to OPC UA Server is established and valid.
+      statBusy { ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // FB is busy.
+      statDiagnostics { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : "typeFbDiagnostics";   // Diagnostic structure for internal use.
+      statDiagnosticsEmpty { ExternalWritable := 'False'} : "typeFbDiagnostics";   // Empty diagnostic structure, to initialize Output.
+      statOpcUaRequests { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Struct   // Internal structure for OPC UA function blocks requests.
+         connect { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_Connect
+         conGS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_ConnectionGetStatus
+         NGIL { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_NamespaceGetIndexList
+         readGHL { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_NodeGetHandleList for ReadList
+         methodsGHL { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_MethodGetHandleList
+         writeGHL { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_NodeGetHandleList for WriteList
+         read { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_ReadList
+         write { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_WriteList
+         methodCall { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_MethodCall
+         readRHL { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_NodeReleaseHandleList for ReadList
+         writeRHL { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_NodeReleaseHandleList for WriteList
+         methodsRHL { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_MethodReleaseHandleList
+         disconnect { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Request for OPC_UA_Disconnect
+      END_STRUCT;
+      statRegisteredLists { ExternalWritable := 'False'} : Struct   // Internal structure for registered Lists/Namespaces. For Diagnostic purpose.
+         NamespaceIndexes { ExternalWritable := 'False'} : Bool;   // Namespace Indexes are registered by OPC_UA_NamespaceGetIndexList
+         Read { ExternalWritable := 'False'} : Bool;   // Read list is registered by OPC_UA_NodeGetHandleList
+         Write { ExternalWritable := 'False'} : Bool;   // Write list is registered by OPC_UA_NodeGetHandleList
+         Methods { ExternalWritable := 'False'} : Bool;   // Method list is registered by OPC_UA_MethodGetHandleList
+      END_STRUCT;
+      statDiagCounter { ExternalWritable := 'False'} : Struct   // Internal structure for counting connects/registrations/functions. For Diagnostic purpose.
+         Connect { ExternalVisible := 'False'; ExternalWritable := 'False'} : UInt;   // Counter for successful connects or reconnects.
+         NamespaceReg { ExternalWritable := 'False'} : UInt;   // Counter for successful Namespace registrations.
+         RegisterRead { ExternalWritable := 'False'} : UInt;   // Counter for successful Read List registrations.
+         RegisterWrite { ExternalWritable := 'False'} : UInt;   // Counter for successful Write List registrations.
+         RegisterMethods { ExternalWritable := 'False'} : UInt;   // Counter for successful Method List registrations.
+         Read { ExternalWritable := 'False'} : UInt;   // Counter for successful Read function executions.
+         Write { ExternalWritable := 'False'} : UInt;   // Counter for successful Write function executions.
+         MethodCall { ExternalWritable := 'False'} : UInt;   // Counter for successful Method Calls.
+      END_STRUCT;
+      statMethodResult { ExternalWritable := 'False'} : DWord;   // OPC UA result after Method Call.
+      statMethodHdl { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : DWord;   // Calculated Method Handle. Dependend on INPUT: methodHdlIndex.
+      statMethodHdlId { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : DInt;   // Internal Variable for INPUT: methodHdlIndex.
+      statConnectionHdl { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : DWord;   // Internal Variable for Connection Handle.
+      statRHLTrigger { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Trigger, do start with releasing Lists for disconnect.
+      statCheckConnectionStatus { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // If TRUE, OPC_UA_ConnectionGetStatus is called to diagnose the connection.
+      statCycDiagTrigger { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;   // Cyclic trigger for OPC_UA_ConnectionGetStatus-
+      instCycDiag {InstructionName := 'IEC_TIMER'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : IEC_TIMER;   // Timer for cyclic connection diagnostics.
+      statOpcUaReadTimeStamps { ExternalWritable := 'False'} : Array[0..299] of LDT;   // Timestamps of read variables. For diagnostic purpose.
+      statSerializeMethodHdls { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Array[0..1199] of Byte;   // Array for calculating the MethodHdl together with the INPUT methodHdlIndex.
+      statOpcUaStatusLists { ExternalWritable := 'False'} : Struct   // Internal structure for Status Lists, that are used by every OPC_UA_xxx FB
+         methodRHL { ExternalWritable := 'False'} : Array[0..299] of DWord;   // Status List for Method OPC_UA_ReleaseHandleList
+         methodGHL { ExternalWritable := 'False'} : Array[0..299] of DWord;   // Status List for Method OPC_UA_GetHandleList
+         writeRHL { ExternalWritable := 'False'} : Array[0..299] of DWord;   // Status List for Write OPC_UA_ReleaseHandleList
+         writeList { ExternalWritable := 'False'} : Array[0..299] of DWord;   // Status List for Write OPC_UA_WritedList
+         writeGHL { ExternalWritable := 'False'} : Array[0..299] of DWord;   // Status List for WriteOPC_UA_GetHandleList
+         readRHL { ExternalWritable := 'False'} : Array[0..299] of DWord;   // Status List for Read OPC_UA_ReleaseHandleList
+         readList { ExternalWritable := 'False'} : Array[0..299] of DWord;   // Status List for Read OPC_UA_ReadList
+         readGHL { ExternalWritable := 'False'} : Array[0..299] of DWord;   // Status List for Read OPC_UA_GetHandleList
+         namespaceGIL { ExternalWritable := 'False'} : Array[0..299] of DWord;   // Status List for Namespace OPC_UA_NamespaceGetIndexList
+      END_STRUCT;
+   END_VAR
+
+   VAR_TEMP 
+      tempIndex : Int;   // Index for finding errors in statOpcUaStatusLists.
+      tempRetVal : Int;   // Return value for Serialize function, that is used for calculating statMethodHdl.
+      tempConnectTrigger : Bool;   // Temporary trigger for connection establishment.
+      tempDisconnectTrigger : Bool;   // Temporary trigger for disconnect.
+      tempReadTrigger : Bool;   // Temporary trigger for Read function.
+      tempWriteTrigger : Bool;   // Temporary trigger for Write function.
+      tempMethodCallTrigger : Bool;   // Temporary trigger for Method Calls.
+      tempReconnectTrigger : Bool;   // Temporary trigger for reconnect.
+      tempClearSessionTrigger : Bool;   // Temporary trigger for clean up Session.
+   END_VAR
+
+   VAR CONSTANT 
+      STATE_CONNECT : Int := 0;   // State for idling until INPUT enable is triggered, to establish a connection.
+      STATE_NAMESPACE_GET_INDEX_LIST : Int := 1;   // State for getting Namespace indexes.
+      STATE_NODE_GET_HANDLE_LIST : Int := 3;   // State for registration of Read/Write/Method Lists
+      STATE_CONNECTED : Int := 4;   // State for idling until INPUT read/write/methodCall has positive edge, to execute function.
+      STATE_DISCONNECT : Int := 5;   // State for releasing Read/Write/Method Lists and disconnect.
+      CGS_CONNECTED : UDInt := 0;   // OPC_UA_ConnectionGetStatus Connection state is connected.
+      CGS_CONN_ERROR : UDInt := 1;   // OPC_UA_ConnectionGetStatus Connection state is in error.
+      CGS_SHUTDOWN : UDInt := 2;   // OPC_UA_ConnectionGetStatus Connection state is in shutdown, nodes have to be released and connection terminated.
+      CGS_SS_RUNNING : UDInt := 0;   // OPC_UA_ConnectionGetStatus Server state is running.
+      CGS_SL_GOOD : Byte := 16#FF;   // OPC_UA_ConnectionGetStatus Connection state is connected.
+      STATUS_SESSION_CLEANEDUP : DWord := 16#A000_0105;   // OPC_UA_ConnectionGetStatus: Session is cleaned up and has to be reconnected.
+      STATUS_SERVER_NOT_CONNECTED : DWord := 16#800D_0000;   // OPC_UA_ConnectionGetStatus: Choosen Server is not connected.
+      STATUS_BAD_CONNECTION_CLOSED : DWord := 16#80AE_0000;   // OPC_UA_ConnectionGetStatus
+      STATUS_BUSY : Word := 16#7001;   // Function block is busy.
+      STATUS_IDLE : Word := 16#7000;   // Function block idles.
+      STATUS_NOT_REGISTERED : Word := 16#80FF;   // Read/Write/Method List is not registered
+      STATUS_DONE : Word := 16#0000;   // Read/Write/Method Call was successfully executed.
+      CYC_TIME_GCS : Time := T#5S;   // Time for cylic call of OPC_UA_ConnectionGetStatus
+      OPC_UA_FUNCTIONS_TIMEOUT : Time := T#10S;   // Timout for all OPC UA Client Function blocks
+      ERR_CONNECT : Word := 16#8601;   // Error during connect.
+      ERR_NGIL : Word := 16#8602;   // Error during getting Namespace Indexes
+      ERR_NGIL_SL : Word := 16#8617;   // Error in Namespace indexes Status list
+      ERR_R_GHL : Word := 16#8631;   // Error during Read list registration
+      ERR_R_GHL_SL : Word := 16#8731;   // Error in Read handle list Status list
+      ERR_W_GHL : Word := 16#8632;   // Error during Write list registration
+      ERR_W_GHL_SL : Word := 16#8732;   // Error in Write handle list Status list
+      ERR_M_GHL : Word := 16#8633;   // Error during Method list registration
+      ERR_M_GHL_SL : Word := 16#8733;   // Error in Method handle List status list
+      ERR_RL : Word := 16#8604;   // Error during Read List execution
+      ERR_RL_NOTREG : Word := 16#86F4;   // Error, because no Read List is registered, but Read execution was triggered
+      ERR_RL_SL : Word := 16#8614;   // Error in Read list status list.
+      ERR_WL : Word := 16#8605;   // Error during Write List execution
+      ERR_WL_NOTREG : Word := 16#86F5;   // Error, because no Write List is registered, but Write execution was triggered
+      ERR_WL_SL : Word := 16#8615;   // Error in Write list status list
+      ERR_MC : Word := 16#8606;   // Error durging Method Call execution
+      ERR_MC_NOTREG : Word := 16#86F6;   // Error, because no Method List is registered, but Method call execution was triggered
+      ERR_MC_SERIALIZE : Word := 16#8616;   // Error during MethodHdl calculation, in Serialize function
+      ERR_MC_RESULT : Word := 16#8626;   // Error, that was reported by Methods OPC UA result
+      ERR_R_RHL : Word := 16#8671;   // Error during release of Read List
+      ERR_R_RHL_SL : Word := 16#8771;   // Error in Release Read List status list
+      ERR_W_RHL : Word := 16#8672;   // Error during realease of Write list
+      ERR_W_RHL_SL : Word := 16#8772;   // Error in Release Write List status list
+      ERR_M_RHL : Word := 16#8673;   // Error during relaese of Method List
+      ERR_M_RHL_SL : Word := 16#8773;   // Error in Release Method List status List
+      ERR_DISCON : Word := 16#8608;   // Error during disconnect.
+      ERR_CGS : Word := 16#8610;   // Error in OPC_UA_ConnectionGetStatus
+      ERR_CGS_CSTATE : Word := 16#8611;   // Error in OPC_UA_ConnectionGetStatus, regarding Connection Status
+      ERR_CGS_CSTATE_SHUTDOWN : Word := 16#8711;   // Error in OPC_UA_ConnectionGetStats, Connection was shut down
+      ERR_CGS_SSTATE : Word := 16#8612;   // Error in OPC_UA_ConnectionGetStatus, regarding Server State
+      ERR_CGS_SLVL : Word := 16#8613;   // Error in OPC_UA_ConnectionGetStatus, regarding Service Level
+      MAX_LIST_LENGTH : UInt := 299;   // Maximum lenth of Write/Readlist
+      MAX_LENGTH_METHOD_INDEX : UInt := 399;   // maximum length of MethodHdls (mas 100 Methods per MethodList)
+   END_VAR
+
+
+BEGIN
+	//=============================================================================
+	// Siemens AG (c)Copyright (2019)
+	//-----------------------------------------------------------------------------
+	// Library: -
+	// Tested with: CPU 1513-1 PN;  FW 2.8
+	// Engineering: TIA Portal (V16)
+	// Restrictions: -
+	// Requirements: OPC UA Client activated, Fimware V2.8; Set PLC time
+	// Functionality: Encapsulates OPC UA client blocks for read, write and method
+	//                call including connection handling and diagnosis
+	//-----------------------------------------------------------------------------
+	// Change log table:
+	// Version    Date         Expert in charge           Changes applied
+	// 01.00.00   01.02.2019   Siemens SUP Applications   First released version
+	// 02.00.00   31.11.2019   Siemens SUP Applications   Interface, Styleguide and user program performance changes
+	//=============================================================================
+	
+	
+	//State machine
+	CASE #statState OF
+	    #STATE_CONNECT:
+	        REGION Connection Handling
+	            //initialize FB
+	            IF NOT #enable THEN
+	                #statBusy := FALSE;
+	                #statDone := FALSE;
+	                #statDiagnostics := #statDiagnosticsEmpty;
+	                #statOldTriggers.connect := FALSE;
+	                #statConnected := FALSE;
+	                #statDiagnostics.status := #STATUS_DONE;
+	            END_IF;
+	            
+	            //Rising Edge detection of connect
+	            #tempConnectTrigger := #enable AND NOT #statOldTriggers.connect;
+	            #statOldTriggers.connect := #enable;
+	            //Rising Edge detection for Reconnect functionality
+	            #tempReconnectTrigger := #enable AND NOT #statConnected
+	            // AND (#statDiagnostics.subfunctionStatus = #STATUS_SESSION_CLEANEDUP
+	            // OR #statDiagnostics.subfunctionStatus = #STATUS_BAD_CONNECTION_CLOSED)
+	            AND #statDiagnostics.subfunctionStatus = UDINT_TO_DWORD(#CGS_SHUTDOWN)
+	            AND NOT #statOldTriggers.reconnect;
+	            #statOldTriggers.reconnect := #enable AND NOT #statConnected
+	            // AND (#statDiagnostics.subfunctionStatus = #STATUS_SESSION_CLEANEDUP
+	            // OR #statDiagnostics.subfunctionStatus = #STATUS_BAD_CONNECTION_CLOSED);
+	            AND #statDiagnostics.subfunctionStatus = UDINT_TO_DWORD(#CGS_SHUTDOWN);
+	            
+	            //If Connect requested, start connection establishment
+	            //---------CONNECT HANDLING-------------
+	            //--------------------------------------
+	            IF #tempConnectTrigger OR #tempReconnectTrigger THEN
+	                IF #statConnectionHdl = 16#0 THEN
+	                    // no connectionHdl is used -> ready to connect
+	                    #statOpcUaRequests.connect := TRUE;
+	                    // set FB outputs
+	                    #statBusy := TRUE;
+	                    #statDiagnostics.status := #STATUS_BUSY;
+	                ELSE
+	                    //connectionHdl might be defect, first delete connectionHdl
+	                    //-> not ready to connect
+	                    #statOpcUaRequests.disconnect := TRUE;
+	                    //set FB Outputs
+	                    #statBusy := TRUE;
+	                    #statDiagnostics.status := #STATUS_BUSY;
+	                END_IF;
+	            ELSE
+	                IF #instOpcUaDisconnect.Error OR #instOpcUaDisconnect.Done AND #enable THEN
+	                    //possibly open connection handle is not available or is disconnected
+	                    //-> ready to connect
+	                    #statOpcUaRequests.disconnect := FALSE;
+	                    #statOpcUaRequests.connect := TRUE;
+	                    #statConnectionHdl := 0;
+	                ELSE
+	                    //nothing done by OPC UA Disconnect block -> Not ready to connect
+	                    #statOpcUaRequests.connect := FALSE;
+	                END_IF;
+	            END_IF;
+	            
+	            //Error at connection establishment
+	            IF #instOpcUaConnect.Error THEN
+	                #statDone := FALSE;
+	                #statConnected := FALSE;
+	                #statDiagnostics.status := #ERR_CONNECT;
+	                #statDiagnostics.subfunctionStatus := #instOpcUaConnect.Status;
+	            END_IF;
+	            
+	            //Connection establishment was successful
+	            IF #instOpcUaConnect.Done THEN
+	                #statConnected := TRUE;
+	                #statOldTriggers.reconnect := FALSE;
+	                #statDiagCounter.Connect += 1;
+	                #statState := #STATE_NAMESPACE_GET_INDEX_LIST;
+	            END_IF;
+	            
+	        END_REGION
+	        
+	    #STATE_NAMESPACE_GET_INDEX_LIST:
+	        REGION Handle Namespaces
+	            //Request Namespace get Indexlist
+	            #statOpcUaRequests.NGIL := TRUE;
+	            #statDiagnostics.status := #STATUS_BUSY;
+	            
+	            // Get Index List was not successful
+	            IF #instOpcUaNamespaceGIL.Error THEN
+	                //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                IF #instOpcUaNamespaceGIL.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                    #statCheckConnectionStatus := TRUE;
+	                ELSE
+	                    #statState := #STATE_CONNECT;
+	                END_IF;
+	                #statOpcUaRequests.NGIL := FALSE;
+	                // => OUT
+	                #statBusy := FALSE;
+	                #statDiagnostics.status := #ERR_NGIL;
+	                #statDiagnostics.subfunctionStatus := #instOpcUaNamespaceGIL.Status;
+	            END_IF;
+	            
+	            //Get Index List was successful
+	            IF #instOpcUaNamespaceGIL.Done THEN
+	                //Check StatusList
+	                FOR #tempIndex := 0 TO UDINT_TO_INT(CountOfElements(#namespaceUris) - 1) DO
+	                    IF #statOpcUaStatusLists.#namespaceGIL[#tempIndex] <> 16#0 THEN
+	                        #statOpcUaRequests.NGIL := FALSE;
+	                        // => OUT
+	                        #statDiagnostics.status := #ERR_NGIL_SL;
+	                        #statDiagnostics.subfunctionStatus := #statOpcUaStatusLists.namespaceGIL[#tempIndex];
+	                        // error during NGIL call --> connection establishment failed
+	                        #statState := #STATE_CONNECT;
+	                        EXIT;
+	                    END_IF;
+	                END_FOR;
+	                #statOpcUaRequests.NGIL := FALSE;
+	                IF NOT #statDiagnostics.status.%X15 THEN
+	                    //Count up statNamespaceGetIndexCount
+	                    #statDiagCounter.NamespaceReg += 1;
+	                    //statNamespaceIndexesSet
+	                    #statRegisteredLists.NamespaceIndexes := TRUE;
+	                    //=>OUT
+	                    //Next Step
+	                    #statState := #STATE_NODE_GET_HANDLE_LIST;
+	                ELSE
+	                    #statCheckConnectionStatus := TRUE;
+	                END_IF;
+	            END_IF;
+	        END_REGION
+	        
+	    #STATE_NODE_GET_HANDLE_LIST:
+	        REGION Handle NodeId lists
+	            //Trigger NodeHandleList SFBs
+	            IF NOT #statRegisteredLists.Write AND #writeNodeIds <> NULL AND #writeNodeHdls <> NULL THEN
+	                #statOpcUaRequests.writeGHL := TRUE;
+	                #statDiagnostics.status := #STATUS_BUSY;
+	            ELSE
+	                IF NOT #statRegisteredLists.Read AND #readNodeIds <> NULL AND #readNodeHdls <> NULL THEN
+	                    #statOpcUaRequests.readGHL := TRUE;
+	                    #statDiagnostics.status := #STATUS_BUSY;
+	                ELSE
+	                    IF NOT #statRegisteredLists.Methods AND #methodNodeIds <> NULL AND #methodHdls <> NULL AND #objNodeIds <> NULL THEN
+	                        #statOpcUaRequests.methodsGHL := TRUE;
+	                        #statDiagnostics.status := #STATUS_BUSY;
+	                    ELSE
+	                        #statState := #STATE_CONNECTED;
+	                        #statBusy := FALSE;
+	                        #statDiagnostics.status := #STATUS_IDLE;
+	                    END_IF;
+	                END_IF;
+	            END_IF;
+	            
+	            REGION Handle ReadList
+	                //Read Node Get Handle List was not successful
+	                IF #InstOpcUaGHLRead.Error THEN
+	                    //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                    IF #InstOpcUaGHLRead.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                        #statCheckConnectionStatus := TRUE;
+	                    ELSE
+	                        //#statCase := #STATE_CONNECT;
+	                        #statState := #STATE_CONNECTED;
+	                    END_IF;
+	                    #statOpcUaRequests.readGHL := FALSE;
+	                    // => OUT
+	                    #statDiagnostics.status := #ERR_R_GHL;
+	                    #statDiagnostics.subfunctionStatus := #InstOpcUaGHLRead.Status;
+	                END_IF;
+	                
+	                //Read Node Get Handle List was successful
+	                IF #InstOpcUaGHLRead.Done THEN
+	                    //Check StatusList
+	                    FOR #tempIndex := 0 TO UDINT_TO_INT(CountOfElements(#readNodeIds) - 1) DO
+	                        IF #statOpcUaStatusLists.#readGHL[#tempIndex] <> 16#0 THEN
+	                            // => OUT
+	                            #statBusy := FALSE;
+	                            #statDiagnostics.status := #ERR_R_GHL_SL;
+	                            #statDiagnostics.subfunctionStatus := #statOpcUaStatusLists.#readGHL[#tempIndex];
+	                            EXIT;
+	                        END_IF;
+	                    END_FOR;
+	                    #statOpcUaRequests.readGHL := FALSE;
+	                    // Count up statRegisterCount
+	                    #statDiagCounter.RegisterRead += 1;
+	                    // Nodes are registered
+	                    #statRegisteredLists.Read := TRUE;
+	                END_IF;
+	            END_REGION
+	            REGION Handle Write List
+	                //Write Node Get Handle List was not successful
+	                IF #instOpcUaGHLWrite.Error THEN
+	                    //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                    IF #instOpcUaGHLWrite.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                        #statCheckConnectionStatus := TRUE;
+	                    ELSE
+	                        //#statCase := #STATE_CONNECT;
+	                        #statState := #STATE_CONNECTED;
+	                    END_IF;
+	                    #statOpcUaRequests.writeGHL := FALSE;
+	                    // => OUT
+	                    #statDiagnostics.status := #ERR_W_GHL;
+	                    #statDiagnostics.subfunctionStatus := #instOpcUaGHLWrite.Status;
+	                END_IF;
+	                
+	                //Write Node Get Handle List was successful
+	                IF #instOpcUaGHLWrite.Done THEN
+	                    //Check StatusList
+	                    FOR #tempIndex := 0 TO UDINT_TO_INT(CountOfElements(#writeNodeIds) - 1) DO
+	                        IF #statOpcUaStatusLists.#writeGHL[#tempIndex] <> 16#0 THEN
+	                            // => OUT
+	                            #statBusy := FALSE;
+	                            #statDiagnostics.status := #ERR_W_GHL_SL;
+	                            #statDiagnostics.subfunctionStatus := #statOpcUaStatusLists.#writeGHL[#tempIndex];
+	                            //#statCase := #STATE_CONNECT;
+	                            EXIT;
+	                        END_IF;
+	                    END_FOR;
+	                    #statOpcUaRequests.writeGHL := FALSE;
+	                    // Count up statRegisterCount
+	                    #statDiagCounter.RegisterWrite += 1;
+	                    // Nodes are registered
+	                    #statRegisteredLists.Write := TRUE;
+	                END_IF;
+	            END_REGION
+	            
+	            REGION Handle MethodList
+	                //Method Get HandleList was not successful
+	                IF #instOpcUaGHLMethods.Error THEN
+	                    //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                    IF #instOpcUaGHLMethods.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                        #statCheckConnectionStatus := TRUE;
+	                    ELSE
+	                        //#statCase := #STATE_CONNECT;
+	                        #statState := #STATE_CONNECTED;
+	                    END_IF;
+	                    #statOpcUaRequests.methodsGHL := FALSE;
+	                    // => OUT
+	                    #statDiagnostics.status := #ERR_M_GHL;
+	                    #statDiagnostics.subfunctionStatus := #instOpcUaGHLMethods.Status;
+	                END_IF;
+	                
+	                //Method Get Handle List was successful
+	                IF #instOpcUaGHLMethods.Done THEN
+	                    //Check StatusList
+	                    FOR #tempIndex := 0 TO UDINT_TO_INT(CountOfElements(#methodNodeIds) - 1) DO
+	                        IF #statOpcUaStatusLists.#methodGHL[#tempIndex] <> 16#0 THEN
+	                            // => OUT
+	                            #statBusy := FALSE;
+	                            #statDiagnostics.status := #ERR_M_GHL_SL;
+	                            #statDiagnostics.subfunctionStatus := #statOpcUaStatusLists.#methodGHL[#tempIndex];
+	                            EXIT;
+	                        END_IF;
+	                    END_FOR;
+	                    #statOpcUaRequests.methodsGHL := FALSE;
+	                    // Count up statRegisterCount
+	                    #statDiagCounter.RegisterMethods += 1;
+	                    // Nodes are registered
+	                    #statRegisteredLists.Methods := TRUE;
+	                END_IF;
+	            END_REGION
+	            
+	        END_REGION
+	        
+	    #STATE_CONNECTED:
+	        
+	        REGION Command and Idle
+	            //Idle as long as no Command was triggered
+	            IF NOT #statBusy AND NOT #read AND NOT #write AND NOT #callMethod AND NOT #statCheckConnectionStatus THEN
+	                #statDone := FALSE;
+	                #statDiagnostics.status := #STATUS_IDLE;
+	            END_IF;
+	            //OPC_UA_GetStatus function is called cyclically, so the connection is monitored
+	            #instCycDiag.TON(IN := NOT #statCycDiagTrigger,
+	                             PT := #CYC_TIME_GCS);
+	            #statCycDiagTrigger := FALSE;
+	            IF #instCycDiag.Q AND NOT #statRHLTrigger AND NOT #tempDisconnectTrigger THEN
+	                #statCheckConnectionStatus := TRUE;
+	                #statCycDiagTrigger := TRUE;
+	            END_IF;
+	            
+	            REGION Read
+	                //Trigger if nodes are registered
+	                IF #statRegisteredLists.Read AND #statConnected THEN
+	                    #tempReadTrigger := #read AND NOT #statOldTriggers.read;
+	                    #statOldTriggers.read := #read;
+	                ELSE
+	                    IF #read AND #statConnected THEN
+	                        #statDiagnostics.status := #ERR_RL_NOTREG; //Error no ReadList is registerd Request denied
+	                        #statDiagnostics.subfunctionStatus := #STATUS_NOT_REGISTERED;
+	                    ELSE
+	                        IF NOT #statCheckConnectionStatus THEN
+	                            #statDiagnostics.status := #STATUS_IDLE; //Wait for Connection Get Status
+	                        END_IF;
+	                    END_IF;
+	                END_IF;
+	                
+	                IF #tempReadTrigger THEN
+	                    #statOpcUaRequests.read := TRUE;
+	                    #statBusy := TRUE;
+	                    #statDiagnostics.status := #STATUS_BUSY;
+	                ELSE
+	                    #statOpcUaRequests.read := FALSE;
+	                END_IF;
+	                //Error
+	                IF #instOpcUaReadList.Error THEN
+	                    //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                    IF #instOpcUaReadList.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                        #statCheckConnectionStatus := TRUE;
+	                    END_IF;
+	                    #statOpcUaRequests.read := FALSE;
+	                    // => OUT
+	                    #statBusy := FALSE;
+	                    #statDiagnostics.status := #ERR_RL;
+	                    #statDiagnostics.subfunctionStatus := #instOpcUaReadList.Status;
+	                END_IF;
+	                
+	                //Done
+	                IF #instOpcUaReadList.Done THEN
+	                    //Check StatusList
+	                    FOR #tempIndex := 0 TO UDINT_TO_INT(CountOfElements(#readNodeIds) - 1) DO
+	                        IF #statOpcUaStatusLists.#readList[#tempIndex] <> 16#0 THEN
+	                            // => OUT
+	                            #statDone := FALSE;
+	                            #statBusy := FALSE;
+	                            #statDiagnostics.status := #ERR_RL_SL;
+	                            #statDiagnostics.subfunctionStatus := #statOpcUaStatusLists.readList[#tempIndex];
+	                            EXIT;
+	                        END_IF;
+	                    END_FOR;
+	                    #statOpcUaRequests.read := FALSE;
+	                    // => OUT
+	                    IF NOT #statDiagnostics.status.%X15 THEN
+	                        #statDone := TRUE;
+	                        #statBusy := FALSE;
+	                        #statDiagnostics.status := #STATUS_DONE;
+	                        //Count up statReadCount
+	                        #statDiagCounter.Read += 1;
+	                        //--> Nodes are read continously ...
+	                    END_IF;
+	                END_IF;
+	            END_REGION
+	            
+	            REGION Write
+	                //Trigger if nodes are registered
+	                IF #statRegisteredLists.Write AND #statConnected THEN
+	                    #tempWriteTrigger := #write AND NOT #statOldTriggers.write;
+	                    #statOldTriggers.write := #write;
+	                ELSE
+	                    IF #write AND #statConnected THEN
+	                        #statDiagnostics.status := #ERR_WL_NOTREG; //Error no WriteList is registerd Request denied
+	                        #statDiagnostics.subfunctionStatus := #STATUS_NOT_REGISTERED;
+	                    ELSE
+	                        IF NOT #statCheckConnectionStatus THEN
+	                            #statDiagnostics.status := #STATUS_IDLE; //Wait for Connection Get Status
+	                        END_IF;
+	                    END_IF;
+	                END_IF;
+	                
+	                IF #tempWriteTrigger THEN
+	                    #statOpcUaRequests.write := TRUE;
+	                    #statBusy := TRUE;
+	                    #statDiagnostics.status := #STATUS_BUSY;
+	                ELSE
+	                    #statOpcUaRequests.write := FALSE;
+	                END_IF;
+	                //Error
+	                IF #instOpcUaWriteList.Error THEN
+	                    //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                    IF #instOpcUaWriteList.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                        #statCheckConnectionStatus := TRUE;
+	                    END_IF;
+	                    #statOpcUaRequests.write := FALSE;
+	                    // => OUT
+	                    #statBusy := FALSE;
+	                    #statDiagnostics.status := #ERR_WL;
+	                    #statDiagnostics.subfunctionStatus := #instOpcUaWriteList.Status;
+	                END_IF;
+	                
+	                //Done
+	                IF #instOpcUaWriteList.Done THEN
+	                    //Check StatusList
+	                    FOR #tempIndex := 0 TO UDINT_TO_INT(CountOfElements(#writeNodeIds) - 1) DO
+	                        IF #statOpcUaStatusLists.#writeList[#tempIndex] <> 16#0 THEN
+	                            // => OUT
+	                            #statDone := FALSE;
+	                            #statBusy := FALSE;
+	                            #statDiagnostics.status := #ERR_WL_SL;
+	                            #statDiagnostics.subfunctionStatus := #statOpcUaStatusLists.#writeList[#tempIndex];
+	                            EXIT;
+	                        END_IF;
+	                    END_FOR;
+	                    
+	                    #statOpcUaRequests.write := FALSE;
+	                    // => OUT
+	                    IF NOT #statDiagnostics.status.%X15 THEN
+	                        #statDone := TRUE;
+	                        #statBusy := FALSE;
+	                        #statDiagnostics.status := #STATUS_DONE;
+	                        //Count up statwriteCount
+	                        #statDiagCounter.Write += 1;
+	                        //--> Nodes are write continously ...
+	                    END_IF;
+	                END_IF;
+	            END_REGION
+	            
+	            REGION Method Call
+	                //Trigger if methods are registered
+	                IF #statRegisteredLists.Methods AND #statConnected THEN
+	                    #tempMethodCallTrigger := #callMethod AND NOT #statOldTriggers.callMethod;
+	                    #statOldTriggers.callMethod := #callMethod;
+	                ELSE
+	                    IF #callMethod AND #statConnected THEN
+	                        #statDiagnostics.status := #ERR_MC_NOTREG; //Error no MethodList is registerd Request denied
+	                        #statDiagnostics.subfunctionStatus := #STATUS_NOT_REGISTERED;
+	                    ELSE
+	                        IF NOT #statCheckConnectionStatus THEN
+	                            #statDiagnostics.status := #STATUS_IDLE; //Wait for Connection Get Status
+	                        END_IF;
+	                    END_IF;
+	                END_IF;
+	                
+	                IF #tempMethodCallTrigger THEN
+	                    #statMethodHdlId := #methodHdlIndex * 0;
+	                    //Define statMethodHdl for the input methodHdlIndex choosen index of MethodList
+	                    #tempRetVal := Serialize(SRC_VARIABLE := #methodHdls,
+	                                             DEST_ARRAY => #statSerializeMethodHdls,
+	                                             POS := #statMethodHdlId);
+	                    IF #tempRetVal <> 0 THEN
+	                        #statDiagnostics.status := #ERR_MC_SERIALIZE;
+	                        #statDiagnostics.subfunctionStatus := INT_TO_WORD(#tempRetVal);
+	                    ELSE
+	                        #statMethodHdlId := #methodHdlIndex * 4;
+	                        #statMethodHdl.%B0 := #statSerializeMethodHdls[#statMethodHdlId + 3];
+	                        #statMethodHdl.%B1 := #statSerializeMethodHdls[#statMethodHdlId + 2];
+	                        #statMethodHdl.%B2 := #statSerializeMethodHdls[#statMethodHdlId + 1];
+	                        #statMethodHdl.%B3 := #statSerializeMethodHdls[#statMethodHdlId];
+	                        //Start Method Call
+	                        #statOpcUaRequests.methodCall := TRUE;
+	                        #statBusy := TRUE;
+	                        #statDiagnostics.status := #STATUS_BUSY;
+	                    END_IF;
+	                ELSE
+	                    #statOpcUaRequests.methodCall := FALSE;
+	                END_IF;
+	                //Error
+	                IF #instOpcUaMethodCall.Error THEN
+	                    //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                    IF #instOpcUaMethodCall.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                        #statCheckConnectionStatus := TRUE;
+	                    END_IF;
+	                    #statOpcUaRequests.methodCall := FALSE;
+	                    // => OUT
+	                    #statBusy := FALSE;
+	                    #statDiagnostics.status := #ERR_MC;
+	                    #statDiagnostics.subfunctionStatus := #instOpcUaMethodCall.Status;
+	                END_IF;
+	                
+	                //Done
+	                IF #instOpcUaMethodCall.Done THEN
+	                    //Check MethodResult
+	                    IF #statMethodResult <> 0 THEN
+	                        #statBusy := FALSE;
+	                        #statDiagnostics.status := #ERR_MC_RESULT;
+	                        #statDiagnostics.subfunctionStatus := #statMethodResult;
+	                    END_IF;
+	                    #statOpcUaRequests.methodCall := FALSE;
+	                    // => OUT
+	                    #statDone := TRUE;
+	                    #statBusy := FALSE;
+	                    #statDiagnostics.status := #STATUS_DONE;
+	                    //Count up statwriteCount
+	                    #statDiagCounter.MethodCall += 1;
+	                    //--> Methods can be called continously ...
+	                END_IF;
+	            END_REGION
+	            
+	            REGION Disconnect Trigger
+	                // Trigger to release handles if OPC UA connection should be disconnected
+	                #tempClearSessionTrigger := NOT #enable AND #statOldTriggers.clearSession;
+	                #statOldTriggers.clearSession := #enable;
+	                
+	                IF #tempClearSessionTrigger THEN
+	                    #statBusy := TRUE;
+	                    #statRHLTrigger := TRUE;
+	                    #statState := #STATE_DISCONNECT;
+	                    #statDiagnostics.status := #STATUS_BUSY;
+	                END_IF;
+	            END_REGION
+	        END_REGION
+	        
+	    #STATE_DISCONNECT:
+	        REGION Clear Session
+	            //If Disconnect requested, release nodes -> disconnect established connection
+	            //-------DISCONNECT HANDLING------------
+	            //--------------------------------------
+	            
+	            IF #statRHLTrigger THEN
+	                IF #statRegisteredLists.Write AND #writeNodeIds <> NULL AND #writeNodeHdls <> NULL THEN
+	                    #statOpcUaRequests.writeRHL := TRUE;
+	                ELSE
+	                    IF #statRegisteredLists.Read AND #readNodeIds <> NULL AND #readNodeHdls <> NULL THEN
+	                        #statOpcUaRequests.readRHL := TRUE;
+	                    ELSE
+	                        IF #statRegisteredLists.Methods AND #methodNodeIds <> NULL AND #methodHdls <> NULL AND #objNodeIds <> NULL THEN
+	                            #statOpcUaRequests.methodsRHL := TRUE;
+	                        ELSE
+	                            #statRHLTrigger := FALSE;
+	                        END_IF;
+	                    END_IF;
+	                END_IF;
+	            END_IF;
+	            REGION Release ReadList
+	                //Release Handle List of Read Nodes was not successful
+	                IF #InstOpcUaRHLRead.Error THEN
+	                    //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                    IF #InstOpcUaRHLRead.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                        #statCheckConnectionStatus := TRUE;
+	                    END_IF;
+	                    #statOpcUaRequests.readRHL := FALSE;
+	                    // => OUT
+	                    #statDiagnostics.status := #ERR_R_RHL;
+	                    #statDiagnostics.subfunctionStatus := #InstOpcUaRHLRead.Status;
+	                END_IF;
+	                
+	                //Release Handle List of Read Nodes was successful
+	                IF #InstOpcUaRHLRead.Done THEN
+	                    //Check StatusList
+	                    FOR #tempIndex := 0 TO UDINT_TO_INT(CountOfElements(#readNodeIds) - 1) DO
+	                        IF #statOpcUaStatusLists.#readRHL[#tempIndex] <> 16#0 THEN
+	                            // => OUT
+	                            #statDone := FALSE;
+	                            #statBusy := FALSE;
+	                            #statDiagnostics.status := #ERR_R_RHL_SL;
+	                            #statDiagnostics.subfunctionStatus := #statOpcUaStatusLists.readRHL[#tempIndex];
+	                            EXIT;
+	                        END_IF;
+	                    END_FOR;
+	                    #statOpcUaRequests.readRHL := FALSE;
+	                    #statRegisteredLists.Read := FALSE;
+	                    IF NOT #statDiagnostics.status.%X15 THEN
+	                        // => OUT
+	                        #statBusy := FALSE;
+	                        #statDiagnostics.status := #STATUS_DONE;
+	                        //--> Nodes are released
+	                    END_IF;
+	                END_IF;
+	            END_REGION
+	            
+	            REGION Release WriteList
+	                //Release Handle List of Write Nodes was not successful
+	                IF #instOpcUaRHLWrite.Error THEN
+	                    //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                    IF #instOpcUaRHLWrite.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                        #statCheckConnectionStatus := TRUE;
+	                    END_IF;
+	                    #statOpcUaRequests.writeRHL := FALSE;
+	                    // => OUT
+	                    #statDiagnostics.status := #ERR_W_RHL;
+	                    #statDiagnostics.subfunctionStatus := #instOpcUaRHLWrite.Status;
+	                END_IF;
+	                
+	                //Release Handle List of Write Nodes was successful
+	                IF #instOpcUaRHLWrite.Done THEN
+	                    //Check StatusList
+	                    FOR #tempIndex := 0 TO UDINT_TO_INT(CountOfElements(#writeNodeIds) - 1) DO
+	                        IF #statOpcUaStatusLists.writeRHL[#tempIndex] <> 16#0 THEN
+	                            // => OUT
+	                            #statDone := FALSE;
+	                            #statBusy := FALSE;
+	                            #statDiagnostics.status := #ERR_W_RHL_SL;
+	                            #statDiagnostics.subfunctionStatus := #statOpcUaStatusLists.#writeRHL[#tempIndex];
+	                            EXIT;
+	                        END_IF;
+	                    END_FOR;
+	                    #statOpcUaRequests.writeRHL := FALSE;
+	                    #statRegisteredLists.Write := FALSE;
+	                    IF NOT #statDiagnostics.status.%X15 THEN
+	                        // => OUT
+	                        #statBusy := FALSE;
+	                        #statDiagnostics.status := #STATUS_DONE;
+	                        //--> Nodes are released
+	                    END_IF;
+	                END_IF;
+	            END_REGION
+	            
+	            REGION Release MethodList
+	                //Release Handle List of Methods was not successful
+	                IF #instOpcUaRHLMethods.Error THEN
+	                    //--> Call ConnectionGetStatus if Status = "16#800D0000"
+	                    IF #instOpcUaRHLMethods.Status = #STATUS_SERVER_NOT_CONNECTED THEN
+	                        #statCheckConnectionStatus := TRUE;
+	                    END_IF;
+	                    #statOpcUaRequests.methodsRHL := FALSE;
+	                    // => OUT
+	                    #statDiagnostics.status := #ERR_M_RHL;
+	                    #statDiagnostics.subfunctionStatus := #instOpcUaRHLMethods.Status;
+	                END_IF;
+	                
+	                //Release Handle List of Methods was successful
+	                IF #instOpcUaRHLMethods.Done THEN
+	                    //Check StatusList
+	                    FOR #tempIndex := 0 TO UDINT_TO_INT(CountOfElements(#methodNodeIds) - 1) DO
+	                        IF #statOpcUaStatusLists.#methodRHL[#tempIndex] <> 16#0 THEN
+	                            // => OUT
+	                            #statDone := FALSE;
+	                            #statBusy := FALSE;
+	                            #statDiagnostics.status := #ERR_M_RHL_SL;
+	                            #statDiagnostics.subfunctionStatus := #statOpcUaStatusLists.#methodRHL[#tempIndex];
+	                            EXIT;
+	                        END_IF;
+	                    END_FOR;
+	                    #statOpcUaRequests.methodsRHL := FALSE;
+	                    #statRegisteredLists.Methods := FALSE;
+	                    IF NOT #statDiagnostics.status.%X15 THEN
+	                        // => OUT
+	                        #statBusy := FALSE;
+	                        #statDiagnostics.status := #STATUS_DONE;
+	                        //--> Nodes are released
+	                    END_IF;
+	                END_IF;
+	            END_REGION
+	            
+	            REGION Disconnect
+	                // disconnect trigger, if all nodes and methods are deregistered
+	                #tempDisconnectTrigger := NOT #statRegisteredLists.Read AND NOT #statRegisteredLists.Write AND NOT #statRegisteredLists.Methods AND NOT #statOldTriggers.disconnect;
+	                #statOldTriggers.disconnect := NOT #statRegisteredLists.Read AND NOT #statRegisteredLists.Write AND NOT #statRegisteredLists.Methods;
+	                IF #tempDisconnectTrigger THEN
+	                    IF #statConnectionHdl <> 16#0 THEN
+	                        #statOpcUaRequests.disconnect := TRUE;
+	                        //set FB Outputs
+	                        #statConnectionHdl := 0;
+	                        #statBusy := TRUE;
+	                        #statDiagnostics.status := #STATUS_BUSY;
+	                    ELSE
+	                        #statState := #STATE_CONNECT;
+	                        //Error No connection established
+	                    END_IF;
+	                ELSE
+	                    #statOpcUaRequests.disconnect := FALSE;
+	                END_IF;
+	                
+	                //Error at connection establishment
+	                IF #instOpcUaDisconnect.Error THEN
+	                    #statBusy := FALSE;
+	                    #statDiagnostics.status := #ERR_DISCON;
+	                    #statDiagnostics.subfunctionStatus := #instOpcUaDisconnect.Status;
+	                    #statCheckConnectionStatus := TRUE;
+	                END_IF;
+	                
+	                //Disconnect was successful
+	                IF #instOpcUaDisconnect.Done THEN
+	                    #statConnected := FALSE;
+	                    #statDone := FALSE;
+	                    #statRegisteredLists.NamespaceIndexes := FALSE;
+	                    #statBusy := FALSE;
+	                    #statOpcUaRequests.disconnect := FALSE;
+	                    
+	                    IF NOT #statDiagnostics.status.%X15 THEN
+	                        #statDiagnostics.status := #STATUS_DONE;
+	                    END_IF;
+	                    //reset positive edges of functions
+	                    #statOldTriggers.read := FALSE;
+	                    #statOldTriggers.write := FALSE;
+	                    #statOldTriggers.callMethod := FALSE;
+	                    #statOldTriggers.disconnect := FALSE;
+	                    #statOldTriggers.clearSession := FALSE;
+	                    #statState := #STATE_CONNECT;
+	                END_IF;
+	            END_REGION
+	        END_REGION
+	        
+	    ELSE  // Statement section ELSE
+	        ; //Not reachable
+	END_CASE;
+	REGION Connection Diagnostics
+	    IF #statCheckConnectionStatus AND #enable AND (#statConnected OR #statDiagnostics.subfunctionStatus <> #CGS_CONNECTED)
+	    THEN
+	        #statOpcUaRequests.conGS := TRUE;
+	        IF #instOpcUaConnectionGetStatus.Error THEN
+	            #statOpcUaRequests.conGS := FALSE;
+	            // => OUT
+	            #statBusy := FALSE;
+	            #statDiagnostics.status := #ERR_CGS;
+	            #statDiagnostics.subfunctionStatus := #instOpcUaConnectionGetStatus.Status;
+	        END_IF;
+	        //Done
+	        IF #instOpcUaConnectionGetStatus.Done THEN
+	            //ConnectionStatus+ServerState+ServiceLevel are "Good"
+	            IF #instOpcUaConnectionGetStatus.ConnectionStatus = #CGS_CONNECTED
+	                AND #instOpcUaConnectionGetStatus.ServerState = #CGS_SS_RUNNING
+	                AND #instOpcUaConnectionGetStatus.ServiceLevel = #CGS_SL_GOOD
+	            THEN
+	                REGION Connection OK
+	                    #statOpcUaRequests.conGS := FALSE;
+	                    //Session is reactivated and nodes are still registered --> Next Step --> CommandAndIdle
+	                    IF #statConnected AND #statRegisteredLists.NamespaceIndexes
+	                        AND (#statRegisteredLists.Read OR #readNodeIds = NULL)
+	                        AND (#statRegisteredLists.Write OR #writeNodeIds = NULL)
+	                        AND (#statRegisteredLists.Methods OR #methodNodeIds = NULL)
+	                    THEN
+	                        #statBusy := FALSE;
+	                        #statCheckConnectionStatus := FALSE;
+	                        //Session is reactivated and nodes are not registered yet --> Next Step --> NodeGetHandleList
+	                    ELSIF #statConnected AND #statRegisteredLists.NamespaceIndexes
+	                        AND (NOT #statRegisteredLists.Read OR NOT #statRegisteredLists.Write OR NOT #statRegisteredLists.Methods)
+	                    THEN
+	                        #statState := #STATE_NODE_GET_HANDLE_LIST;
+	                        #statCheckConnectionStatus := FALSE;
+	                        //Session is reactivated and namespaceIndexes are not set yet --> Next Step --> NamespaceGetIndexList
+	                    ELSIF #statConnected AND NOT #statRegisteredLists.NamespaceIndexes
+	                        AND (NOT #statRegisteredLists.Read OR NOT #statRegisteredLists.Write OR NOT #statRegisteredLists.Methods)
+	                    THEN
+	                        #statState := #STATE_NAMESPACE_GET_INDEX_LIST;
+	                        #statCheckConnectionStatus := FALSE;
+	                        //Session is reactivated (but connected bit isn't set) and namespaceIndexes are set and nodes are registered
+	                        //--> Next Step --> CommandAndIdle
+	                    ELSIF NOT #statConnected AND #statRegisteredLists.NamespaceIndexes
+	                        AND (#statRegisteredLists.Read OR #readNodeIds = NULL)
+	                        AND (#statRegisteredLists.Write OR #writeNodeIds = NULL)
+	                        AND (#statRegisteredLists.Methods OR #methodNodeIds = NULL)
+	                    THEN
+	                        //connected has to be set
+	                        #statConnected := TRUE;
+	                        #statBusy := FALSE;
+	                        #statRHLTrigger := FALSE;
+	                        #statOpcUaRequests.writeRHL := FALSE;
+	                        #statOpcUaRequests.readRHL := FALSE;
+	                        #statOpcUaRequests.methodsRHL := FALSE;
+	                        #statCheckConnectionStatus := FALSE;
+	                    END_IF;
+	                END_REGION
+	            ELSE
+	                REGION Connection Defect
+	                    IF #enable THEN
+	                        //ConnectionStatus is in Status Connection Error -> Connection has to be monitored
+	                        IF #instOpcUaConnectionGetStatus.ConnectionStatus = #CGS_CONN_ERROR THEN
+	                            #statOpcUaRequests.conGS := FALSE;
+	                            // => OUT
+	                            #statBusy := FALSE;
+	                            #statConnected := FALSE;
+	                            #statDiagnostics.status := #ERR_CGS_CSTATE;
+	                            #statDiagnostics.subfunctionStatus := UDINT_TO_DWORD(#instOpcUaConnectionGetStatus.ConnectionStatus);
+	                            //Connection status is in Shutdown -> connection handle has to be released with OPC_UA_Disconnect
+	                        ELSIF #instOpcUaConnectionGetStatus.ConnectionStatus = #CGS_SHUTDOWN THEN
+	                            #statOpcUaRequests.conGS := FALSE;
+	                            #statState := #STATE_CONNECT;
+	                            #statRegisteredLists.Read := FALSE;
+	                            #statRegisteredLists.Write := FALSE;
+	                            #statRegisteredLists.Methods := FALSE;
+	                            #statCheckConnectionStatus := FALSE;
+	                            // => OUT
+	                            #statBusy := FALSE;
+	                            #statConnected := FALSE;
+	                            #statDiagnostics.status := #ERR_CGS_CSTATE_SHUTDOWN;
+	                            #statDiagnostics.subfunctionStatus := UDINT_TO_DWORD(#instOpcUaConnectionGetStatus.ConnectionStatus);
+	                            
+	                            //ServerState is not "Good"
+	                        ELSIF #instOpcUaConnectionGetStatus.ServerState <> #CGS_SS_RUNNING THEN
+	                            #statOpcUaRequests.conGS := FALSE;
+	                            // => OUT
+	                            #statBusy := FALSE;
+	                            #statConnected := FALSE;
+	                            #statDiagnostics.status := #ERR_CGS_SSTATE;
+	                            #statDiagnostics.subfunctionStatus := UDINT_TO_DWORD(#instOpcUaConnectionGetStatus.ServerState);
+	                            //ServiceLevel is not "Good"
+	                        ELSIF #instOpcUaConnectionGetStatus.ServiceLevel <> #CGS_SL_GOOD THEN
+	                            #statOpcUaRequests.conGS := FALSE;
+	                            // => OUT
+	                            #statBusy := FALSE;
+	                            #statDiagnostics.status := #ERR_CGS_SLVL;
+	                            #statDiagnostics.subfunctionStatus := #instOpcUaConnectionGetStatus.ServiceLevel;
+	                        END_IF;
+	                    ELSE
+	                        //enable is not set -> connection was faulty -> back to case CONNECT
+	                        //new connection can be set up
+	                        #statCheckConnectionStatus := FALSE;
+	                        #statOpcUaRequests.conGS := FALSE;
+	                        #statRHLTrigger := FALSE;
+	                        #statRegisteredLists.NamespaceIndexes := FALSE;
+	                        #statRegisteredLists.Read := FALSE;
+	                        #statRegisteredLists.Write := FALSE;
+	                        #statRegisteredLists.Methods := FALSE;
+	                    END_IF;
+	                END_REGION
+	            END_IF;
+	        END_IF;
+	    END_IF;
+	END_REGION
+	
+	REGION Call SFBs
+	    //CALL SFB OPC_UA_Connect
+	    #instOpcUaConnect(REQ := #statOpcUaRequests.connect,
+	                      ServerEndpointUrl := #serverEndpointUrl,
+	                      SessionConnectInfo := #connectionInfo,
+	                      Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                      ConnectionHdl => #statConnectionHdl);
+	    
+	    //CALL SFB OPC_UA_NamespaceGetIndexList 
+	    #instOpcUaNamespaceGIL(REQ := #statOpcUaRequests.NGIL,
+	                           ConnectionHdl := #statConnectionHdl,
+	                           NamespaceUrisCount := UDINT_TO_UINT(CountOfElements(#namespaceUris)),
+	                           NamespaceUris := #namespaceUris,
+	                           Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                           StatusList := #statOpcUaStatusLists.#namespaceGIL,
+	                           NamespaceIndexes := #namespaceIndexes);
+	    
+	    //CALL SFB OPC_UA_NodeGetHandleList_Read
+	    #InstOpcUaGHLRead(REQ := #statOpcUaRequests.readGHL,
+	                      ConnectionHdl := #statConnectionHdl,
+	                      NodeIDCount := UDINT_TO_UINT(CountOfElements(#readNodeIds)),
+	                      NodeIDs := #readNodeIds,
+	                      Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                      NamespaceIndexCount := UDINT_TO_UINT(CountOfElements(#namespaceIndexes)),
+	                      NamespaceIndexes := #namespaceIndexes,
+	                      NodeStatusList := #statOpcUaStatusLists.#readGHL,
+	                      NodeHdls := #readNodeHdls);
+	    
+	    //CALL SFB OPC_UA_NodeGetHandleList_Write
+	    #instOpcUaGHLWrite(REQ := #statOpcUaRequests.writeGHL,
+	                       ConnectionHdl := #statConnectionHdl,
+	                       NodeIDCount := UDINT_TO_UINT(CountOfElements(#writeNodeIds)),
+	                       NodeIDs := #writeNodeIds,
+	                       Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                       NamespaceIndexCount := UDINT_TO_UINT(CountOfElements(#namespaceIndexes)),
+	                       NamespaceIndexes := #namespaceIndexes,
+	                       NodeStatusList := #statOpcUaStatusLists.#writeGHL,
+	                       NodeHdls := #writeNodeHdls);
+	    
+	    //CALL SFB OPC_UA_MethodGetHandleList
+	    #instOpcUaGHLMethods(REQ := #statOpcUaRequests.methodsGHL,
+	                         ConnectionHdl := #statConnectionHdl,
+	                         NodeIDCount := UDINT_TO_UINT(CountOfElements(#methodNodeIds)),
+	                         ObjectNodeIDs := #objNodeIds,
+	                         MethodNodeIDs := #methodNodeIds,
+	                         Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                         NamespaceIndexCount := UDINT_TO_UINT(CountOfElements(#namespaceIndexes)),
+	                         NamespaceIndexes := #namespaceIndexes,
+	                         StatusList := #statOpcUaStatusLists.#methodGHL,
+	                         MethodHdls := #methodHdls);
+	    
+	    //CALL SFB OPC_UA_ReadList
+	    #instOpcUaReadList(REQ := #statOpcUaRequests.read,
+	                       ConnectionHdl := #statConnectionHdl,
+	                       NodeHdlCount := UDINT_TO_UINT(CountOfElements(#readNodeHdls)),
+	                       NodeHdls := #readNodeHdls,
+	                       Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                       NodeStatusList := #statOpcUaStatusLists.#readList,
+	                       TimeStamps := #statOpcUaReadTimeStamps,
+	                       Variable := #readData);
+	    
+	    //CALL SFB OPC_UA_WriteList
+	    #instOpcUaWriteList(REQ := #statOpcUaRequests.write,
+	                        ConnectionHdl := #statConnectionHdl,
+	                        NodeHdlCount := UDINT_TO_UINT(CountOfElements(#writeNodeHdls)),
+	                        NodeHdls := #writeNodeHdls,
+	                        Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                        NodeStatusList := #statOpcUaStatusLists.#writeList,
+	                        Variable := #writeData);
+	    
+	    //CALL SFB OPC_UA_MethodCall
+	    #instOpcUaMethodCall(REQ := #statOpcUaRequests.methodCall,
+	                         ConnectionHdl := #statConnectionHdl,
+	                         MethodHdl := #statMethodHdl,
+	                         Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                         MethodResult := #statMethodResult,
+	                         InputArguments := #inputArguments,
+	                         OutputArguments := #outputArguments);
+	    
+	    //CALL SFB OPC_UA_NodeReleaseHandleList_Read
+	    #InstOpcUaRHLRead(REQ := #statOpcUaRequests.readRHL,
+	                      ConnectionHdl := #statConnectionHdl,
+	                      NodeHdlCount := UDINT_TO_UINT(CountOfElements(#readNodeHdls)),
+	                      NodeHdls := #readNodeHdls,
+	                      Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                      NodeStatusList := #statOpcUaStatusLists.#readRHL);
+	    
+	    //CALL SFB OPC_UA_NodeReleaseHandleList_Write
+	    #instOpcUaRHLWrite(REQ := #statOpcUaRequests.writeRHL,
+	                       ConnectionHdl := #statConnectionHdl,
+	                       NodeHdlCount := UDINT_TO_UINT(CountOfElements(#writeNodeHdls)),
+	                       NodeHdls := #writeNodeHdls,
+	                       Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                       NodeStatusList := #statOpcUaStatusLists.#writeRHL);
+	    
+	    //CALL SFB OPC_UA_MethodReleaseHandleList
+	    #instOpcUaRHLMethods(REQ := #statOpcUaRequests.methodsRHL,
+	                         ConnectionHdl := #statConnectionHdl,
+	                         MethodHdlCount := UDINT_TO_UINT(CountOfElements(#methodHdls)),
+	                         MethodHdls := #methodHdls,
+	                         Timeout := #OPC_UA_FUNCTIONS_TIMEOUT,
+	                         StatusList := #statOpcUaStatusLists.#methodRHL);
+	    
+	    //CALL SFB OPC_UA_Disconnect
+	    #instOpcUaDisconnect(REQ := #statOpcUaRequests.disconnect,
+	                         ConnectionHdl := #statConnectionHdl,
+	                         Timeout := #OPC_UA_FUNCTIONS_TIMEOUT);
+	    
+	    //CALL SFB OPC_UA_ConnectionGetStatus
+	    #instOpcUaConnectionGetStatus(REQ := #statOpcUaRequests.conGS,
+	                                  ConnectionHdl := #statConnectionHdl,
+	                                  Timeout := #OPC_UA_FUNCTIONS_TIMEOUT);
+	END_REGION
+	
+	REGION Set FB Outputs
+	    #connected := #statConnected;
+	    #done := #statDone;
+	    #busy := #statBusy;
+	    #error := #statDiagnostics.status.%X15;
+	    #connectionHdl := #statConnectionHdl;
+	    #status := #statDiagnostics.status;
+	    IF #statDiagnostics.status.%X15 THEN
+	        #diagnostics := #statDiagnostics;
+	    END_IF;
+	END_REGION
+END_FUNCTION_BLOCK
+
