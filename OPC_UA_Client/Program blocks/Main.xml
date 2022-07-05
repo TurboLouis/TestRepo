@@ -476,18 +476,6 @@
       <Component Name="opcUaDone" UId="34" />
     </Symbol>
   </Access>
-  <Blank Num="1" UId="35" />
-  <Token Text="AND" UId="36" />
-  <Blank Num="1" UId="37" />
-  <Token Text="NOT" UId="38" />
-  <Blank Num="1" UId="39" />
-  <Access Scope="GlobalVariable" UId="40">
-    <Symbol UId="41">
-      <Component Name="ControllingInterface" UId="42" />
-      <Token Text="." UId="43" />
-      <Component Name="opcUaConnected" UId="44" />
-    </Symbol>
-  </Access>
   <Token Text=";" UId="45" />
 </StructuredText></NetworkSource>
           <ProgrammingLanguage>SCL</ProgrammingLanguage>
