@@ -2,7 +2,7 @@
 <Document>
   <Engineering version="V17" />
   <DocumentInfo>
-    <Created>2022-07-05T08:55:22.2572738Z</Created>
+    <Created>2022-07-05T09:10:52.0513918Z</Created>
     <ExportSetting>WithDefaults</ExportSetting>
     <InstalledProducts>
       <Product>
@@ -474,6 +474,18 @@
       <Component Name="ControllingInterface" UId="32" />
       <Token Text="." UId="33" />
       <Component Name="opcUaDone" UId="34" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="35" />
+  <Token Text="AND" UId="36" />
+  <Blank Num="1" UId="37" />
+  <Token Text="NOT" UId="38" />
+  <Blank Num="1" UId="39" />
+  <Access Scope="GlobalVariable" UId="40">
+    <Symbol UId="41">
+      <Component Name="ControllingInterface" UId="42" />
+      <Token Text="." UId="43" />
+      <Component Name="opcUaConnected" UId="44" />
     </Symbol>
   </Access>
   <Token Text=";" UId="45" />
