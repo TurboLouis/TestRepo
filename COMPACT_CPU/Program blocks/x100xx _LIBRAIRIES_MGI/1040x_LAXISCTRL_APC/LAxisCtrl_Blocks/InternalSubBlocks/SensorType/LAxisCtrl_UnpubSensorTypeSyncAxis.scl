@@ -1,0 +1,16 @@
+﻿FUNCTION "LAxisCtrl_UnpubSensorTypeSyncAxis" : DInt
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis {InstructionName := 'TO_SynchronousAxis'; LibVersion := '5.0'} : TO_SynchronousAxis;
+      index : Int;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	#LAxisCtrl_UnpubSensorTypeSyncAxis := #axis.Sensor[#index].Type;
+END_FUNCTION
+

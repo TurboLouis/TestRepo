@@ -1,0 +1,181 @@
+﻿FUNCTION_BLOCK "LConSMC_Taper"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool := FALSE;
+      taperMode : Int;
+      diamActVal : LReal := 0.0;
+      upperLimitTaper : LReal := 100.0;
+      lowerLimitTaper : LReal := 0.0;
+      taperRatio : LReal := 0.0;
+      taperDiameterStart : LReal := 0.2;
+      taperDiameterMax : LReal := 1.0;
+      NoOfBreakpoints : Int := 20;
+      tensionValues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+      diametervalues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool;
+      error : Bool := FALSE;
+      errorID : DWord := 16#0000_0000;
+      tensionTaper : LReal := 1.0;
+   END_VAR
+
+   VAR 
+      instTableChar : "LConSMC_TableChar";
+      statEnableOld : Bool;
+      statBusy : Bool := FALSE;
+      statTensionTaper : LReal := 1.0;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#4101_0000;
+      TAP_CHAR_NO_TAPER : Int;
+      TAP_CHAR_LINEAR : Int := 1;
+      TAP_CHAR_HYPERLIC_1 : Int := 2;
+      TAP_CHAR_HYPERLIC_2 : Int := 3;
+      TAP_CHAR_TABLE : Int := 4;
+      NO_ERROR : DWord := 16#0000_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : Taper
+	//functionality : Tension taper for winder
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge              changes applied
+	//V1.0      03.08.2012    APC GMC group                 Creation
+	//V1.1      17.11.2016    APC ERL                       adapted to styleguide; warning "variable might not be initialized" removed
+	//========================================================================================================================
+	
+	IF #enable AND NOT #statEnableOld THEN
+	    #instTableChar(enable := False,
+	                   x := #diamActVal,
+	                   sizeOfArray := #NoOfBreakpoints,
+	                   xn := #diametervalues,
+	                   yn := #tensionValues);
+	    #error := ((#taperMode < 0) OR (#taperMode > 4) OR (#upperLimitTaper < #lowerLimitTaper) OR (#lowerLimitTaper < 0.0)
+	    OR (((#taperDiameterStart < 0.0)
+	    OR (#taperDiameterMax <= #taperDiameterStart)
+	    OR (#taperRatio < 0.0)
+	    OR (#taperRatio > 100.0)
+	    )
+	    AND
+	    ((#taperMode = #TAP_CHAR_LINEAR)
+	    OR (#taperMode = #TAP_CHAR_HYPERLIC_1)
+	    OR (#taperMode = #TAP_CHAR_HYPERLIC_2)
+	    ))
+	    )
+	    AND (#taperMode <> 0);
+	    IF (#error) THEN
+	        #statBusy := FALSE;
+	        #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";                  // diameter Max must be higher than diameter start
+	        #statTensionTaper := 1.0;
+	    ELSE
+	        #statBusy := TRUE;
+	        #errorID := #NO_ERROR;
+	    END_IF;
+	    #statEnableOld := #enable;
+	    RETURN;
+	END_IF;
+	
+	IF NOT (#enable) AND #statEnableOld THEN                                           // falling edge, disable
+	    #instTableChar(enable := False,
+	                   x := #diamActVal,
+	                   sizeOfArray := #NoOfBreakpoints,
+	                   xn := #diametervalues,
+	                   yn := #tensionValues);
+	    #statBusy := FALSE;
+	    #error := FALSE;
+	    #errorID := #NO_ERROR;
+	    #statTensionTaper := 1.0;
+	    #statEnableOld := #enable;
+	    RETURN;
+	END_IF;
+	
+	IF #statBusy THEN
+	    IF (#diamActVal <= 0.0) AND #taperMode <> #TAP_CHAR_NO_TAPER THEN
+	        #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_INPUT_PARAMETER";                             // Calculated diameter Value is not plausible
+	        #error := TRUE;
+	        #statBusy := FALSE;
+	        #statTensionTaper := 1.0;
+	    END_IF;
+	    
+	    CASE #taperMode OF
+	            
+	        0:                  // #TAP_CHAR_NO_TAPER:                                   // No tension taper characteristic
+	            #statTensionTaper := 1.0;
+	            
+	            
+	        1:                 // #TAP_CHAR_LINEAR:                                      // Linear taper form
+	            IF (#diamActVal <= #taperDiameterStart) THEN
+	                #statTensionTaper := 1.0;
+	            ELSIF (#diamActVal >= #taperDiameterMax) THEN
+	                #statTensionTaper := 1.0 - #taperRatio / 100.0;
+	            ELSE
+	                #statTensionTaper := (1.0 - #taperRatio / 100.0 * (#diamActVal - #taperDiameterStart)
+	                / (#taperDiameterMax - #taperDiameterStart));
+	            END_IF;
+	            
+	            
+	            
+	        2:                // #TAP_CHAR_HYPERLIC_1:                                    // Hyperlic taper form 1 reach full ratio with diamMax
+	            IF (#diamActVal < #taperDiameterStart) THEN
+	                #statTensionTaper := 1.0;
+	            ELSIF (#diamActVal >= #taperDiameterMax) THEN
+	                #statTensionTaper := 1.0 - #taperRatio / 100.0;
+	            ELSE
+	                #statTensionTaper := (1.0 - #taperRatio / 100.0 * ((#diamActVal - #taperDiameterStart) / #diamActVal) *
+	                (#taperDiameterMax / (#taperDiameterMax - #taperDiameterStart)));
+	            END_IF;
+	            
+	            
+	            
+	        3:              // #TAP_CHAR_HYPERLIC_2:                                   // Hyperlic taper form 2 never reach full ratio  
+	            IF (#diamActVal < #taperDiameterStart) THEN
+	                #statTensionTaper := 1.0;
+	            ELSE
+	                #statTensionTaper := (1.0 - #taperRatio / 100.0 * (1.0 - (#taperDiameterStart / #diamActVal)));
+	            END_IF;
+	            
+	            
+	            
+	        4:               //#TAP_CHAR_TABLE:                                        // Linear interpolation from a table  
+	            #instTableChar(enable := True,
+	                           x := #diamActVal,
+	                           sizeOfArray := #NoOfBreakpoints,
+	                           xn := #diametervalues,
+	                           yn := #tensionValues);
+	            IF (#instTableChar.error) THEN
+	                #statTensionTaper := 1.0;
+	                #error := TRUE;
+	                #errorID := #UNIT_ID OR DWORD_TO_WORD(#instTableChar.errorID);
+	            ELSE
+	                #statTensionTaper := #instTableChar.y / 100.0;
+	            END_IF;
+	            
+	        ELSE
+	            #error := TRUE;
+	            #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_INPUT_PARAMETER";
+	            #statBusy := FALSE;
+	            #statTensionTaper := 1.0;
+	    END_CASE;
+	    
+	    #statTensionTaper := LIMIT(MN := #lowerLimitTaper / 100.0,
+	                               IN := #statTensionTaper,
+	                               MX := #upperLimitTaper / 100.0);
+	END_IF;
+	
+	// set outputs
+	#busy := #statBusy;
+	#tensionTaper := #statTensionTaper;
+	
+END_FUNCTION_BLOCK
+

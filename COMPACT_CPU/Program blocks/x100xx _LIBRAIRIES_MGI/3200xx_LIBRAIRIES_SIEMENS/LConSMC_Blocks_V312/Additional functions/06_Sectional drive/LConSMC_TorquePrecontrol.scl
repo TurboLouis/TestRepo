@@ -1,0 +1,177 @@
+﻿FUNCTION_BLOCK "LConSMC_TorquePrecontrol"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool := FALSE;
+      metricUnits : Bool := TRUE;
+      typeOfDrive : Int := 0;
+      drivespeed : LReal := 0.0;
+      lineAcceleration : LReal := 0.0;
+      diameter : LReal := 0.0;
+      tensionSetpoint : LReal := 0.0;
+      JFix : LReal;
+      JMandrel : LReal;
+      JMot : LReal;
+      gearRatio : LReal;
+      frictionAdjustment : Real;
+      tensionAdjustment : Real;
+      accelerationAdjustment : Real := 1.0;
+      sizeOfArray : Int := 20;
+      xn_speedValues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+      yn_torqueValues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool;
+      error : Bool := FALSE;
+      errorID : DWord := 16#0000_0000;
+      totalinertia : LReal := 0.0;
+      preCtrlMotor : LReal := 0.0;
+      totalTorquePreCtrl : LReal := 0.0;
+      tensionTorque : LReal := 0.0;
+   END_VAR
+
+   VAR 
+      instTableChar : "LConSMC_TableChar";
+      statAlpha : LReal;
+      statMfrict : LReal;
+      statMAccel : LReal;
+      statGearRatio2 : LReal;
+      statSignDrivespeed : Int;
+      statEnableOld : Bool;
+      statBusy : Bool := FALSE;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#6101_0000;
+      PI : Real := 3.141592;
+      NO_ERROR : DWord := 16#0000_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : TorquePrecontrol
+	//functionality : Torque Precontrol Calculation for drives
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge          changes applied
+	//V1.0      08.08.2012    APC GMC group             Creation
+	//V1.1      17.11.2016    APC ERL                   adapted to styleguide; warning "variable might not be initialized" removed
+	//V1.2      20.07.2018    APC ERL                   additional input "accelerationAdjustment"
+	//========================================================================================================================
+	
+	#preCtrlMotor := 0.0;
+	#totalTorquePreCtrl := 0.0;
+	#tensionTorque := 0.0;
+	#totalinertia := 0.0;
+	
+	
+	IF #enable AND NOT (#statEnableOld) THEN                                           // rising edge, init
+	    #instTableChar(enable := false,
+	                   x := (ABS(#drivespeed)),
+	                   sizeOfArray := #sizeOfArray,
+	                   xn := #xn_speedValues,
+	                   yn := #yn_torqueValues);
+	    #error := (#gearRatio <= 0.0)
+	    OR (#JFix < 0.0)
+	    OR (#JMandrel < 0.0)
+	    OR (#JMot < 0.0)
+	    OR #typeOfDrive < 0
+	    OR #typeOfDrive > 1;
+	    
+	    IF #error THEN
+	        #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";                          // One or more Configuration Data are wrong or not plausible
+	        #statBusy := FALSE;
+	    ELSE
+	        #statBusy := TRUE;
+	        #errorID := #NO_ERROR;
+	    END_IF;
+	    #statEnableOld := #enable;
+	    RETURN;
+	END_IF;
+	
+	IF NOT (#enable) AND #statEnableOld THEN                                           // falling edge, disable
+	    #instTableChar(enable := false,
+	                   x := (ABS(#drivespeed)),
+	                   sizeOfArray := #sizeOfArray,
+	                   xn := #xn_speedValues,
+	                   yn := #yn_torqueValues);
+	    #statBusy := FALSE;
+	    #error := FALSE;
+	    #errorID := #NO_ERROR;
+	    #statEnableOld := #enable;
+	    RETURN;
+	END_IF;
+	
+	
+	IF #statBusy THEN
+	    IF #diameter <= 0.0 THEN
+	        #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_INPUT_PARAMETER";                             // Calculated diameter Value is not plausible
+	        #error := TRUE;
+	        #statBusy := FALSE;
+	    END_IF;
+	    
+	    #statGearRatio2 := #gearRatio * #gearRatio;
+	    #totalinertia := (#JMandrel / #statGearRatio2)                            // totalInertia = (jMandrel + jFix ) / gearRatio**2  + jMot
+	    + #JMot
+	    + #JFix;
+	    
+	    // Acceleration precontrol
+	    IF #metricUnits THEN
+	        #statAlpha := (#lineAcceleration * #gearRatio / (#diameter / 2.0));         // alpha = (acceleration * gearRatio) / ( diamActVal / 2.0 ) [ 1/s? ]   
+	    ELSE
+	        #statAlpha := (#lineAcceleration * #gearRatio / (#diameter / 2.0 / 12.0));  // alpha = (acceleration * gearRatio) / ( diamActVal / 2.0 ) [ 1/s? ]   
+	    END_IF;
+	    
+	    #statMAccel := #statAlpha * #totalinertia * #accelerationAdjustment;
+	    
+	    // Friction precontrol
+	    IF #drivespeed <> 0.0 THEN
+	        #statSignDrivespeed := LREAL_TO_INT(#drivespeed / ABS(#drivespeed));
+	    ELSE
+	        #statSignDrivespeed := 0;
+	    END_IF;
+	    
+	    IF (#frictionAdjustment <> 0.0) THEN
+	        #instTableChar(enable := true,
+	                       x := (ABS(#drivespeed)),
+	                       sizeOfArray := #sizeOfArray,
+	                       xn := #xn_speedValues,
+	                       yn := #yn_torqueValues);
+	        IF (#instTableChar.error) THEN                                       // If there's no error yet or its prio is below new prio
+	            #statMfrict := 0.0;
+	            #error := TRUE;
+	            #errorID := #UNIT_ID OR DWORD_TO_WORD(#instTableChar.errorID);
+	        ELSE
+	            #statMfrict := #instTableChar.y * #frictionAdjustment * #statSignDrivespeed;// [ M ] friction;
+	        END_IF;
+	    ELSE
+	        #statMfrict := 0.0;
+	    END_IF;
+	    
+	    // Tension precontrol
+	    IF #metricUnits THEN
+	        #tensionTorque := ((#tensionSetpoint * #tensionAdjustment)
+	        * (#diameter / 2.0)) / #gearRatio;                          // [M] Motor torque (Nm) required for tension [tension(N) * radius(M)/gear ratio]
+	    ELSE
+	        #tensionTorque := ((#tensionSetpoint * #tensionAdjustment) * (#diameter / 2.0 / 12.0)) / #gearRatio;  // [lbf ft]
+	    END_IF;
+	    // Torque addition          
+	    // Invert tensionTorque
+	    IF #typeOfDrive = "LCON_TYPE_OF_DRIVE_HELD" THEN
+	        #tensionTorque := - #tensionTorque;
+	    END_IF;
+	    #preCtrlMotor := #statMAccel + #statMfrict;                                 // Friction, acceleration
+	    #totalTorquePreCtrl := #preCtrlMotor + #tensionTorque;                    // Add tension torque
+	END_IF;
+	
+	// set outputs
+	#busy := #statBusy;
+	
+END_FUNCTION_BLOCK
+

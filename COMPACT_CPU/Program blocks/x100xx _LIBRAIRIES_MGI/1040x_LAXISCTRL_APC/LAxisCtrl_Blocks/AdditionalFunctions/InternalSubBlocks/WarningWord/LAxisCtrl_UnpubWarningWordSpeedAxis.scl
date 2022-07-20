@@ -1,0 +1,15 @@
+﻿FUNCTION "LAxisCtrl_UnpubWarningWordSpeedAxis" : DWord
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis {InstructionName := 'TO_SpeedAxis'; LibVersion := '5.0'} : TO_SpeedAxis;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	#LAxisCtrl_UnpubWarningWordSpeedAxis := #axis.WarningWord;
+END_FUNCTION
+

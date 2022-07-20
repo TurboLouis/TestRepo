@@ -1,0 +1,143 @@
+﻿FUNCTION_BLOCK "LAxisCtrl_AxisStatusWord"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis : DB_ANY;
+   END_VAR
+
+   VAR_OUTPUT 
+      status { ExternalWritable := 'False'; S7_HiddenAssignment := 'Show'} : Word;
+      statusWord { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : DWord;
+      statusWord2 { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : DWord;
+      enable { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      error { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      restartActive { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      onlineStartValuesChanged { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      controlPanelActive { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      homingDone { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      done { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      standstill { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      positioningCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      jogCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      velocityCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      homingCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      constantVelocity { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      accelerating { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      decelerating { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      swLimitMinActive { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      swLimitMaxActive { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      hwLimitMinActive { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      hwLimitMaxActive { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      synchronizing { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      synchronous { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      superimposedMotionCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      phasingCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      axisSimulation { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      torqueLimitingCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      inLimitation { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      nonPositionControlled { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      kinematicsMotionCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      inClamping { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      motionInCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      stopCommand { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+   END_VAR
+
+   VAR_TEMP 
+      tempStatusWord : DWord;
+      tempStatusWord2 : DWord;
+   END_VAR
+
+   VAR CONSTANT 
+      ERROR_INVALID_TECHNOLOGY_OBJECT : Word := 16#8002;
+      FINISHED : Word;
+   END_VAR
+
+
+BEGIN
+	REGION HEADER
+	  //================================================================================
+	  // SIEMENS AG
+	  // (c)Copyright 2020 All Rights Reserved
+	  //--------------------------------------------------------------------------------
+	  // Library: LAxisCtrl
+	  // Tested with: S7-1515-2 PN
+	  // Engineering: TIA Portal V16
+	  // Restrictions: -
+	  // Requirements: S7-1500 FW 2.8.1
+	  // Functionality: The FB is splitting the status word of an axis (DB_Any) into bits.
+	  // Support: tech.team.motioncontrol@siemens.com
+	  // Note: Parameter comments are only available in language 'English (United States)'
+	  //--------------------------------------------------------------------------------
+	  // Change log table:
+	  // Version  Date        Expert in charge  Changes applied
+	  // 01.01.00 12.03.2020  RS                First released version
+	  //================================================================================
+	END_REGION
+	
+	CASE TypeOfDB(#axis) OF
+	  TO_ExternalEncoder:
+	    #tempStatusWord := "LAnyAxis_UnpubStatusWordExtEncoder"(#axis);
+	    #tempStatusWord2 := 16#0000_0000;
+	    #status := #FINISHED;
+	    
+	  TO_SpeedAxis:
+	    #tempStatusWord := "LAnyAxis_UnpubStatusWordSpeedAxis"(#axis);
+	    #tempStatusWord2 := "LAnyAxis_UnpubStatusWord2SpeedAxis"(#axis);
+	    #status := #FINISHED;
+	    
+	  TO_PositioningAxis:
+	    #tempStatusWord := "LAnyAxis_UnpubStatusWordPosAxis"(#axis);
+	    #tempStatusWord2 := "LAnyAxis_UnpubStatusWord2PosAxis"(#axis);
+	    #status := #FINISHED;
+	    
+	  TO_SynchronousAxis:
+	    #tempStatusWord := "LAnyAxis_UnpubStatusWordSyncAxis"(#axis);
+	    #tempStatusWord2 := "LAnyAxis_UnpubStatusWord2SyncAxis"(#axis);
+	    #status := #FINISHED;
+	    
+	  ELSE
+	    #tempStatusWord := 16#0000_0000;
+	    #tempStatusWord2 := 16#0000_0000;
+	    #status := #ERROR_INVALID_TECHNOLOGY_OBJECT;
+	END_CASE;
+	
+	#statusWord := #tempStatusWord;
+	#statusWord2 := #tempStatusWord2;
+	//----------------------------------------------------------------------------------------------
+	// Write outputs
+	//----------------------------------------------------------------------------------------------
+	#enable := #tempStatusWord.%X0;
+	#error := #tempStatusWord.%X1;
+	#restartActive := #tempStatusWord.%X2;
+	#onlineStartValuesChanged := #tempStatusWord.%X3;
+	#controlPanelActive := #tempStatusWord.%X4;
+	#homingDone := #tempStatusWord.%X5;
+	#done := #tempStatusWord.%X6;
+	#standstill := #tempStatusWord.%X7;
+	#positioningCommand := #tempStatusWord.%X8;
+	#jogCommand := #tempStatusWord.%X9;
+	#velocityCommand := #tempStatusWord.%X10;
+	#homingCommand := #tempStatusWord.%X11;
+	#constantVelocity := #tempStatusWord.%X12;
+	#accelerating := #tempStatusWord.%X13;
+	#decelerating := #tempStatusWord.%X14;
+	#swLimitMinActive := #tempStatusWord.%X15;
+	#swLimitMaxActive := #tempStatusWord.%X16;
+	#hwLimitMinActive := #tempStatusWord.%X17;
+	#hwLimitMaxActive := #tempStatusWord.%X18;
+	#synchronizing := #tempStatusWord.%X21;
+	#synchronous := #tempStatusWord.%X22;
+	#superimposedMotionCommand := #tempStatusWord.%X23;
+	#phasingCommand := #tempStatusWord.%X24;
+	#axisSimulation := #tempStatusWord.%X25;
+	#torqueLimitingCommand := #tempStatusWord.%X26;
+	#inLimitation := #tempStatusWord.%X27;
+	#nonPositionControlled := #tempStatusWord.%X28;
+	#kinematicsMotionCommand := #tempStatusWord.%X29; // V15
+	#inClamping := #tempStatusWord.%X30;
+	#motionInCommand := #tempStatusWord.%X31; // V15
+	#stopCommand := #tempStatusWord2.%X0;
+END_FUNCTION_BLOCK
+

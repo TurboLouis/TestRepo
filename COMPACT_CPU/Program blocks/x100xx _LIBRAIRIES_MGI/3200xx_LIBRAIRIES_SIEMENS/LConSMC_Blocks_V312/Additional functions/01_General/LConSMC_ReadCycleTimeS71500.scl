@@ -1,0 +1,64 @@
+﻿FUNCTION "LConSMC_ReadCycleTimeS71500" : Real
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      OBnumber : Int;
+   END_VAR
+
+   VAR_TEMP 
+      tmpRetInt : Int;
+      tmpCycleTime : UDInt;
+      tmpPhase : UDInt;
+      tmpStatus : Word;
+      tmpStartUpSi {InstructionName := 'SI_Startup'; LibVersion := '1.0'} : SI_Startup;
+      tmpTopSi {InstructionName := 'SI_SynchCycle'; LibVersion := '1.0'} : SI_SynchCycle;
+      tmpSiNone {InstructionName := 'SI_none'; LibVersion := '1.0'} : SI_none;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#1001_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : ReadCycleTimeS71500
+	//functionality : Cycle time identification for S7-1500 CPU
+	//assignment    : Any
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge              changes applied
+	//V1.0      02.07.2012    APC GMC group                 Creation
+	//V2.0      10.11.2016    APC ERL                       extended to read cycle time from synchronous cycle OBs
+	//V2.1      17.11.2016    APC ERL                       adapted to styleguide
+	//=========================================================================================================================
+	
+	#LConSMC_ReadCycleTimeS71500 := 0.0;
+	
+	#tmpRetInt := RD_SINFO(TOP_SI => #tmpSiNone, START_UP_SI => #tmpStartUpSi);
+	
+	IF #tmpSiNone.OB_Class = 30 THEN
+	    #tmpRetInt := QRY_CINT(OB_NR := #OBnumber, CYCLE => #tmpCycleTime, PHASE => #tmpPhase, STATUS => #tmpStatus);
+	    IF (#tmpStatus = 16#0014) THEN
+	        IF #tmpRetInt = 0 THEN
+	            #LConSMC_ReadCycleTimeS71500 := (UDINT_TO_REAL(#tmpCycleTime)) / 1000;                            //Conversion from microseconds to milliseconds
+	        END_IF;
+	    END_IF;
+	    
+	ELSIF #tmpSiNone.OB_Class = 61 THEN
+	    #tmpRetInt := RD_SINFO(TOP_SI => #tmpTopSi, START_UP_SI => #tmpStartUpSi);
+	    IF #tmpTopSi.OB_Nr = #OBnumber THEN
+	        IF #tmpRetInt = 0 THEN
+	            #LConSMC_ReadCycleTimeS71500 := DINT_TO_REAL(LTIME_TO_DINT(#tmpTopSi.SyncCycleTime)) / 1000000; // convert to milliseconds in REAL-Format
+	        END_IF;
+	    END_IF;
+	    
+	    
+	ELSE
+	    #LConSMC_ReadCycleTimeS71500 := 0.0;
+	END_IF;
+END_FUNCTION
+

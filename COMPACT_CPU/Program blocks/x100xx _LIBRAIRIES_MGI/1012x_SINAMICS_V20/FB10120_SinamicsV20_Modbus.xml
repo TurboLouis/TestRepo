@@ -1,0 +1,2644 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T06:59:47.4747821Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor>Anirouddh</HeaderAuthor>
+      <HeaderFamily>1012x_SINAMICS_V20</HeaderFamily>
+      <HeaderName />
+      <HeaderVersion>1.0</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="MotorInError" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="SpeedSetpoint" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList><Comment><MultiLanguageText Lang="fr-FR">mm/s</MultiLanguageText></Comment><StartValue>200.0</StartValue></Member>
+    <Member Name="AxisDiameter" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList><Comment><MultiLanguageText Lang="fr-FR">(mm)</MultiLanguageText></Comment><StartValue>84.0</StartValue></Member>
+    <Member Name="Gear" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList><Comment><MultiLanguageText Lang="fr-FR">Ratio</MultiLanguageText></Comment><StartValue>12.5</StartValue></Member>
+    <Member Name="RequestAcknowledge" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="MotorMaxSpeedRotation" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList><Comment><MultiLanguageText Lang="fr-FR">(tr/min)</MultiLanguageText></Comment><StartValue>1600</StartValue></Member>
+    <Member Name="RequestChangeSpeed" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RequestStartMotor" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ModbusRtuRequestDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="StartMotor" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="AlarmReset" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="MotorStarted" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="MotorStopped" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="StartModbusRtuCommunication" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ModbusRtuDataAddress" Datatype="UInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ModbusRtuDataLength" Datatype="UInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ModbusRtuMode" Datatype="USInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ModbusRtuDataRegisterToSend" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ModbusRtuDataRegisterToSend_1" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ReadAlarmCodeDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="SpeedChangeDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="MaterialOk" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="InOut" />
+  <Section Name="Static">
+    <Member Name="RequestMotorStartUp" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="MaximalSpeed" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Comment><MultiLanguageText Lang="fr-FR">mm/s</MultiLanguageText></Comment></Member>
+    <Member Name="SpeedSetPoint_1" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="ModbusCommunicationStateDiagram" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="MotorStartUpStateDiagram" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="MotorMovementStateDiagram" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="MotorAlarmManagementStateDiagram" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="SpeedSetPointMemory" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="R_TRIG_Start" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_RequestChangeSpeed" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_RequestAcknowledge" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="F_TRIG_Start" Datatype="F_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="F_TRIG_MotorInError" Datatype="F_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TON_StartMotorSignal" Datatype="TON_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TON_StopMotorSignal" Datatype="TON_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TON_AlarmResetSignal" Datatype="TON_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+  </Section>
+  <Section Name="Temp" />
+  <Section Name="Constant">
+    <Member Name="Pi" Datatype="Real" Accessibility="Public">
+      <StartValue>3.141592</StartValue>
+    </Member>
+    <Member Name="WAIT_FOR_MOTOR_START_UP" Datatype="Int" Accessibility="Public">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="INITIALIZE_SPEED" Datatype="Int" Accessibility="Public">
+      <StartValue>10</StartValue>
+    </Member>
+    <Member Name="MOTOR_START_UP_DONE" Datatype="Int" Accessibility="Public">
+      <StartValue>20</StartValue>
+    </Member>
+    <Member Name="==========" Datatype="Bool" Accessibility="Public" />
+    <Member Name="WAIT_FOR_MODBUS_COMMUNICATION_REQUEST" Datatype="Int" Accessibility="Public">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="WRITE_SPEED_SET_POINT" Datatype="Int" Accessibility="Public">
+      <StartValue>10</StartValue>
+    </Member>
+    <Member Name="MODBUS_COMMUNICATION_DONE" Datatype="Int" Accessibility="Public">
+      <StartValue>20</StartValue>
+    </Member>
+    <Member Name="==========_1" Datatype="Bool" Accessibility="Public" />
+    <Member Name="WAIT_FOR_MOVEMENT_REQUEST" Datatype="Int" Accessibility="Public">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="START_BELT" Datatype="Int" Accessibility="Public">
+      <StartValue>20</StartValue>
+    </Member>
+    <Member Name="STOP_BELT" Datatype="Int" Accessibility="Public">
+      <StartValue>30</StartValue>
+    </Member>
+    <Member Name="MOVEMENT_DONE" Datatype="Int" Accessibility="Public">
+      <StartValue>50</StartValue>
+    </Member>
+    <Member Name="==========_2" Datatype="Bool" Accessibility="Public" />
+    <Member Name="WAIT_FOR_MOTOR_ERROR" Datatype="Int" Accessibility="Public">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="RESET_MOTOR_COMMUNICATION_MOVEMENT" Datatype="Int" Accessibility="Public">
+      <StartValue>10</StartValue>
+    </Member>
+    <Member Name="ALARM_RESET" Datatype="Int" Accessibility="Public">
+      <StartValue>20</StartValue>
+    </Member>
+    <Member Name="GATHER_ERROR_CODE" Datatype="Int" Accessibility="Public">
+      <StartValue>30</StartValue>
+    </Member>
+    <Member Name="MOTOR_ERROR_MANAGEMENT_DONE" Datatype="Int" Accessibility="Public">
+      <StartValue>40</StartValue>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>FB10120_SinamicsV20_Modbus</Name>
+      <Number>10120</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>Release note : 
+1.0 - Feature developped</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="GlobalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="FirstScan" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="THEN" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalVariable" UId="30">
+    <Symbol UId="31">
+      <Component Name="RequestMotorStartUp" UId="32" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="33" />
+  <Token Text=":=" UId="34" />
+  <Blank Num="1" UId="35" />
+  <Access Scope="LiteralConstant" UId="36">
+    <Constant UId="37">
+      <ConstantValue UId="39">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="40" />
+  <NewLine Num="1" UId="41" />
+  <Blank Num="4" UId="42" />
+  <Access Scope="LocalVariable" UId="43">
+    <Symbol UId="44">
+      <Component Name="SpeedSetPointMemory" UId="45" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="46" />
+  <Token Text=":=" UId="47" />
+  <Blank Num="1" UId="48" />
+  <Access Scope="LiteralConstant" UId="49">
+    <Constant UId="50">
+      <ConstantValue UId="52">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="53" />
+  <NewLine Num="1" UId="54" />
+  <Blank Num="4" UId="55" />
+  <Access Scope="LocalVariable" UId="56">
+    <Symbol UId="57">
+      <Component Name="ModbusCommunicationStateDiagram" UId="58" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="59" />
+  <Token Text=":=" UId="60" />
+  <Blank Num="1" UId="61" />
+  <Access Scope="LiteralConstant" UId="62">
+    <Constant UId="63">
+      <ConstantValue UId="65">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="66" />
+  <NewLine Num="1" UId="67" />
+  <Blank Num="4" UId="68" />
+  <Access Scope="LocalVariable" UId="69">
+    <Symbol UId="70">
+      <Component Name="SpeedChangeDone" UId="71" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="72" />
+  <Token Text=":=" UId="73" />
+  <Blank Num="1" UId="74" />
+  <Access Scope="LiteralConstant" UId="75">
+    <Constant UId="76">
+      <ConstantValue UId="78">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="79" />
+  <NewLine Num="1" UId="80" />
+  <Blank Num="4" UId="81" />
+  <Access Scope="LocalVariable" UId="82">
+    <Symbol UId="83">
+      <Component Name="ReadAlarmCodeDone" UId="84" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="85" />
+  <Token Text=":=" UId="86" />
+  <Blank Num="1" UId="87" />
+  <Access Scope="LiteralConstant" UId="88">
+    <Constant UId="89">
+      <ConstantValue UId="91">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="92" />
+  <NewLine Num="1" UId="93" />
+  <Token Text="END_IF" UId="94" />
+  <Token Text=";" UId="95" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>First Scan</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Access Scope="LocalVariable" UId="21">
+    <Symbol UId="22">
+      <Component Name="MaximalSpeed" UId="23" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="24" />
+  <Token Text=":=" UId="25" />
+  <Blank Num="1" UId="26" />
+  <Token Text="(" UId="27" />
+  <Token Text="(" UId="28" />
+  <Access Scope="LocalConstant" UId="29">
+    <Constant Name="Pi" UId="30" />
+  </Access>
+  <Token Text="*" UId="33" />
+  <Access Scope="LocalVariable" UId="34">
+    <Symbol UId="35">
+      <Component Name="AxisDiameter" UId="36" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="37" />
+  <Token Text="/" UId="38" />
+  <Blank Num="1" UId="39" />
+  <Access Scope="LocalVariable" UId="40">
+    <Symbol UId="41">
+      <Component Name="Gear" UId="42" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="43" />
+  <Blank Num="1" UId="44" />
+  <Token Text="*" UId="45" />
+  <Blank Num="1" UId="46" />
+  <Token Text="(" UId="47" />
+  <Access Scope="LocalVariable" UId="48">
+    <Symbol UId="49">
+      <Component Name="MotorMaxSpeedRotation" UId="50" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="51" />
+  <Token Text=")" UId="52" />
+  <Token Text="/" UId="53" />
+  <Access Scope="LiteralConstant" UId="54">
+    <Constant UId="55">
+      <ConstantValue UId="57">60</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="58" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="F" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="10" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Maximum Speed Calculation</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="11" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="12" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Access Scope="LocalVariable" UId="21">
+    <Symbol UId="22">
+      <Component Name="SpeedSetPoint_1" UId="23" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="24" />
+  <Token Text=":=" UId="25" />
+  <Blank Num="1" UId="26" />
+  <Token Text="(" UId="27" />
+  <Access Scope="LocalVariable" UId="28">
+    <Symbol UId="29">
+      <Component Name="SpeedSetpoint" UId="30" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="31" />
+  <Token Text="*" UId="32" />
+  <Blank Num="1" UId="33" />
+  <Token Text="(" UId="34" />
+  <Access Scope="LiteralConstant" UId="35">
+    <Constant UId="36">
+      <ConstantValue UId="38">100</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="39" />
+  <Token Text="/" UId="40" />
+  <Blank Num="1" UId="41" />
+  <Access Scope="LocalVariable" UId="42">
+    <Symbol UId="43">
+      <Component Name="MaximalSpeed" UId="44" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="45" />
+  <Token Text=")" UId="46" />
+  <Token Text=";" UId="47" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="13" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="14" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="15" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="16" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="17" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>%Speed Setpoint Calculation</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="18" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="CASE" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="MotorStartUpStateDiagram" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="OF" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalConstant" UId="30">
+    <Constant Name="WAIT_FOR_MOTOR_START_UP" UId="31" />
+  </Access>
+  <Token Text=":" UId="34" />
+  <NewLine Num="1" UId="35" />
+  <Blank Num="8" UId="36" />
+  <Token Text="IF" UId="37" />
+  <Blank Num="1" UId="38" />
+  <Access Scope="LocalVariable" UId="39">
+    <Symbol UId="40">
+      <Component Name="RequestMotorStartUp" UId="41" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="42" />
+  <Token Text="AND" UId="43" />
+  <Blank Num="1" UId="44" />
+  <Access Scope="LocalVariable" UId="45">
+    <Symbol UId="46">
+      <Component Name="RequestAcknowledge" UId="47" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="48" />
+  <Token Text="THEN" UId="49" />
+  <NewLine Num="1" UId="50" />
+  <Blank Num="12" UId="51" />
+  <Access Scope="LocalVariable" UId="52">
+    <Symbol UId="53">
+      <Component Name="MotorStartUpStateDiagram" UId="54" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="55" />
+  <Token Text=":=" UId="56" />
+  <Blank Num="1" UId="57" />
+  <Access Scope="LocalConstant" UId="58">
+    <Constant Name="INITIALIZE_SPEED" UId="59" />
+  </Access>
+  <Token Text=";" UId="62" />
+  <NewLine Num="1" UId="63" />
+  <Blank Num="8" UId="64" />
+  <Token Text="END_IF" UId="65" />
+  <Token Text=";" UId="66" />
+  <NewLine Num="1" UId="67" />
+  <Blank Num="4" UId="68" />
+  <Access Scope="LocalConstant" UId="69">
+    <Constant Name="INITIALIZE_SPEED" UId="70" />
+  </Access>
+  <Token Text=":" UId="73" />
+  <NewLine Num="1" UId="74" />
+  <Blank Num="8" UId="75" />
+  <Access Scope="LocalVariable" UId="76">
+    <Symbol UId="77">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="78" />
+      <Token Text="." UId="79" />
+      <Token Text="%X0" UId="80" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="81" />
+  <Token Text=":=" UId="82" />
+  <Blank Num="1" UId="83" />
+  <Access Scope="LocalVariable" UId="84">
+    <Symbol UId="85">
+      <Component Name="RequestStartMotor" UId="86" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="87" />
+  <Blank Num="2" UId="88" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="89">
+    <Text UId="90">Start</Text>
+  </LineComment>
+  <NewLine Num="1" UId="91" />
+  <Blank Num="8" UId="92" />
+  <Access Scope="LocalVariable" UId="93">
+    <Symbol UId="94">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="95" />
+      <Token Text="." UId="96" />
+      <Token Text="%X1" UId="97" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="98" />
+  <Token Text=":=" UId="99" />
+  <Blank Num="1" UId="100" />
+  <Access Scope="LiteralConstant" UId="101">
+    <Constant UId="102">
+      <ConstantValue UId="104">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="105" />
+  <Blank Num="3" UId="106" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="107">
+    <Text UId="108">Electric Stop </Text>
+  </LineComment>
+  <NewLine Num="1" UId="109" />
+  <Blank Num="8" UId="110" />
+  <Access Scope="LocalVariable" UId="111">
+    <Symbol UId="112">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="113" />
+      <Token Text="." UId="114" />
+      <Token Text="%X2" UId="115" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="116" />
+  <Token Text=":=" UId="117" />
+  <Blank Num="1" UId="118" />
+  <Access Scope="LiteralConstant" UId="119">
+    <Constant UId="120">
+      <ConstantValue UId="122">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="123" />
+  <Blank Num="3" UId="124" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="125">
+    <Text UId="126">Quick Stop</Text>
+  </LineComment>
+  <NewLine Num="1" UId="127" />
+  <Blank Num="8" UId="128" />
+  <Access Scope="LocalVariable" UId="129">
+    <Symbol UId="130">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="131" />
+      <Token Text="." UId="132" />
+      <Token Text="%X3" UId="133" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="134" />
+  <Token Text=":=" UId="135" />
+  <Blank Num="1" UId="136" />
+  <Access Scope="LiteralConstant" UId="137">
+    <Constant UId="138">
+      <ConstantValue UId="140">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="141" />
+  <Blank Num="3" UId="142" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="143">
+    <Text UId="144">Allow Pulse</Text>
+  </LineComment>
+  <NewLine Num="1" UId="145" />
+  <Blank Num="8" UId="146" />
+  <Access Scope="LocalVariable" UId="147">
+    <Symbol UId="148">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="149" />
+      <Token Text="." UId="150" />
+      <Token Text="%X4" UId="151" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="152" />
+  <Token Text=":=" UId="153" />
+  <Blank Num="1" UId="154" />
+  <Access Scope="LiteralConstant" UId="155">
+    <Constant UId="156">
+      <ConstantValue UId="158">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="159" />
+  <Blank Num="3" UId="160" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="161">
+    <Text UId="162">Allow GR</Text>
+  </LineComment>
+  <NewLine Num="1" UId="163" />
+  <Blank Num="8" UId="164" />
+  <Access Scope="LocalVariable" UId="165">
+    <Symbol UId="166">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="167" />
+      <Token Text="." UId="168" />
+      <Token Text="%X5" UId="169" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="170" />
+  <Token Text=":=" UId="171" />
+  <Blank Num="1" UId="172" />
+  <Access Scope="LiteralConstant" UId="173">
+    <Constant UId="174">
+      <ConstantValue UId="176">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="177" />
+  <Blank Num="3" UId="178" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="179">
+    <Text UId="180">Start GR</Text>
+  </LineComment>
+  <NewLine Num="1" UId="181" />
+  <Blank Num="8" UId="182" />
+  <Access Scope="LocalVariable" UId="183">
+    <Symbol UId="184">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="185" />
+      <Token Text="." UId="186" />
+      <Token Text="%X6" UId="187" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="188" />
+  <Token Text=":=" UId="189" />
+  <Blank Num="1" UId="190" />
+  <Access Scope="LiteralConstant" UId="191">
+    <Constant UId="192">
+      <ConstantValue UId="194">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="195" />
+  <Blank Num="3" UId="196" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="197">
+    <Text UId="198">Start Setpoint</Text>
+  </LineComment>
+  <NewLine Num="1" UId="199" />
+  <Blank Num="8" UId="200" />
+  <Access Scope="LocalVariable" UId="201">
+    <Symbol UId="202">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="203" />
+      <Token Text="." UId="204" />
+      <Token Text="%X7" UId="205" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="206" />
+  <Token Text=":=" UId="207" />
+  <Blank Num="1" UId="208" />
+  <Access Scope="LiteralConstant" UId="209">
+    <Constant UId="210">
+      <ConstantValue UId="212">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="213" />
+  <Blank Num="2" UId="214" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="215">
+    <Text UId="216">Allow Acknowledge</Text>
+  </LineComment>
+  <NewLine Num="1" UId="217" />
+  <Blank Num="8" UId="218" />
+  <Access Scope="LocalVariable" UId="219">
+    <Symbol UId="220">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="221" />
+      <Token Text="." UId="222" />
+      <Token Text="%X8" UId="223" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="224" />
+  <Token Text=":=" UId="225" />
+  <Blank Num="1" UId="226" />
+  <Access Scope="LiteralConstant" UId="227">
+    <Constant UId="228">
+      <ConstantValue UId="230">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="231" />
+  <Blank Num="2" UId="232" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="233">
+    <Text UId="234">JOG Right</Text>
+  </LineComment>
+  <NewLine Num="1" UId="235" />
+  <Blank Num="8" UId="236" />
+  <Access Scope="LocalVariable" UId="237">
+    <Symbol UId="238">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="239" />
+      <Token Text="." UId="240" />
+      <Token Text="%X9" UId="241" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="242" />
+  <Token Text=":=" UId="243" />
+  <Blank Num="1" UId="244" />
+  <Access Scope="LiteralConstant" UId="245">
+    <Constant UId="246">
+      <ConstantValue UId="248">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="249" />
+  <Blank Num="2" UId="250" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="251">
+    <Text UId="252">JOG left </Text>
+  </LineComment>
+  <NewLine Num="1" UId="253" />
+  <Blank Num="8" UId="254" />
+  <Access Scope="LocalVariable" UId="255">
+    <Symbol UId="256">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="257" />
+      <Token Text="." UId="258" />
+      <Token Text="%X10" UId="259" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="260" />
+  <Token Text=":=" UId="261" />
+  <Blank Num="1" UId="262" />
+  <Access Scope="LiteralConstant" UId="263">
+    <Constant UId="264">
+      <ConstantValue UId="266">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="267" />
+  <Blank Num="2" UId="268" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="269">
+    <Text UId="270">PLC Control</Text>
+  </LineComment>
+  <NewLine Num="1" UId="271" />
+  <Blank Num="8" UId="272" />
+  <Access Scope="LocalVariable" UId="273">
+    <Symbol UId="274">
+      <Component Name="ModbusRtuDataRegisterToSend_1" UId="275" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="276" />
+  <Token Text=":=" UId="277" />
+  <Blank Num="1" UId="278" />
+  <Access Scope="Call" UId="279">
+    <Instruction Name="REAL_TO_INT" UId="280">
+      <Token Text="(" UId="281" />
+      <NamelessParameter UId="282">
+        <Access Scope="LocalVariable" UId="283">
+          <Symbol UId="284">
+            <Component Name="SpeedSetPoint_1" UId="285" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="286" />
+        <Token Text="*" UId="287" />
+        <Blank Num="1" UId="288" />
+        <Access Scope="LiteralConstant" UId="289">
+          <Constant UId="290">
+            <ConstantValue UId="292">163.84</ConstantValue>
+          </Constant>
+        </Access>
+        <Blank Num="1" UId="293" />
+        <Token Text="*" UId="294" />
+        <Blank Num="1" UId="295" />
+        <Access Scope="LiteralConstant" UId="296">
+          <Constant UId="297">
+            <ConstantValue UId="299">1.12</ConstantValue>
+          </Constant>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="301" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="302" />
+  <Blank Num="1" UId="303" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="304">
+    <Text UId="305"> SpeedSetPoint * ? * Correction</Text>
+  </LineComment>
+  <NewLine Num="1" UId="306" />
+  <Blank Num="8" UId="307" />
+  <Access Scope="LocalVariable" UId="308">
+    <Symbol UId="309">
+      <Component Name="StartModbusRtuCommunication" UId="310" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="311" />
+  <Token Text=":=" UId="312" />
+  <Blank Num="1" UId="313" />
+  <Access Scope="LiteralConstant" UId="314">
+    <Constant UId="315">
+      <ConstantValue UId="317">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="318" />
+  <NewLine Num="1" UId="319" />
+  <Blank Num="8" UId="320" />
+  <Access Scope="LocalVariable" UId="321">
+    <Symbol UId="322">
+      <Component Name="ModbusRtuDataAddress" UId="323" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="324" />
+  <Token Text=":=" UId="325" />
+  <Blank Num="1" UId="326" />
+  <Access Scope="LiteralConstant" UId="327">
+    <Constant UId="328">
+      <ConstantValue UId="330">40100</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="331" />
+  <NewLine Num="1" UId="332" />
+  <Blank Num="8" UId="333" />
+  <Access Scope="LocalVariable" UId="334">
+    <Symbol UId="335">
+      <Component Name="ModbusRtuDataLength" UId="336" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="337" />
+  <Token Text=":=" UId="338" />
+  <Blank Num="1" UId="339" />
+  <Access Scope="LiteralConstant" UId="340">
+    <Constant UId="341">
+      <ConstantValue UId="343">2</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="344" />
+  <NewLine Num="1" UId="345" />
+  <Blank Num="8" UId="346" />
+  <Access Scope="LocalVariable" UId="347">
+    <Symbol UId="348">
+      <Component Name="ModbusRtuMode" UId="349" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="350" />
+  <Token Text=":=" UId="351" />
+  <Blank Num="1" UId="352" />
+  <Access Scope="GlobalConstant" UId="353">
+    <Constant Name="MODBUS_RTU_WRITE_MODE" UId="354" />
+  </Access>
+  <Token Text=";" UId="357" />
+  <NewLine Num="1" UId="358" />
+  <Blank Num="8" UId="359" />
+  <Token Text="IF" UId="360" />
+  <Blank Num="1" UId="361" />
+  <Access Scope="LocalVariable" UId="362">
+    <Symbol UId="363">
+      <Component Name="ModbusRtuRequestDone" UId="364" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="365" />
+  <Token Text="THEN" UId="366" />
+  <NewLine Num="1" UId="367" />
+  <Blank Num="12" UId="368" />
+  <Access Scope="LocalVariable" UId="369">
+    <Symbol UId="370">
+      <Component Name="StartModbusRtuCommunication" UId="371" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="372" />
+  <Token Text=":=" UId="373" />
+  <Blank Num="1" UId="374" />
+  <Access Scope="LiteralConstant" UId="375">
+    <Constant UId="376">
+      <ConstantValue UId="378">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="379" />
+  <NewLine Num="1" UId="380" />
+  <Blank Num="12" UId="381" />
+  <Access Scope="LocalVariable" UId="382">
+    <Symbol UId="383">
+      <Component Name="MotorStartUpStateDiagram" UId="384" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="385" />
+  <Token Text=":=" UId="386" />
+  <Blank Num="1" UId="387" />
+  <Access Scope="LocalConstant" UId="388">
+    <Constant Name="MOTOR_START_UP_DONE" UId="389" />
+  </Access>
+  <Token Text=";" UId="392" />
+  <NewLine Num="1" UId="393" />
+  <Blank Num="8" UId="394" />
+  <Token Text="END_IF" UId="395" />
+  <Token Text=";" UId="396" />
+  <NewLine Num="1" UId="397" />
+  <Blank Num="4" UId="398" />
+  <Access Scope="LocalConstant" UId="399">
+    <Constant Name="MOTOR_START_UP_DONE" UId="400" />
+  </Access>
+  <Token Text=":" UId="403" />
+  <NewLine Num="1" UId="404" />
+  <Blank Num="8" UId="405" />
+  <Access Scope="LocalVariable" UId="406">
+    <Symbol UId="407">
+      <Component Name="MaterialOk" UId="408" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="409" />
+  <Token Text=":=" UId="410" />
+  <Blank Num="1" UId="411" />
+  <Access Scope="LiteralConstant" UId="412">
+    <Constant UId="413">
+      <ConstantValue UId="415">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="416" />
+  <NewLine Num="1" UId="417" />
+  <Blank Num="8" UId="418" />
+  <Access Scope="LocalVariable" UId="419">
+    <Symbol UId="420">
+      <Component Name="RequestMotorStartUp" UId="421" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="422" />
+  <Token Text=":=" UId="423" />
+  <Blank Num="1" UId="424" />
+  <Access Scope="LiteralConstant" UId="425">
+    <Constant UId="426">
+      <ConstantValue UId="428">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="429" />
+  <NewLine Num="1" UId="430" />
+  <Token Text="END_CASE" UId="431" />
+  <Token Text=";" UId="432" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="1A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="1B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="1D" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="1E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Motor Start Up Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="20" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="CASE" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="ModbusCommunicationStateDiagram" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="OF" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalConstant" UId="30">
+    <Constant Name="WAIT_FOR_MODBUS_COMMUNICATION_REQUEST" UId="31" />
+  </Access>
+  <Token Text=":" UId="34" />
+  <NewLine Num="1" UId="35" />
+  <Blank Num="8" UId="36" />
+  <Access Scope="LocalVariable" UId="37">
+    <Symbol UId="38">
+      <Component Name="R_TRIG_RequestChangeSpeed" UId="39" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="40">
+    <Instruction UId="41">
+      <Token Text="(" UId="42" />
+      <Parameter Name="CLK" UId="43">
+        <Blank Num="1" UId="44" />
+        <Token Text=":=" UId="45" />
+        <Blank Num="1" UId="46" />
+        <Access Scope="LocalVariable" UId="47">
+          <Symbol UId="48">
+            <Component Name="RequestChangeSpeed" UId="49" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="50" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="51" />
+  <NewLine Num="1" UId="52" />
+  <Blank Num="8" UId="53" />
+  <Token Text="IF" UId="54" />
+  <Blank Num="1" UId="55" />
+  <Access Scope="LocalVariable" UId="56">
+    <Symbol UId="57">
+      <Component Name="R_TRIG_RequestChangeSpeed" UId="58" />
+      <Token Text="." UId="59" />
+      <Component Name="Q" UId="60" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="61" />
+  <Token Text="THEN" UId="62" />
+  <NewLine Num="1" UId="63" />
+  <Blank Num="12" UId="64" />
+  <Access Scope="LocalVariable" UId="65">
+    <Symbol UId="66">
+      <Component Name="SpeedChangeDone" UId="67" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="68" />
+  <Token Text=":=" UId="69" />
+  <Blank Num="1" UId="70" />
+  <Access Scope="LiteralConstant" UId="71">
+    <Constant UId="72">
+      <ConstantValue UId="74">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="75" />
+  <NewLine Num="1" UId="76" />
+  <Blank Num="12" UId="77" />
+  <Access Scope="LocalVariable" UId="78">
+    <Symbol UId="79">
+      <Component Name="ModbusCommunicationStateDiagram" UId="80" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="81" />
+  <Token Text=":=" UId="82" />
+  <Blank Num="1" UId="83" />
+  <Access Scope="LocalConstant" UId="84">
+    <Constant Name="WRITE_SPEED_SET_POINT" UId="85" />
+  </Access>
+  <Token Text=";" UId="88" />
+  <NewLine Num="1" UId="89" />
+  <Blank Num="8" UId="90" />
+  <Token Text="END_IF" UId="91" />
+  <Token Text=";" UId="92" />
+  <NewLine Num="1" UId="93" />
+  <Blank Num="4" UId="94" />
+  <Access Scope="LocalConstant" UId="95">
+    <Constant Name="WRITE_SPEED_SET_POINT" UId="96" />
+  </Access>
+  <Token Text=":" UId="99" />
+  <NewLine Num="1" UId="100" />
+  <Blank Num="8" UId="101" />
+  <Access Scope="LocalVariable" UId="102">
+    <Symbol UId="103">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="104" />
+      <Token Text="." UId="105" />
+      <Token Text="%X0" UId="106" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="107" />
+  <Token Text=":=" UId="108" />
+  <Blank Num="1" UId="109" />
+  <Access Scope="LocalVariable" UId="110">
+    <Symbol UId="111">
+      <Component Name="RequestStartMotor" UId="112" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="113" />
+  <Blank Num="2" UId="114" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="115">
+    <Text UId="116">Start</Text>
+  </LineComment>
+  <NewLine Num="1" UId="117" />
+  <Blank Num="8" UId="118" />
+  <Access Scope="LocalVariable" UId="119">
+    <Symbol UId="120">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="121" />
+      <Token Text="." UId="122" />
+      <Token Text="%X1" UId="123" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="124" />
+  <Token Text=":=" UId="125" />
+  <Blank Num="1" UId="126" />
+  <Access Scope="LiteralConstant" UId="127">
+    <Constant UId="128">
+      <ConstantValue UId="130">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="131" />
+  <Blank Num="3" UId="132" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="133">
+    <Text UId="134">Electric Stop </Text>
+  </LineComment>
+  <NewLine Num="1" UId="135" />
+  <Blank Num="8" UId="136" />
+  <Access Scope="LocalVariable" UId="137">
+    <Symbol UId="138">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="139" />
+      <Token Text="." UId="140" />
+      <Token Text="%X2" UId="141" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="142" />
+  <Token Text=":=" UId="143" />
+  <Blank Num="1" UId="144" />
+  <Access Scope="LiteralConstant" UId="145">
+    <Constant UId="146">
+      <ConstantValue UId="148">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="149" />
+  <Blank Num="3" UId="150" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="151">
+    <Text UId="152">Quick Stop</Text>
+  </LineComment>
+  <NewLine Num="1" UId="153" />
+  <Blank Num="8" UId="154" />
+  <Access Scope="LocalVariable" UId="155">
+    <Symbol UId="156">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="157" />
+      <Token Text="." UId="158" />
+      <Token Text="%X3" UId="159" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="160" />
+  <Token Text=":=" UId="161" />
+  <Blank Num="1" UId="162" />
+  <Access Scope="LiteralConstant" UId="163">
+    <Constant UId="164">
+      <ConstantValue UId="166">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="167" />
+  <Blank Num="3" UId="168" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="169">
+    <Text UId="170">Allow Pulse</Text>
+  </LineComment>
+  <NewLine Num="1" UId="171" />
+  <Blank Num="8" UId="172" />
+  <Access Scope="LocalVariable" UId="173">
+    <Symbol UId="174">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="175" />
+      <Token Text="." UId="176" />
+      <Token Text="%X4" UId="177" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="178" />
+  <Token Text=":=" UId="179" />
+  <Blank Num="1" UId="180" />
+  <Access Scope="LiteralConstant" UId="181">
+    <Constant UId="182">
+      <ConstantValue UId="184">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="185" />
+  <Blank Num="3" UId="186" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="187">
+    <Text UId="188">Allow GR</Text>
+  </LineComment>
+  <NewLine Num="1" UId="189" />
+  <Blank Num="8" UId="190" />
+  <Access Scope="LocalVariable" UId="191">
+    <Symbol UId="192">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="193" />
+      <Token Text="." UId="194" />
+      <Token Text="%X5" UId="195" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="196" />
+  <Token Text=":=" UId="197" />
+  <Blank Num="1" UId="198" />
+  <Access Scope="LiteralConstant" UId="199">
+    <Constant UId="200">
+      <ConstantValue UId="202">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="203" />
+  <Blank Num="3" UId="204" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="205">
+    <Text UId="206">Start GR</Text>
+  </LineComment>
+  <NewLine Num="1" UId="207" />
+  <Blank Num="8" UId="208" />
+  <Access Scope="LocalVariable" UId="209">
+    <Symbol UId="210">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="211" />
+      <Token Text="." UId="212" />
+      <Token Text="%X6" UId="213" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="214" />
+  <Token Text=":=" UId="215" />
+  <Blank Num="1" UId="216" />
+  <Access Scope="LiteralConstant" UId="217">
+    <Constant UId="218">
+      <ConstantValue UId="220">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="221" />
+  <Blank Num="3" UId="222" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="223">
+    <Text UId="224">Start Setpoint</Text>
+  </LineComment>
+  <NewLine Num="1" UId="225" />
+  <Blank Num="8" UId="226" />
+  <Access Scope="LocalVariable" UId="227">
+    <Symbol UId="228">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="229" />
+      <Token Text="." UId="230" />
+      <Token Text="%X7" UId="231" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="232" />
+  <Token Text=":=" UId="233" />
+  <Blank Num="1" UId="234" />
+  <Access Scope="LiteralConstant" UId="235">
+    <Constant UId="236">
+      <ConstantValue UId="238">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="239" />
+  <Blank Num="2" UId="240" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="241">
+    <Text UId="242">Allow Acknowledge</Text>
+  </LineComment>
+  <NewLine Num="1" UId="243" />
+  <Blank Num="8" UId="244" />
+  <Access Scope="LocalVariable" UId="245">
+    <Symbol UId="246">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="247" />
+      <Token Text="." UId="248" />
+      <Token Text="%X8" UId="249" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="250" />
+  <Token Text=":=" UId="251" />
+  <Blank Num="1" UId="252" />
+  <Access Scope="LiteralConstant" UId="253">
+    <Constant UId="254">
+      <ConstantValue UId="256">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="257" />
+  <Blank Num="2" UId="258" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="259">
+    <Text UId="260">JOG Right</Text>
+  </LineComment>
+  <NewLine Num="1" UId="261" />
+  <Blank Num="8" UId="262" />
+  <Access Scope="LocalVariable" UId="263">
+    <Symbol UId="264">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="265" />
+      <Token Text="." UId="266" />
+      <Token Text="%X9" UId="267" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="268" />
+  <Token Text=":=" UId="269" />
+  <Blank Num="1" UId="270" />
+  <Access Scope="LiteralConstant" UId="271">
+    <Constant UId="272">
+      <ConstantValue UId="274">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="275" />
+  <Blank Num="2" UId="276" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="277">
+    <Text UId="278">JOG left </Text>
+  </LineComment>
+  <NewLine Num="1" UId="279" />
+  <Blank Num="8" UId="280" />
+  <Access Scope="LocalVariable" UId="281">
+    <Symbol UId="282">
+      <Component Name="ModbusRtuDataRegisterToSend" UId="283" />
+      <Token Text="." UId="284" />
+      <Token Text="%X10" UId="285" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="286" />
+  <Token Text=":=" UId="287" />
+  <Blank Num="1" UId="288" />
+  <Access Scope="LiteralConstant" UId="289">
+    <Constant UId="290">
+      <ConstantValue UId="292">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="293" />
+  <Blank Num="2" UId="294" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="295">
+    <Text UId="296">PLC Control</Text>
+  </LineComment>
+  <NewLine Num="1" UId="297" />
+  <Blank Num="8" UId="298" />
+  <Access Scope="LocalVariable" UId="299">
+    <Symbol UId="300">
+      <Component Name="ModbusRtuDataRegisterToSend_1" UId="301" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="302" />
+  <Token Text=":=" UId="303" />
+  <Blank Num="1" UId="304" />
+  <Access Scope="Call" UId="305">
+    <Instruction Name="REAL_TO_INT" UId="306">
+      <Token Text="(" UId="307" />
+      <NamelessParameter UId="308">
+        <Access Scope="LocalVariable" UId="309">
+          <Symbol UId="310">
+            <Component Name="SpeedSetPoint_1" UId="311" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="312" />
+        <Token Text="*" UId="313" />
+        <Blank Num="1" UId="314" />
+        <Access Scope="LiteralConstant" UId="315">
+          <Constant UId="316">
+            <ConstantValue UId="318">163.84</ConstantValue>
+          </Constant>
+        </Access>
+        <Blank Num="1" UId="319" />
+        <Token Text="*" UId="320" />
+        <Blank Num="1" UId="321" />
+        <Access Scope="LiteralConstant" UId="322">
+          <Constant UId="323">
+            <ConstantValue UId="325">1.12</ConstantValue>
+          </Constant>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="327" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="328" />
+  <Blank Num="1" UId="329" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="330">
+    <Text UId="331"> SpeedSetPoint * ? * Correction</Text>
+  </LineComment>
+  <NewLine Num="1" UId="332" />
+  <Blank Num="8" UId="333" />
+  <Access Scope="LocalVariable" UId="334">
+    <Symbol UId="335">
+      <Component Name="StartModbusRtuCommunication" UId="336" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="337" />
+  <Token Text=":=" UId="338" />
+  <Blank Num="1" UId="339" />
+  <Access Scope="LiteralConstant" UId="340">
+    <Constant UId="341">
+      <ConstantValue UId="343">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="344" />
+  <NewLine Num="1" UId="345" />
+  <Blank Num="8" UId="346" />
+  <Access Scope="LocalVariable" UId="347">
+    <Symbol UId="348">
+      <Component Name="ModbusRtuDataAddress" UId="349" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="350" />
+  <Token Text=":=" UId="351" />
+  <Blank Num="1" UId="352" />
+  <Access Scope="LiteralConstant" UId="353">
+    <Constant UId="354">
+      <ConstantValue UId="356">40100</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="357" />
+  <NewLine Num="1" UId="358" />
+  <Blank Num="8" UId="359" />
+  <Access Scope="LocalVariable" UId="360">
+    <Symbol UId="361">
+      <Component Name="ModbusRtuDataLength" UId="362" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="363" />
+  <Token Text=":=" UId="364" />
+  <Blank Num="1" UId="365" />
+  <Access Scope="LiteralConstant" UId="366">
+    <Constant UId="367">
+      <ConstantValue UId="369">2</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="370" />
+  <NewLine Num="1" UId="371" />
+  <Blank Num="8" UId="372" />
+  <Access Scope="LocalVariable" UId="373">
+    <Symbol UId="374">
+      <Component Name="ModbusRtuMode" UId="375" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="376" />
+  <Token Text=":=" UId="377" />
+  <Blank Num="1" UId="378" />
+  <Access Scope="GlobalConstant" UId="379">
+    <Constant Name="MODBUS_RTU_WRITE_MODE" UId="380" />
+  </Access>
+  <Token Text=";" UId="383" />
+  <NewLine Num="1" UId="384" />
+  <Blank Num="8" UId="385" />
+  <Token Text="IF" UId="386" />
+  <Blank Num="1" UId="387" />
+  <Access Scope="LocalVariable" UId="388">
+    <Symbol UId="389">
+      <Component Name="ModbusRtuRequestDone" UId="390" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="391" />
+  <Token Text="THEN" UId="392" />
+  <NewLine Num="1" UId="393" />
+  <Blank Num="12" UId="394" />
+  <Access Scope="LocalVariable" UId="395">
+    <Symbol UId="396">
+      <Component Name="SpeedChangeDone" UId="397" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="398" />
+  <Token Text=":=" UId="399" />
+  <Blank Num="1" UId="400" />
+  <Access Scope="LiteralConstant" UId="401">
+    <Constant UId="402">
+      <ConstantValue UId="404">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="405" />
+  <NewLine Num="1" UId="406" />
+  <Blank Num="12" UId="407" />
+  <Access Scope="LocalVariable" UId="408">
+    <Symbol UId="409">
+      <Component Name="StartModbusRtuCommunication" UId="410" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="411" />
+  <Token Text=":=" UId="412" />
+  <Blank Num="1" UId="413" />
+  <Access Scope="LiteralConstant" UId="414">
+    <Constant UId="415">
+      <ConstantValue UId="417">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="418" />
+  <NewLine Num="1" UId="419" />
+  <Blank Num="12" UId="420" />
+  <Access Scope="LocalVariable" UId="421">
+    <Symbol UId="422">
+      <Component Name="ModbusCommunicationStateDiagram" UId="423" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="424" />
+  <Token Text=":=" UId="425" />
+  <Blank Num="1" UId="426" />
+  <Access Scope="LocalConstant" UId="427">
+    <Constant Name="MODBUS_COMMUNICATION_DONE" UId="428" />
+  </Access>
+  <Token Text=";" UId="431" />
+  <NewLine Num="1" UId="432" />
+  <Blank Num="8" UId="433" />
+  <Token Text="END_IF" UId="434" />
+  <Token Text=";" UId="435" />
+  <NewLine Num="1" UId="436" />
+  <Blank Num="4" UId="437" />
+  <Access Scope="LocalConstant" UId="438">
+    <Constant Name="MODBUS_COMMUNICATION_DONE" UId="439" />
+  </Access>
+  <Token Text=":" UId="442" />
+  <NewLine Num="1" UId="443" />
+  <Blank Num="8" UId="444" />
+  <Access Scope="LocalVariable" UId="445">
+    <Symbol UId="446">
+      <Component Name="ModbusCommunicationStateDiagram" UId="447" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="448" />
+  <Token Text=":=" UId="449" />
+  <Blank Num="1" UId="450" />
+  <Access Scope="LocalConstant" UId="451">
+    <Constant Name="WAIT_FOR_MODBUS_COMMUNICATION_REQUEST" UId="452" />
+  </Access>
+  <Token Text=";" UId="455" />
+  <NewLine Num="1" UId="456" />
+  <Token Text="END_CASE" UId="457" />
+  <Token Text=";" UId="458" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="21" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="22" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="23" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="24" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="25" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Motor Communication Managemnt</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="26" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="27" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="CASE" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="MotorMovementStateDiagram" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="OF" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalConstant" UId="30">
+    <Constant Name="WAIT_FOR_MOVEMENT_REQUEST" UId="31" />
+  </Access>
+  <Token Text=":" UId="34" />
+  <NewLine Num="1" UId="35" />
+  <Blank Num="8" UId="36" />
+  <Access Scope="LocalVariable" UId="37">
+    <Symbol UId="38">
+      <Component Name="R_TRIG_Start" UId="39" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="40">
+    <Instruction UId="41">
+      <Token Text="(" UId="42" />
+      <Parameter Name="CLK" UId="43">
+        <Blank Num="1" UId="44" />
+        <Token Text=":=" UId="45" />
+        <Blank Num="1" UId="46" />
+        <Access Scope="LocalVariable" UId="47">
+          <Symbol UId="48">
+            <Component Name="RequestStartMotor" UId="49" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="50" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="51" />
+  <NewLine Num="1" UId="52" />
+  <Blank Num="8" UId="53" />
+  <Access Scope="LocalVariable" UId="54">
+    <Symbol UId="55">
+      <Component Name="F_TRIG_Start" UId="56" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="57">
+    <Instruction UId="58">
+      <Token Text="(" UId="59" />
+      <Parameter Name="CLK" UId="60">
+        <Blank Num="1" UId="61" />
+        <Token Text=":=" UId="62" />
+        <Blank Num="1" UId="63" />
+        <Access Scope="LocalVariable" UId="64">
+          <Symbol UId="65">
+            <Component Name="RequestStartMotor" UId="66" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="67" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="68" />
+  <NewLine Num="1" UId="69" />
+  <Blank Num="8" UId="70" />
+  <Token Text="IF" UId="71" />
+  <Blank Num="1" UId="72" />
+  <Access Scope="LocalVariable" UId="73">
+    <Symbol UId="74">
+      <Component Name="R_TRIG_Start" UId="75" />
+      <Token Text="." UId="76" />
+      <Component Name="Q" UId="77" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="78" />
+  <Token Text="THEN" UId="79" />
+  <NewLine Num="1" UId="80" />
+  <Blank Num="12" UId="81" />
+  <Access Scope="LocalVariable" UId="82">
+    <Symbol UId="83">
+      <Component Name="MotorStarted" UId="84" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="85" />
+  <Token Text=":=" UId="86" />
+  <Blank Num="1" UId="87" />
+  <Access Scope="LiteralConstant" UId="88">
+    <Constant UId="89">
+      <ConstantValue UId="91">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="92" />
+  <NewLine Num="1" UId="93" />
+  <Blank Num="12" UId="94" />
+  <Access Scope="LocalVariable" UId="95">
+    <Symbol UId="96">
+      <Component Name="MotorStopped" UId="97" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="98" />
+  <Token Text=":=" UId="99" />
+  <Blank Num="1" UId="100" />
+  <Access Scope="LiteralConstant" UId="101">
+    <Constant UId="102">
+      <ConstantValue UId="104">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="105" />
+  <NewLine Num="1" UId="106" />
+  <Blank Num="12" UId="107" />
+  <Access Scope="LocalVariable" UId="108">
+    <Symbol UId="109">
+      <Component Name="ReadAlarmCodeDone" UId="110" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="111" />
+  <Token Text=":=" UId="112" />
+  <Blank Num="1" UId="113" />
+  <Access Scope="LiteralConstant" UId="114">
+    <Constant UId="115">
+      <ConstantValue UId="117">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="118" />
+  <NewLine Num="1" UId="119" />
+  <Blank Num="12" UId="120" />
+  <Access Scope="LocalVariable" UId="121">
+    <Symbol UId="122">
+      <Component Name="MotorMovementStateDiagram" UId="123" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="124" />
+  <Token Text=":=" UId="125" />
+  <Blank Num="1" UId="126" />
+  <Access Scope="LocalConstant" UId="127">
+    <Constant Name="START_BELT" UId="128" />
+  </Access>
+  <Token Text=";" UId="131" />
+  <NewLine Num="1" UId="132" />
+  <Blank Num="8" UId="133" />
+  <Token Text="ELSIF" UId="134" />
+  <Blank Num="1" UId="135" />
+  <Access Scope="LocalVariable" UId="136">
+    <Symbol UId="137">
+      <Component Name="F_TRIG_Start" UId="138" />
+      <Token Text="." UId="139" />
+      <Component Name="Q" UId="140" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="141" />
+  <Token Text="THEN" UId="142" />
+  <NewLine Num="1" UId="143" />
+  <Blank Num="12" UId="144" />
+  <Access Scope="LocalVariable" UId="145">
+    <Symbol UId="146">
+      <Component Name="MotorStarted" UId="147" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="148" />
+  <Token Text=":=" UId="149" />
+  <Blank Num="1" UId="150" />
+  <Access Scope="LiteralConstant" UId="151">
+    <Constant UId="152">
+      <ConstantValue UId="154">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="155" />
+  <NewLine Num="1" UId="156" />
+  <Blank Num="12" UId="157" />
+  <Access Scope="LocalVariable" UId="158">
+    <Symbol UId="159">
+      <Component Name="MotorStopped" UId="160" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="161" />
+  <Token Text=":=" UId="162" />
+  <Blank Num="1" UId="163" />
+  <Access Scope="LiteralConstant" UId="164">
+    <Constant UId="165">
+      <ConstantValue UId="167">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="168" />
+  <NewLine Num="1" UId="169" />
+  <Blank Num="12" UId="170" />
+  <Access Scope="LocalVariable" UId="171">
+    <Symbol UId="172">
+      <Component Name="ReadAlarmCodeDone" UId="173" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="174" />
+  <Token Text=":=" UId="175" />
+  <Blank Num="1" UId="176" />
+  <Access Scope="LiteralConstant" UId="177">
+    <Constant UId="178">
+      <ConstantValue UId="180">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="181" />
+  <NewLine Num="1" UId="182" />
+  <Blank Num="12" UId="183" />
+  <Access Scope="LocalVariable" UId="184">
+    <Symbol UId="185">
+      <Component Name="MotorMovementStateDiagram" UId="186" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="187" />
+  <Token Text=":=" UId="188" />
+  <Blank Num="1" UId="189" />
+  <Access Scope="LocalConstant" UId="190">
+    <Constant Name="STOP_BELT" UId="191" />
+  </Access>
+  <Token Text=";" UId="194" />
+  <NewLine Num="1" UId="195" />
+  <Blank Num="8" UId="196" />
+  <Token Text="END_IF" UId="197" />
+  <Token Text=";" UId="198" />
+  <NewLine Num="1" UId="199" />
+  <Blank Num="4" UId="200" />
+  <Access Scope="LocalConstant" UId="201">
+    <Constant Name="START_BELT" UId="202" />
+  </Access>
+  <Token Text=":" UId="205" />
+  <NewLine Num="1" UId="206" />
+  <Blank Num="12" UId="207" />
+  <Access Scope="LocalVariable" UId="208">
+    <Symbol UId="209">
+      <Component Name="StartMotor" UId="210" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="211" />
+  <Token Text=":=" UId="212" />
+  <Blank Num="1" UId="213" />
+  <Access Scope="LiteralConstant" UId="214">
+    <Constant UId="215">
+      <ConstantValue UId="217">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="218" />
+  <NewLine Num="1" UId="219" />
+  <Blank Num="12" UId="220" />
+  <Token Text="IF" UId="221" />
+  <Blank Num="1" UId="222" />
+  <Access Scope="LocalVariable" UId="223">
+    <Symbol UId="224">
+      <Component Name="TON_StartMotorSignal" UId="225" />
+      <Token Text="." UId="226" />
+      <Component Name="Q" UId="227" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="228" />
+  <Token Text="THEN" UId="229" />
+  <NewLine Num="1" UId="230" />
+  <Blank Num="16" UId="231" />
+  <Access Scope="Call" UId="232">
+    <Instruction Name="RESET_TIMER" UId="233">
+      <Token Text="(" UId="234" />
+      <NamelessParameter UId="235">
+        <Access Scope="LocalVariable" UId="236">
+          <Symbol UId="237">
+            <Component Name="TON_StartMotorSignal" UId="238" />
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="239" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="240" />
+  <NewLine Num="1" UId="241" />
+  <Blank Num="16" UId="242" />
+  <Access Scope="LocalVariable" UId="243">
+    <Symbol UId="244">
+      <Component Name="MotorStarted" UId="245" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="246" />
+  <Token Text=":=" UId="247" />
+  <Blank Num="1" UId="248" />
+  <Access Scope="LiteralConstant" UId="249">
+    <Constant UId="250">
+      <ConstantValue UId="252">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="253" />
+  <NewLine Num="1" UId="254" />
+  <Blank Num="16" UId="255" />
+  <Access Scope="LocalVariable" UId="256">
+    <Symbol UId="257">
+      <Component Name="MotorMovementStateDiagram" UId="258" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="259" />
+  <Token Text=":=" UId="260" />
+  <Blank Num="1" UId="261" />
+  <Access Scope="LocalConstant" UId="262">
+    <Constant Name="MOVEMENT_DONE" UId="263" />
+  </Access>
+  <Token Text=";" UId="266" />
+  <NewLine Num="1" UId="267" />
+  <Blank Num="12" UId="268" />
+  <Token Text="END_IF" UId="269" />
+  <Token Text=";" UId="270" />
+  <NewLine Num="1" UId="271" />
+  <Blank Num="8" UId="272" />
+  <Access Scope="LocalConstant" UId="273">
+    <Constant Name="STOP_BELT" UId="274" />
+  </Access>
+  <Token Text=":" UId="277" />
+  <NewLine Num="1" UId="278" />
+  <Blank Num="12" UId="279" />
+  <Access Scope="LocalVariable" UId="280">
+    <Symbol UId="281">
+      <Component Name="StartMotor" UId="282" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="283" />
+  <Token Text=":=" UId="284" />
+  <Blank Num="1" UId="285" />
+  <Access Scope="LiteralConstant" UId="286">
+    <Constant UId="287">
+      <ConstantValue UId="289">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="290" />
+  <NewLine Num="1" UId="291" />
+  <Blank Num="12" UId="292" />
+  <Token Text="IF" UId="293" />
+  <Blank Num="1" UId="294" />
+  <Access Scope="LocalVariable" UId="295">
+    <Symbol UId="296">
+      <Component Name="TON_StopMotorSignal" UId="297" />
+      <Token Text="." UId="298" />
+      <Component Name="Q" UId="299" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="300" />
+  <Token Text="THEN" UId="301" />
+  <NewLine Num="1" UId="302" />
+  <Blank Num="16" UId="303" />
+  <Access Scope="LocalVariable" UId="304">
+    <Symbol UId="305">
+      <Component Name="MotorStopped" UId="306" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="307" />
+  <Token Text=":=" UId="308" />
+  <Blank Num="1" UId="309" />
+  <Access Scope="LiteralConstant" UId="310">
+    <Constant UId="311">
+      <ConstantValue UId="313">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="314" />
+  <NewLine Num="1" UId="315" />
+  <Blank Num="16" UId="316" />
+  <Access Scope="Call" UId="317">
+    <Instruction Name="RESET_TIMER" UId="318">
+      <Token Text="(" UId="319" />
+      <NamelessParameter UId="320">
+        <Access Scope="LocalVariable" UId="321">
+          <Symbol UId="322">
+            <Component Name="TON_StopMotorSignal" UId="323" />
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="324" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="325" />
+  <NewLine Num="1" UId="326" />
+  <Blank Num="16" UId="327" />
+  <Access Scope="LocalVariable" UId="328">
+    <Symbol UId="329">
+      <Component Name="MotorMovementStateDiagram" UId="330" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="331" />
+  <Token Text=":=" UId="332" />
+  <Blank Num="1" UId="333" />
+  <Access Scope="LocalConstant" UId="334">
+    <Constant Name="MOVEMENT_DONE" UId="335" />
+  </Access>
+  <Token Text=";" UId="338" />
+  <NewLine Num="1" UId="339" />
+  <Blank Num="12" UId="340" />
+  <Token Text="END_IF" UId="341" />
+  <Token Text=";" UId="342" />
+  <NewLine Num="1" UId="343" />
+  <Blank Num="4" UId="344" />
+  <Access Scope="LocalConstant" UId="345">
+    <Constant Name="MOVEMENT_DONE" UId="346" />
+  </Access>
+  <Token Text=":" UId="349" />
+  <NewLine Num="1" UId="350" />
+  <Blank Num="8" UId="351" />
+  <Access Scope="LocalVariable" UId="352">
+    <Symbol UId="353">
+      <Component Name="MotorMovementStateDiagram" UId="354" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="355" />
+  <Token Text=":=" UId="356" />
+  <Blank Num="1" UId="357" />
+  <Access Scope="LocalConstant" UId="358">
+    <Constant Name="WAIT_FOR_MOVEMENT_REQUEST" UId="359" />
+  </Access>
+  <Token Text=";" UId="362" />
+  <NewLine Num="1" UId="363" />
+  <Token Text="END_CASE" UId="364" />
+  <Token Text=";" UId="365" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="28" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="29" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="2B" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="2C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Motor Movement Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="2E" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="CASE" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="MotorAlarmManagementStateDiagram" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="OF" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalConstant" UId="30">
+    <Constant Name="WAIT_FOR_MOTOR_ERROR" UId="31" />
+  </Access>
+  <Token Text=":" UId="34" />
+  <NewLine Num="1" UId="35" />
+  <Blank Num="8" UId="36" />
+  <Access Scope="LocalVariable" UId="37">
+    <Symbol UId="38">
+      <Component Name="F_TRIG_MotorInError" UId="39" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="40">
+    <Instruction UId="41">
+      <Token Text="(" UId="42" />
+      <Parameter Name="CLK" UId="43">
+        <Blank Num="1" UId="44" />
+        <Token Text=":=" UId="45" />
+        <Blank Num="1" UId="46" />
+        <Access Scope="LocalVariable" UId="47">
+          <Symbol UId="48">
+            <Component Name="MotorInError" UId="49" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="50" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="51" />
+  <NewLine Num="1" UId="52" />
+  <Blank Num="8" UId="53" />
+  <Access Scope="LocalVariable" UId="54">
+    <Symbol UId="55">
+      <Component Name="R_TRIG_RequestAcknowledge" UId="56" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="57">
+    <Instruction UId="58">
+      <Token Text="(" UId="59" />
+      <Parameter Name="CLK" UId="60">
+        <Blank Num="1" UId="61" />
+        <Token Text=":=" UId="62" />
+        <Blank Num="1" UId="63" />
+        <Access Scope="LocalVariable" UId="64">
+          <Symbol UId="65">
+            <Component Name="RequestAcknowledge" UId="66" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="67" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="68" />
+  <NewLine Num="1" UId="69" />
+  <Blank Num="8" UId="70" />
+  <Token Text="IF" UId="71" />
+  <Blank Num="1" UId="72" />
+  <Access Scope="LocalVariable" UId="73">
+    <Symbol UId="74">
+      <Component Name="F_TRIG_MotorInError" UId="75" />
+      <Token Text="." UId="76" />
+      <Component Name="Q" UId="77" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="78" />
+  <Token Text="THEN" UId="79" />
+  <NewLine Num="1" UId="80" />
+  <Blank Num="12" UId="81" />
+  <Access Scope="LocalVariable" UId="82">
+    <Symbol UId="83">
+      <Component Name="ReadAlarmCodeDone" UId="84" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="85" />
+  <Token Text=":=" UId="86" />
+  <Blank Num="1" UId="87" />
+  <Access Scope="LiteralConstant" UId="88">
+    <Constant UId="89">
+      <ConstantValue UId="91">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="92" />
+  <NewLine Num="1" UId="93" />
+  <Blank Num="12" UId="94" />
+  <Access Scope="LocalVariable" UId="95">
+    <Symbol UId="96">
+      <Component Name="MotorAlarmManagementStateDiagram" UId="97" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="98" />
+  <Token Text=":=" UId="99" />
+  <Blank Num="1" UId="100" />
+  <Access Scope="LocalConstant" UId="101">
+    <Constant Name="RESET_MOTOR_COMMUNICATION_MOVEMENT" UId="102" />
+  </Access>
+  <Token Text=";" UId="105" />
+  <NewLine Num="1" UId="106" />
+  <Blank Num="8" UId="107" />
+  <Token Text="ELSIF" UId="108" />
+  <Blank Num="1" UId="109" />
+  <Access Scope="LocalVariable" UId="110">
+    <Symbol UId="111">
+      <Component Name="R_TRIG_RequestAcknowledge" UId="112" />
+      <Token Text="." UId="113" />
+      <Component Name="Q" UId="114" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="115" />
+  <Token Text="THEN" UId="116" />
+  <NewLine Num="1" UId="117" />
+  <Blank Num="12" UId="118" />
+  <Access Scope="LocalVariable" UId="119">
+    <Symbol UId="120">
+      <Component Name="ReadAlarmCodeDone" UId="121" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="122" />
+  <Token Text=":=" UId="123" />
+  <Blank Num="1" UId="124" />
+  <Access Scope="LiteralConstant" UId="125">
+    <Constant UId="126">
+      <ConstantValue UId="128">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="129" />
+  <NewLine Num="1" UId="130" />
+  <Blank Num="12" UId="131" />
+  <Access Scope="LocalVariable" UId="132">
+    <Symbol UId="133">
+      <Component Name="MotorAlarmManagementStateDiagram" UId="134" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="135" />
+  <Token Text=":=" UId="136" />
+  <Blank Num="1" UId="137" />
+  <Access Scope="LocalConstant" UId="138">
+    <Constant Name="ALARM_RESET" UId="139" />
+  </Access>
+  <Token Text=";" UId="142" />
+  <NewLine Num="1" UId="143" />
+  <Blank Num="8" UId="144" />
+  <Token Text="END_IF" UId="145" />
+  <Token Text=";" UId="146" />
+  <NewLine Num="1" UId="147" />
+  <Blank Num="4" UId="148" />
+  <Access Scope="LocalConstant" UId="149">
+    <Constant Name="RESET_MOTOR_COMMUNICATION_MOVEMENT" UId="150" />
+  </Access>
+  <Token Text=":" UId="153" />
+  <NewLine Num="1" UId="154" />
+  <Blank Num="8" UId="155" />
+  <Access Scope="LocalVariable" UId="156">
+    <Symbol UId="157">
+      <Component Name="ModbusCommunicationStateDiagram" UId="158" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="159" />
+  <Token Text=":=" UId="160" />
+  <Blank Num="1" UId="161" />
+  <Access Scope="LocalConstant" UId="162">
+    <Constant Name="WAIT_FOR_MODBUS_COMMUNICATION_REQUEST" UId="163" />
+  </Access>
+  <Token Text=";" UId="166" />
+  <NewLine Num="1" UId="167" />
+  <Blank Num="8" UId="168" />
+  <Access Scope="LocalVariable" UId="169">
+    <Symbol UId="170">
+      <Component Name="MotorMovementStateDiagram" UId="171" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="172" />
+  <Token Text=":=" UId="173" />
+  <Blank Num="1" UId="174" />
+  <Access Scope="LocalConstant" UId="175">
+    <Constant Name="WAIT_FOR_MOVEMENT_REQUEST" UId="176" />
+  </Access>
+  <Token Text=";" UId="179" />
+  <NewLine Num="1" UId="180" />
+  <Blank Num="8" UId="181" />
+  <Access Scope="LocalVariable" UId="182">
+    <Symbol UId="183">
+      <Component Name="StartMotor" UId="184" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="185" />
+  <Token Text=":=" UId="186" />
+  <Blank Num="1" UId="187" />
+  <Access Scope="LiteralConstant" UId="188">
+    <Constant UId="189">
+      <ConstantValue UId="191">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="192" />
+  <NewLine Num="1" UId="193" />
+  <Blank Num="8" UId="194" />
+  <Token Text="IF" UId="195" />
+  <Blank Num="1" UId="196" />
+  <Token Text="(" UId="197" />
+  <Access Scope="LocalVariable" UId="198">
+    <Symbol UId="199">
+      <Component Name="ModbusCommunicationStateDiagram" UId="200" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="201" />
+  <Token Text="=" UId="202" />
+  <Blank Num="1" UId="203" />
+  <Access Scope="LocalConstant" UId="204">
+    <Constant Name="WAIT_FOR_MODBUS_COMMUNICATION_REQUEST" UId="205" />
+  </Access>
+  <Token Text=")" UId="208" />
+  <Blank Num="1" UId="209" />
+  <Token Text="AND" UId="210" />
+  <Blank Num="1" UId="211" />
+  <Token Text="(" UId="212" />
+  <Access Scope="LocalVariable" UId="213">
+    <Symbol UId="214">
+      <Component Name="MotorMovementStateDiagram" UId="215" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="216" />
+  <Token Text="=" UId="217" />
+  <Blank Num="1" UId="218" />
+  <Access Scope="LocalConstant" UId="219">
+    <Constant Name="WAIT_FOR_MOVEMENT_REQUEST" UId="220" />
+  </Access>
+  <Token Text=")" UId="223" />
+  <Blank Num="1" UId="224" />
+  <Token Text="AND" UId="225" />
+  <Blank Num="1" UId="226" />
+  <Token Text="NOT" UId="227" />
+  <Blank Num="1" UId="228" />
+  <Token Text="(" UId="229" />
+  <Access Scope="LocalVariable" UId="230">
+    <Symbol UId="231">
+      <Component Name="StartModbusRtuCommunication" UId="232" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="233" />
+  <Blank Num="1" UId="234" />
+  <Token Text="THEN" UId="235" />
+  <NewLine Num="1" UId="236" />
+  <Blank Num="12" UId="237" />
+  <Access Scope="LocalVariable" UId="238">
+    <Symbol UId="239">
+      <Component Name="MotorAlarmManagementStateDiagram" UId="240" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="241" />
+  <Token Text=":=" UId="242" />
+  <Blank Num="1" UId="243" />
+  <Access Scope="LocalConstant" UId="244">
+    <Constant Name="GATHER_ERROR_CODE" UId="245" />
+  </Access>
+  <Token Text=";" UId="248" />
+  <NewLine Num="1" UId="249" />
+  <Blank Num="8" UId="250" />
+  <Token Text="END_IF" UId="251" />
+  <Token Text=";" UId="252" />
+  <NewLine Num="1" UId="253" />
+  <Blank Num="4" UId="254" />
+  <Access Scope="LocalConstant" UId="255">
+    <Constant Name="ALARM_RESET" UId="256" />
+  </Access>
+  <Token Text=":" UId="259" />
+  <NewLine Num="1" UId="260" />
+  <Blank Num="8" UId="261" />
+  <Access Scope="LocalVariable" UId="262">
+    <Symbol UId="263">
+      <Component Name="AlarmReset" UId="264" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="265" />
+  <Token Text=":=" UId="266" />
+  <Blank Num="1" UId="267" />
+  <Access Scope="LiteralConstant" UId="268">
+    <Constant UId="269">
+      <ConstantValue UId="271">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="272" />
+  <NewLine Num="1" UId="273" />
+  <Blank Num="8" UId="274" />
+  <Token Text="IF" UId="275" />
+  <Blank Num="1" UId="276" />
+  <Access Scope="LocalVariable" UId="277">
+    <Symbol UId="278">
+      <Component Name="TON_AlarmResetSignal" UId="279" />
+      <Token Text="." UId="280" />
+      <Component Name="Q" UId="281" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="282" />
+  <Token Text="THEN" UId="283" />
+  <NewLine Num="1" UId="284" />
+  <Blank Num="12" UId="285" />
+  <Access Scope="LocalVariable" UId="286">
+    <Symbol UId="287">
+      <Component Name="AlarmReset" UId="288" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="289" />
+  <Token Text=":=" UId="290" />
+  <Blank Num="1" UId="291" />
+  <Access Scope="LiteralConstant" UId="292">
+    <Constant UId="293">
+      <ConstantValue UId="295">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="296" />
+  <NewLine Num="1" UId="297" />
+  <Blank Num="12" UId="298" />
+  <Access Scope="LocalVariable" UId="299">
+    <Symbol UId="300">
+      <Component Name="MotorAlarmManagementStateDiagram" UId="301" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="302" />
+  <Token Text=":=" UId="303" />
+  <Blank Num="1" UId="304" />
+  <Access Scope="LocalConstant" UId="305">
+    <Constant Name="GATHER_ERROR_CODE" UId="306" />
+  </Access>
+  <Token Text=";" UId="309" />
+  <NewLine Num="1" UId="310" />
+  <Blank Num="8" UId="311" />
+  <Token Text="END_IF" UId="312" />
+  <Token Text=";" UId="313" />
+  <NewLine Num="1" UId="314" />
+  <Blank Num="4" UId="315" />
+  <Access Scope="LocalConstant" UId="316">
+    <Constant Name="GATHER_ERROR_CODE" UId="317" />
+  </Access>
+  <Token Text=":" UId="320" />
+  <NewLine Num="1" UId="321" />
+  <Blank Num="8" UId="322" />
+  <Access Scope="LocalVariable" UId="323">
+    <Symbol UId="324">
+      <Component Name="MotorAlarmManagementStateDiagram" UId="325" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="326" />
+  <Token Text=":=" UId="327" />
+  <Blank Num="1" UId="328" />
+  <Access Scope="LocalConstant" UId="329">
+    <Constant Name="MOTOR_ERROR_MANAGEMENT_DONE" UId="330" />
+  </Access>
+  <Token Text=";" UId="333" />
+  <NewLine Num="1" UId="334" />
+  <Blank Num="4" UId="335" />
+  <Access Scope="LocalConstant" UId="336">
+    <Constant Name="MOTOR_ERROR_MANAGEMENT_DONE" UId="337" />
+  </Access>
+  <Token Text=":" UId="340" />
+  <NewLine Num="1" UId="341" />
+  <Blank Num="8" UId="342" />
+  <Access Scope="LocalVariable" UId="343">
+    <Symbol UId="344">
+      <Component Name="MotorAlarmManagementStateDiagram" UId="345" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="346" />
+  <Token Text=":=" UId="347" />
+  <Blank Num="1" UId="348" />
+  <Access Scope="LocalConstant" UId="349">
+    <Constant Name="WAIT_FOR_MOTOR_ERROR" UId="350" />
+  </Access>
+  <Token Text=";" UId="353" />
+  <NewLine Num="1" UId="354" />
+  <Token Text="END_CASE" UId="355" />
+  <Token Text=";" UId="356" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="2F" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="30" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="31" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="32" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="33" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Motor Error Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="34" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="35" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <LineComment Inserted="false" NoClosingBracket="false" UId="21">
+    <Text UId="22">StartSignal</Text>
+  </LineComment>
+  <NewLine Num="1" UId="23" />
+  <Access Scope="LocalVariable" UId="24">
+    <Symbol UId="25">
+      <Component Name="TON_StartMotorSignal" UId="26" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="27">
+    <Instruction UId="28">
+      <Token Text="(" UId="29" />
+      <Parameter Name="IN" UId="30">
+        <Blank Num="1" UId="31" />
+        <Token Text=":=" UId="32" />
+        <Blank Num="1" UId="33" />
+        <Access Scope="LocalVariable" UId="34">
+          <Symbol UId="35">
+            <Component Name="MotorMovementStateDiagram" UId="36" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="37" />
+        <Token Text="=" UId="38" />
+        <Blank Num="1" UId="39" />
+        <Access Scope="LocalConstant" UId="40">
+          <Constant Name="START_BELT" UId="41" />
+        </Access>
+      </Parameter>
+      <Token Text="," UId="44" />
+      <NewLine Num="1" UId="45" />
+      <Blank Num="22" UId="46" />
+      <Parameter Name="PT" UId="47">
+        <Blank Num="1" UId="48" />
+        <Token Text=":=" UId="49" />
+        <Blank Num="1" UId="50" />
+        <Access Scope="TypedConstant" UId="51">
+          <Constant UId="52">
+            <ConstantValue UId="53">T#500ms</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="54" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="55" />
+  <NewLine Num="2" UId="56" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="57">
+    <Text UId="58">StopSignal</Text>
+  </LineComment>
+  <NewLine Num="1" UId="59" />
+  <Access Scope="LocalVariable" UId="60">
+    <Symbol UId="61">
+      <Component Name="TON_StopMotorSignal" UId="62" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="63">
+    <Instruction UId="64">
+      <Token Text="(" UId="65" />
+      <Parameter Name="IN" UId="66">
+        <Blank Num="1" UId="67" />
+        <Token Text=":=" UId="68" />
+        <Blank Num="1" UId="69" />
+        <Access Scope="LocalVariable" UId="70">
+          <Symbol UId="71">
+            <Component Name="MotorMovementStateDiagram" UId="72" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="73" />
+        <Token Text="=" UId="74" />
+        <Blank Num="1" UId="75" />
+        <Access Scope="LocalConstant" UId="76">
+          <Constant Name="STOP_BELT" UId="77" />
+        </Access>
+      </Parameter>
+      <Token Text="," UId="80" />
+      <NewLine Num="1" UId="81" />
+      <Blank Num="21" UId="82" />
+      <Parameter Name="PT" UId="83">
+        <Blank Num="1" UId="84" />
+        <Token Text=":=" UId="85" />
+        <Blank Num="1" UId="86" />
+        <Access Scope="TypedConstant" UId="87">
+          <Constant UId="88">
+            <ConstantValue UId="89">T#500ms</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="90" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="91" />
+  <NewLine Num="2" UId="92" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="93">
+    <Text UId="94">AlarmResetSignal</Text>
+  </LineComment>
+  <NewLine Num="1" UId="95" />
+  <Access Scope="LocalVariable" UId="96">
+    <Symbol UId="97">
+      <Component Name="TON_AlarmResetSignal" UId="98" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="99">
+    <Instruction UId="100">
+      <Token Text="(" UId="101" />
+      <Parameter Name="IN" UId="102">
+        <Blank Num="1" UId="103" />
+        <Token Text=":=" UId="104" />
+        <Blank Num="1" UId="105" />
+        <Access Scope="LocalVariable" UId="106">
+          <Symbol UId="107">
+            <Component Name="MotorAlarmManagementStateDiagram" UId="108" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="109" />
+        <Token Text="=" UId="110" />
+        <Blank Num="1" UId="111" />
+        <Access Scope="LocalConstant" UId="112">
+          <Constant Name="ALARM_RESET" UId="113" />
+        </Access>
+      </Parameter>
+      <Token Text="," UId="116" />
+      <NewLine Num="1" UId="117" />
+      <Blank Num="22" UId="118" />
+      <Parameter Name="PT" UId="119">
+        <Blank Num="1" UId="120" />
+        <Token Text=":=" UId="121" />
+        <Blank Num="1" UId="122" />
+        <Access Scope="TypedConstant" UId="123">
+          <Constant UId="124">
+            <ConstantValue UId="125">T#500ms</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="126" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="127" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="36" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="37" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="38" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="39" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="3A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Signal Timers</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="3B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="3C" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="3D" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>FB10120_SinamicsV20_Modbus</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3E" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

@@ -1,0 +1,591 @@
+﻿FUNCTION_BLOCK "LAcycCom_ResourceManager"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : APC_ERLF
+FAMILY : AcycCom
+VERSION : 1.1
+   VAR_INPUT 
+      enable : Bool := FALSE;
+      config : "LAcycCom_typeResourceManagerConf";
+   END_VAR
+
+   VAR_OUTPUT 
+      valid { ExternalWritable := 'False'} : Bool := FALSE;
+      busy { ExternalWritable := 'False'} : Bool := FALSE;
+      error { ExternalWritable := 'False'} : Bool := FALSE;
+      status { ExternalWritable := 'False'} : Word := #STATUS_NO_CALL;
+      diagnostics { ExternalWritable := 'False'} : "LAcycCom_typeResourceManagerDiag";
+   END_VAR
+
+   VAR_IN_OUT 
+      requestBuffer : "LAcycCom_typeRequestBuffer";
+   END_VAR
+
+   VAR 
+      statResourceAddInfo { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Array[0..#RESOURCES_ARRAY_UPPER_LIM] of Struct
+         IOSystem { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;
+         station { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;
+      END_STRUCT;
+      instBufferLockWatchdog {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      instRuntime {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      instCycleTime {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      statIM0Data {InstructionName := 'IM0_Data'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : IM0_Data;
+      statNoOfUsedResources { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int := 0;
+      statUpperLimResources { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int := 0;
+      statErrorUserCleared { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statErrorAutoCleared { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statEnableOld { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statDisabling { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      instGetIMData {InstructionName := 'Get_IM_Data'; LibVersion := '1.3'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Get_IM_Data;
+   END_VAR
+
+   VAR_TEMP 
+      tempCurGeoAddr {InstructionName := 'GEOADDR'; LibVersion := '1.0'} : GEOADDR;
+      tempCurReqState : Struct
+         allocated : Bool;
+         assigned : Bool;
+         release : Bool;
+         rejected : Bool;
+      END_STRUCT;
+      tempCurRuntime : Time;
+      tempCycleTime : Time;
+      tempCurQueueTime : Time;
+      tempNoOfRequests : Int;
+      tempFirstQueueElement : Int;
+      tempIndex : Int;
+      tempNoOfFreeResources : Int;
+      tempActBufferIndex : Int;
+      tempQueueElementPrevious : Int;
+      tempQueueElementNext : Int;
+      tempRetVal : Int;
+      tempByte : Byte;
+      tempStationInUse : Bool;
+   END_VAR
+
+   VAR CONSTANT 
+      TIME_RUNTIME_TIMER : Time := T#1D;
+      STATUS_NO_CALL : Word := 16#7000;
+      STATUS_FIRST_CALL : Word := 16#7001;
+      STATUS_SUBSEQUENT_CALL : Word := 16#7002;
+      STATUS_BUFFER_FULL : Word := 16#7003;
+      WARN_BUFFER_LOCKED : Word := 16#7100;
+      WARN_WRONG_HARDWARE_ID : Word := 16#7101;
+      MAX_NO_OF_RESOURCES_1200_V1 : Int := 4;
+      MAX_NO_OF_RESOURCES_1500_V1 : Int := 10;
+      MAX_NO_OF_RESOURCES_1500_V2 : Int := 20;
+      RESOURCES_ARRAY_UPPER_LIM : Int := 19;
+   END_VAR
+
+
+BEGIN
+	//=============================================================================================
+	// SIEMENS AG
+	// (c)Copyright 2016 All Rights Reserved
+	//---------------------------------------------------------------------------------------------
+	// Library: LAcycCom
+	// Tested with: S7-1513-1 PN
+	// Engineering: TIA Portal V13 SP1
+	// Restrictions: ---
+	// Requirements: S7-1200 / S7-1500
+	// Functionality: Central buffer management for arbitration of DPV1 services.
+	//----------------------------------------------------------------------------------------------
+	// Change log table:
+	// Version    Date          Expert in charge    Changes applied
+	// 01.00.00   02.09.2015    RC                  release
+	// 01.01.01   25.02.2016    AW                  maxAssignedTime is separated into every resource
+	//                                              bugfix lockbuffer (multitasking)
+	//
+	//----------------------------------------------------------------------------------------------
+	// Function block: LAcycCom_ResourceManager
+	//==============================================================================================
+	
+	//Check if FB is been disabled
+	IF NOT #enable AND #statEnableOld THEN
+	  //Check if no request is executed at the moment
+	  IF (#statNoOfUsedResources <= 0)
+	    OR #statErrorUserCleared
+	  THEN
+	    #requestBuffer.header.lockBuffer := TRUE;
+	    #requestBuffer.header.numberOfRequests := -1;
+	    #requestBuffer.header.nextFreeElement := -1;
+	    
+	    FOR #tempIndex := 0 TO #RESOURCES_ARRAY_UPPER_LIM DO
+	      #requestBuffer.header.activeRequests[#tempIndex].bufferIndex := -1;
+	      #requestBuffer.header.activeRequests[#tempIndex].maxAssignedTime := #config.maxAssignedTime;
+	      #statResourceAddInfo[#tempIndex].IOSystem := -1;
+	      #statResourceAddInfo[#tempIndex].station := -1;
+	    END_FOR;
+	    
+	    //Error outputs are reset with falling edge of enable input
+	    #statErrorUserCleared := FALSE;
+	    #statErrorAutoCleared := FALSE;
+	    #statDisabling := FALSE;
+	    #error := FALSE;
+	    #status := #STATUS_NO_CALL;
+	    
+	    //Enable and busy are reset with falling edge of enable input
+	    #valid := FALSE;
+	    #busy := FALSE;
+	    
+	    //Set old value of enable for edge detection and end execution
+	    #statEnableOld := #enable;
+	    RETURN;
+	    
+	  ELSE
+	    // Wait for requests to be finished
+	    #statDisabling := TRUE;
+	  END_IF;
+	  
+	  //Check if FB is enabled
+	ELSIF (#enable AND NOT #statEnableOld AND NOT #statDisabling) THEN
+	  #requestBuffer.header.lockBuffer := TRUE;
+	  #requestBuffer.header.numberOfRequests := 0;
+	  #requestBuffer.header.nextFreeElement := 0;
+	  #requestBuffer.header.firstQueueElement := -1;
+	  
+	  #instRuntime(IN := FALSE,
+	               PT := #TIME_RUNTIME_TIMER);
+	  
+	  #instCycleTime(IN := FALSE,
+	                 PT := #TIME_RUNTIME_TIMER);
+	  
+	  #instBufferLockWatchdog(IN := FALSE,
+	                          PT := #TIME_RUNTIME_TIMER);
+	  
+	  #diagnostics.maxNoOfRequests := 0;
+	  #diagnostics.maxRuntime := t#0s;
+	  
+	  FOR #tempIndex := 0 TO "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM" DO
+	    #requestBuffer.elements[#tempIndex].state := 16#00;
+	    #requestBuffer.elements[#tempIndex].hardwareId := 0;
+	    #requestBuffer.elements[#tempIndex].queueElementNext := -1;
+	    #requestBuffer.elements[#tempIndex].queueElementPrevious := -1;
+	    #requestBuffer.elements[#tempIndex].queueTime := T#0s;
+	  END_FOR;
+	  
+	  FOR #tempIndex := 0 TO #RESOURCES_ARRAY_UPPER_LIM DO
+	    #requestBuffer.header.activeRequests[#tempIndex].bufferIndex := -1;
+	    #requestBuffer.header.activeRequests[#tempIndex].maxAssignedTime := #config.maxAssignedTime;
+	    #statResourceAddInfo[#tempIndex].IOSystem := -1;
+	    #statResourceAddInfo[#tempIndex].station := -1;
+	  END_FOR;
+	  
+	  REPEAT
+	    // Set maximum number of resources from I&M Data
+	    #instGetIMData(LADDR := 50,
+	                   IM_TYPE := 0,
+	                   DATA := #statIM0Data);
+	    
+	  UNTIL (#instGetIMData.DONE) OR (#instGetIMData.ERROR) END_REPEAT;
+	  
+	  IF #instGetIMData.DONE THEN
+	    IF (#statIM0Data.Order_ID[6] = '2') THEN
+	      // Order ID of 1200 CPU detected
+	      #statUpperLimResources := #MAX_NO_OF_RESOURCES_1200_V1 - 1;
+	      
+	    ELSE
+	      // If no 1200 CPU it have to be a 1500 CPU or a 1500 Software controller
+	      IF (#statIM0Data.Software_Revision.Functional >= 2) THEN
+	        #statUpperLimResources := #MAX_NO_OF_RESOURCES_1500_V2 - 1; // Firmware V2.x
+	        
+	      ELSE
+	        #statUpperLimResources := #MAX_NO_OF_RESOURCES_1500_V1 - 1; // Firmware V1.x
+	      END_IF;
+	    END_IF;
+	  ELSE
+	    // If no I&M data coul be read, use the lower number of resources
+	    #statUpperLimResources := #MAX_NO_OF_RESOURCES_1200_V1 - 1;
+	  END_IF;
+	  
+	  // Check if resource array is shorter then possible resources
+	  IF (#statUpperLimResources > #RESOURCES_ARRAY_UPPER_LIM) THEN
+	    #statUpperLimResources := #RESOURCES_ARRAY_UPPER_LIM;
+	  END_IF;
+	  
+	  #requestBuffer.header.lockBuffer := FALSE;
+	  
+	  #busy := TRUE; //Busy is set at rising edge of enable input
+	  #status := #STATUS_FIRST_CALL; //Set status for first call
+	  #statEnableOld := #enable; //Set old value of enable for edge detection and end execution
+	  RETURN;
+	  
+	  //Check if user cleared error in FB occurred
+	ELSIF #statErrorUserCleared THEN
+	  #busy := FALSE;
+	  #statEnableOld := #enable;
+	  //No set of status necessary, because status already set when error occurred
+	  RETURN;
+	  
+	  //Check if function block is disabled
+	ELSIF NOT #enable AND NOT #statDisabling THEN
+	  #busy := FALSE;
+	  #status := #STATUS_NO_CALL;
+	  #statEnableOld := #enable;
+	  RETURN;
+	  
+	ELSE
+	  // Reset automatically cleared errors
+	  #statErrorAutoCleared := FALSE;
+	  
+	  //Detect edge for disabling
+	  #statEnableOld := #enable;
+	END_IF;
+	//----------------------------------------------------------------------------------------------
+	
+	// Get current runtime
+	#instRuntime(IN := TRUE,
+	             PT := #TIME_RUNTIME_TIMER);
+	
+	// Cycle time measurement
+	#instCycleTime(IN := TRUE,
+	               PT := #TIME_RUNTIME_TIMER);
+	
+	#tempCycleTime := #instCycleTime.ET;
+	
+	#instCycleTime(IN := FALSE,
+	               PT := #TIME_RUNTIME_TIMER);
+	
+	#instCycleTime(IN := TRUE,
+	               PT := #TIME_RUNTIME_TIMER);
+	
+	
+	// Watchdog for lock of complete buffer DB
+	#instBufferLockWatchdog(IN := #requestBuffer.header.lockBuffer,
+	                        PT := #config.timeoutBufferLock);
+	
+	// Check if buffer was locked too long
+	IF #instBufferLockWatchdog.Q THEN
+	  #statErrorAutoCleared := TRUE;
+	  #requestBuffer.header.lockBuffer := FALSE;
+	  #status := #WARN_BUFFER_LOCKED;
+	  
+	ELSIF #requestBuffer.header.lockBuffer THEN
+	  ; // Do nothing until buffer is unlocked
+	  
+	ELSE
+	  #requestBuffer.header.lockBuffer := TRUE;
+	  
+	  //----------------------------------------------------------------------------------------------
+	  // Release elements blocking resources
+	  //----------------------------------------------------------------------------------------------  
+	  #statNoOfUsedResources := 0;
+	  #tempFirstQueueElement := #requestBuffer.header.firstQueueElement;
+	  
+	  // Check and release buffer items
+	  FOR #tempIndex := 0 TO #statUpperLimResources DO
+	    #tempActBufferIndex := #requestBuffer.header.activeRequests[#tempIndex].bufferIndex;
+	    // Check if current index is used for a resource
+	    IF (#tempActBufferIndex >= 0) THEN
+	      #tempByte := #requestBuffer.elements[#tempActBufferIndex].state;
+	      #tempCurReqState.allocated := #tempByte.%X0;
+	      #tempCurReqState.assigned := #tempByte.%X1;
+	      #tempCurReqState.release := #tempByte.%X2;
+	      #tempCurReqState.rejected := #tempByte.%X3;
+	      
+	      // Check if resource can be released
+	      IF #tempCurReqState.release THEN
+	        #tempQueueElementPrevious := #requestBuffer.elements[#tempActBufferIndex].queueElementPrevious;
+	        #tempQueueElementNext := #requestBuffer.elements[#tempActBufferIndex].queueElementNext;
+	        
+	        IF (#tempQueueElementPrevious = -1) AND
+	          (#tempQueueElementNext = -1)
+	        THEN
+	          // Only element in queue; Reset pointer for first element
+	          #tempFirstQueueElement := -1;
+	          #requestBuffer.header.firstQueueElement := -1;
+	          
+	        ELSIF (#tempQueueElementPrevious = -1) THEN
+	          // Element was first element in queue
+	          #requestBuffer.elements[#tempQueueElementNext].queueElementPrevious := -1;
+	          #requestBuffer.header.firstQueueElement := #tempQueueElementNext;
+	          #tempFirstQueueElement := #tempQueueElementNext;
+	          
+	        ELSIF (#tempQueueElementNext = -1) THEN
+	          // Element was last element in queue
+	          #requestBuffer.elements[#tempQueueElementPrevious].queueElementNext := -1;
+	          
+	        ELSE
+	          // Current element has a previous and next element
+	          #requestBuffer.elements[#tempQueueElementNext].queueElementPrevious := #tempQueueElementPrevious;
+	          #requestBuffer.elements[#tempQueueElementPrevious].queueElementNext := #tempQueueElementNext;
+	        END_IF;
+	        
+	        #requestBuffer.elements[#tempActBufferIndex].state := 16#00;
+	        #requestBuffer.elements[#tempActBufferIndex].hardwareId := 0;
+	        #requestBuffer.elements[#tempActBufferIndex].queueElementPrevious := -1;
+	        #requestBuffer.elements[#tempActBufferIndex].queueElementNext := -1;
+	        #requestBuffer.elements[#tempActBufferIndex].queueTime := T#0s;
+	        #requestBuffer.header.activeRequests[#tempIndex].bufferIndex := -1;
+	        #requestBuffer.header.activeRequests[#tempIndex].maxAssignedTime := #config.maxAssignedTime;
+	        
+	        #statResourceAddInfo[#tempIndex].IOSystem := -1;
+	        #statResourceAddInfo[#tempIndex].station := -1;
+	        
+	        // Check if buffer was full when last element tries to allocate
+	        IF (#requestBuffer.header.nextFreeElement < 0) THEN
+	          // Set actual write index to current released element
+	          #requestBuffer.header.nextFreeElement := #tempActBufferIndex;
+	        END_IF;
+	        
+	      ELSE
+	        #statNoOfUsedResources := #statNoOfUsedResources + 1;
+	      END_IF; // #tempCurReqState.release
+	      
+	    ELSE
+	      ; // Check next resource
+	    END_IF; // (#tempActBufferIndex >= 0)
+	  END_FOR;
+	  
+	  #tempNoOfFreeResources := #statUpperLimResources - #statNoOfUsedResources; // Calculate free resources
+	  
+	  //----------------------------------------------------------------------------------------------
+	  // Release other elements and assign resources to elements
+	  //----------------------------------------------------------------------------------------------  
+	  #tempActBufferIndex := #tempFirstQueueElement;
+	  #tempNoOfRequests := 0;
+	  
+	  WHILE (#tempActBufferIndex >= 0) DO
+	    #tempQueueElementNext := #requestBuffer.elements[#tempActBufferIndex].queueElementNext; // Set next element
+	    #tempByte := #requestBuffer.elements[#tempActBufferIndex].state;
+	    #tempCurReqState.allocated := #tempByte.%X0;
+	    #tempCurReqState.assigned := #tempByte.%X1;
+	    #tempCurReqState.release := #tempByte.%X2;
+	    #tempCurReqState.rejected := #tempByte.%X3;
+	    
+	    // Check if resource can be released
+	    IF #tempCurReqState.release THEN
+	      #tempQueueElementPrevious := #requestBuffer.elements[#tempActBufferIndex].queueElementPrevious;
+	      
+	      IF (#tempQueueElementPrevious = -1) AND
+	        (#tempQueueElementNext = -1)
+	      THEN
+	        // Only element in queue; Reset pointer for first element
+	        #tempFirstQueueElement := -1;
+	        #requestBuffer.header.firstQueueElement := -1;
+	        
+	      ELSIF (#tempQueueElementPrevious = -1) THEN
+	        // Element was first element in queue
+	        #requestBuffer.elements[#tempQueueElementNext].queueElementPrevious := -1;
+	        #tempFirstQueueElement := #tempQueueElementNext;
+	        #requestBuffer.header.firstQueueElement := #tempQueueElementNext;
+	        
+	      ELSIF (#tempQueueElementNext = -1) THEN
+	        // Element was last element in queue
+	        #requestBuffer.elements[#tempQueueElementPrevious].queueElementNext := -1;
+	        
+	      ELSE
+	        // Current element has a previous and next element
+	        #requestBuffer.elements[#tempQueueElementNext].queueElementPrevious := #tempQueueElementPrevious;
+	        #requestBuffer.elements[#tempQueueElementPrevious].queueElementNext := #tempQueueElementNext;
+	      END_IF;
+	      
+	      #requestBuffer.elements[#tempActBufferIndex].state := 16#00;
+	      #requestBuffer.elements[#tempActBufferIndex].hardwareId := 0;
+	      #requestBuffer.elements[#tempActBufferIndex].queueElementPrevious := -1;
+	      #requestBuffer.elements[#tempActBufferIndex].queueElementNext := -1;
+	      #requestBuffer.elements[#tempActBufferIndex].queueTime := T#0s;
+	      
+	      // Check if buffer was full when last element tries to allocate
+	      IF (#requestBuffer.header.nextFreeElement < 0) THEN
+	        // Set actual write index to current released element
+	        #requestBuffer.header.nextFreeElement := #tempActBufferIndex;
+	      END_IF;
+	      
+	    ELSE // NOT  #tempCurReqState.release 
+	      // Count elements and go to next element
+	      #tempNoOfRequests := #tempNoOfRequests + 1;
+	      
+	      // Calculate queue time of current request     
+	      #tempCurQueueTime := #tempCycleTime + #requestBuffer.elements[#tempActBufferIndex].queueTime;
+	      #requestBuffer.elements[#tempActBufferIndex].queueTime := #tempCurQueueTime;
+	      
+	      // Check if resource was already assigned
+	      IF #tempCurReqState.assigned THEN
+	        FOR #tempIndex := 0 TO #statUpperLimResources DO
+	          IF (#requestBuffer.header.activeRequests[#tempIndex].bufferIndex = #tempActBufferIndex) THEN
+	            // Choose maxAssignedTime of resource
+	            IF (#requestBuffer.header.activeRequests[#tempIndex].maxAssignedTime >= #config.maxAssignedTime) THEN
+	              ; // do nothing
+	              
+	              // Choose global maxAssignedTime
+	            ELSE
+	              #requestBuffer.header.activeRequests[#tempIndex].maxAssignedTime := #config.maxAssignedTime;
+	            END_IF;
+	            EXIT;
+	          END_IF;
+	        END_FOR;
+	        
+	        IF (#tempCurQueueTime < #requestBuffer.header.activeRequests[#tempIndex].maxAssignedTime) THEN
+	          ; // Everything okay
+	        ELSIF (#tempCurQueueTime < (#requestBuffer.header.activeRequests[#tempIndex].maxAssignedTime + #config.delayReleaseAfterReject)) THEN
+	          // Current element is over queue time
+	          #requestBuffer.elements[#tempActBufferIndex].state.%X3 := TRUE; // Request rejected
+	        ELSE
+	          // Current element is over queue time and is released in next cycle
+	          #requestBuffer.elements[#tempActBufferIndex].state.%X2 := TRUE; // Request release
+	        END_IF;
+	        
+	        // Check if block is disabled and reject all new requests 
+	      ELSIF (#statDisabling) THEN
+	        // Current element is rejected cause function block is disabled  
+	        #requestBuffer.elements[#tempActBufferIndex].state.%X3 := TRUE; // Request rejected
+	        
+	        // If current time is over the delay, release the request asap
+	        IF (#tempCurQueueTime > #config.delayReleaseAfterReject) THEN
+	          #requestBuffer.elements[#tempActBufferIndex].state.%X2 := TRUE; // Request release
+	        END_IF;
+	        
+	      ELSE
+	        // Check if device for hardware address is already in used by a other request
+	        #tempRetVal := LOG2GEO(LADDR := #requestBuffer.elements[#tempActBufferIndex].hardwareId,
+	                               GEOADDR := #tempCurGeoAddr);
+	        
+	        // Check if everything is okay
+	        IF #tempRetVal <> 0 THEN
+	          #requestBuffer.elements[#tempActBufferIndex].state.%X3 := TRUE; // Request rejected because of error in system function
+	          #statErrorAutoCleared := TRUE;
+	          #status := #WARN_WRONG_HARDWARE_ID;
+	        ELSE
+	          ; // Everything okay
+	        END_IF;
+	        
+	        // Check if hardware is already in use
+	        #tempStationInUse := FALSE;
+	        
+	        FOR #tempIndex := 0 TO #statUpperLimResources DO
+	          // Check if station is already in use by a request
+	          IF (#statResourceAddInfo[#tempIndex].IOSystem = UINT_TO_INT(#tempCurGeoAddr.IOSYSTEM)) AND
+	            (#statResourceAddInfo[#tempIndex].station = UINT_TO_INT(#tempCurGeoAddr.STATION))
+	          THEN
+	            #tempStationInUse := TRUE;
+	            EXIT;
+	          ELSE
+	            ; // Check next element
+	          END_IF;
+	        END_FOR;
+	        
+	        // Check if station can be enabled
+	        IF NOT #tempStationInUse THEN
+	          // Search for free resource
+	          FOR #tempIndex := 0 TO #statUpperLimResources DO
+	            // Check for free slot
+	            IF (#statResourceAddInfo[#tempIndex].IOSystem = -1) AND
+	              (#statResourceAddInfo[#tempIndex].station = -1)
+	            THEN
+	              // Set information and enable request
+	              #statResourceAddInfo[#tempIndex].IOSystem := UINT_TO_INT(#tempCurGeoAddr.IOSYSTEM);
+	              #statResourceAddInfo[#tempIndex].station := UINT_TO_INT(#tempCurGeoAddr.STATION);
+	              #requestBuffer.elements[#tempActBufferIndex].queueTime := T#0s;
+	              #requestBuffer.elements[#tempActBufferIndex].state.%X1 := TRUE; // Resource assigned to request
+	              #requestBuffer.header.activeRequests[#tempIndex].bufferIndex := #tempActBufferIndex;
+	              #statNoOfUsedResources := #statNoOfUsedResources + 1;
+	              #tempNoOfFreeResources := #tempNoOfFreeResources - 1;
+	              EXIT;
+	            ELSE
+	              ; // Check next element
+	            END_IF;
+	          END_FOR;
+	          
+	        ELSE
+	          // Current request can not be added, because other request is active on station
+	          IF (#tempCurQueueTime < #config.maxQueueTime) THEN
+	            ; // Everything okay
+	          ELSIF (#tempCurQueueTime < (#config.maxQueueTime + #config.delayReleaseAfterReject)) THEN
+	            // Current element is over queue time
+	            #requestBuffer.elements[#tempActBufferIndex].state.%X3 := TRUE; // Request rejected
+	          ELSE
+	            // Current element is over queue time and is released in next cycle
+	            #requestBuffer.elements[#tempActBufferIndex].state.%X2 := TRUE; // Request released
+	          END_IF;
+	        END_IF; // #tempCurReqState.assigned
+	      END_IF; // NOT #tempStationInUse
+	    END_IF; //  #tempCurReqState.release 
+	    
+	    #tempActBufferIndex := #tempQueueElementNext; // Switch to next buffer element
+	  END_WHILE;
+	  
+	  #requestBuffer.header.lockBuffer := FALSE;
+	  
+	  // Check if block can be disabled
+	  IF (#statDisabling AND (#tempNoOfRequests = 0)) THEN
+	    #statDisabling := FALSE; // Reset disabling bit
+	    
+	    // Initialize buffer and FB
+	    #requestBuffer.header.lockBuffer := TRUE;
+	    #requestBuffer.header.numberOfRequests := -1;
+	    #requestBuffer.header.nextFreeElement := -1;
+	    
+	    FOR #tempIndex := 0 TO #RESOURCES_ARRAY_UPPER_LIM DO
+	      #requestBuffer.header.activeRequests[#tempIndex].bufferIndex := -1;
+	      #requestBuffer.header.activeRequests[#tempIndex].maxAssignedTime := #config.maxAssignedTime;
+	      
+	      #statResourceAddInfo[#tempIndex].IOSystem := -1;
+	      #statResourceAddInfo[#tempIndex].station := -1;
+	    END_FOR;
+	    
+	    //Error outputs are reset with falling edge of enable input
+	    #statErrorUserCleared := FALSE;
+	    #statErrorAutoCleared := FALSE;
+	    #error := FALSE;
+	    #status := #STATUS_NO_CALL;
+	    
+	    //Enable and busy are reset with falling edge of enable input
+	    #valid := FALSE;
+	    #busy := FALSE;
+	    
+	  ELSE
+	    #requestBuffer.header.numberOfRequests := #tempNoOfRequests;
+	  END_IF;
+	  
+	  
+	  // Calculate runtime
+	  #instRuntime(IN := TRUE,
+	               PT := #TIME_RUNTIME_TIMER);
+	  
+	  #tempCurRuntime := #instRuntime.ET;
+	  
+	  #instRuntime(IN := FALSE,
+	               PT := #TIME_RUNTIME_TIMER);
+	  
+	  #diagnostics.curRuntime := #tempCurRuntime;
+	  
+	  IF (#tempCurRuntime > #diagnostics.maxRuntime) THEN
+	    #diagnostics.maxRuntime := #tempCurRuntime;
+	  END_IF;
+	  
+	  // Set maximum number of requests
+	  IF (#tempNoOfRequests > #diagnostics.maxNoOfRequests) THEN
+	    #diagnostics.maxNoOfRequests := INT_TO_UINT(#tempNoOfRequests);
+	  END_IF;
+	  
+	END_IF; // #statFBBufferWatchdog.Q
+	
+	//----------------------------------------------------------------------------------------------
+	//Error handling 
+	//----------------------------------------------------------------------------------------------
+	IF #statErrorUserCleared THEN
+	  #busy := FALSE;
+	  #valid := FALSE;
+	  #error := TRUE;
+	  RETURN;
+	  
+	ELSIF #statErrorAutoCleared THEN
+	  #valid := FALSE;
+	  #busy := TRUE;
+	  #error := TRUE;
+	  RETURN;
+	  
+	ELSE
+	  //Process normal output values
+	  #valid := TRUE;
+	  #error := FALSE;
+	  
+	  IF (#tempNoOfRequests > "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM") THEN
+	    #status := #STATUS_BUFFER_FULL; // Buffer is full at the moment
+	  ELSE
+	    #status := #STATUS_SUBSEQUENT_CALL; //Set status for subsequent call  
+	  END_IF;
+	  
+	END_IF;
+	//----------------------------------------------------------------------------------------------
+END_FUNCTION_BLOCK
+

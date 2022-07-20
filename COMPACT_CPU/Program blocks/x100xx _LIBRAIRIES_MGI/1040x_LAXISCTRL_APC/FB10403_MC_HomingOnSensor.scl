@@ -1,0 +1,494 @@
+﻿FUNCTION_BLOCK "FB10403_MC_HomingOnSensor"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      axis {InstructionName := 'TO_PositioningAxis'; LibVersion := '5.0'} : TO_PositioningAxis;
+      enable : Bool;
+      reset : Bool;
+      sensorState : Bool;
+      velocityValue : LReal;
+      homingValue : LReal;
+      homingSeq : Bool;   // false = Before retract, true = After retract
+      retractValue : LReal;
+      waitSensorTimer : Time;
+   END_VAR
+
+   VAR_OUTPUT 
+      done : Bool;
+      busy : Bool;
+      error : Bool;
+      status : DWord;
+      statusText : String;
+   END_VAR
+
+   VAR 
+      statFirstCycle { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := TRUE;
+      statTimerOn_Off { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      statTimerClampingState_1 { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      statMyMemo_swLimit : Bool;
+      statAct_Step { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;
+      statPT_TIMER : Time := T#3S;
+      statTimerTimeOut {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      statEdgeExecute {InstructionName := 'R_TRIG'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : R_TRIG;
+      statRisingEdgeSensor {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      statFallingEdgeSensor {InstructionName := 'F_TRIG'; LibVersion := '1.0'} : F_TRIG;
+      statMyAxis_in_TorqueClamping : Struct
+         boEnable { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      END_STRUCT;
+      statMyAxis_in_Move : Struct
+         boExecute { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+         Direction { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;
+      END_STRUCT;
+      statMyAxis_in_PosRel : Struct
+         boExecute { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      END_STRUCT;
+      statMyAxis_in_Home : Struct
+         boExecute : Bool;
+      END_STRUCT;
+      statMyAxis_in_Halt : Struct
+         boExecute { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      END_STRUCT;
+      statMyAxis_out : Struct
+         boSystemFault { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+         boConfigFault { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+         boDriveFault { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+         boError { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+         boStandstill { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+         boEnabled { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+         boHomed { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+         boTorqueLimitingCommandActive { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      END_STRUCT;
+      statTimerClampingState {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      inst_MC_TORQUECLAMPING {InstructionName := 'MC_TORQUELIMITING'; LibVersion := '5.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : MC_TORQUELIMITING;
+      inst_MC_MOVEVELOCITY_Instance {InstructionName := 'MC_MOVEVELOCITY'; LibVersion := '5.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : MC_MOVEVELOCITY;
+      inst_MC_MOVERELATIVE_Instance {InstructionName := 'MC_MOVERELATIVE'; LibVersion := '5.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : MC_MOVERELATIVE;
+      inst_MC_HOME_Instance {InstructionName := 'MC_HOME'; LibVersion := '5.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : MC_HOME;
+      inst_MC_HALT_Instance {InstructionName := 'MC_HALT'; LibVersion := '5.0'} : MC_HALT;
+      statTimerWaiting {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      statTimerWaitingSignal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      statMemOnSensorAtStart : Bool;
+   END_VAR
+
+   VAR CONSTANT 
+      ERR_HOMINGONSENSOR_AXIS_NOT_ENABLE : DWord := 16#0000_9001;
+      ERR_HOMINGONSENSOR_AXIS_ERROR : DWord := 16#0000_9002;
+      ERR_HOMINGONSENSOR_MOVE_VELOCITY : DWord := 16#0000_9003;
+      ERR_HOMINGONSENSOR_END_STOP : DWord := 16#0000_9004;
+      ERR_HOMINGONSENSOR_HOMING : DWord := 16#0000_9005;
+      ERR_HOMINGONSENSOR_NOT_VALID : DWord := 16#0000_9006;
+      ERR_HOMINGONSENSOR_RETRACT : DWord := 16#0000_9007;
+      ERR_HOMINGONSENSOR_AXIS_VIRTUAL : DWord := 16#0000_9008;
+      ERR_HOMINGONSENSOR_SIMULATED : DWord := 16#0000_9009;
+      ERR_HOMINGONSENSOR_MC_TORQUE_LIMITING_ACTIVE : DWord := 16#0000_9010;
+      ERR_HOMINGONSENSOR_TORQUE_VALUE : DWord := 16#0000_9011;
+   END_VAR
+
+
+BEGIN
+	//============================================================================================================
+	// MGI
+	//------------------------------------------------------------------------------------------------------------
+	// Tested with: S7-1515TF Firmware V2.5
+	// Engineering: TIA Portal V15
+	// Restrictions: APC example program unrestricted
+	// Requirements: S7-1500(T)
+	// Functionality:  Homing absolute or incremental encoder on sensor
+	//                 and possibility to home before or after retracting axis after fixed stop detection
+	//------------------------------------------------------------------------------------------------------------
+	// Change log table:
+	// Version  Date        Expert in charge    Changes applied
+	// 01.00.00 08.06.2018  SDA                 First released version
+	//
+	//============================================================================================================
+	// Function block: From MC_HomingTorqueAxis_APCFR
+	//============================================================================================================
+	
+	
+	REGION Init
+	    (*___________________ Init functions at startUp ____________________________________*)
+	    IF #statFirstCycle = TRUE THEN
+	        #statFirstCycle := FALSE;
+	        #statAct_Step := 100;
+	        #done := TRUE;
+	        #busy := FALSE;
+	        #error := FALSE;
+	        #status := 0;
+	        #statusText := 'NO ERROR';
+	        #statTimerOn_Off := FALSE;
+	        #statTimerClampingState_1 := FALSE;
+	        #statMyAxis_in_TorqueClamping.boEnable := FALSE;
+	        #statMyAxis_in_Move.boExecute := FALSE;
+	        #statMyAxis_in_PosRel.boExecute := FALSE;
+	        #statMyAxis_in_Home.boExecute := FALSE;
+	        #statMyAxis_in_Halt.boExecute := FALSE;
+	        #statTimerWaitingSignal := FALSE;
+	    END_IF;
+	END_REGION
+	
+	REGION Axis_State
+	    (*___________________ Init Status Axis ____________________________________*)
+	    #statMyAxis_out.boSystemFault := #axis.ErrorWord.%X0;
+	    #statMyAxis_out.boConfigFault := #axis.ErrorWord.%X1;
+	    #statMyAxis_out.boDriveFault := #axis.ErrorWord.%X4;
+	    #statMyAxis_out.boEnabled := #axis.StatusWord.%X0;
+	    #statMyAxis_out.boError := #axis.StatusWord.%X1;
+	    #statMyAxis_out.boHomed := #axis.StatusWord.%X5;
+	    #statMyAxis_out.boTorqueLimitingCommandActive := #axis.StatusWord.%X26;
+	END_REGION
+	
+	REGION Function_Homing_On_Sensor
+	    (*______________________ Homing Activation _________________________*)
+	    #statEdgeExecute(CLK := #enable);
+	    #statRisingEdgeSensor(CLK := #sensorState);
+	    #statFallingEdgeSensor(CLK := #sensorState);
+	    
+	    #statTimerWaiting(IN:= #statTimerWaitingSignal, PT:=T#200ms);
+	    
+	    IF #statEdgeExecute.Q THEN
+	        #statAct_Step := 0;
+	    ELSIF (NOT #enable) AND NOT (#busy OR #error) THEN
+	        #statAct_Step := 100;
+	        #done := TRUE;
+	        #busy := FALSE;
+	        #error := FALSE;
+	    END_IF;
+	    
+	    CASE #statAct_Step OF
+	        0://Start graph
+	            IF true THEN
+	                #done := FALSE;
+	                #busy := TRUE;
+	                #error := FALSE;
+	                
+	                #statMemOnSensorAtStart := FALSE;
+	                #statTimerWaitingSignal := FALSE;
+	                
+	                // Test Axis not virtual or not in simultation
+	                IF (#axis.VirtualAxis.Mode = 1) THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_AXIS_VIRTUAL;
+	                    #statusText := 'ERR_HOMINGONSENSOR_AXIS_VIRTUAL : Step0';
+	                ELSIF (#axis.Simulation.Mode = 1) THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_SIMULATED;
+	                    #statusText := 'ERR_HOMINGONSENSOR_SIMULATED : Step0';
+	                ELSE
+	                    #statAct_Step := 1;
+	                END_IF;
+	            END_IF;
+	            
+	        1://Test Conditions
+	            IF TRUE THEN
+	                // Conditions OK
+	                IF #statMyAxis_out.boEnabled
+	                    AND (NOT #statMyAxis_out.boSystemFault) AND (NOT #statMyAxis_out.boConfigFault) AND (NOT #statMyAxis_out.boDriveFault)
+	                    AND NOT #statMyAxis_out.boError
+	                    AND NOT #statMyAxis_out.boTorqueLimitingCommandActive THEN
+	                    #statAct_Step := 2;
+	                    // Axis not enabled
+	                ELSIF (NOT #statMyAxis_out.boEnabled) THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_AXIS_NOT_ENABLE;
+	                    #statusText := 'ERR_HOMINGONSENSOR_AXIS_NOT_ENABLE : Step1';
+	                    // Axis not valid    
+	                ELSIF #statMyAxis_out.boSystemFault OR #statMyAxis_out.boConfigFault OR #statMyAxis_out.boDriveFault THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_NOT_VALID;
+	                    #statusText := 'ERR_HOMINGONSENSOR_NOT_VALID : Step1';
+	                    // Error Axis    
+	                ELSIF #statMyAxis_out.boError THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_AXIS_ERROR;
+	                    #statusText := 'ERR_HOMINGONSENSOR_AXIS_ERROR : Step1';
+	                    // Torque limiting Command already active     
+	                ELSIF #statMyAxis_out.boTorqueLimitingCommandActive THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_MC_TORQUE_LIMITING_ACTIVE;
+	                    #statusText := 'ERR_HOMINGONSENSOR_MC_TORQUE_LIMITING_ACTIVE : Step1';
+	                END_IF;
+	            END_IF;
+	            
+	        2://Disable software limits
+	            IF TRUE THEN
+	                IF #axis.PositionLimits_SW.Active THEN
+	                    #axis.PositionLimits_SW.Active := FALSE;
+	                    #statMyMemo_swLimit := TRUE;
+	                ELSE
+	                    #statAct_Step := 3;
+	                    #statTimerOn_Off := false;
+	                END_IF;
+	            END_IF;
+	            
+	        3:// If on sensor, move out
+	            IF TRUE THEN
+	                #statPT_TIMER := T#5s;
+	                #statTimerOn_Off := TRUE;
+	                
+	                
+	                IF #sensorState OR #statMemOnSensorAtStart THEN
+	                    
+	                    IF NOT #statMemOnSensorAtStart THEN
+	                        // Go down, positive way
+	                        #statMyAxis_in_Move.Direction := 1;
+	                        
+	                        #statMyAxis_in_Move.boExecute := TRUE;
+	                        #inst_MC_MOVEVELOCITY_Instance.Velocity := ABS(IN := #velocityValue);
+	                        #inst_MC_MOVEVELOCITY_Instance.Acceleration := 5.0;
+	                        #inst_MC_MOVEVELOCITY_Instance.Deceleration := 5.0;
+	                        #inst_MC_MOVEVELOCITY_Instance.Jerk := 50.0;
+	                    END_IF;
+	                    
+	                    // memorisation of the starting on sensor
+	                    #statMemOnSensorAtStart := TRUE;
+	                    
+	                    IF #inst_MC_MOVEVELOCITY_Instance.Busy AND (NOT #statMyAxis_out.boStandstill) THEN
+	                        #statTimerOn_Off := FALSE;
+	                        #statMyAxis_in_Move.boExecute := false;
+	                        
+	                    END_IF;
+	                    
+	                    // Out of the sensor
+	                    IF NOT #sensorState THEN
+	                        #statTimerWaitingSignal := TRUE;
+	                        
+	                        #inst_MC_MOVERELATIVE_Instance.Distance := 2.0;
+	                        #inst_MC_MOVERELATIVE_Instance.Velocity := 2.0;
+	                        #inst_MC_MOVERELATIVE_Instance.Acceleration := 50.0;
+	                        #inst_MC_MOVERELATIVE_Instance.Deceleration := 50.0;
+	                        #inst_MC_MOVERELATIVE_Instance.Jerk := 500.0;
+	                        
+	                        #statMyAxis_in_PosRel.boExecute := TRUE;
+	                        
+	
+	                        IF #inst_MC_MOVERELATIVE_Instance.Done THEN
+	                            #statAct_Step := 4;
+	                            #statMyAxis_in_PosRel.boExecute := FALSE;
+	                        END_IF;
+	                       
+	                    END_IF;
+	                    
+	                ELSE
+	                    #statMemOnSensorAtStart := FALSE;
+	                    #statTimerOn_Off := FALSE;
+	                    #statAct_Step := 4;
+	                END_IF;
+	
+	            END_IF;
+	            
+	        4://Start Axis
+	            IF TRUE THEN
+	                #statPT_TIMER := T#3s;
+	                #statTimerOn_Off := TRUE;
+	                IF #statMyAxis_out.boEnabled THEN
+	                    (*
+	                    IF #velocityValue >= 0 THEN
+	                        #statMyAxis_in.Move.Direction := 1;
+	                    ELSE
+	                        #statMyAxis_in.Move.Direction := 2;
+	                    END_IF;
+	                    *)
+	                    IF #statMemOnSensorAtStart THEN
+	                        #statMyAxis_in_Move.Direction := 1;
+	                    ELSE
+	                        #statMyAxis_in_Move.Direction := 2;
+	                    END_IF;
+	                    
+	                    #statTimerWaitingSignal := TRUE;
+	                        
+	                    #statMyAxis_in_Move.boExecute := TRUE;
+	                        #inst_MC_MOVEVELOCITY_Instance.Velocity := ABS(IN := #velocityValue);
+	                        #inst_MC_MOVEVELOCITY_Instance.Acceleration := 50.0;
+	                        #inst_MC_MOVEVELOCITY_Instance.Deceleration := 50.0;
+	                        #inst_MC_MOVEVELOCITY_Instance.Jerk := 500.0;
+	                    END_IF;
+	                
+	                    IF #inst_MC_MOVEVELOCITY_Instance.Busy AND (NOT #statMyAxis_out.boStandstill) AND #statTimerWaiting.Q THEN
+	                    #statTimerOn_Off := FALSE;
+	                    #statMyAxis_in_Move.boExecute := false;
+	                    #statTimerWaitingSignal := FALSE;
+	                    #statAct_Step := 5;
+	                ELSIF #statTimerTimeOut.Q OR #inst_MC_MOVEVELOCITY_Instance.Error THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_MOVE_VELOCITY;
+	                    #statusText := 'ERR_HOMINGONSENSOR_MOVE_VELOCITY : Step4';
+	                END_IF;
+	            END_IF;
+	            
+	        5://Wait Sensor 
+	            IF TRUE THEN
+	                #statPT_TIMER := #waitSensorTimer;
+	                #statTimerOn_Off := TRUE; // TimeOut Graph Step
+	                
+	                // In Rising Edge
+	                IF #statRisingEdgeSensor.Q THEN
+	                    #statTimerOn_Off := FALSE;
+	                    IF #homingSeq THEN
+	                        #statAct_Step := 6;
+	                    ELSE
+	                        #statAct_Step := 7;
+	                    END_IF;
+	                    // Axis not enabled
+	                ELSIF (NOT #statMyAxis_out.boEnabled) THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_AXIS_NOT_ENABLE;
+	                    #statusText := 'ERR_HOMINGONSENSOR_AXIS_NOT_ENABLE : Step5';
+	                    // TimeOut Graph Step    
+	                ELSIF #statTimerTimeOut.Q THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_END_STOP;
+	                    #statusText := 'ERR_HOMINGONSENSOR_END_STOP : Step5';
+	                END_IF;
+	            END_IF;
+	            
+	        6://Retract value
+	            IF TRUE THEN
+	                #statPT_TIMER := T#120s;
+	                #statTimerOn_Off := TRUE;
+	                
+	                
+	                IF #statMyAxis_out.boEnabled THEN //AND NOT #MC_TORQUECLAMPING_Instance.Busy THEN
+	                    #statMyAxis_in_PosRel.boExecute := TRUE;
+	(*                    IF #velocityValue > 0.0 THEN
+	                        #inst_MC_MOVERELATIVE_Instance.Distance := -1.0 * ABS(#retractValue + #axis.Clamping.FollowingErrorDeviation);
+	                    ELSE *)
+	                    #inst_MC_MOVERELATIVE_Instance.Distance := ABS(#retractValue); // + #axis.Clamping.FollowingErrorDeviation);
+	               (*     END_IF; *)
+	                    #inst_MC_MOVERELATIVE_Instance.Velocity := ABS(#velocityValue);
+	                    #inst_MC_MOVERELATIVE_Instance.Acceleration := 50.0;
+	                    #inst_MC_MOVERELATIVE_Instance.Deceleration := 50.0;
+	                    #inst_MC_MOVERELATIVE_Instance.Jerk := 500.0;
+	                END_IF;
+	                
+	                IF #inst_MC_MOVERELATIVE_Instance.Done THEN
+	                    #statTimerOn_Off := FALSE;
+	                    #statMyAxis_in_PosRel.boExecute := FALSE;
+	                    IF #homingSeq THEN
+	                        #statAct_Step := 7;
+	                    ELSE
+	                        #statAct_Step := 8;
+	                    END_IF;
+	                ELSIF (NOT #statMyAxis_out.boEnabled) THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_AXIS_NOT_ENABLE;
+	                    #statusText := 'ERR_HOMINGONSENSOR_AXIS_NOT_ENABLE : Step6';
+	                ELSIF #statTimerTimeOut.Q THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_RETRACT;
+	                    #statusText := 'ERR_HOMINGONSENSOR_RETRACT : Step6';
+	                END_IF;
+	            END_IF;
+	            
+	        7://Homing Axis
+	            IF TRUE THEN
+	                #statPT_TIMER := T#3s;
+	                #statTimerOn_Off := TRUE;
+	                
+	                #statMyAxis_in_Home.boExecute := TRUE;
+	                IF (#axis.Sensor[1].Type = 1) OR (#axis.Sensor[1].Type = 2) THEN
+	                    #inst_MC_HOME_Instance.Mode := 7; // Absolute encoder
+	                ELSE
+	                    #inst_MC_HOME_Instance.Mode := 0; // Incremental encoder
+	                END_IF;
+	                #inst_MC_HOME_Instance.Position := #homingValue;
+	                
+	                IF #statMyAxis_out.boHomed AND #inst_MC_HOME_Instance.Done THEN
+	                    #statTimerOn_Off := FALSE;
+	                    #statMyAxis_in_Home.boExecute := FALSE;
+	                    IF #homingSeq THEN
+	                        #statAct_Step := 8;
+	                    ELSE
+	                        #statAct_Step := 6;
+	                    END_IF;
+	                ELSIF #statTimerTimeOut.Q THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_HOMINGONSENSOR_HOMING;
+	                    #statusText := 'ERR_HOMINGONSENSOR_HOMING : Step7';
+	                END_IF;
+	            END_IF;
+	            
+	        8://Disable End Stop and Torque limit
+	            IF TRUE THEN
+	                #statMyAxis_in_TorqueClamping.boEnable := FALSE;
+	                IF NOT #statMyAxis_out.boTorqueLimitingCommandActive THEN
+	                    #statAct_Step := 9;
+	                END_IF;
+	            END_IF;
+	            
+	        9://Enable Software limits
+	            IF TRUE THEN
+	                IF #statMyMemo_swLimit THEN
+	                    #axis.PositionLimits_SW.Active := TRUE;
+	                    #statMyMemo_swLimit := FALSE;
+	                END_IF;
+	                #statAct_Step := 10;
+	            END_IF;
+	            
+	        10://Function Ok
+	            IF TRUE THEN
+	                #done := TRUE;
+	                #busy := FALSE;
+	                IF (NOT #enable) THEN
+	                    #statAct_Step := 100;
+	                END_IF;
+	            END_IF;
+	            
+	        20://Function error
+	            IF TRUE THEN
+	                #busy := FALSE;
+	                #error := TRUE;
+	                
+	                // Enable Software limits
+	                IF #statMyMemo_swLimit THEN
+	                    #axis.PositionLimits_SW.Active := TRUE;
+	                    #statMyMemo_swLimit := FALSE;
+	                END_IF;
+	                
+	                // Stop Axis
+	                IF NOT #statMyAxis_out.boStandstill AND #statMyAxis_out.boEnabled THEN
+	                    #statMyAxis_in_Halt.boExecute := TRUE;
+	                    #inst_MC_HALT_Instance.Deceleration := -1;
+	                    #inst_MC_HALT_Instance.Jerk := -1;
+	                END_IF;
+	                
+	                IF NOT #enable AND #reset THEN
+	                    #error := FALSE;
+	                    #statAct_Step := 100;
+	                    #status := 0;
+	                    #statusText := 'NO ERROR';
+	                    #statTimerOn_Off := FALSE;
+	                    #statTimerClampingState_1 := FALSE;
+	                    #statMyAxis_in_TorqueClamping.boEnable := FALSE;
+	                    #statMyAxis_in_Move.boExecute := FALSE;
+	                    #statMyAxis_in_PosRel.boExecute := FALSE;
+	                    #statMyAxis_in_Home.boExecute := FALSE;
+	                    #statMyAxis_in_Halt.boExecute := FALSE;
+	                    
+	                END_IF;
+	            END_IF;
+	    END_CASE;
+	    
+	    #statTimerTimeOut(IN := #statTimerOn_Off,
+	                      PT := #statPT_TIMER);
+	    
+	    
+	    #inst_MC_MOVEVELOCITY_Instance(Axis := #axis,
+	                                   Execute := #statMyAxis_in_Move.boExecute,
+	                                   Direction := #statMyAxis_in_Move.Direction,
+	                                   Current := FALSE,
+	                                   PositionControlled := TRUE);
+	    
+	    #inst_MC_MOVERELATIVE_Instance(Axis := #axis,
+	                                   Execute := #statMyAxis_in_PosRel.boExecute);
+	    
+	    #inst_MC_HOME_Instance(Axis := #axis,
+	                           Execute := #statMyAxis_in_Home.boExecute);
+	    
+	    #inst_MC_HALT_Instance(Axis := #axis,
+	                           Execute := #statMyAxis_in_Halt.boExecute,
+	                           Deceleration := 1000);
+	    
+	    
+	END_REGION
+	
+END_FUNCTION_BLOCK
+

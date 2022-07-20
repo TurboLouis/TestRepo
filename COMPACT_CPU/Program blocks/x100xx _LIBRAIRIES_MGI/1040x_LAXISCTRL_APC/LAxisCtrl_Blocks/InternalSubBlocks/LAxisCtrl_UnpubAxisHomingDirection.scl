@@ -1,0 +1,25 @@
+﻿FUNCTION "LAxisCtrl_UnpubAxisHomingDirection" : DInt
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis : DB_ANY;
+      index : Int;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	CASE TypeOfDB(#axis) OF
+	  TO_PositioningAxis:
+	    #LAxisCtrl_UnpubAxisHomingDirection := "LAxisCtrl_UnpubHomingDirectionPosAxis"(axis := #axis, index := #index);
+	    
+	  TO_SynchronousAxis:
+	    #LAxisCtrl_UnpubAxisHomingDirection := "LAxisCtrl_UnpubHomingDirectionSyncAxis"(axis := #axis, index := #index);
+	    
+	  ELSE
+	    #LAxisCtrl_UnpubAxisHomingDirection := 0; // Positive direction
+	END_CASE;
+END_FUNCTION
+

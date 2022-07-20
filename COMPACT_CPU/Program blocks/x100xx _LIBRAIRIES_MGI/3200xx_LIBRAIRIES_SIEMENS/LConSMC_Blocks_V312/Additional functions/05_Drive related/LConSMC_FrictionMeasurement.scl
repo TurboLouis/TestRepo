@@ -1,0 +1,208 @@
+﻿FUNCTION_BLOCK "LConSMC_FrictionMeasurement"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      execute : Bool;
+      abort : Bool;
+      warmUpTime : Time;
+      rampTime : Real;
+      actualTorque : LReal;
+      valueNumber : Int := 50;
+      sizeOfArray : Int := 20;
+      maxSpeed : LReal := 0.0;
+      speedValues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+      measurementDelayTime : Time := T#1S;
+      tCycle : Real;
+   END_VAR
+
+   VAR_OUTPUT 
+      done : Bool;
+      aborted : Bool;
+      busy : Bool;
+      error : Bool;
+      errorId : DWord;
+      speedSetpoint : LReal;
+      torqueOutValues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+      speedOutValues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+   END_VAR
+
+   VAR 
+      instExTrig : "LConSMC_TRIG";
+      instAbTrig : "LConSMC_TRIG";
+      instRFG : "LConSMC_RFG";
+      instTON {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      instDelay {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      statValueIndex : Int;
+      statPointIndex : Int;
+      statMaxValue : LReal;
+      statTotalValue : LReal;
+      statMaxValueReached : Bool;
+      statSizeOfArray : Int;
+      statSpeedValues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+      statSpeedVar : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+      statValueNumber : Int;
+      statBusy : Bool;
+      statDone : Bool;
+      statAborted : Bool;
+      statSpeedSetpoint : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#3103_0000;
+      NO_ERROR : DWord := 16#0000_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : FrictionMeasurement
+	//functionality : Friction char measurement
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon 
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version       date            expert in charge        changes applied
+	//V1.0          03.07.2012      APC GMC group           Creation
+	//V1.1          10.03.2015      APC ERLF                Bugfix value number 
+	//V1.2          27.07.2016      APC ERLF                Bugfix: errot bit was not set in case #ENTRY_NUM_TOO_SMALL
+	//                                                      Bugfix: last speed value of speedValues table was not considered in case (#maxSpeed = 0.0)
+	//V1.3          17.11.2016      APC ERL                 Adapted to styleguide; warning "variable might not be initialized" removed
+	//V1.4          27.01.2021      APC Erlangen            see LConSMC_aVersion       
+	//========================================================================================================================
+	
+	#instExTrig(CLK := #execute);                                                   // Start FB only if in idle
+	#instAbTrig(CLK := #abort);                                                     // Stop FB if busy
+	
+	#instTON(IN := #statBusy,                                                           // Warm-up timer
+	         PT := #warmUpTime + DINT_TO_TIME(REAL_TO_DINT(#rampTime)));
+	IF #instExTrig.QR AND NOT (#statBusy) AND NOT (#statDone) AND NOT (#abort) THEN
+	    #error := FALSE;
+	    #errorId := #NO_ERROR;
+	    #statBusy := FALSE;
+	    #statDone := FALSE;
+	    #statAborted := FALSE;
+	    #statSpeedSetpoint := 0.0;
+	    #statTotalValue := 0.0;
+	    #statValueIndex := 0;
+	    #statSizeOfArray := LIMIT(MN := 0, IN := #sizeOfArray, MX := "LCON_MAX_VALUE_BREAK_POINT_TABLE"); (*c_00032*)
+	    #statValueNumber := LIMIT(MN := 50, IN := #valueNumber, MX := 500);
+	    
+	    IF #statSizeOfArray < 1 THEN
+	        #error := TRUE;
+	        #errorId := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	        RETURN;
+	    ELSE
+	        IF #maxSpeed <> 0.0 THEN //use max speed to fill speed values
+	            #statMaxValue := #maxSpeed;
+	            FOR #statPointIndex := 0 TO #statSizeOfArray - 1 BY 1 DO
+	                #statSpeedValues.values[#statPointIndex] := (ABS(#maxSpeed) / (#statSizeOfArray - 1) * #statPointIndex);
+	                #statSpeedVar.values[#statPointIndex] := #statSpeedValues.values[#statPointIndex];
+	                #speedOutValues.values[#statPointIndex] := #statSpeedVar.values[#statPointIndex];
+	            END_FOR;
+	        END_IF;
+	        #statPointIndex := #statSizeOfArray;                                           // Proceed to warmup phase, select highest x value
+	        #statBusy := TRUE;
+	        #statDone := FALSE;
+	        
+	        IF #maxSpeed = 0.0 THEN
+	            #statPointIndex := 0;
+	            #statMaxValue := 0.0;
+	            REPEAT
+	                #statSpeedVar.values[#statPointIndex] := #speedValues.values[#statPointIndex];
+	                #speedOutValues.values[#statPointIndex] := #speedValues.values[#statPointIndex];
+	                #statMaxValue := MAX(IN1 := #statMaxValue, IN2 := #statSpeedVar.values[#statPointIndex]);
+	                #statPointIndex := #statPointIndex + 1;
+	            UNTIL #statPointIndex = (#statSizeOfArray)
+	            END_REPEAT;
+	        END_IF;
+	    END_IF;
+	ELSIF #instAbTrig.QR AND #statBusy THEN                                            // Abort and stop
+	    #statTotalValue := 0.0;
+	    #statValueIndex := 0;
+	    #statPointIndex := -1;
+	END_IF;
+	
+	
+	IF #statDone THEN
+	    #statDone := FALSE;
+	END_IF;
+	IF #statAborted THEN
+	    #statAborted := FALSE;
+	END_IF;
+	
+	IF #statBusy THEN
+	    
+	    IF #statPointIndex > 0 THEN   // Ramp within the table points
+	        #instRFG(x := #statSpeedVar.values[#statPointIndex - 1],
+	                 nominalValue := #statMaxValue,
+	                 upperLimit := #instRFG.nominalValue,
+	                 rampupTime := #rampTime,
+	                 rampdownTime := #rampTime,
+	                 set := #instExTrig.QR,
+	                 followup := True,
+	                 increase := False,
+	                 decrease := False,
+	                 tCycle := #tCycle);
+	    ELSE                                                                    // Ramp to zero
+	        #instRFG(x := 0.0,                                          // X_ACT
+	                 nominalValue := #statMaxValue,                                    // X_MAX
+	                 upperLimit := #instRFG.nominalValue,                        // X_MAX,
+	                 rampupTime := #rampTime,
+	                 rampdownTime := #rampTime,
+	                 set := FALSE,
+	                 followup := TRUE,
+	                 tCycle := #tCycle);
+	        IF #instRFG.SetpointReached AND #instRFG.statY = 0.0 THEN                 // Setpoint reached zero after start OR finish
+	            #statBusy := FALSE;
+	            IF #statPointIndex = 0 THEN
+	                #statDone := TRUE;
+	            ELSE
+	                #statAborted := TRUE;
+	            END_IF;
+	        END_IF;
+	    END_IF;
+	    IF #instRFG.statError THEN
+	        #statSpeedSetpoint := 0.0;
+	        #statBusy := FALSE;
+	        #error := TRUE;
+	        #errorId := #UNIT_ID OR DWORD_TO_WORD(#instRFG.errorID);
+	    ELSE
+	        #statSpeedSetpoint := #instRFG.statY;                                      // Setpoint to the drive
+	    END_IF;
+	ELSE                                                                // not busy
+	    #statSpeedSetpoint := 0.0;                                           // Setpoint to the drive
+	END_IF;
+	IF #statBusy AND #statPointIndex > 0 THEN                                        // Init complete, go from cell to cell
+	    IF (#instTON.Q) THEN                                                       // Not warmup
+	        IF #instRFG.SetpointReached OR #instRFG.upperLimitReached OR #instRFG.lowerLimitReached THEN // Measure if ramping is finished
+	            #instDelay(IN := true,                                                   // delay at point to avoid acceleration/deceleration         
+	                       PT := #measurementDelayTime);
+	            IF (#instDelay.Q) THEN
+	                #statTotalValue := #statTotalValue + #actualTorque;
+	                #statValueIndex := #statValueIndex + 1;
+	                IF (#statValueIndex = #statValueNumber) OR #statSpeedSetpoint = 0.0 THEN  // Number of values reached
+	                    IF #statSpeedSetpoint = 0.0 THEN
+	                        #statTotalValue := 0.0;
+	                    END_IF;
+	                    #torqueOutValues.values[#statPointIndex - 1] := (#statTotalValue / INT_TO_REAL(#statValueIndex));        // Enter y
+	                    #statTotalValue := 0.0;                                          // Reset
+	                    #statValueIndex := 0;
+	                    #statPointIndex := #statPointIndex - 1;                              // Next point
+	                    #instDelay(IN := false,
+	                               PT := #measurementDelayTime);
+	                END_IF;
+	            END_IF;
+	        END_IF;
+	    END_IF;
+	END_IF;
+	
+	// set outputs
+	#done := #statDone;
+	#aborted := #statAborted;
+	#busy := #statBusy;
+	#speedSetpoint := #statSpeedSetpoint;
+	
+END_FUNCTION_BLOCK
+

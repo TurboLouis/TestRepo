@@ -1,0 +1,12 @@
+﻿FUNCTION "LConSMC_GetWinderActPosPosAxis" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      winderAxis {InstructionName := 'TO_PositioningAxis'; LibVersion := '5.0'} : TO_PositioningAxis;
+   END_VAR
+
+
+BEGIN
+	#LConSMC_GetWinderActPosPosAxis := #winderAxis.ActualPosition;
+END_FUNCTION
+

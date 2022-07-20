@@ -1,0 +1,127 @@
+﻿FUNCTION_BLOCK "LConSMC_Integrator"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      set : Bool := FALSE;
+      x : LReal := 0.0;
+      setValue : LReal := 0.0;
+      upperLimit : LReal := 1.0;
+      lowerLimit : LReal := 0.0;
+      integralTime : LReal := 5.0;
+      tCycle : Real;
+   END_VAR
+
+   VAR_OUTPUT 
+      error : Bool;
+      errorID : DWord := 16#0000_0000;
+      upperLimitReached : Bool := FALSE;
+      lowerLimitReached : Bool := FALSE;
+      y : LReal;
+   END_VAR
+
+   VAR 
+      statTmax : LReal;
+      statXkm1 : LReal;
+      statYkm1 : LReal;
+      statXFactor : LReal;
+      statFirstRun : Bool := TRUE;
+      statUpperLimit : LReal;
+      statLowerLimit : LReal;
+      statLimiter : LReal;
+      statXlim : LReal;
+      statError : Bool := FALSE;
+      statY : LReal := 0.0;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#1102_0000;
+      MAX_INT_TIME : Real := 60000.0;
+      NO_ERROR : DWord := 16#0000_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : Integrator
+	//functionality : Numerical integrator
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge              changes applied
+	//V1.0      12.07.2012    APC GMC group                 Creation
+	//V1.1      17.11.2016    APC ERL                       adapted to styleguide; warning "variable might not be initialized" removed
+	//V1.2      23.10.2017    APC ERL                       Increas integration constant MAX_INT_TIME to 60000
+	//========================================================================================================================
+	
+	IF #statFirstRun THEN                                                            //Only at First Run
+	    #statFirstRun := FALSE;
+	    #statXkm1 := 0.0;
+	END_IF;
+	
+	
+	#statError := #statError OR (#tCycle = 0.0);                                         // Cycle time identified as zero
+	
+	
+	IF (#statError) THEN
+	    #errorID := #UNIT_ID OR "LCON_ERROR_CYCLE_TIME_ZERO";                                       // FB NOT running IN cyclic task (81)
+	ELSE
+	    #errorID := #NO_ERROR;
+	END_IF;
+	
+	IF (NOT #statError) THEN                                                         // execute code if below error priority 1
+	    #statTmax := LIMIT(MN := #tCycle, IN := #integralTime, MX := #MAX_INT_TIME);            // Limit IntTimeConst
+	    IF (#set) THEN                                                             // Check for active s: if active, set y to SV.
+	        #statY := #setValue;
+	    ELSE                                                                      // Implement algorythm: ix, trapezoid integration ("Tustin")
+	        #statXFactor := #tCycle / (2.0 * #statTmax);
+	        #statY := #statYkm1 + #statXFactor * (#x + #statXkm1);
+	    END_IF;
+	    
+	    #statUpperLimit := #upperLimit;                                 //Values passed for limiting the outputs
+	    #statLowerLimit := #lowerLimit;
+	    #statXlim := #statY;
+	    
+	    IF (#statLowerLimit >= #statUpperLimit) THEN
+	        #statLimiter := #statUpperLimit;
+	        #upperLimitReached := TRUE;
+	        #lowerLimitReached := TRUE;
+	        #statY := #statLimiter;
+	        
+	    ELSIF (#statXlim >= #statUpperLimit) THEN
+	        #statLimiter := #statUpperLimit;
+	        #upperLimitReached := TRUE;
+	        #lowerLimitReached := FALSE;
+	        #statY := #statLimiter;
+	        
+	        
+	    ELSIF (#statXlim <= #statLowerLimit) THEN
+	        #statLimiter := #statLowerLimit;
+	        #upperLimitReached := FALSE;
+	        #lowerLimitReached := TRUE;
+	        #statY := #statLimiter;
+	    ELSE
+	        #statLimiter := #statXlim;
+	        #upperLimitReached := FALSE;
+	        #lowerLimitReached := FALSE;
+	        #statY := #statLimiter;
+	        
+	    END_IF;
+	    
+	    
+	    #statXkm1 := #x;                                                              //  set present value as previous value for next cycle
+	    #statYkm1 := #statY;
+	ELSE
+	    #upperLimitReached := FALSE;
+	    #lowerLimitReached := FALSE;
+	    #statY := 0.0;
+	END_IF;
+	
+	// set outputs
+	#error := #statError;
+	#y := #statY;
+	
+END_FUNCTION_BLOCK
+

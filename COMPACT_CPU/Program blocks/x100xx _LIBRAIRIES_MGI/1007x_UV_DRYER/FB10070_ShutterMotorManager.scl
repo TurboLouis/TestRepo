@@ -1,0 +1,161 @@
+﻿FUNCTION_BLOCK "FB10070_ShutterMotorManager"
+TITLE = FB10070_ShutterMotorManager
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : Jonathan
+FAMILY : '1007x_DRYER_UV'
+VERSION : 1.1
+//Release note : 
+//1.0 - version alphajet
+//1.1 - modification en mettant le bit estopactivated en input + sortie des bit pour piloter la PWM
+//
+   VAR_INPUT 
+      EstopActivated : Bool;
+      MaintainPowerOnMotor : Bool;
+      RequestInitialisationMotor : Bool;
+      RequestOpenShutter : Bool;
+      RequestCloseShutter : Bool;
+      SensorShutterClosed : Bool;
+      Reset : Bool;
+   END_VAR
+
+   VAR_OUTPUT 
+      RequestInitialisationMotor_Done : Bool;
+      RequestOpenShutter_Done : Bool;
+      RequestCloseShutter_Done : Bool;
+      EnableMotor : Bool;
+      ShutterInitialised : Bool;
+      ShutterOpened : Bool;
+      ShutterClosed : Bool;
+      ShutterMotorRunning : Bool;
+      PWM_Channel_SW_Enable : Bool;
+      PWM_ProgressAccel : Bool;
+      PWM_FrequencyValue : Real;
+   END_VAR
+
+   VAR 
+      CurrentState : Int;
+      RTrigSensorShutterClosed {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      FTrigSensorShutterClosed {InstructionName := 'F_TRIG'; LibVersion := '1.0'} : F_TRIG;
+      TON_EnablePWM {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      Local_PWM_Channel_SW_Enable : Bool;
+   END_VAR
+
+
+BEGIN
+	
+	// Edges on sensor
+	#RTrigSensorShutterClosed(CLK := #SensorShutterClosed);
+	#FTrigSensorShutterClosed(CLK := #SensorShutterClosed);
+	
+	// Delay enable
+	#TON_EnablePWM(IN := (#MaintainPowerOnMotor OR #RequestInitialisationMotor OR #RequestOpenShutter OR #RequestCloseShutter),
+	               PT := T#300ms);
+	               
+	#EnableMotor := (#MaintainPowerOnMotor OR #RequestInitialisationMotor OR #RequestOpenShutter OR #RequestCloseShutter);
+	               
+	// Reset Current State to 0
+	IF #Reset THEN
+	    #CurrentState := 0;
+	    #ShutterInitialised := FALSE;
+	    #ShutterOpened := FALSE;
+	    #ShutterClosed := FALSE;
+	    
+	END_IF;
+	
+	
+	IF #CurrentState= 0 AND (#RequestInitialisationMotor OR #RequestOpenShutter OR #RequestCloseShutter) AND #TON_EnablePWM.Q THEN
+	    #CurrentState := 1;
+	END_IF;
+	
+	
+	CASE #CurrentState OF
+	        
+	        // New request incomming
+	    1:
+	        IF #RequestInitialisationMotor THEN
+	            #CurrentState := 10;
+	        ELSIF #RequestOpenShutter THEN
+	            IF #SensorShutterClosed THEN
+	                #CurrentState := 20;
+	            ELSE
+	                #CurrentState := 10;
+	            END_IF;
+	        ELSIF #RequestCloseShutter THEN
+	            #CurrentState := 30;
+	        END_IF;
+	        
+	        // Initialisation on rising edge on shutter sensor
+	    10 :
+	        REGION 10 - Initialisation on rising edge
+	            #Local_PWM_Channel_SW_Enable := TRUE;
+	            IF #RTrigSensorShutterClosed.Q THEN
+	                #Local_PWM_Channel_SW_Enable := FALSE;
+	                #ShutterInitialised := TRUE;
+	                #ShutterOpened := FALSE;
+	                #ShutterClosed := TRUE;
+	                IF #RequestOpenShutter THEN
+	                    #CurrentState := 20;
+	                ELSIF #RequestCloseShutter THEN
+	                    #CurrentState := 30;
+	                ELSE
+	                    #CurrentState := 0;
+	                    #RequestInitialisationMotor_Done := TRUE;
+	                    #ShutterInitialised := TRUE;
+	                END_IF;
+	            END_IF;
+	        END_REGION
+	        
+	    20 :
+	        REGION 20 - Open Shutter
+	            #Local_PWM_Channel_SW_Enable := TRUE;
+	            IF #FTrigSensorShutterClosed.Q THEN
+	                #Local_PWM_Channel_SW_Enable := FALSE;
+	                #RequestOpenShutter_Done := TRUE;
+	                #ShutterOpened := TRUE;
+	                #ShutterClosed := FALSE;
+	                #CurrentState := 0;
+	            END_IF;
+	            
+	        END_REGION
+	        
+	    30 :
+	        REGION 30 - Close Shutter
+	            #Local_PWM_Channel_SW_Enable := TRUE;
+	            IF #RTrigSensorShutterClosed.Q THEN
+	                #Local_PWM_Channel_SW_Enable := FALSE;
+	                #RequestCloseShutter_Done := TRUE;
+	                #ShutterOpened := FALSE;
+	                #ShutterClosed := TRUE;
+	                #CurrentState := 0;
+	            END_IF;
+	            
+	        END_REGION
+	        
+	    ELSE
+	        #Local_PWM_Channel_SW_Enable := FALSE;
+	        
+	        #RequestInitialisationMotor_Done := FALSE;
+	        #RequestOpenShutter_Done := FALSE;
+	        #RequestCloseShutter_Done := FALSE;
+	        
+	END_CASE;
+	
+	IF #EstopActivated THEN
+	    #Local_PWM_Channel_SW_Enable := FALSE;
+	END_IF;
+	
+	
+	// Common parameters
+	// 
+	#PWM_Channel_SW_Enable := #Local_PWM_Channel_SW_Enable;
+	#PWM_FrequencyValue := 1500.0;
+	#PWM_ProgressAccel := FALSE;
+	
+	#ShutterMotorRunning := #Local_PWM_Channel_SW_Enable;
+	
+	// Call Frequence Mode Block to manage PWM
+	//#FB2031_TM_Pulse_Out0_FrequenceMode_Instance();
+	
+	
+END_FUNCTION_BLOCK
+

@@ -1,0 +1,27 @@
+﻿FUNCTION "LAxisCtrl_UnpubAxisEmergencyDec" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis : DB_ANY;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	CASE TypeOfDB(#axis) OF
+	  TO_SpeedAxis:
+	    #LAxisCtrl_UnpubAxisEmergencyDec := "LAxisCtrl_UnpubEmergencyDecSpeedAxis"(#axis);
+	    
+	  TO_PositioningAxis:
+	    #LAxisCtrl_UnpubAxisEmergencyDec := "LAxisCtrl_UnpubEmergencyDecPosAxis"(#axis);
+	    
+	  TO_SynchronousAxis:
+	    #LAxisCtrl_UnpubAxisEmergencyDec := "LAxisCtrl_UnpubEmergencyDecSyncAxis"(#axis);
+	    
+	  ELSE
+	    #LAxisCtrl_UnpubAxisEmergencyDec := -1.0;
+	END_CASE;
+END_FUNCTION
+

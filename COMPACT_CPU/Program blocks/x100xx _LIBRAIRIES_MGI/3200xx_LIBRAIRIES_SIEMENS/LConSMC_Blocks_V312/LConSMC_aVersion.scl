@@ -1,0 +1,158 @@
+﻿FUNCTION "LConSMC_aVersion" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : aVersion
+	//functionality : Changelog
+	//assignment    : /
+	//library       : LConSMC
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version     date            expert in charge            changes applied
+	//------------------------------------------------------------------------------------------------------------------------
+	// 3.1.2       21.06.2021      APC ERL                     changes from 3.1.1
+	// New functionality:
+	// >> LConSMC_WITorquePrecontrol
+	//      - New torque precontrol fucntionality dD/dt to precontrol necessary acceleration/deceleration torque for fast changing diameter values (*c_00035*)
+	//      - Additional inputs "tCycle" and "dDdTAdjustment"
+	//      
+	// >> LConSMC_typeTorquePrecontrolConfig
+	//      - Added new parameter "dDdTAdjustment" to precontrol acceleration torque for fast changing diameter values (dD/dt)
+	//
+	// Bugfixes:
+	// >> LConSMC_Winder
+	//      - In case of torque controlled modes at maximum line speed (winderConfig.maxVelocity) and minimum diameter, the speed setpoint was calculated incorrect (*c_00034*)
+	//      - Extended warning reason "5105_4002" if parameter "dDdtAdjustment" is > 0.0 but no telegram 750 is connected (*c_00038*)
+	// >> LConSMC_SectionalDrive
+	//      - In case of torque controlled modes at maximum line speed (sectionalConfig.maxVelocity), the speed setpoint was calculated incorrect (*c_00036*)
+	// >> LConSMC_EnableInterface
+	//      - Override was internally limited to 100% --> Changed to 200% as it is in the technology object (*c_00037*)
+	// >> LConSMC_DiameterCalculation
+	//      - Diagnostic outputs "atMinDia"/"atMaxDia" have been calculated wrong in the calculation modes 2&5 (Integral&Position) until the first diameter values has been calculated (*c_00040*)
+	// >> LConSMC_CalcTargetDiamStopCondition
+	//      - Output "busy" was not set to TRUE if function block was in operation
+	//
+	//------------------------------------------------------------------------------------------------------------------------ 
+	// 3.1.1       14.01.2021      APC ERL                     changes from 3.1.0
+	// General:
+	// >> Updated structure of the example project
+	// >> Since this version the "LCon" library is split up into two libraries for
+	//      - LCon_S7-1200     :   Application for HW platform S7-300/400 & S7-1200 without technology object
+	//      - LCon_S7-1500(T)  :   Application for HW platform S7-1500 & S7-1500T solution (LConSMC / LConAMC) based on technology objects
+	//
+	// >> LConSMC_Winder/LConSMC_SectionalDrive
+	//      - Changed axis parameter from input to InOut parameter
+	// >> LConSMC_FrictionMeasurement
+	//      - Limited input variable "sizeOfArray" to global constant LCON_MAX_VALUE_BREAK_POINT_TABLE (*c_00032*)
+	// >> LConSMC_typeBreakPointTable
+	//      - Added constant LCON_MAX_VALUE_BREAK_POINT_TABLE to definition (same length as before)
+	// >> LConSMC_LineUnitConversion
+	//      - New function to convert any leading value input unit vor s,v,a into necessary unit for winder/sectional
+	//        drive funtion block connection
+	// >> LConSMC_FrictionMeasurement_V2
+	//      - New function block to internally measure friction characterstic of a rotatory axis  
+	// >> LConSMC_Types
+	//      - New data types (for in/out variables) for KpAdaption, Tension taper and friction measurement function blocks
+	//      
+	//------------------------------------------------------------------------------------------------------------------------ 
+	// 3.1.0       04.09.2020      APC ERL                     changes from 3.0.1
+	// >> LConSMC_EnableInterface
+	//      - New Errormessage if MC_Halt has an error it will occur LCON_ERROR_STOP (*c_00030*)
+	//      - Bugfix: Cycledelay between calculated and executed motion profile has been removed (*c_00028*)
+	//      - Rename: moveVelocityActive -> MCInterfaceActive. MCInterfaceActive is TRUE if MC_MoveVelocity OR
+	//        MC_Halt ist active!. (*c_00026*)
+	// >> LConSMC_Winder and LConSMC_SectionalDrive
+	//      - Bugfix: Webbreak: Relationfactor multiplied in Numerator not longer in Denumerator (*c_00027*)
+	//      - Enhancement: New Warning "LCON_WARNING_MAXVELOCITY_EXCEEDED" to  determine if the
+	//        lineVelocity + additionalVvelocity is higher then the configurated maxVelocity (*c_00031*)
+	// >> LConSMC_Winder and LConSMC_SectionalDrive and LConSMC_EnableInterface
+	//      - Bugfix: Deceleration at Winder and SectionalDrive possible now. For this a new datatype LConSMC_typeActualDynamics
+	//        is used(*c_00029*)
+	
+	//------------------------------------------------------------------------------------------------------------------------      
+	// 03.00.01    21.01.2020    APC Erlangen                 changes from 03.00.00
+	// >> LConSMC_Winder and LConSMC_SectionalDrive
+	//      - Bugfix: Gearfactor now with odd number possible (*c_00020*)
+	//      - TorquePrecontrol is able to be startet at DRAW_CONTROL (*c_00021*)
+	// >> LConSMC_EnableInterface
+	//      - Bugfix:  moveVelocity and stop will be resetted with enable (*c_00022*)
+	
+	//------------------------------------------------------------------------------------------------------------------------      
+	// 03.00.00   23.10.2019      APC ERL                     changes from 02.02.00
+	// >> LConSMC_Winder and LConSMC_SectionalDrive
+	//      - new diag structure
+	//      - new in- and outputs
+	//      - communication of torque data via TO and not applicative
+	//      - Kp_Adaption as a seperate function block
+	//      - drive commands not via LAxisCtrl, now internal
+	//      - No UserMode. If needed, LAxisCtrl can be downloaded in SIOS
+	//      - new dynamic structures
+	//      - webbreak detection implemented
+	//      - Bugfix: the set web tension is maintained at maximum speed
+	//      - FBs are called via DB_Any.
+	// >> LConSMC_DiameterCalculation
+	//      - Bugfix: After the first initialization the correct diameter value is used now (*c_00019*)
+	
+	//------------------------------------------------------------------------------------------------------------------------      
+	// 02.02.00   16.09.2019      APC ERL                     changes from 02.01.01
+	// >>LConSMC_WITorquePrecontrol
+	//      - correct calculation of tension torque in anglo american units (*c_00017*)
+	// >>LConSMC_DiamCalcIntegral / LConSMC_DiamCalcPos
+	//      - Reset statOutoutRateIntervalPassed at rising edge of enable (*c_00016*)
+	// >>LConSMC_WriteTorqueToDrive
+	//      - additional support of telegram 750
+	//      - bugfix (at Error Velocity Reached -> nothing happend, now: axis stops with
+	//        stopdynamics, AdditiveTorque=0, open TorqueLimits) (*c_000018*) 
+	// >>LConSMC_Winder
+	//      - handshake between winderconfig.Tel750 and internalAxisInterface.AxisCommand.Tel750
+	// >>LConSMC_PosAxisInterface/"LConSMC_SpeedAxisInterface"
+	//      - bugfix (At Region: Write Torque Limits) at winder.enable = False, additiveTorque = 0,
+	//        Torquelimits will be opend and axis will be ramped down. (onlyLconSMC_SpeedAxis)
+	//      - new Input of LConSMC_WriteTorqueToDrive "Tel750" and instance of this FB connected
+	//      - bugfix (at Error Velocity Reached -> nothing happend, now: axis stops with
+	//        stopdynamics, AdditiveTorque=0, open TorqueLimits) (*c_000018*) 
+	// >>LConSMC_PT1
+	//      - update variables also for smoothingTime <= 0.0 (*c_00015*)
+	//------------------------------------------------------------------------------------------------------------------------      
+	// 02.01.01   27.08.2018      APC ERL                     changes from 02.01.00
+	// 
+	// >>LConSMC_WITorquePrecontrol/LConSMC_TorquePrecontrol
+	//      - New function: - Additional input "accelerationAdjustment"
+	// >>LConSMC_CalcStopDistance
+	//      - Bugfix calc time to reduce acceleration with jerk limitation (*c_00009*)
+	// >>LConSMC_Winder/LConSMC_SectionalDrive
+	//      - New function: - Use speed sepoint or actual value for friction torque precontrol (*c_00008*)
+	//                      - Additional configuration parameter "accelerationAdjustment"
+	//      - Bugfix:
+	//                      - calculating actual velocity (*c_00010*)
+	//                      - calculate output "setdriveSpeed" on drive side (*c_00011*)
+	//      - Deleted input "openBrake"                
+	// >>LConSMC_TableChar
+	//      - Bugfix for x values smaller than first x coordinate (*c_00004*)
+	// >>LConSMC_SpeedAxisInterface
+	//      - Bugfix resetting the error output (*c_00001*)
+	//      - Adapted enable precontrol for USER_MODE (*c_00006*)
+	//      - changed calculation of "inVelocity" signal for internal interface (*c_00007*)
+	// >>LConSMC_PosAxisInterface
+	//      - Bugfix resetting the error output (*c_00002*)
+	//      - Adapted enable precontrol for USER_MODE (*c_00006*)
+	//      - changed calculation of "inVelocity" signal for internal interface (*c_00007*)
+	// >>LConSMC_RFG
+	//      - Bugfix for mode increase&decrease if x = upper/lower limit (*c_00012*)
+	// >>LConSMC_WinderTorquePrecontrolConfigType/LConSMC_SectionalDriveTorquePrecontrolConfigType
+	//      - Additional configuration parameters "accelerationAdjustment", "useSetValForFrictionComp"     
+	// >>LConWriteTorqueToDrive
+	//      - Validate length of telegramm extension only if HW_Address > 0 (*c_00005*)
+	//      - Reset busy output if enable = FALSE
+	//------------------------------------------------------------------------------------------------------------------------      
+	// 02.01.00   06.11.2017      APC ERL                     changes from 02.00.00
+	// 
+	//>>General
+	//      - Created function blocks and example OBs to realise a winder/sectional drive usind standard motion control (SMC)
+	//        functionality in combination with technology objects (Based on functions from LCon V2.0.0)
+END_FUNCTION
+

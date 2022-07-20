@@ -1,0 +1,842 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T06:59:44.2149616Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FC ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor>Jonathan</HeaderAuthor>
+      <HeaderFamily>1007x_DRYER</HeaderFamily>
+      <HeaderName />
+      <HeaderVersion>1.0</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="AnalogValue" Datatype="Int" Accessibility="Public" />
+  </Section>
+  <Section Name="Output">
+    <Member Name="VoltageValue" Datatype="Real" Accessibility="Public" />
+  </Section>
+  <Section Name="InOut" />
+  <Section Name="Temp" />
+  <Section Name="Constant" />
+  <Section Name="Return">
+    <Member Name="Ret_Val" Datatype="Void" Accessibility="Public" />
+  </Section>
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <Name>FC10071_ScalingLamUVErrorCode</Name>
+      <Number>10071</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>Release note : 
+1.0 - Feature developped</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <NewLine Num="4" UId="21" />
+  <Token Text="CASE" UId="22" />
+  <Blank Num="1" UId="23" />
+  <Access Scope="LocalVariable" UId="24">
+    <Symbol UId="25">
+      <Component Name="AnalogValue" UId="26" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="27" />
+  <Token Text="OF" UId="28" />
+  <NewLine Num="1" UId="29" />
+  <Blank Num="4" UId="30" />
+  <Access Scope="LiteralConstant" UId="31">
+    <Constant UId="32">
+      <ConstantValue UId="34">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="35" />
+  <Access Scope="LiteralConstant" UId="36">
+    <Constant UId="37">
+      <ConstantValue UId="39">1382</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=":" UId="40" />
+  <Blank Num="2" UId="41" />
+  <NewLine Num="1" UId="42" />
+  <Blank Num="8" UId="43" />
+  <Access Scope="LocalVariable" UId="44">
+    <Symbol UId="45">
+      <Component Name="VoltageValue" UId="46" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="47" />
+  <Token Text=":=" UId="48" />
+  <Blank Num="1" UId="49" />
+  <Access Scope="LiteralConstant" UId="50">
+    <Constant UId="51">
+      <ConstantValue UId="53">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="54" />
+  <NewLine Num="1" UId="55" />
+  <Blank Num="4" UId="56" />
+  <Access Scope="LiteralConstant" UId="57">
+    <Constant UId="58">
+      <ConstantValue UId="60">1383</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="61" />
+  <Access Scope="LiteralConstant" UId="62">
+    <Constant UId="63">
+      <ConstantValue UId="65">2765</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=":" UId="66" />
+  <Blank Num="2" UId="67" />
+  <NewLine Num="1" UId="68" />
+  <Blank Num="8" UId="69" />
+  <Access Scope="LocalVariable" UId="70">
+    <Symbol UId="71">
+      <Component Name="VoltageValue" UId="72" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="73" />
+  <Token Text=":=" UId="74" />
+  <Blank Num="1" UId="75" />
+  <Access Scope="LiteralConstant" UId="76">
+    <Constant UId="77">
+      <ConstantValue UId="79">0.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="80" />
+  <NewLine Num="1" UId="81" />
+  <Blank Num="4" UId="82" />
+  <Access Scope="LiteralConstant" UId="83">
+    <Constant UId="84">
+      <ConstantValue UId="86">2766</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="87" />
+  <Access Scope="LiteralConstant" UId="88">
+    <Constant UId="89">
+      <ConstantValue UId="91">4148</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="92" />
+  <Token Text=":" UId="93" />
+  <NewLine Num="1" UId="94" />
+  <Blank Num="8" UId="95" />
+  <Access Scope="LocalVariable" UId="96">
+    <Symbol UId="97">
+      <Component Name="VoltageValue" UId="98" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="99" />
+  <Token Text=":=" UId="100" />
+  <Blank Num="1" UId="101" />
+  <Access Scope="LiteralConstant" UId="102">
+    <Constant UId="103">
+      <ConstantValue UId="105">1.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="106" />
+  <NewLine Num="1" UId="107" />
+  <Blank Num="4" UId="108" />
+  <Access Scope="LiteralConstant" UId="109">
+    <Constant UId="110">
+      <ConstantValue UId="112">4149</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="113" />
+  <Access Scope="LiteralConstant" UId="114">
+    <Constant UId="115">
+      <ConstantValue UId="117">5531</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="118" />
+  <Token Text=":" UId="119" />
+  <NewLine Num="1" UId="120" />
+  <Blank Num="8" UId="121" />
+  <Access Scope="LocalVariable" UId="122">
+    <Symbol UId="123">
+      <Component Name="VoltageValue" UId="124" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="125" />
+  <Token Text=":=" UId="126" />
+  <Blank Num="1" UId="127" />
+  <Access Scope="LiteralConstant" UId="128">
+    <Constant UId="129">
+      <ConstantValue UId="131">1.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="132" />
+  <NewLine Num="1" UId="133" />
+  <Blank Num="4" UId="134" />
+  <Access Scope="LiteralConstant" UId="135">
+    <Constant UId="136">
+      <ConstantValue UId="138">5532</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="139" />
+  <Access Scope="LiteralConstant" UId="140">
+    <Constant UId="141">
+      <ConstantValue UId="143">6914</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="144" />
+  <Token Text=":" UId="145" />
+  <NewLine Num="1" UId="146" />
+  <Blank Num="8" UId="147" />
+  <Access Scope="LocalVariable" UId="148">
+    <Symbol UId="149">
+      <Component Name="VoltageValue" UId="150" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="151" />
+  <Token Text=":=" UId="152" />
+  <Blank Num="1" UId="153" />
+  <Access Scope="LiteralConstant" UId="154">
+    <Constant UId="155">
+      <ConstantValue UId="157">2.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="158" />
+  <NewLine Num="1" UId="159" />
+  <Blank Num="4" UId="160" />
+  <Access Scope="LiteralConstant" UId="161">
+    <Constant UId="162">
+      <ConstantValue UId="164">6915</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="165" />
+  <Access Scope="LiteralConstant" UId="166">
+    <Constant UId="167">
+      <ConstantValue UId="169">8297</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="170" />
+  <Token Text=":" UId="171" />
+  <NewLine Num="1" UId="172" />
+  <Blank Num="8" UId="173" />
+  <Access Scope="LocalVariable" UId="174">
+    <Symbol UId="175">
+      <Component Name="VoltageValue" UId="176" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="177" />
+  <Token Text=":=" UId="178" />
+  <Blank Num="1" UId="179" />
+  <Access Scope="LiteralConstant" UId="180">
+    <Constant UId="181">
+      <ConstantValue UId="183">2.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="184" />
+  <NewLine Num="1" UId="185" />
+  <Blank Num="4" UId="186" />
+  <Access Scope="LiteralConstant" UId="187">
+    <Constant UId="188">
+      <ConstantValue UId="190">8298</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="191" />
+  <Access Scope="LiteralConstant" UId="192">
+    <Constant UId="193">
+      <ConstantValue UId="195">9680</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="196" />
+  <Token Text=":" UId="197" />
+  <NewLine Num="1" UId="198" />
+  <Blank Num="8" UId="199" />
+  <Access Scope="LocalVariable" UId="200">
+    <Symbol UId="201">
+      <Component Name="VoltageValue" UId="202" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="203" />
+  <Token Text=":=" UId="204" />
+  <Blank Num="1" UId="205" />
+  <Access Scope="LiteralConstant" UId="206">
+    <Constant UId="207">
+      <ConstantValue UId="209">3.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="210" />
+  <NewLine Num="1" UId="211" />
+  <Blank Num="4" UId="212" />
+  <Access Scope="LiteralConstant" UId="213">
+    <Constant UId="214">
+      <ConstantValue UId="216">9681</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="217" />
+  <Access Scope="LiteralConstant" UId="218">
+    <Constant UId="219">
+      <ConstantValue UId="221">11063</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="222" />
+  <Token Text=":" UId="223" />
+  <NewLine Num="1" UId="224" />
+  <Blank Num="8" UId="225" />
+  <Access Scope="LocalVariable" UId="226">
+    <Symbol UId="227">
+      <Component Name="VoltageValue" UId="228" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="229" />
+  <Token Text=":=" UId="230" />
+  <Blank Num="1" UId="231" />
+  <Access Scope="LiteralConstant" UId="232">
+    <Constant UId="233">
+      <ConstantValue UId="235">3.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="236" />
+  <NewLine Num="1" UId="237" />
+  <Blank Num="4" UId="238" />
+  <Access Scope="LiteralConstant" UId="239">
+    <Constant UId="240">
+      <ConstantValue UId="242">11064</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="243" />
+  <Access Scope="LiteralConstant" UId="244">
+    <Constant UId="245">
+      <ConstantValue UId="247">12446</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="248" />
+  <Token Text=":" UId="249" />
+  <NewLine Num="1" UId="250" />
+  <Blank Num="8" UId="251" />
+  <Access Scope="LocalVariable" UId="252">
+    <Symbol UId="253">
+      <Component Name="VoltageValue" UId="254" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="255" />
+  <Token Text=":=" UId="256" />
+  <Blank Num="1" UId="257" />
+  <Access Scope="LiteralConstant" UId="258">
+    <Constant UId="259">
+      <ConstantValue UId="261">4.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="262" />
+  <NewLine Num="1" UId="263" />
+  <Blank Num="4" UId="264" />
+  <Access Scope="LiteralConstant" UId="265">
+    <Constant UId="266">
+      <ConstantValue UId="268">12447</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="269" />
+  <Access Scope="LiteralConstant" UId="270">
+    <Constant UId="271">
+      <ConstantValue UId="273">13829</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="274" />
+  <Token Text=":" UId="275" />
+  <NewLine Num="1" UId="276" />
+  <Blank Num="8" UId="277" />
+  <Access Scope="LocalVariable" UId="278">
+    <Symbol UId="279">
+      <Component Name="VoltageValue" UId="280" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="281" />
+  <Token Text=":=" UId="282" />
+  <Blank Num="1" UId="283" />
+  <Access Scope="LiteralConstant" UId="284">
+    <Constant UId="285">
+      <ConstantValue UId="287">4.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="288" />
+  <NewLine Num="1" UId="289" />
+  <Blank Num="4" UId="290" />
+  <Access Scope="LiteralConstant" UId="291">
+    <Constant UId="292">
+      <ConstantValue UId="294">13830</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="295" />
+  <Access Scope="LiteralConstant" UId="296">
+    <Constant UId="297">
+      <ConstantValue UId="299">15212</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="300" />
+  <Token Text=":" UId="301" />
+  <NewLine Num="1" UId="302" />
+  <Blank Num="8" UId="303" />
+  <Access Scope="LocalVariable" UId="304">
+    <Symbol UId="305">
+      <Component Name="VoltageValue" UId="306" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="307" />
+  <Token Text=":=" UId="308" />
+  <Blank Num="1" UId="309" />
+  <Access Scope="LiteralConstant" UId="310">
+    <Constant UId="311">
+      <ConstantValue UId="313">5.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="314" />
+  <NewLine Num="1" UId="315" />
+  <Blank Num="4" UId="316" />
+  <Access Scope="LiteralConstant" UId="317">
+    <Constant UId="318">
+      <ConstantValue UId="320">15213</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="321" />
+  <Access Scope="LiteralConstant" UId="322">
+    <Constant UId="323">
+      <ConstantValue UId="325">16595</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="326" />
+  <Token Text=":" UId="327" />
+  <NewLine Num="1" UId="328" />
+  <Blank Num="8" UId="329" />
+  <Access Scope="LocalVariable" UId="330">
+    <Symbol UId="331">
+      <Component Name="VoltageValue" UId="332" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="333" />
+  <Token Text=":=" UId="334" />
+  <Blank Num="1" UId="335" />
+  <Access Scope="LiteralConstant" UId="336">
+    <Constant UId="337">
+      <ConstantValue UId="339">5.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="340" />
+  <NewLine Num="1" UId="341" />
+  <Blank Num="4" UId="342" />
+  <Access Scope="LiteralConstant" UId="343">
+    <Constant UId="344">
+      <ConstantValue UId="346">16596</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="347" />
+  <Access Scope="LiteralConstant" UId="348">
+    <Constant UId="349">
+      <ConstantValue UId="351">17978</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="352" />
+  <Token Text=":" UId="353" />
+  <NewLine Num="1" UId="354" />
+  <Blank Num="8" UId="355" />
+  <Access Scope="LocalVariable" UId="356">
+    <Symbol UId="357">
+      <Component Name="VoltageValue" UId="358" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="359" />
+  <Token Text=":=" UId="360" />
+  <Blank Num="1" UId="361" />
+  <Access Scope="LiteralConstant" UId="362">
+    <Constant UId="363">
+      <ConstantValue UId="365">6.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="366" />
+  <NewLine Num="1" UId="367" />
+  <Blank Num="4" UId="368" />
+  <Access Scope="LiteralConstant" UId="369">
+    <Constant UId="370">
+      <ConstantValue UId="372">17979</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="373" />
+  <Access Scope="LiteralConstant" UId="374">
+    <Constant UId="375">
+      <ConstantValue UId="377">19361</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="378" />
+  <Token Text=":" UId="379" />
+  <NewLine Num="1" UId="380" />
+  <Blank Num="8" UId="381" />
+  <Access Scope="LocalVariable" UId="382">
+    <Symbol UId="383">
+      <Component Name="VoltageValue" UId="384" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="385" />
+  <Token Text=":=" UId="386" />
+  <Blank Num="1" UId="387" />
+  <Access Scope="LiteralConstant" UId="388">
+    <Constant UId="389">
+      <ConstantValue UId="391">6.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="392" />
+  <NewLine Num="1" UId="393" />
+  <Blank Num="4" UId="394" />
+  <Access Scope="LiteralConstant" UId="395">
+    <Constant UId="396">
+      <ConstantValue UId="398">19362</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="399" />
+  <Access Scope="LiteralConstant" UId="400">
+    <Constant UId="401">
+      <ConstantValue UId="403">20744</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="404" />
+  <Token Text=":" UId="405" />
+  <NewLine Num="1" UId="406" />
+  <Blank Num="8" UId="407" />
+  <Access Scope="LocalVariable" UId="408">
+    <Symbol UId="409">
+      <Component Name="VoltageValue" UId="410" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="411" />
+  <Token Text=":=" UId="412" />
+  <Blank Num="1" UId="413" />
+  <Access Scope="LiteralConstant" UId="414">
+    <Constant UId="415">
+      <ConstantValue UId="417">7.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="418" />
+  <NewLine Num="1" UId="419" />
+  <Blank Num="4" UId="420" />
+  <Access Scope="LiteralConstant" UId="421">
+    <Constant UId="422">
+      <ConstantValue UId="424">20745</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="425" />
+  <Access Scope="LiteralConstant" UId="426">
+    <Constant UId="427">
+      <ConstantValue UId="429">22127</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="430" />
+  <Token Text=":" UId="431" />
+  <NewLine Num="1" UId="432" />
+  <Blank Num="8" UId="433" />
+  <Access Scope="LocalVariable" UId="434">
+    <Symbol UId="435">
+      <Component Name="VoltageValue" UId="436" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="437" />
+  <Token Text=":=" UId="438" />
+  <Blank Num="1" UId="439" />
+  <Access Scope="LiteralConstant" UId="440">
+    <Constant UId="441">
+      <ConstantValue UId="443">7.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="444" />
+  <NewLine Num="1" UId="445" />
+  <Blank Num="4" UId="446" />
+  <Access Scope="LiteralConstant" UId="447">
+    <Constant UId="448">
+      <ConstantValue UId="450">22128</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="451" />
+  <Access Scope="LiteralConstant" UId="452">
+    <Constant UId="453">
+      <ConstantValue UId="455">23510</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="456" />
+  <Token Text=":" UId="457" />
+  <NewLine Num="1" UId="458" />
+  <Blank Num="8" UId="459" />
+  <Access Scope="LocalVariable" UId="460">
+    <Symbol UId="461">
+      <Component Name="VoltageValue" UId="462" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="463" />
+  <Token Text=":=" UId="464" />
+  <Blank Num="1" UId="465" />
+  <Access Scope="LiteralConstant" UId="466">
+    <Constant UId="467">
+      <ConstantValue UId="469">8.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="470" />
+  <NewLine Num="1" UId="471" />
+  <Blank Num="4" UId="472" />
+  <Access Scope="LiteralConstant" UId="473">
+    <Constant UId="474">
+      <ConstantValue UId="476">23511</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="477" />
+  <Access Scope="LiteralConstant" UId="478">
+    <Constant UId="479">
+      <ConstantValue UId="481">24893</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="482" />
+  <Token Text=":" UId="483" />
+  <NewLine Num="1" UId="484" />
+  <Blank Num="8" UId="485" />
+  <Access Scope="LocalVariable" UId="486">
+    <Symbol UId="487">
+      <Component Name="VoltageValue" UId="488" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="489" />
+  <Token Text=":=" UId="490" />
+  <Blank Num="1" UId="491" />
+  <Access Scope="LiteralConstant" UId="492">
+    <Constant UId="493">
+      <ConstantValue UId="495">8.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="496" />
+  <NewLine Num="1" UId="497" />
+  <Blank Num="4" UId="498" />
+  <Access Scope="LiteralConstant" UId="499">
+    <Constant UId="500">
+      <ConstantValue UId="502">24894</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="503" />
+  <Access Scope="LiteralConstant" UId="504">
+    <Constant UId="505">
+      <ConstantValue UId="507">26276</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="508" />
+  <Token Text=":" UId="509" />
+  <NewLine Num="1" UId="510" />
+  <Blank Num="8" UId="511" />
+  <Access Scope="LocalVariable" UId="512">
+    <Symbol UId="513">
+      <Component Name="VoltageValue" UId="514" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="515" />
+  <Token Text=":=" UId="516" />
+  <Blank Num="1" UId="517" />
+  <Access Scope="LiteralConstant" UId="518">
+    <Constant UId="519">
+      <ConstantValue UId="521">9.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="522" />
+  <NewLine Num="1" UId="523" />
+  <Blank Num="4" UId="524" />
+  <Access Scope="LiteralConstant" UId="525">
+    <Constant UId="526">
+      <ConstantValue UId="528">26277</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="529" />
+  <Access Scope="LiteralConstant" UId="530">
+    <Constant UId="531">
+      <ConstantValue UId="533">27659</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="534" />
+  <Token Text=":" UId="535" />
+  <NewLine Num="1" UId="536" />
+  <Blank Num="8" UId="537" />
+  <Access Scope="LocalVariable" UId="538">
+    <Symbol UId="539">
+      <Component Name="VoltageValue" UId="540" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="541" />
+  <Token Text=":=" UId="542" />
+  <Blank Num="1" UId="543" />
+  <Access Scope="LiteralConstant" UId="544">
+    <Constant UId="545">
+      <ConstantValue UId="547">9.5</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="548" />
+  <NewLine Num="1" UId="549" />
+  <Blank Num="4" UId="550" />
+  <Access Scope="LiteralConstant" UId="551">
+    <Constant UId="552">
+      <ConstantValue UId="554">27660</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="555" />
+  <Access Scope="LiteralConstant" UId="556">
+    <Constant UId="557">
+      <ConstantValue UId="559">29042</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="560" />
+  <Token Text=":" UId="561" />
+  <NewLine Num="1" UId="562" />
+  <Blank Num="8" UId="563" />
+  <Access Scope="LocalVariable" UId="564">
+    <Symbol UId="565">
+      <Component Name="VoltageValue" UId="566" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="567" />
+  <Token Text=":=" UId="568" />
+  <Blank Num="1" UId="569" />
+  <Access Scope="LiteralConstant" UId="570">
+    <Constant UId="571">
+      <ConstantValue UId="573">10.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="574" />
+  <NewLine Num="1" UId="575" />
+  <Blank Num="4" UId="576" />
+  <Token Text="ELSE" UId="577" />
+  <Blank Num="2" UId="578" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="579">
+    <Text UId="580"> Statement section ELSE</Text>
+  </LineComment>
+  <NewLine Num="1" UId="581" />
+  <Blank Num="8" UId="582" />
+  <Access Scope="LocalVariable" UId="583">
+    <Symbol UId="584">
+      <Component Name="VoltageValue" UId="585" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="586" />
+  <Token Text=":=" UId="587" />
+  <Blank Num="1" UId="588" />
+  <Access Scope="LiteralConstant" UId="589">
+    <Constant UId="590">
+      <ConstantValue UId="592">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="593" />
+  <NewLine Num="1" UId="594" />
+  <Token Text="END_CASE" UId="595" />
+  <Token Text=";" UId="596" />
+  <NewLine Num="2" UId="597" />
+  <Blank Num="4" UId="598" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="B" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="C" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>FC10071_ScalingLamUVErrorCode</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="D" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FC>
+</Document>

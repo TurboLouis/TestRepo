@@ -1,0 +1,12 @@
+﻿FUNCTION "LConSMC_GetWinderActPosSyncAxis" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      winderAxis {InstructionName := 'TO_SynchronousAxis'; LibVersion := '5.0'} : TO_SynchronousAxis;
+   END_VAR
+
+
+BEGIN
+	#LConSMC_GetWinderActPosSyncAxis := #winderAxis.ActualPosition;
+END_FUNCTION
+

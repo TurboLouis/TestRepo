@@ -1,0 +1,106 @@
+﻿FUNCTION_BLOCK "LAxisCtrl_AxisErrorWord"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis : DB_ANY;
+   END_VAR
+
+   VAR_OUTPUT 
+      status { ExternalWritable := 'False'} : Word;
+      errorWord { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : DWord;
+      systemFault { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      configFault { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      userFault { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      commandNotAccepted { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      driveFault { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      sensorFault { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      dynamicError { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      communicationFault { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      swLimit { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      hwLimit { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      homingError { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      followingErrorFault { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      positioningFault { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      peripheralError { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      synchronousError { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+      adaptionError { ExternalWritable := 'False'; S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Bool;
+   END_VAR
+
+   VAR_TEMP 
+      tempErrorWord : DWord;
+   END_VAR
+
+   VAR CONSTANT 
+      ERROR_INVALID_TECHNOLOGY_OBJECT : Word := 16#8002;
+      FINISHED : Word;
+   END_VAR
+
+
+BEGIN
+	REGION HEADER
+	  //================================================================================
+	  // SIEMENS AG
+	  // (c)Copyright 2020 All Rights Reserved
+	  //--------------------------------------------------------------------------------
+	  // Library: LAxisCtrl 
+	  // Tested with: S7-1515-2 PN
+	  // Engineering: TIA Portal V16
+	  // Restrictions: -
+	  // Requirements: S7-1500 FW 2.8.1
+	  // Functionality: The FB is splitting the error word of an axis (DB_Any) into bits.
+	  // Support: tech.team.motioncontrol@siemens.com
+	  // Note: Parameter comments are only available in language 'English (United States)'
+	  //--------------------------------------------------------------------------------
+	  // Change log table:
+	  // Version  Date        Expert in charge  Changes applied
+	  // 01.01.00 12.03.2020  RS                First released version
+	  //================================================================================
+	END_REGION
+	
+	CASE TypeOfDB(#axis) OF
+	  TO_ExternalEncoder:
+	    #tempErrorWord := "LAxisCtrl_UnpubErrorWordExtEncoder"(#axis);
+	    #status := #FINISHED;
+	    
+	  TO_SpeedAxis:
+	    #tempErrorWord := "LAxisCtrl_UnpubErrorWordSpeedAxis"(#axis);
+	    #status := #FINISHED;
+	    
+	  TO_PositioningAxis:
+	    #tempErrorWord := "LAxisCtrl_UnpubErrorWordPosAxis"(#axis);
+	    #status := #FINISHED;
+	    
+	  TO_SynchronousAxis:
+	    #tempErrorWord := "LAxisCtrl_UnpubErrorWordSyncAxis"(#axis);
+	    #status := #FINISHED;
+	    
+	  ELSE
+	    #tempErrorWord := 16#0000_0000;
+	    #status := #ERROR_INVALID_TECHNOLOGY_OBJECT;
+	    ENO := FALSE;
+	END_CASE;
+	
+	#errorWord := #tempErrorWord;
+	//----------------------------------------------------------------------------------------------
+	// Write outputs
+	//----------------------------------------------------------------------------------------------
+	#systemFault := #tempErrorWord.%X0;
+	#configFault := #tempErrorWord.%X1;
+	#userFault := #tempErrorWord.%X2;
+	#commandNotAccepted := #tempErrorWord.%X3;
+	#driveFault := #tempErrorWord.%X4;
+	#sensorFault := #tempErrorWord.%X5;
+	#dynamicError := #tempErrorWord.%X6;
+	#communicationFault := #tempErrorWord.%X7;
+	#swLimit := #tempErrorWord.%X8;
+	#hwLimit := #tempErrorWord.%X9;
+	#homingError := #tempErrorWord.%X10;
+	#followingErrorFault := #tempErrorWord.%X11;
+	#positioningFault := #tempErrorWord.%X12;
+	#peripheralError := #tempErrorWord.%X13;
+	#synchronousError := #tempErrorWord.%X14;
+	#adaptionError := #tempErrorWord.%X15;
+END_FUNCTION_BLOCK
+

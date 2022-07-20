@@ -1,0 +1,183 @@
+﻿FUNCTION_BLOCK "LConSMC_SectionalDrive"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool := FALSE;
+      speedMatch : Bool;
+      CntrlEnable : Bool := FALSE;
+      jogPos : Bool := FALSE;
+      jogNeg : Bool := FALSE;
+      lineAxisMotionVector : "LConSMC_typeMotionVector";
+      additionalVelocity : LReal := 0.0;
+      draw : LReal := 1.0;
+      typeOfDrive : Int := 0;
+      controlMode : Int := 0;
+      CntrlSetpoint : LReal := 0.0;
+      CntrlActual : LReal := 0.0;
+      tCycle : Real := 0.0;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool := FALSE;
+      active : Bool := FALSE;
+      inSync : Bool;
+      ctrlBusy : Bool := FALSE;
+      error : Bool := FALSE;
+      errorID : DWord := 16#0000_0000;
+      SectionalDriveMotionVector : "LConSMC_typeActualDynamics";
+   END_VAR
+
+   VAR_IN_OUT 
+      axis : DB_ANY;
+      sectionalConfig : "LConSMC_typeSectionalDriveConfig";
+      sectionalDiag : "LConSMC_typeSectionalDriveDiag";
+   END_VAR
+
+   VAR 
+      statEnableOld : Bool;
+      statValid : Bool;
+      statTypeOfAxis : Int;
+      instSectionalSpeed : "LConSMC_SectionalDriveSpeed";
+      instSectionalPos : "LConSMC_SectionalDrivePos";
+      instSectionalSync : "LConSMC_SectionalDriveSync";
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#7102_0000;
+      NO_ERROR : DWord := 16#0000_0000;
+      INVALID_AXIS : Int := 0;
+      SPEED_AXIS : Int := 1;
+      POSITIONING_AXIS : Int := 2;
+      SYNCHRONOUS_AXIS : Int := 3;
+   END_VAR
+
+
+BEGIN
+	//----------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Erlangen, Germany
+	//----------------------------------------------------------------------------------------------------------------------
+	//functionality : Sectional drive function block for any technology object (w/ , TPID, Mprec)
+	//assignment    : OB6x/PostServo-OB     
+	//======================================================================================================================
+	//change log table:
+	//version     date          expert in charge          changes applied
+	//01.00.00    23.10.2019    APC Erlangen              Creation
+	//02.00.00    23.10.2019    APC ERL                   - called via DB_Any
+	//02.00.01    29.04.2020    APC ERL                   - Bugfix: Parametrizable deceleration possible via new datatype
+	//                                                      for sectionalDriveMotionVector (*c_00025*)
+	//02.00.02    29.01.2021    APC ERL                   - Changed input "axis" to from input paramter to InOut parameter
+	//02.00.03    22.06.2021    APC ERL                   - see LConSMC_aVersion
+	//======================================================================================================================
+	//
+	//----------------------------------------------------------------------------------------------------------------------
+	
+	IF #enable AND NOT #statEnableOld THEN
+	    #error := FALSE;
+	    #errorID := #NO_ERROR;
+	    CASE TypeOfDB(#axis) OF
+	        TO_SpeedAxis:
+	            #statTypeOfAxis := #SPEED_AXIS;
+	        TO_PositioningAxis:
+	            #statTypeOfAxis := #POSITIONING_AXIS;
+	        TO_SynchronousAxis:
+	            #statTypeOfAxis := #SYNCHRONOUS_AXIS;
+	        ELSE
+	            #statTypeOfAxis := #INVALID_AXIS;
+	            #error := TRUE;
+	            #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_TYPE_OF_AXIS";
+	            RETURN;
+	    END_CASE;
+	    #statValid := TRUE;
+	    #sectionalDiag.typeOfAxis := #statTypeOfAxis;
+	END_IF;
+	#statEnableOld := #enable;
+	IF NOT #statValid THEN
+	    #error := #enable;
+	    IF NOT #enable THEN
+	        #errorID := #NO_ERROR;
+	    END_IF;
+	    RETURN;
+	END_IF;
+	
+	CASE #statTypeOfAxis OF
+	    #SPEED_AXIS:
+	        #instSectionalSpeed(enable := #enable,
+	                            speedMatch := #speedMatch,
+	                            CntrlEnable := #CntrlEnable,
+	                            jogPos := #jogPos,
+	                            jogNeg := #jogNeg,
+	                            lineAxisMotionVector := #lineAxisMotionVector,
+	                            additionalVelocity := #additionalVelocity,
+	                            draw := #draw,
+	                            typeOfDrive := #typeOfDrive,
+	                            controlMode := #controlMode,
+	                            CntrlSetpoint := #CntrlSetpoint,
+	                            CntrlActual := #CntrlActual,
+	                            tCycle := #tCycle,
+	                            axis := #axis,
+	                            busy => #busy,
+	                            active => #active,
+	                            ctrlBusy => #ctrlBusy,
+	                            inSync => #inSync,
+	                            error => #error,
+	                            errorID => #errorID,
+	                            SectionalDriveMotionVector => #SectionalDriveMotionVector,
+	                            sectionalConfig := #sectionalConfig,
+	                            sectionalDiag := #sectionalDiag);
+	        
+	    #POSITIONING_AXIS:
+	        #instSectionalPos(enable := #enable,
+	                          speedMatch := #speedMatch,
+	                          CntrlEnable := #CntrlEnable,
+	                          jogPos := #jogPos,
+	                          jogNeg := #jogNeg,
+	                          lineAxisMotionVector := #lineAxisMotionVector,
+	                          additionalVelocity := #additionalVelocity,
+	                          draw := #draw,
+	                          typeOfDrive := #typeOfDrive,
+	                          controlMode := #controlMode,
+	                          CntrlSetpoint := #CntrlSetpoint,
+	                          CntrlActual := #CntrlActual,
+	                          tCycle := #tCycle,
+	                          axis := #axis,
+	                          busy => #busy,
+	                          active => #active,
+	                          ctrlBusy => #ctrlBusy,
+	                          inSync => #inSync,
+	                          error => #error,
+	                          errorID => #errorID,
+	                          SectionalDriveMotionVector => #SectionalDriveMotionVector,
+	                          sectionalConfig := #sectionalConfig,
+	                          sectionalDiag := #sectionalDiag);
+	        
+	    #SYNCHRONOUS_AXIS:
+	        #instSectionalSync(enable := #enable,
+	                           speedMatch := #speedMatch,
+	                           CntrlEnable := #CntrlEnable,
+	                           jogPos := #jogPos,
+	                           jogNeg := #jogNeg,
+	                           lineAxisMotionVector := #lineAxisMotionVector,
+	                           additionalVelocity := #additionalVelocity,
+	                           draw := #draw,
+	                           typeOfDrive := #typeOfDrive,
+	                           controlMode := #controlMode,
+	                           CntrlSetpoint := #CntrlSetpoint,
+	                           CntrlActual := #CntrlActual,
+	                           tCycle := #tCycle,
+	                           axis := #axis,
+	                           busy => #busy,
+	                           active => #active,
+	                           ctrlBusy => #ctrlBusy,
+	                           inSync => #inSync,
+	                           error => #error,
+	                           errorID => #errorID,
+	                           SectionalDriveMotionVector => #SectionalDriveMotionVector,
+	                           sectionalConfig := #sectionalConfig,
+	                           sectionalDiag := #sectionalDiag);
+	    ELSE
+	        ;
+	END_CASE;
+	
+	
+END_FUNCTION_BLOCK
+

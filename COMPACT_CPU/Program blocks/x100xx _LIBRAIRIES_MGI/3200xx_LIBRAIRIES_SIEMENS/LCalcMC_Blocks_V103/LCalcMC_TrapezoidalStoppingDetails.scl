@@ -1,0 +1,55 @@
+﻿FUNCTION "LCalcMC_TrapezoidalStoppingDetails" : Word
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : CalcMC
+VERSION : 1.0
+   VAR_INPUT 
+      startVelocity : LReal;
+      deceleration : LReal;
+   END_VAR
+
+   VAR_OUTPUT 
+      distance : LReal;
+      "time" : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      CALCULATION_CORRECT : Word := 16#0000;
+      LCALCMC_ERR_DECEL_INVALID : Word := 16#8202;
+   END_VAR
+
+
+BEGIN
+	  //================================================================================
+	  // SIEMENS AG
+	  // (c)Copyright 2017 All Rights Reserved
+	  // -------------------------------------------------------------------------------
+	  // Library: LCalcMC
+	  // Tested with: S7-1515T-2 PN
+	  // Engineering: TIA Portal V14
+	  // Restrictions: -
+	  // Requirements: S7-1500/S7-1500T FW 2.0
+	  // Functionality: Calculate time and distance needed to stop an axis with trapezoidal dynamics (jerk = 0.0)
+	  // Support: tech.team.motioncontrol@siemens.com
+	  // Note: Parameter comments are only available in language 'English (United States)'
+	  // -------------------------------------------------------------------------------
+	  // Change log table:
+	  // Version   Date        Expert in charge  Changes applied
+	  // 01.00.00  16.08.2017  CR                First released version
+	  // 01.00.01  07.02.2020  KT                Error constants are now local (library conformance)
+	  //================================================================================
+	  
+	  // Check set deceleration  
+	  IF (#deceleration <= 0.0) THEN
+	    #LCalcMC_TrapezoidalStoppingDetails := #LCALCMC_ERR_DECEL_INVALID;
+	    RETURN;
+	    
+	  ELSE
+	    #LCalcMC_TrapezoidalStoppingDetails := #CALCULATION_CORRECT;
+	  END_IF;
+	  
+	  #time := ABS(#startVelocity) / #deceleration;
+	  #distance := #time * 0.5 * #startVelocity;
+	
+END_FUNCTION
+

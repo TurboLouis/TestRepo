@@ -1,0 +1,2579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T07:02:30.5184204Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor />
+      <HeaderFamily />
+      <HeaderName />
+      <HeaderVersion>0.1</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="SheetProfile" Datatype="&quot;stSheetProfile&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="Length" Datatype="Real"><Comment><MultiLanguageText Lang="fr-FR">[mm]</MultiLanguageText></Comment></Member><Member Name="Area" Datatype="Array[1..&quot;MAX_NUMBER_OF_FOIL_AREA&quot;] of &quot;stAreaProfile&quot;"><Sections><Section Name="None"><Member Name="Start" Datatype="Real" /><Member Name="End" Datatype="Real" /></Section></Sections></Member><Member Name="StampAreaStartAdjustment" Datatype="Real" /><Member Name="StampAreaLengthAdjustement" Datatype="Real" /></Section></Sections></Member>
+    <Member Name="FoilAcceleration" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="FoilDeceleration" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RatioFoilPaper" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList><StartValue>1.0</StartValue></Member>
+    <Member Name="CompensationForTensionInAcceleration" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="CompensationForTensionInDeceleration" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="MainDriveVelocity" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="DistanceProductSensorFilmDrum" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Execute" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="Done" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="Error" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="DeadZoneBeforeStampArea" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="DeadZoneAfterStampArea" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="GapBetweenArea" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="NbPoints" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="CamProfile" Datatype="Array[1..32] of &quot;LCamHdl_typeBasicPoint&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="leadingValue" Datatype="LReal" /><Member Name="followingValue" Datatype="LReal" /><Member Name="velocityRatio" Datatype="LReal" /><Member Name="accelerationRatio" Datatype="LReal" /></Section></Sections></Member>
+  </Section>
+  <Section Name="InOut" />
+  <Section Name="Static">
+    <Member Name="statNumberOfArea" Datatype="UInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="FoilAccelerationDistance" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Comment><MultiLanguageText Lang="fr-FR">[mm]</MultiLanguageText></Comment></Member>
+    <Member Name="FoilDecelerationDistance" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Comment><MultiLanguageText Lang="fr-FR">[mm]</MultiLanguageText></Comment></Member>
+    <Member Name="MasterAccelerationDistance" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="MasterDecelerationDistance" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="statPointtNumber" Datatype="UInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="statDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="statError" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="R_TRIG_Execute" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+  </Section>
+  <Section Name="Temp">
+    <Member Name="AreaNumber" Datatype="UInt" />
+    <Member Name="tempTotLength" Datatype="Real" />
+  </Section>
+  <Section Name="Constant">
+    <Member Name="ratioDeadZone" Datatype="Real" Accessibility="Public">
+      <StartValue>4.0</StartValue>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>FB11003_CamConvertProfile</Name>
+      <Number>11003</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <LineComment Inserted="false" NoClosingBracket="false" UId="21">
+    <Text UId="22">==========================================================================================</Text>
+  </LineComment>
+  <NewLine Num="1" UId="23" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="24">
+    <Text UId="25"> SIEMENS SAS      RC-FR DI FA APC</Text>
+  </LineComment>
+  <NewLine Num="1" UId="26" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="27">
+    <Text UId="28">------------------------------------------------------------------------------------------</Text>
+  </LineComment>
+  <NewLine Num="1" UId="29" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="30">
+    <Text UId="31"> Restrictions:    TIA V16 and more</Text>
+  </LineComment>
+  <NewLine Num="1" UId="32" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="33">
+    <Text UId="34"> Requirements:    S7-1500T + LCameHdl + MGI library</Text>
+  </LineComment>
+  <NewLine Num="1" UId="35" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="36">
+    <Text UId="37"> Functionality:   This function block convert stSheetProfile into LCamHdl advanced element</Text>
+  </LineComment>
+  <NewLine Num="1" UId="38" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="39">
+    <Text UId="40"> and check data</Text>
+  </LineComment>
+  <NewLine Num="1" UId="41" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="42">
+    <Text UId="43">------------------------------------------------------------------------------------------</Text>
+  </LineComment>
+  <NewLine Num="1" UId="44" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="45">
+    <Text UId="46"> Change log table:</Text>
+  </LineComment>
+  <NewLine Num="1" UId="47" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="48">
+    <Text UId="49"> Version      Date        Expert in charge    Changes applied</Text>
+  </LineComment>
+  <NewLine Num="1" UId="50" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="51">
+    <Text UId="52"> 01.00.01     09.06.2020  RTO                 First released version</Text>
+  </LineComment>
+  <NewLine Num="1" UId="53" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="54">
+    <Text UId="55">==========================================================================================</Text>
+  </LineComment>
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Comments</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="REGION" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Text UId="23">EDGE SIGNALS</Text>
+  <NewLine Num="1" UId="24" />
+  <Blank Num="4" UId="25" />
+  <Access Scope="LocalVariable" UId="26">
+    <Symbol UId="27">
+      <Component Name="R_TRIG_Execute" UId="28" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="29">
+    <Instruction UId="30">
+      <Token Text="(" UId="31" />
+      <Parameter Name="CLK" UId="32">
+        <Blank Num="1" UId="33" />
+        <Token Text=":=" UId="34" />
+        <Blank Num="1" UId="35" />
+        <Access Scope="LocalVariable" UId="36">
+          <Symbol UId="37">
+            <Component Name="Execute" UId="38" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="39" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="40" />
+  <NewLine Num="1" UId="41" />
+  <Token Text="END_REGION" UId="42" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="F" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="10" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Edge Signals &amp; Timers</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="11" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="12" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Token Text="NOT" UId="23" />
+  <Blank Num="1" UId="24" />
+  <Access Scope="LocalVariable" UId="25">
+    <Symbol UId="26">
+      <Component Name="Execute" UId="27" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="28" />
+  <Token Text="THEN" UId="29" />
+  <NewLine Num="1" UId="30" />
+  <Blank Num="4" UId="31" />
+  <Access Scope="LocalVariable" UId="32">
+    <Symbol UId="33">
+      <Component Name="statDone" UId="34" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="35" />
+  <Token Text=":=" UId="36" />
+  <Blank Num="1" UId="37" />
+  <Access Scope="LiteralConstant" UId="38">
+    <Constant UId="39">
+      <ConstantValue UId="41">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="42" />
+  <NewLine Num="1" UId="43" />
+  <Blank Num="4" UId="44" />
+  <Access Scope="LocalVariable" UId="45">
+    <Symbol UId="46">
+      <Component Name="statError" UId="47" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="48" />
+  <Token Text=":=" UId="49" />
+  <Blank Num="1" UId="50" />
+  <Access Scope="LiteralConstant" UId="51">
+    <Constant UId="52">
+      <ConstantValue UId="54">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="55" />
+  <NewLine Num="1" UId="56" />
+  <Token Text="END_IF" UId="57" />
+  <Token Text=";" UId="58" />
+  <NewLine Num="2" UId="59" />
+  <Token Text="IF" UId="60" />
+  <Blank Num="1" UId="61" />
+  <Access Scope="LocalVariable" UId="62">
+    <Symbol UId="63">
+      <Component Name="R_TRIG_Execute" UId="64" />
+      <Token Text="." UId="65" />
+      <Component Name="Q" UId="66" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="67" />
+  <Token Text="THEN" UId="68" />
+  <NewLine Num="1" UId="69" />
+  <Blank Num="4" UId="70" />
+  <NewLine Num="1" UId="71" />
+  <Blank Num="4" UId="72" />
+  <Token Text="REGION" UId="73" />
+  <Blank Num="1" UId="74" />
+  <Text UId="75">Parameters</Text>
+  <NewLine Num="1" UId="76" />
+  <Blank Num="8" UId="77" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="78">
+    <Text UId="79"> Get number of area used</Text>
+  </LineComment>
+  <NewLine Num="1" UId="80" />
+  <Blank Num="8" UId="81" />
+  <Access Scope="LocalVariable" UId="82">
+    <Symbol UId="83">
+      <Component Name="statNumberOfArea" UId="84" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="85" />
+  <Token Text=":=" UId="86" />
+  <Blank Num="1" UId="87" />
+  <Access Scope="LiteralConstant" UId="88">
+    <Constant UId="89">
+      <ConstantValue UId="91">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="92" />
+  <NewLine Num="1" UId="93" />
+  <Blank Num="8" UId="94" />
+  <Token Text="FOR" UId="95" />
+  <Blank Num="1" UId="96" />
+  <Access Scope="LocalVariable" UId="97">
+    <Symbol UId="98">
+      <Component Name="AreaNumber" UId="99" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="100" />
+  <Token Text=":=" UId="101" />
+  <Blank Num="1" UId="102" />
+  <Access Scope="LiteralConstant" UId="103">
+    <Constant UId="104">
+      <ConstantValue UId="106">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="107" />
+  <Token Text="TO" UId="108" />
+  <Blank Num="1" UId="109" />
+  <Access Scope="GlobalConstant" UId="110">
+    <Constant Name="MAX_NUMBER_OF_FOIL_AREA" UId="111" />
+  </Access>
+  <Blank Num="1" UId="114" />
+  <Token Text="DO" UId="115" />
+  <NewLine Num="1" UId="116" />
+  <Blank Num="12" UId="117" />
+  <Token Text="IF" UId="118" />
+  <Blank Num="1" UId="119" />
+  <Access Scope="LocalVariable" UId="120">
+    <Symbol UId="121">
+      <Component Name="SheetProfile" UId="122" />
+      <Token Text="." UId="123" />
+      <Component Name="Area" UId="124">
+        <Token Text="[" UId="125" />
+        <Access Scope="LocalVariable" UId="126">
+          <Symbol UId="127">
+            <Component Name="AreaNumber" UId="128" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="129" />
+      </Component>
+      <Token Text="." UId="130" />
+      <Component Name="Start" UId="131" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="132" />
+  <Token Text="&lt;&gt;" UId="133" />
+  <Blank Num="1" UId="134" />
+  <Access Scope="LocalVariable" UId="135">
+    <Symbol UId="136">
+      <Component Name="SheetProfile" UId="137" />
+      <Token Text="." UId="138" />
+      <Component Name="Area" UId="139">
+        <Token Text="[" UId="140" />
+        <Access Scope="LocalVariable" UId="141">
+          <Symbol UId="142">
+            <Component Name="AreaNumber" UId="143" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="144" />
+      </Component>
+      <Token Text="." UId="145" />
+      <Component Name="End" UId="146" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="147" />
+  <Token Text="THEN" UId="148" />
+  <NewLine Num="1" UId="149" />
+  <Blank Num="16" UId="150" />
+  <Access Scope="LocalVariable" UId="151">
+    <Symbol UId="152">
+      <Component Name="statNumberOfArea" UId="153" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="154" />
+  <Token Text=":=" UId="155" />
+  <Blank Num="1" UId="156" />
+  <Access Scope="LocalVariable" UId="157">
+    <Symbol UId="158">
+      <Component Name="statNumberOfArea" UId="159" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="160" />
+  <Token Text="+" UId="161" />
+  <Blank Num="1" UId="162" />
+  <Access Scope="LiteralConstant" UId="163">
+    <Constant UId="164">
+      <ConstantValue UId="166">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="167" />
+  <NewLine Num="1" UId="168" />
+  <Blank Num="12" UId="169" />
+  <Token Text="END_IF" UId="170" />
+  <Token Text=";" UId="171" />
+  <NewLine Num="1" UId="172" />
+  <Blank Num="8" UId="173" />
+  <Token Text="END_FOR" UId="174" />
+  <Token Text=";" UId="175" />
+  <NewLine Num="1" UId="176" />
+  <Blank Num="8" UId="177" />
+  <NewLine Num="1" UId="178" />
+  <Blank Num="8" UId="179" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="180">
+    <Text UId="181"> Get foil acceleration and deceleration distance</Text>
+  </LineComment>
+  <NewLine Num="1" UId="182" />
+  <Blank Num="8" UId="183" />
+  <Access Scope="LocalVariable" UId="184">
+    <Symbol UId="185">
+      <Component Name="FoilAccelerationDistance" UId="186" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="187" />
+  <Token Text=":=" UId="188" />
+  <Blank Num="1" UId="189" />
+  <Access Scope="LocalVariable" UId="190">
+    <Symbol UId="191">
+      <Component Name="FoilAcceleration" UId="192" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="193" />
+  <Token Text="*" UId="194" />
+  <Blank Num="1" UId="195" />
+  <Access Scope="LocalConstant" UId="196">
+    <Constant Name="ratioDeadZone" UId="197" />
+  </Access>
+  <Token Text=";" UId="200" />
+  <NewLine Num="1" UId="201" />
+  <Blank Num="8" UId="202" />
+  <Access Scope="LocalVariable" UId="203">
+    <Symbol UId="204">
+      <Component Name="FoilDecelerationDistance" UId="205" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="206" />
+  <Token Text=":=" UId="207" />
+  <Blank Num="1" UId="208" />
+  <Access Scope="LocalVariable" UId="209">
+    <Symbol UId="210">
+      <Component Name="FoilDeceleration" UId="211" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="212" />
+  <Token Text="*" UId="213" />
+  <Blank Num="1" UId="214" />
+  <Access Scope="LocalConstant" UId="215">
+    <Constant Name="ratioDeadZone" UId="216" />
+  </Access>
+  <Token Text=";" UId="219" />
+  <NewLine Num="1" UId="220" />
+  <Blank Num="8" UId="221" />
+  <NewLine Num="1" UId="222" />
+  <Blank Num="8" UId="223" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="224">
+    <Text UId="225"> Get winder acceleration and deceleration distance</Text>
+  </LineComment>
+  <NewLine Num="1" UId="226" />
+  <Blank Num="8" UId="227" />
+  <NewLine Num="1" UId="228" />
+  <Blank Num="8" UId="229" />
+  <Access Scope="LocalVariable" UId="230">
+    <Symbol UId="231">
+      <Component Name="MasterAccelerationDistance" UId="232" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="233" />
+  <Token Text=":=" UId="234" />
+  <Blank Num="1" UId="235" />
+  <Access Scope="LocalVariable" UId="236">
+    <Symbol UId="237">
+      <Component Name="FoilAccelerationDistance" UId="238" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="239" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="240">
+    <Text UId="241"> / #RatioFoilPaper;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="242" />
+  <Blank Num="8" UId="243" />
+  <Access Scope="LocalVariable" UId="244">
+    <Symbol UId="245">
+      <Component Name="MasterDecelerationDistance" UId="246" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="247" />
+  <Token Text=":=" UId="248" />
+  <Blank Num="1" UId="249" />
+  <Access Scope="LocalVariable" UId="250">
+    <Symbol UId="251">
+      <Component Name="FoilDecelerationDistance" UId="252" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="253" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="254">
+    <Text UId="255"> / #RatioFoilPaper;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="256" />
+  <Blank Num="8" UId="257" />
+  <NewLine Num="1" UId="258" />
+  <Blank Num="12" UId="259" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="260">
+    <Text UId="261"> Parameters error</Text>
+  </LineComment>
+  <NewLine Num="1" UId="262" />
+  <Blank Num="12" UId="263" />
+  <Token Text="IF" UId="264" />
+  <Blank Num="1" UId="265" />
+  <Access Scope="LocalVariable" UId="266">
+    <Symbol UId="267">
+      <Component Name="statNumberOfArea" UId="268" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="269" />
+  <Token Text="=" UId="270" />
+  <Blank Num="1" UId="271" />
+  <Access Scope="LiteralConstant" UId="272">
+    <Constant UId="273">
+      <ConstantValue UId="275">0</ConstantValue>
+    </Constant>
+  </Access>
+  <NewLine Num="1" UId="276" />
+  <Blank Num="16" UId="277" />
+  <Token Text="OR" UId="278" />
+  <Blank Num="1" UId="279" />
+  <Access Scope="LocalVariable" UId="280">
+    <Symbol UId="281">
+      <Component Name="FoilAccelerationDistance" UId="282" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="283" />
+  <Token Text="&lt;=" UId="284" />
+  <Blank Num="1" UId="285" />
+  <Access Scope="LiteralConstant" UId="286">
+    <Constant UId="287">
+      <ConstantValue UId="289">0</ConstantValue>
+    </Constant>
+  </Access>
+  <NewLine Num="1" UId="290" />
+  <Blank Num="16" UId="291" />
+  <Token Text="OR" UId="292" />
+  <Blank Num="1" UId="293" />
+  <Access Scope="LocalVariable" UId="294">
+    <Symbol UId="295">
+      <Component Name="FoilDecelerationDistance" UId="296" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="297" />
+  <Token Text="&lt;=" UId="298" />
+  <Blank Num="1" UId="299" />
+  <Access Scope="LiteralConstant" UId="300">
+    <Constant UId="301">
+      <ConstantValue UId="303">0</ConstantValue>
+    </Constant>
+  </Access>
+  <NewLine Num="1" UId="304" />
+  <Blank Num="12" UId="305" />
+  <Token Text="THEN" UId="306" />
+  <NewLine Num="1" UId="307" />
+  <Blank Num="16" UId="308" />
+  <Access Scope="LocalVariable" UId="309">
+    <Symbol UId="310">
+      <Component Name="statError" UId="311" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="312" />
+  <Token Text=":=" UId="313" />
+  <Blank Num="1" UId="314" />
+  <Access Scope="LiteralConstant" UId="315">
+    <Constant UId="316">
+      <ConstantValue UId="318">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="319" />
+  <NewLine Num="1" UId="320" />
+  <Blank Num="12" UId="321" />
+  <Token Text="END_IF" UId="322" />
+  <Token Text=";" UId="323" />
+  <NewLine Num="1" UId="324" />
+  <Blank Num="12" UId="325" />
+  <NewLine Num="1" UId="326" />
+  <Blank Num="8" UId="327" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="328">
+    <Text UId="329"> Clear CamProfile</Text>
+  </LineComment>
+  <NewLine Num="1" UId="330" />
+  <Blank Num="8" UId="331" />
+  <Token Text="FOR" UId="332" />
+  <Blank Num="1" UId="333" />
+  <Access Scope="LocalVariable" UId="334">
+    <Symbol UId="335">
+      <Component Name="statPointtNumber" UId="336" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="337" />
+  <Token Text=":=" UId="338" />
+  <Blank Num="1" UId="339" />
+  <Access Scope="LiteralConstant" UId="340">
+    <Constant UId="341">
+      <ConstantValue UId="343">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="344" />
+  <Token Text="TO" UId="345" />
+  <Blank Num="1" UId="346" />
+  <Access Scope="LiteralConstant" UId="347">
+    <Constant UId="348">
+      <ConstantValue UId="350">32</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="351" />
+  <Token Text="DO" UId="352" />
+  <NewLine Num="1" UId="353" />
+  <Blank Num="12" UId="354" />
+  <Access Scope="LocalVariable" UId="355">
+    <Symbol UId="356">
+      <Component Name="CamProfile" UId="357">
+        <Token Text="[" UId="358" />
+        <Access Scope="LocalVariable" UId="359">
+          <Symbol UId="360">
+            <Component Name="statPointtNumber" UId="361" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="362" />
+      </Component>
+      <Token Text="." UId="363" />
+      <Component Name="leadingValue" UId="364" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="365" />
+  <Token Text=":=" UId="366" />
+  <Blank Num="1" UId="367" />
+  <Access Scope="LiteralConstant" UId="368">
+    <Constant UId="369">
+      <ConstantValue UId="371">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="372" />
+  <NewLine Num="1" UId="373" />
+  <Blank Num="12" UId="374" />
+  <Access Scope="LocalVariable" UId="375">
+    <Symbol UId="376">
+      <Component Name="CamProfile" UId="377">
+        <Token Text="[" UId="378" />
+        <Access Scope="LocalVariable" UId="379">
+          <Symbol UId="380">
+            <Component Name="statPointtNumber" UId="381" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="382" />
+      </Component>
+      <Token Text="." UId="383" />
+      <Component Name="followingValue" UId="384" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="385" />
+  <Token Text=":=" UId="386" />
+  <Blank Num="1" UId="387" />
+  <Access Scope="LiteralConstant" UId="388">
+    <Constant UId="389">
+      <ConstantValue UId="391">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="392" />
+  <NewLine Num="1" UId="393" />
+  <Blank Num="12" UId="394" />
+  <Access Scope="LocalVariable" UId="395">
+    <Symbol UId="396">
+      <Component Name="CamProfile" UId="397">
+        <Token Text="[" UId="398" />
+        <Access Scope="LocalVariable" UId="399">
+          <Symbol UId="400">
+            <Component Name="statPointtNumber" UId="401" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="402" />
+      </Component>
+      <Token Text="." UId="403" />
+      <Component Name="velocityRatio" UId="404" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="405" />
+  <Token Text=":=" UId="406" />
+  <Blank Num="1" UId="407" />
+  <Access Scope="LiteralConstant" UId="408">
+    <Constant UId="409">
+      <ConstantValue UId="411">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="412" />
+  <NewLine Num="1" UId="413" />
+  <Blank Num="12" UId="414" />
+  <Access Scope="LocalVariable" UId="415">
+    <Symbol UId="416">
+      <Component Name="CamProfile" UId="417">
+        <Token Text="[" UId="418" />
+        <Access Scope="LocalVariable" UId="419">
+          <Symbol UId="420">
+            <Component Name="statPointtNumber" UId="421" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="422" />
+      </Component>
+      <Token Text="." UId="423" />
+      <Component Name="accelerationRatio" UId="424" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="425" />
+  <Token Text=":=" UId="426" />
+  <Blank Num="1" UId="427" />
+  <Access Scope="LiteralConstant" UId="428">
+    <Constant UId="429">
+      <ConstantValue UId="431">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="432" />
+  <NewLine Num="1" UId="433" />
+  <Blank Num="8" UId="434" />
+  <Token Text="END_FOR" UId="435" />
+  <Token Text=";" UId="436" />
+  <NewLine Num="1" UId="437" />
+  <Blank Num="8" UId="438" />
+  <NewLine Num="1" UId="439" />
+  <Blank Num="8" UId="440" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="441">
+    <Text UId="442"> Initializr number of segment</Text>
+  </LineComment>
+  <NewLine Num="1" UId="443" />
+  <Blank Num="8" UId="444" />
+  <Access Scope="LocalVariable" UId="445">
+    <Symbol UId="446">
+      <Component Name="statPointtNumber" UId="447" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="448" />
+  <Token Text=":=" UId="449" />
+  <Blank Num="1" UId="450" />
+  <Access Scope="LiteralConstant" UId="451">
+    <Constant UId="452">
+      <ConstantValue UId="454">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="455" />
+  <NewLine Num="1" UId="456" />
+  <Blank Num="8" UId="457" />
+  <NewLine Num="1" UId="458" />
+  <Blank Num="4" UId="459" />
+  <Token Text="END_REGION" UId="460" />
+  <NewLine Num="1" UId="461" />
+  <Blank Num="4" UId="462" />
+  <NewLine Num="1" UId="463" />
+  <Blank Num="4" UId="464" />
+  <Token Text="IF" UId="465" />
+  <Blank Num="1" UId="466" />
+  <Token Text="NOT" UId="467" />
+  <Blank Num="1" UId="468" />
+  <Access Scope="LocalVariable" UId="469">
+    <Symbol UId="470">
+      <Component Name="statError" UId="471" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="472" />
+  <Token Text="THEN" UId="473" />
+  <NewLine Num="1" UId="474" />
+  <Blank Num="8" UId="475" />
+  <Token Text="REGION" UId="476" />
+  <Blank Num="1" UId="477" />
+  <Text UId="478">Segment definition</Text>
+  <NewLine Num="1" UId="479" />
+  <Blank Num="12" UId="480" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="481">
+    <Text UId="482">--- FIRST POINT ---</Text>
+  </LineComment>
+  <NewLine Num="1" UId="483" />
+  <Blank Num="12" UId="484" />
+  <Access Scope="LocalVariable" UId="485">
+    <Symbol UId="486">
+      <Component Name="CamProfile" UId="487">
+        <Token Text="[" UId="488" />
+        <Access Scope="LocalVariable" UId="489">
+          <Symbol UId="490">
+            <Component Name="statPointtNumber" UId="491" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="492" />
+      </Component>
+      <Token Text="." UId="493" />
+      <Component Name="leadingValue" UId="494" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="495" />
+  <Token Text=":=" UId="496" />
+  <Blank Num="1" UId="497" />
+  <Token Text="-" UId="498" />
+  <Blank Num="1" UId="499" />
+  <Access Scope="LocalVariable" UId="500">
+    <Symbol UId="501">
+      <Component Name="DistanceProductSensorFilmDrum" UId="502" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="503" />
+  <NewLine Num="1" UId="504" />
+  <Blank Num="12" UId="505" />
+  <Access Scope="LocalVariable" UId="506">
+    <Symbol UId="507">
+      <Component Name="CamProfile" UId="508">
+        <Token Text="[" UId="509" />
+        <Access Scope="LocalVariable" UId="510">
+          <Symbol UId="511">
+            <Component Name="statPointtNumber" UId="512" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="513" />
+      </Component>
+      <Token Text="." UId="514" />
+      <Component Name="followingValue" UId="515" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="516" />
+  <Token Text=":=" UId="517" />
+  <Blank Num="1" UId="518" />
+  <Access Scope="LiteralConstant" UId="519">
+    <Constant UId="520">
+      <ConstantValue UId="522">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="523" />
+  <NewLine Num="1" UId="524" />
+  <Blank Num="12" UId="525" />
+  <Access Scope="LocalVariable" UId="526">
+    <Symbol UId="527">
+      <Component Name="CamProfile" UId="528">
+        <Token Text="[" UId="529" />
+        <Access Scope="LocalVariable" UId="530">
+          <Symbol UId="531">
+            <Component Name="statPointtNumber" UId="532" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="533" />
+      </Component>
+      <Token Text="." UId="534" />
+      <Component Name="velocityRatio" UId="535" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="536" />
+  <Token Text=":=" UId="537" />
+  <Blank Num="1" UId="538" />
+  <Access Scope="LiteralConstant" UId="539">
+    <Constant UId="540">
+      <ConstantValue UId="542">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="543" />
+  <NewLine Num="1" UId="544" />
+  <Blank Num="12" UId="545" />
+  <Access Scope="LocalVariable" UId="546">
+    <Symbol UId="547">
+      <Component Name="CamProfile" UId="548">
+        <Token Text="[" UId="549" />
+        <Access Scope="LocalVariable" UId="550">
+          <Symbol UId="551">
+            <Component Name="statPointtNumber" UId="552" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="553" />
+      </Component>
+      <Token Text="." UId="554" />
+      <Component Name="accelerationRatio" UId="555" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="556" />
+  <Token Text=":=" UId="557" />
+  <Blank Num="1" UId="558" />
+  <Access Scope="LiteralConstant" UId="559">
+    <Constant UId="560">
+      <ConstantValue UId="562">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="563" />
+  <NewLine Num="1" UId="564" />
+  <Blank Num="12" UId="565" />
+  <Access Scope="LocalVariable" UId="566">
+    <Symbol UId="567">
+      <Component Name="statPointtNumber" UId="568" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="569" />
+  <Token Text=":=" UId="570" />
+  <Blank Num="1" UId="571" />
+  <Access Scope="LocalVariable" UId="572">
+    <Symbol UId="573">
+      <Component Name="statPointtNumber" UId="574" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="575" />
+  <Token Text="+" UId="576" />
+  <Blank Num="1" UId="577" />
+  <Access Scope="LiteralConstant" UId="578">
+    <Constant UId="579">
+      <ConstantValue UId="581">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="582" />
+  <NewLine Num="1" UId="583" />
+  <Blank Num="16" UId="584" />
+  <NewLine Num="1" UId="585" />
+  <Blank Num="12" UId="586" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="587">
+    <Text UId="588">--- AREA ---</Text>
+  </LineComment>
+  <NewLine Num="1" UId="589" />
+  <Blank Num="12" UId="590" />
+  <Token Text="FOR" UId="591" />
+  <Blank Num="1" UId="592" />
+  <Access Scope="LocalVariable" UId="593">
+    <Symbol UId="594">
+      <Component Name="AreaNumber" UId="595" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="596" />
+  <Token Text=":=" UId="597" />
+  <Blank Num="1" UId="598" />
+  <Access Scope="LiteralConstant" UId="599">
+    <Constant UId="600">
+      <ConstantValue UId="602">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="603" />
+  <Token Text="TO" UId="604" />
+  <Blank Num="1" UId="605" />
+  <Access Scope="LocalVariable" UId="606">
+    <Symbol UId="607">
+      <Component Name="statNumberOfArea" UId="608" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="609" />
+  <Token Text="DO" UId="610" />
+  <NewLine Num="1" UId="611" />
+  <Blank Num="16" UId="612" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="613">
+    <Text UId="614">--- ACCELERATION ---</Text>
+  </LineComment>
+  <NewLine Num="1" UId="615" />
+  <Blank Num="16" UId="616" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="617">
+    <Text UId="618"> From</Text>
+  </LineComment>
+  <NewLine Num="1" UId="619" />
+  <Blank Num="16" UId="620" />
+  <Access Scope="LocalVariable" UId="621">
+    <Symbol UId="622">
+      <Component Name="CamProfile" UId="623">
+        <Token Text="[" UId="624" />
+        <Access Scope="LocalVariable" UId="625">
+          <Symbol UId="626">
+            <Component Name="statPointtNumber" UId="627" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="628" />
+      </Component>
+      <Token Text="." UId="629" />
+      <Component Name="leadingValue" UId="630" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="631" />
+  <Token Text=":=" UId="632" />
+  <Blank Num="1" UId="633" />
+  <Access Scope="LocalVariable" UId="634">
+    <Symbol UId="635">
+      <Component Name="SheetProfile" UId="636" />
+      <Token Text="." UId="637" />
+      <Component Name="Area" UId="638">
+        <Token Text="[" UId="639" />
+        <Access Scope="LocalVariable" UId="640">
+          <Symbol UId="641">
+            <Component Name="AreaNumber" UId="642" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="643" />
+      </Component>
+      <Token Text="." UId="644" />
+      <Component Name="Start" UId="645" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="646" />
+  <Token Text="+" UId="647" />
+  <Blank Num="1" UId="648" />
+  <Access Scope="LocalVariable" UId="649">
+    <Symbol UId="650">
+      <Component Name="SheetProfile" UId="651" />
+      <Token Text="." UId="652" />
+      <Component Name="StampAreaStartAdjustment" UId="653" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="654" />
+  <Token Text="-" UId="655" />
+  <Blank Num="1" UId="656" />
+  <Access Scope="LocalVariable" UId="657">
+    <Symbol UId="658">
+      <Component Name="MasterAccelerationDistance" UId="659" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="660" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="661">
+    <Text UId="662">;#FoilAccelerationDistance;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="663" />
+  <Blank Num="16" UId="664" />
+  <Access Scope="LocalVariable" UId="665">
+    <Symbol UId="666">
+      <Component Name="CamProfile" UId="667">
+        <Token Text="[" UId="668" />
+        <Access Scope="LocalVariable" UId="669">
+          <Symbol UId="670">
+            <Component Name="statPointtNumber" UId="671" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="672" />
+      </Component>
+      <Token Text="." UId="673" />
+      <Component Name="followingValue" UId="674" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="675" />
+  <Token Text=":=" UId="676" />
+  <Blank Num="1" UId="677" />
+  <Access Scope="LocalVariable" UId="678">
+    <Symbol UId="679">
+      <Component Name="CamProfile" UId="680">
+        <Token Text="[" UId="681" />
+        <Access Scope="LocalVariable" UId="682">
+          <Symbol UId="683">
+            <Component Name="statPointtNumber" UId="684" />
+          </Symbol>
+        </Access>
+        <Token Text="-" UId="685" />
+        <Access Scope="LiteralConstant" UId="686">
+          <Constant UId="687">
+            <ConstantValue UId="689">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="690" />
+      </Component>
+      <Token Text="." UId="691" />
+      <Component Name="followingValue" UId="692" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="693" />
+  <NewLine Num="1" UId="694" />
+  <Blank Num="16" UId="695" />
+  <Access Scope="LocalVariable" UId="696">
+    <Symbol UId="697">
+      <Component Name="CamProfile" UId="698">
+        <Token Text="[" UId="699" />
+        <Access Scope="LocalVariable" UId="700">
+          <Symbol UId="701">
+            <Component Name="statPointtNumber" UId="702" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="703" />
+      </Component>
+      <Token Text="." UId="704" />
+      <Component Name="velocityRatio" UId="705" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="706" />
+  <Token Text=":=" UId="707" />
+  <Blank Num="1" UId="708" />
+  <Access Scope="LiteralConstant" UId="709">
+    <Constant UId="710">
+      <ConstantValue UId="712">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="713" />
+  <NewLine Num="1" UId="714" />
+  <Blank Num="16" UId="715" />
+  <Access Scope="LocalVariable" UId="716">
+    <Symbol UId="717">
+      <Component Name="CamProfile" UId="718">
+        <Token Text="[" UId="719" />
+        <Access Scope="LocalVariable" UId="720">
+          <Symbol UId="721">
+            <Component Name="statPointtNumber" UId="722" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="723" />
+      </Component>
+      <Token Text="." UId="724" />
+      <Component Name="accelerationRatio" UId="725" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="726" />
+  <Token Text=":=" UId="727" />
+  <Blank Num="1" UId="728" />
+  <Access Scope="LiteralConstant" UId="729">
+    <Constant UId="730">
+      <ConstantValue UId="732">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="733" />
+  <NewLine Num="1" UId="734" />
+  <Blank Num="16" UId="735" />
+  <Access Scope="LocalVariable" UId="736">
+    <Symbol UId="737">
+      <Component Name="statPointtNumber" UId="738" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="739" />
+  <Token Text=":=" UId="740" />
+  <Blank Num="1" UId="741" />
+  <Access Scope="LocalVariable" UId="742">
+    <Symbol UId="743">
+      <Component Name="statPointtNumber" UId="744" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="745" />
+  <Token Text="+" UId="746" />
+  <Blank Num="1" UId="747" />
+  <Access Scope="LiteralConstant" UId="748">
+    <Constant UId="749">
+      <ConstantValue UId="751">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="752" />
+  <NewLine Num="1" UId="753" />
+  <Blank Num="16" UId="754" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="755">
+    <Text UId="756"> To</Text>
+  </LineComment>
+  <NewLine Num="1" UId="757" />
+  <Blank Num="16" UId="758" />
+  <Access Scope="LocalVariable" UId="759">
+    <Symbol UId="760">
+      <Component Name="CamProfile" UId="761">
+        <Token Text="[" UId="762" />
+        <Access Scope="LocalVariable" UId="763">
+          <Symbol UId="764">
+            <Component Name="statPointtNumber" UId="765" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="766" />
+      </Component>
+      <Token Text="." UId="767" />
+      <Component Name="leadingValue" UId="768" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="769" />
+  <Token Text=":=" UId="770" />
+  <Blank Num="1" UId="771" />
+  <Access Scope="LocalVariable" UId="772">
+    <Symbol UId="773">
+      <Component Name="SheetProfile" UId="774" />
+      <Token Text="." UId="775" />
+      <Component Name="Area" UId="776">
+        <Token Text="[" UId="777" />
+        <Access Scope="LocalVariable" UId="778">
+          <Symbol UId="779">
+            <Component Name="AreaNumber" UId="780" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="781" />
+      </Component>
+      <Token Text="." UId="782" />
+      <Component Name="Start" UId="783" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="784" />
+  <Token Text="+" UId="785" />
+  <Blank Num="1" UId="786" />
+  <Access Scope="LocalVariable" UId="787">
+    <Symbol UId="788">
+      <Component Name="SheetProfile" UId="789" />
+      <Token Text="." UId="790" />
+      <Component Name="StampAreaStartAdjustment" UId="791" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="792" />
+  <Token Text="+" UId="793" />
+  <Blank Num="1" UId="794" />
+  <Access Scope="LocalVariable" UId="795">
+    <Symbol UId="796">
+      <Component Name="CompensationForTensionInAcceleration" UId="797" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="798" />
+  <NewLine Num="1" UId="799" />
+  <Blank Num="16" UId="800" />
+  <Access Scope="LocalVariable" UId="801">
+    <Symbol UId="802">
+      <Component Name="CamProfile" UId="803">
+        <Token Text="[" UId="804" />
+        <Access Scope="LocalVariable" UId="805">
+          <Symbol UId="806">
+            <Component Name="statPointtNumber" UId="807" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="808" />
+      </Component>
+      <Token Text="." UId="809" />
+      <Component Name="followingValue" UId="810" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="811" />
+  <Token Text=":=" UId="812" />
+  <Blank Num="1" UId="813" />
+  <Access Scope="LocalVariable" UId="814">
+    <Symbol UId="815">
+      <Component Name="CamProfile" UId="816">
+        <Token Text="[" UId="817" />
+        <Access Scope="LocalVariable" UId="818">
+          <Symbol UId="819">
+            <Component Name="statPointtNumber" UId="820" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="821" />
+        <Token Text="-" UId="822" />
+        <Blank Num="1" UId="823" />
+        <Access Scope="LiteralConstant" UId="824">
+          <Constant UId="825">
+            <ConstantValue UId="827">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="828" />
+      </Component>
+      <Token Text="." UId="829" />
+      <Component Name="followingValue" UId="830" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="831" />
+  <Token Text="+" UId="832" />
+  <Blank Num="1" UId="833" />
+  <Access Scope="LocalVariable" UId="834">
+    <Symbol UId="835">
+      <Component Name="FoilAccelerationDistance" UId="836" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="837" />
+  <Token Text="+" UId="838" />
+  <Blank Num="1" UId="839" />
+  <Access Scope="LocalVariable" UId="840">
+    <Symbol UId="841">
+      <Component Name="CompensationForTensionInAcceleration" UId="842" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="843" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="844">
+    <Text UId="845">#UnwinderAccelerationDistance + 15.0;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="846" />
+  <Blank Num="16" UId="847" />
+  <Access Scope="LocalVariable" UId="848">
+    <Symbol UId="849">
+      <Component Name="CamProfile" UId="850">
+        <Token Text="[" UId="851" />
+        <Access Scope="LocalVariable" UId="852">
+          <Symbol UId="853">
+            <Component Name="statPointtNumber" UId="854" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="855" />
+      </Component>
+      <Token Text="." UId="856" />
+      <Component Name="velocityRatio" UId="857" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="858" />
+  <Token Text=":=" UId="859" />
+  <Blank Num="1" UId="860" />
+  <Access Scope="LocalVariable" UId="861">
+    <Symbol UId="862">
+      <Component Name="RatioFoilPaper" UId="863" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="864" />
+  <NewLine Num="1" UId="865" />
+  <Blank Num="16" UId="866" />
+  <Access Scope="LocalVariable" UId="867">
+    <Symbol UId="868">
+      <Component Name="CamProfile" UId="869">
+        <Token Text="[" UId="870" />
+        <Access Scope="LocalVariable" UId="871">
+          <Symbol UId="872">
+            <Component Name="statPointtNumber" UId="873" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="874" />
+      </Component>
+      <Token Text="." UId="875" />
+      <Component Name="accelerationRatio" UId="876" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="877" />
+  <Token Text=":=" UId="878" />
+  <Blank Num="1" UId="879" />
+  <Access Scope="LiteralConstant" UId="880">
+    <Constant UId="881">
+      <ConstantValue UId="883">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="884" />
+  <NewLine Num="1" UId="885" />
+  <Blank Num="16" UId="886" />
+  <Access Scope="LocalVariable" UId="887">
+    <Symbol UId="888">
+      <Component Name="statPointtNumber" UId="889" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="890" />
+  <Token Text=":=" UId="891" />
+  <Blank Num="1" UId="892" />
+  <Access Scope="LocalVariable" UId="893">
+    <Symbol UId="894">
+      <Component Name="statPointtNumber" UId="895" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="896" />
+  <Token Text="+" UId="897" />
+  <Blank Num="1" UId="898" />
+  <Access Scope="LiteralConstant" UId="899">
+    <Constant UId="900">
+      <ConstantValue UId="902">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="903" />
+  <NewLine Num="1" UId="904" />
+  <Blank Num="16" UId="905" />
+  <NewLine Num="1" UId="906" />
+  <Blank Num="20" UId="907" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="908">
+    <Text UId="909"> Error accemeration segment</Text>
+  </LineComment>
+  <NewLine Num="1" UId="910" />
+  <Blank Num="20" UId="911" />
+  <Token Text="IF" UId="912" />
+  <Blank Num="1" UId="913" />
+  <Access Scope="LocalVariable" UId="914">
+    <Symbol UId="915">
+      <Component Name="CamProfile" UId="916">
+        <Token Text="[" UId="917" />
+        <Access Scope="LocalVariable" UId="918">
+          <Symbol UId="919">
+            <Component Name="statPointtNumber" UId="920" />
+          </Symbol>
+        </Access>
+        <Token Text="-" UId="921" />
+        <Access Scope="LiteralConstant" UId="922">
+          <Constant UId="923">
+            <ConstantValue UId="925">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="926" />
+      </Component>
+      <Token Text="." UId="927" />
+      <Component Name="leadingValue" UId="928" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="929" />
+  <Token Text="&lt;" UId="930" />
+  <Blank Num="1" UId="931" />
+  <Access Scope="LocalVariable" UId="932">
+    <Symbol UId="933">
+      <Component Name="CamProfile" UId="934">
+        <Token Text="[" UId="935" />
+        <Access Scope="LocalVariable" UId="936">
+          <Symbol UId="937">
+            <Component Name="statPointtNumber" UId="938" />
+          </Symbol>
+        </Access>
+        <Token Text="-" UId="939" />
+        <Access Scope="LiteralConstant" UId="940">
+          <Constant UId="941">
+            <ConstantValue UId="943">2</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="944" />
+      </Component>
+      <Token Text="." UId="945" />
+      <Component Name="leadingValue" UId="946" />
+    </Symbol>
+  </Access>
+  <NewLine Num="1" UId="947" />
+  <Blank Num="20" UId="948" />
+  <Token Text="OR" UId="949" />
+  <Blank Num="1" UId="950" />
+  <Access Scope="LocalVariable" UId="951">
+    <Symbol UId="952">
+      <Component Name="CamProfile" UId="953">
+        <Token Text="[" UId="954" />
+        <Access Scope="LocalVariable" UId="955">
+          <Symbol UId="956">
+            <Component Name="statPointtNumber" UId="957" />
+          </Symbol>
+        </Access>
+        <Token Text="-" UId="958" />
+        <Access Scope="LiteralConstant" UId="959">
+          <Constant UId="960">
+            <ConstantValue UId="962">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="963" />
+      </Component>
+      <Token Text="." UId="964" />
+      <Component Name="followingValue" UId="965" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="966" />
+  <Token Text="&lt;" UId="967" />
+  <Blank Num="1" UId="968" />
+  <Access Scope="LocalVariable" UId="969">
+    <Symbol UId="970">
+      <Component Name="CamProfile" UId="971">
+        <Token Text="[" UId="972" />
+        <Access Scope="LocalVariable" UId="973">
+          <Symbol UId="974">
+            <Component Name="statPointtNumber" UId="975" />
+          </Symbol>
+        </Access>
+        <Token Text="-" UId="976" />
+        <Access Scope="LiteralConstant" UId="977">
+          <Constant UId="978">
+            <ConstantValue UId="980">2</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="981" />
+      </Component>
+      <Token Text="." UId="982" />
+      <Component Name="followingValue" UId="983" />
+    </Symbol>
+  </Access>
+  <NewLine Num="1" UId="984" />
+  <Blank Num="20" UId="985" />
+  <Token Text="THEN" UId="986" />
+  <NewLine Num="1" UId="987" />
+  <Blank Num="24" UId="988" />
+  <Access Scope="LocalVariable" UId="989">
+    <Symbol UId="990">
+      <Component Name="statError" UId="991" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="992" />
+  <Token Text=":=" UId="993" />
+  <Blank Num="1" UId="994" />
+  <Access Scope="LiteralConstant" UId="995">
+    <Constant UId="996">
+      <ConstantValue UId="998">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="999" />
+  <NewLine Num="1" UId="1000" />
+  <Blank Num="20" UId="1001" />
+  <Token Text="END_IF" UId="1002" />
+  <Token Text=";" UId="1003" />
+  <NewLine Num="1" UId="1004" />
+  <Blank Num="16" UId="1005" />
+  <NewLine Num="1" UId="1006" />
+  <Blank Num="16" UId="1007" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1008">
+    <Text UId="1009">--- SYNCHRONOUS ---</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1010" />
+  <Blank Num="16" UId="1011" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1012">
+    <Text UId="1013"> Until</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1014" />
+  <Blank Num="16" UId="1015" />
+  <Access Scope="LocalVariable" UId="1016">
+    <Symbol UId="1017">
+      <Component Name="CamProfile" UId="1018">
+        <Token Text="[" UId="1019" />
+        <Access Scope="LocalVariable" UId="1020">
+          <Symbol UId="1021">
+            <Component Name="statPointtNumber" UId="1022" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1023" />
+      </Component>
+      <Token Text="." UId="1024" />
+      <Component Name="leadingValue" UId="1025" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1026" />
+  <Token Text=":=" UId="1027" />
+  <Blank Num="1" UId="1028" />
+  <Access Scope="LocalVariable" UId="1029">
+    <Symbol UId="1030">
+      <Component Name="CamProfile" UId="1031">
+        <Token Text="[" UId="1032" />
+        <Access Scope="LocalVariable" UId="1033">
+          <Symbol UId="1034">
+            <Component Name="statPointtNumber" UId="1035" />
+          </Symbol>
+        </Access>
+        <Token Text="-" UId="1036" />
+        <Access Scope="LiteralConstant" UId="1037">
+          <Constant UId="1038">
+            <ConstantValue UId="1040">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1041" />
+      </Component>
+      <Token Text="." UId="1042" />
+      <Component Name="leadingValue" UId="1043" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1044" />
+  <Token Text="+" UId="1045" />
+  <Blank Num="1" UId="1046" />
+  <Access Scope="LocalVariable" UId="1047">
+    <Symbol UId="1048">
+      <Component Name="SheetProfile" UId="1049" />
+      <Token Text="." UId="1050" />
+      <Component Name="Area" UId="1051">
+        <Token Text="[" UId="1052" />
+        <Access Scope="LocalVariable" UId="1053">
+          <Symbol UId="1054">
+            <Component Name="AreaNumber" UId="1055" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1056" />
+      </Component>
+      <Token Text="." UId="1057" />
+      <Component Name="End" UId="1058" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1059" />
+  <Token Text="-" UId="1060" />
+  <Blank Num="1" UId="1061" />
+  <Access Scope="LocalVariable" UId="1062">
+    <Symbol UId="1063">
+      <Component Name="SheetProfile" UId="1064" />
+      <Token Text="." UId="1065" />
+      <Component Name="Area" UId="1066">
+        <Token Text="[" UId="1067" />
+        <Access Scope="LocalVariable" UId="1068">
+          <Symbol UId="1069">
+            <Component Name="AreaNumber" UId="1070" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1071" />
+      </Component>
+      <Token Text="." UId="1072" />
+      <Component Name="Start" UId="1073" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1074" />
+  <Token Text="+" UId="1075" />
+  <Blank Num="1" UId="1076" />
+  <Access Scope="LocalVariable" UId="1077">
+    <Symbol UId="1078">
+      <Component Name="SheetProfile" UId="1079" />
+      <Token Text="." UId="1080" />
+      <Component Name="StampAreaLengthAdjustement" UId="1081" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1082" />
+  <NewLine Num="1" UId="1083" />
+  <Blank Num="16" UId="1084" />
+  <Access Scope="LocalVariable" UId="1085">
+    <Symbol UId="1086">
+      <Component Name="CamProfile" UId="1087">
+        <Token Text="[" UId="1088" />
+        <Access Scope="LocalVariable" UId="1089">
+          <Symbol UId="1090">
+            <Component Name="statPointtNumber" UId="1091" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1092" />
+      </Component>
+      <Token Text="." UId="1093" />
+      <Component Name="followingValue" UId="1094" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1095" />
+  <Token Text=":=" UId="1096" />
+  <Blank Num="1" UId="1097" />
+  <Access Scope="LocalVariable" UId="1098">
+    <Symbol UId="1099">
+      <Component Name="CamProfile" UId="1100">
+        <Token Text="[" UId="1101" />
+        <Access Scope="LocalVariable" UId="1102">
+          <Symbol UId="1103">
+            <Component Name="statPointtNumber" UId="1104" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1105" />
+        <Token Text="-" UId="1106" />
+        <Blank Num="1" UId="1107" />
+        <Access Scope="LiteralConstant" UId="1108">
+          <Constant UId="1109">
+            <ConstantValue UId="1111">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1112" />
+      </Component>
+      <Token Text="." UId="1113" />
+      <Component Name="followingValue" UId="1114" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1115" />
+  <Token Text="+" UId="1116" />
+  <Blank Num="1" UId="1117" />
+  <Token Text="(" UId="1118" />
+  <Access Scope="LocalVariable" UId="1119">
+    <Symbol UId="1120">
+      <Component Name="SheetProfile" UId="1121" />
+      <Token Text="." UId="1122" />
+      <Component Name="Area" UId="1123">
+        <Token Text="[" UId="1124" />
+        <Access Scope="LocalVariable" UId="1125">
+          <Symbol UId="1126">
+            <Component Name="AreaNumber" UId="1127" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1128" />
+      </Component>
+      <Token Text="." UId="1129" />
+      <Component Name="End" UId="1130" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1131" />
+  <Token Text="-" UId="1132" />
+  <Blank Num="1" UId="1133" />
+  <Access Scope="LocalVariable" UId="1134">
+    <Symbol UId="1135">
+      <Component Name="SheetProfile" UId="1136" />
+      <Token Text="." UId="1137" />
+      <Component Name="Area" UId="1138">
+        <Token Text="[" UId="1139" />
+        <Access Scope="LocalVariable" UId="1140">
+          <Symbol UId="1141">
+            <Component Name="AreaNumber" UId="1142" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1143" />
+      </Component>
+      <Token Text="." UId="1144" />
+      <Component Name="Start" UId="1145" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="1146" />
+  <Blank Num="1" UId="1147" />
+  <Token Text="*" UId="1148" />
+  <Blank Num="1" UId="1149" />
+  <Access Scope="LocalVariable" UId="1150">
+    <Symbol UId="1151">
+      <Component Name="RatioFoilPaper" UId="1152" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1153" />
+  <Token Text="+" UId="1154" />
+  <Blank Num="1" UId="1155" />
+  <Access Scope="LocalVariable" UId="1156">
+    <Symbol UId="1157">
+      <Component Name="SheetProfile" UId="1158" />
+      <Token Text="." UId="1159" />
+      <Component Name="StampAreaLengthAdjustement" UId="1160" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1161" />
+  <NewLine Num="1" UId="1162" />
+  <Blank Num="16" UId="1163" />
+  <Access Scope="LocalVariable" UId="1164">
+    <Symbol UId="1165">
+      <Component Name="CamProfile" UId="1166">
+        <Token Text="[" UId="1167" />
+        <Access Scope="LocalVariable" UId="1168">
+          <Symbol UId="1169">
+            <Component Name="statPointtNumber" UId="1170" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1171" />
+      </Component>
+      <Token Text="." UId="1172" />
+      <Component Name="velocityRatio" UId="1173" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1174" />
+  <Token Text=":=" UId="1175" />
+  <Blank Num="1" UId="1176" />
+  <Access Scope="LocalVariable" UId="1177">
+    <Symbol UId="1178">
+      <Component Name="RatioFoilPaper" UId="1179" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1180" />
+  <NewLine Num="1" UId="1181" />
+  <Blank Num="16" UId="1182" />
+  <Access Scope="LocalVariable" UId="1183">
+    <Symbol UId="1184">
+      <Component Name="CamProfile" UId="1185">
+        <Token Text="[" UId="1186" />
+        <Access Scope="LocalVariable" UId="1187">
+          <Symbol UId="1188">
+            <Component Name="statPointtNumber" UId="1189" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1190" />
+      </Component>
+      <Token Text="." UId="1191" />
+      <Component Name="accelerationRatio" UId="1192" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1193" />
+  <Token Text=":=" UId="1194" />
+  <Blank Num="1" UId="1195" />
+  <Access Scope="LiteralConstant" UId="1196">
+    <Constant UId="1197">
+      <ConstantValue UId="1199">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1200" />
+  <NewLine Num="1" UId="1201" />
+  <Blank Num="16" UId="1202" />
+  <Access Scope="LocalVariable" UId="1203">
+    <Symbol UId="1204">
+      <Component Name="statPointtNumber" UId="1205" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1206" />
+  <Token Text=":=" UId="1207" />
+  <Blank Num="1" UId="1208" />
+  <Access Scope="LocalVariable" UId="1209">
+    <Symbol UId="1210">
+      <Component Name="statPointtNumber" UId="1211" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1212" />
+  <Token Text="+" UId="1213" />
+  <Blank Num="1" UId="1214" />
+  <Access Scope="LiteralConstant" UId="1215">
+    <Constant UId="1216">
+      <ConstantValue UId="1218">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1219" />
+  <NewLine Num="1" UId="1220" />
+  <Blank Num="16" UId="1221" />
+  <NewLine Num="1" UId="1222" />
+  <Blank Num="16" UId="1223" />
+  <NewLine Num="1" UId="1224" />
+  <Blank Num="20" UId="1225" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1226">
+    <Text UId="1227"> Error synchronous segment</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1228" />
+  <Blank Num="16" UId="1229" />
+  <Token Text="IF" UId="1230" />
+  <Blank Num="1" UId="1231" />
+  <Access Scope="LocalVariable" UId="1232">
+    <Symbol UId="1233">
+      <Component Name="CamProfile" UId="1234">
+        <Token Text="[" UId="1235" />
+        <Access Scope="LocalVariable" UId="1236">
+          <Symbol UId="1237">
+            <Component Name="statPointtNumber" UId="1238" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1239" />
+        <Token Text="-" UId="1240" />
+        <Blank Num="1" UId="1241" />
+        <Access Scope="LiteralConstant" UId="1242">
+          <Constant UId="1243">
+            <ConstantValue UId="1245">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1246" />
+      </Component>
+      <Token Text="." UId="1247" />
+      <Component Name="leadingValue" UId="1248" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1249" />
+  <Token Text="&lt;" UId="1250" />
+  <Blank Num="1" UId="1251" />
+  <Access Scope="LocalVariable" UId="1252">
+    <Symbol UId="1253">
+      <Component Name="CamProfile" UId="1254">
+        <Token Text="[" UId="1255" />
+        <Access Scope="LocalVariable" UId="1256">
+          <Symbol UId="1257">
+            <Component Name="statPointtNumber" UId="1258" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1259" />
+        <Token Text="-" UId="1260" />
+        <Blank Num="1" UId="1261" />
+        <Access Scope="LiteralConstant" UId="1262">
+          <Constant UId="1263">
+            <ConstantValue UId="1265">2</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1266" />
+      </Component>
+      <Token Text="." UId="1267" />
+      <Component Name="leadingValue" UId="1268" />
+    </Symbol>
+  </Access>
+  <NewLine Num="1" UId="1269" />
+  <Blank Num="20" UId="1270" />
+  <Token Text="OR" UId="1271" />
+  <Blank Num="1" UId="1272" />
+  <Access Scope="LocalVariable" UId="1273">
+    <Symbol UId="1274">
+      <Component Name="CamProfile" UId="1275">
+        <Token Text="[" UId="1276" />
+        <Access Scope="LocalVariable" UId="1277">
+          <Symbol UId="1278">
+            <Component Name="statPointtNumber" UId="1279" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1280" />
+        <Token Text="-" UId="1281" />
+        <Blank Num="1" UId="1282" />
+        <Access Scope="LiteralConstant" UId="1283">
+          <Constant UId="1284">
+            <ConstantValue UId="1286">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1287" />
+      </Component>
+      <Token Text="." UId="1288" />
+      <Component Name="followingValue" UId="1289" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1290" />
+  <Token Text="&lt;" UId="1291" />
+  <Blank Num="1" UId="1292" />
+  <Access Scope="LocalVariable" UId="1293">
+    <Symbol UId="1294">
+      <Component Name="CamProfile" UId="1295">
+        <Token Text="[" UId="1296" />
+        <Access Scope="LocalVariable" UId="1297">
+          <Symbol UId="1298">
+            <Component Name="statPointtNumber" UId="1299" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1300" />
+        <Token Text="-" UId="1301" />
+        <Blank Num="1" UId="1302" />
+        <Access Scope="LiteralConstant" UId="1303">
+          <Constant UId="1304">
+            <ConstantValue UId="1306">2</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1307" />
+      </Component>
+      <Token Text="." UId="1308" />
+      <Component Name="followingValue" UId="1309" />
+    </Symbol>
+  </Access>
+  <NewLine Num="1" UId="1310" />
+  <Blank Num="16" UId="1311" />
+  <Token Text="THEN" UId="1312" />
+  <NewLine Num="1" UId="1313" />
+  <Blank Num="20" UId="1314" />
+  <Access Scope="LocalVariable" UId="1315">
+    <Symbol UId="1316">
+      <Component Name="statError" UId="1317" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1318" />
+  <Token Text=":=" UId="1319" />
+  <Blank Num="1" UId="1320" />
+  <Access Scope="LiteralConstant" UId="1321">
+    <Constant UId="1322">
+      <ConstantValue UId="1324">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1325" />
+  <NewLine Num="1" UId="1326" />
+  <Blank Num="16" UId="1327" />
+  <Token Text="END_IF" UId="1328" />
+  <Token Text=";" UId="1329" />
+  <NewLine Num="1" UId="1330" />
+  <Blank Num="16" UId="1331" />
+  <NewLine Num="1" UId="1332" />
+  <Blank Num="16" UId="1333" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1334">
+    <Text UId="1335">--- DECELERATION ---</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1336" />
+  <Blank Num="16" UId="1337" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1338">
+    <Text UId="1339"> Until</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1340" />
+  <Blank Num="16" UId="1341" />
+  <Access Scope="LocalVariable" UId="1342">
+    <Symbol UId="1343">
+      <Component Name="CamProfile" UId="1344">
+        <Token Text="[" UId="1345" />
+        <Access Scope="LocalVariable" UId="1346">
+          <Symbol UId="1347">
+            <Component Name="statPointtNumber" UId="1348" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1349" />
+      </Component>
+      <Token Text="." UId="1350" />
+      <Component Name="leadingValue" UId="1351" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1352" />
+  <Token Text=":=" UId="1353" />
+  <Blank Num="1" UId="1354" />
+  <Access Scope="LocalVariable" UId="1355">
+    <Symbol UId="1356">
+      <Component Name="CamProfile" UId="1357">
+        <Token Text="[" UId="1358" />
+        <Access Scope="LocalVariable" UId="1359">
+          <Symbol UId="1360">
+            <Component Name="statPointtNumber" UId="1361" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1362" />
+        <Token Text="-" UId="1363" />
+        <Blank Num="1" UId="1364" />
+        <Access Scope="LiteralConstant" UId="1365">
+          <Constant UId="1366">
+            <ConstantValue UId="1368">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1369" />
+      </Component>
+      <Token Text="." UId="1370" />
+      <Component Name="leadingValue" UId="1371" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1372" />
+  <Token Text="+" UId="1373" />
+  <Blank Num="1" UId="1374" />
+  <Access Scope="LocalVariable" UId="1375">
+    <Symbol UId="1376">
+      <Component Name="MasterDecelerationDistance" UId="1377" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1378" />
+  <Token Text="+" UId="1379" />
+  <Blank Num="1" UId="1380" />
+  <Token Text="(" UId="1381" />
+  <Access Scope="LocalVariable" UId="1382">
+    <Symbol UId="1383">
+      <Component Name="CompensationForTensionInDeceleration" UId="1384" />
+    </Symbol>
+  </Access>
+  <Token Text="/" UId="1385" />
+  <Access Scope="LiteralConstant" UId="1386">
+    <Constant UId="1387">
+      <ConstantValue UId="1389">1.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=")" UId="1390" />
+  <Token Text=";" UId="1391" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1392">
+    <Text UId="1393">#FoilDecelerationDistance;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1394" />
+  <Blank Num="20" UId="1395" />
+  <Access Scope="LocalVariable" UId="1396">
+    <Symbol UId="1397">
+      <Component Name="CamProfile" UId="1398">
+        <Token Text="[" UId="1399" />
+        <Access Scope="LocalVariable" UId="1400">
+          <Symbol UId="1401">
+            <Component Name="statPointtNumber" UId="1402" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1403" />
+      </Component>
+      <Token Text="." UId="1404" />
+      <Component Name="followingValue" UId="1405" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1406" />
+  <Token Text=":=" UId="1407" />
+  <Blank Num="1" UId="1408" />
+  <Access Scope="LocalVariable" UId="1409">
+    <Symbol UId="1410">
+      <Component Name="CamProfile" UId="1411">
+        <Token Text="[" UId="1412" />
+        <Access Scope="LocalVariable" UId="1413">
+          <Symbol UId="1414">
+            <Component Name="statPointtNumber" UId="1415" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1416" />
+        <Token Text="-" UId="1417" />
+        <Blank Num="1" UId="1418" />
+        <Access Scope="LiteralConstant" UId="1419">
+          <Constant UId="1420">
+            <ConstantValue UId="1422">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1423" />
+      </Component>
+      <Token Text="." UId="1424" />
+      <Component Name="followingValue" UId="1425" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1426" />
+  <Token Text="+" UId="1427" />
+  <Blank Num="1" UId="1428" />
+  <Access Scope="LocalVariable" UId="1429">
+    <Symbol UId="1430">
+      <Component Name="FoilDecelerationDistance" UId="1431" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1432" />
+  <Token Text="+" UId="1433" />
+  <Blank Num="1" UId="1434" />
+  <Access Scope="LocalVariable" UId="1435">
+    <Symbol UId="1436">
+      <Component Name="CompensationForTensionInDeceleration" UId="1437" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1438" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1439">
+    <Text UId="1440">#UnwinderDecelerationDistance + 10.0;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1441" />
+  <Blank Num="16" UId="1442" />
+  <Access Scope="LocalVariable" UId="1443">
+    <Symbol UId="1444">
+      <Component Name="CamProfile" UId="1445">
+        <Token Text="[" UId="1446" />
+        <Access Scope="LocalVariable" UId="1447">
+          <Symbol UId="1448">
+            <Component Name="statPointtNumber" UId="1449" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1450" />
+      </Component>
+      <Token Text="." UId="1451" />
+      <Component Name="velocityRatio" UId="1452" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1453" />
+  <Token Text=":=" UId="1454" />
+  <Blank Num="1" UId="1455" />
+  <Access Scope="LiteralConstant" UId="1456">
+    <Constant UId="1457">
+      <ConstantValue UId="1459">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1460" />
+  <NewLine Num="1" UId="1461" />
+  <Blank Num="16" UId="1462" />
+  <Access Scope="LocalVariable" UId="1463">
+    <Symbol UId="1464">
+      <Component Name="CamProfile" UId="1465">
+        <Token Text="[" UId="1466" />
+        <Access Scope="LocalVariable" UId="1467">
+          <Symbol UId="1468">
+            <Component Name="statPointtNumber" UId="1469" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1470" />
+      </Component>
+      <Token Text="." UId="1471" />
+      <Component Name="accelerationRatio" UId="1472" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1473" />
+  <Token Text=":=" UId="1474" />
+  <Blank Num="1" UId="1475" />
+  <Access Scope="LiteralConstant" UId="1476">
+    <Constant UId="1477">
+      <ConstantValue UId="1479">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1480" />
+  <NewLine Num="1" UId="1481" />
+  <Blank Num="16" UId="1482" />
+  <Access Scope="LocalVariable" UId="1483">
+    <Symbol UId="1484">
+      <Component Name="statPointtNumber" UId="1485" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1486" />
+  <Token Text=":=" UId="1487" />
+  <Blank Num="1" UId="1488" />
+  <Access Scope="LocalVariable" UId="1489">
+    <Symbol UId="1490">
+      <Component Name="statPointtNumber" UId="1491" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1492" />
+  <Token Text="+" UId="1493" />
+  <Blank Num="1" UId="1494" />
+  <Access Scope="LiteralConstant" UId="1495">
+    <Constant UId="1496">
+      <ConstantValue UId="1498">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1499" />
+  <NewLine Num="1" UId="1500" />
+  <Blank Num="20" UId="1501" />
+  <NewLine Num="1" UId="1502" />
+  <Blank Num="20" UId="1503" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1504">
+    <Text UId="1505"> Error decelration segment</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1506" />
+  <Blank Num="20" UId="1507" />
+  <Token Text="IF" UId="1508" />
+  <Blank Num="1" UId="1509" />
+  <Access Scope="LocalVariable" UId="1510">
+    <Symbol UId="1511">
+      <Component Name="CamProfile" UId="1512">
+        <Token Text="[" UId="1513" />
+        <Access Scope="LocalVariable" UId="1514">
+          <Symbol UId="1515">
+            <Component Name="statPointtNumber" UId="1516" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1517" />
+        <Token Text="-" UId="1518" />
+        <Blank Num="1" UId="1519" />
+        <Access Scope="LiteralConstant" UId="1520">
+          <Constant UId="1521">
+            <ConstantValue UId="1523">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1524" />
+      </Component>
+      <Token Text="." UId="1525" />
+      <Component Name="leadingValue" UId="1526" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1527" />
+  <Token Text="&lt;" UId="1528" />
+  <Blank Num="1" UId="1529" />
+  <Access Scope="LocalVariable" UId="1530">
+    <Symbol UId="1531">
+      <Component Name="CamProfile" UId="1532">
+        <Token Text="[" UId="1533" />
+        <Access Scope="LocalVariable" UId="1534">
+          <Symbol UId="1535">
+            <Component Name="statPointtNumber" UId="1536" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1537" />
+        <Token Text="-" UId="1538" />
+        <Blank Num="1" UId="1539" />
+        <Access Scope="LiteralConstant" UId="1540">
+          <Constant UId="1541">
+            <ConstantValue UId="1543">2</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1544" />
+      </Component>
+      <Token Text="." UId="1545" />
+      <Component Name="leadingValue" UId="1546" />
+    </Symbol>
+  </Access>
+  <NewLine Num="1" UId="1547" />
+  <Blank Num="20" UId="1548" />
+  <Token Text="OR" UId="1549" />
+  <Blank Num="1" UId="1550" />
+  <Access Scope="LocalVariable" UId="1551">
+    <Symbol UId="1552">
+      <Component Name="CamProfile" UId="1553">
+        <Token Text="[" UId="1554" />
+        <Access Scope="LocalVariable" UId="1555">
+          <Symbol UId="1556">
+            <Component Name="statPointtNumber" UId="1557" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1558" />
+        <Token Text="-" UId="1559" />
+        <Blank Num="1" UId="1560" />
+        <Access Scope="LiteralConstant" UId="1561">
+          <Constant UId="1562">
+            <ConstantValue UId="1564">1</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1565" />
+      </Component>
+      <Token Text="." UId="1566" />
+      <Component Name="followingValue" UId="1567" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1568" />
+  <Token Text="&lt;" UId="1569" />
+  <Blank Num="1" UId="1570" />
+  <Access Scope="LocalVariable" UId="1571">
+    <Symbol UId="1572">
+      <Component Name="CamProfile" UId="1573">
+        <Token Text="[" UId="1574" />
+        <Access Scope="LocalVariable" UId="1575">
+          <Symbol UId="1576">
+            <Component Name="statPointtNumber" UId="1577" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1578" />
+        <Token Text="-" UId="1579" />
+        <Blank Num="1" UId="1580" />
+        <Access Scope="LiteralConstant" UId="1581">
+          <Constant UId="1582">
+            <ConstantValue UId="1584">2</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="1585" />
+      </Component>
+      <Token Text="." UId="1586" />
+      <Component Name="followingValue" UId="1587" />
+    </Symbol>
+  </Access>
+  <NewLine Num="1" UId="1588" />
+  <Blank Num="20" UId="1589" />
+  <Token Text="THEN" UId="1590" />
+  <NewLine Num="1" UId="1591" />
+  <Blank Num="24" UId="1592" />
+  <Access Scope="LocalVariable" UId="1593">
+    <Symbol UId="1594">
+      <Component Name="statError" UId="1595" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1596" />
+  <Token Text=":=" UId="1597" />
+  <Blank Num="1" UId="1598" />
+  <Access Scope="LiteralConstant" UId="1599">
+    <Constant UId="1600">
+      <ConstantValue UId="1602">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1603" />
+  <NewLine Num="1" UId="1604" />
+  <Blank Num="20" UId="1605" />
+  <Token Text="END_IF" UId="1606" />
+  <Token Text=";" UId="1607" />
+  <NewLine Num="1" UId="1608" />
+  <Blank Num="20" UId="1609" />
+  <NewLine Num="1" UId="1610" />
+  <Blank Num="12" UId="1611" />
+  <Token Text="END_FOR" UId="1612" />
+  <Token Text=";" UId="1613" />
+  <NewLine Num="1" UId="1614" />
+  <Blank Num="12" UId="1615" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1616">
+    <Text UId="1617">--- END AREA ---</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1618" />
+  <Blank Num="12" UId="1619" />
+  <NewLine Num="1" UId="1620" />
+  <Blank Num="12" UId="1621" />
+  <Token Text="END_REGION" UId="1622" />
+  <NewLine Num="1" UId="1623" />
+  <Blank Num="4" UId="1624" />
+  <Token Text="END_IF" UId="1625" />
+  <Token Text=";" UId="1626" />
+  <NewLine Num="1" UId="1627" />
+  <Blank Num="4" UId="1628" />
+  <NewLine Num="1" UId="1629" />
+  <Blank Num="4" UId="1630" />
+  <Access Scope="LocalVariable" UId="1631">
+    <Symbol UId="1632">
+      <Component Name="statDone" UId="1633" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1634" />
+  <Token Text=":=" UId="1635" />
+  <Blank Num="1" UId="1636" />
+  <Access Scope="LiteralConstant" UId="1637">
+    <Constant UId="1638">
+      <ConstantValue UId="1640">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1641" />
+  <NewLine Num="1" UId="1642" />
+  <Token Text="END_IF" UId="1643" />
+  <Token Text=";" UId="1644" />
+  <NewLine Num="1" UId="1645" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="13" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="14" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="15" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="16" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="17" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Manage data</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="18" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="REGION" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Text UId="23">Output</Text>
+  <NewLine Num="1" UId="24" />
+  <Blank Num="4" UId="25" />
+  <Access Scope="LocalVariable" UId="26">
+    <Symbol UId="27">
+      <Component Name="DeadZoneBeforeStampArea" UId="28" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="29" />
+  <Token Text=":=" UId="30" />
+  <Blank Num="1" UId="31" />
+  <Access Scope="LocalVariable" UId="32">
+    <Symbol UId="33">
+      <Component Name="FoilAcceleration" UId="34" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="35" />
+  <Token Text="*" UId="36" />
+  <Blank Num="1" UId="37" />
+  <Access Scope="LocalConstant" UId="38">
+    <Constant Name="ratioDeadZone" UId="39" />
+  </Access>
+  <Token Text=";" UId="42" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="43">
+    <Text UId="44">#MasterAccelerationDistance;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="45" />
+  <Blank Num="4" UId="46" />
+  <Access Scope="LocalVariable" UId="47">
+    <Symbol UId="48">
+      <Component Name="DeadZoneAfterStampArea" UId="49" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="50" />
+  <Token Text=":=" UId="51" />
+  <Blank Num="1" UId="52" />
+  <Access Scope="LocalVariable" UId="53">
+    <Symbol UId="54">
+      <Component Name="FoilDeceleration" UId="55" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="56" />
+  <Token Text="*" UId="57" />
+  <Blank Num="1" UId="58" />
+  <Access Scope="LocalConstant" UId="59">
+    <Constant Name="ratioDeadZone" UId="60" />
+  </Access>
+  <Token Text=";" UId="63" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="64">
+    <Text UId="65">#MasterDecelerationDistance;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="66" />
+  <Blank Num="4" UId="67" />
+  <Access Scope="LocalVariable" UId="68">
+    <Symbol UId="69">
+      <Component Name="GapBetweenArea" UId="70" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="71" />
+  <Token Text=":=" UId="72" />
+  <Blank Num="1" UId="73" />
+  <Access Scope="LocalVariable" UId="74">
+    <Symbol UId="75">
+      <Component Name="DeadZoneBeforeStampArea" UId="76" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="77" />
+  <Token Text="+" UId="78" />
+  <Blank Num="1" UId="79" />
+  <Access Scope="LocalVariable" UId="80">
+    <Symbol UId="81">
+      <Component Name="DeadZoneAfterStampArea" UId="82" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="83" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="84">
+    <Text UId="85">#FoilAccelerationDistance + #FoilDecelerationDistance;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="86" />
+  <Blank Num="4" UId="87" />
+  <Access Scope="LocalVariable" UId="88">
+    <Symbol UId="89">
+      <Component Name="NbPoints" UId="90" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="91" />
+  <Token Text=":=" UId="92" />
+  <Blank Num="1" UId="93" />
+  <Access Scope="LocalVariable" UId="94">
+    <Symbol UId="95">
+      <Component Name="statPointtNumber" UId="96" />
+    </Symbol>
+  </Access>
+  <Token Text="-" UId="97" />
+  <Access Scope="LiteralConstant" UId="98">
+    <Constant UId="99">
+      <ConstantValue UId="101">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="102" />
+  <NewLine Num="1" UId="103" />
+  <Blank Num="4" UId="104" />
+  <Access Scope="LocalVariable" UId="105">
+    <Symbol UId="106">
+      <Component Name="Done" UId="107" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="108" />
+  <Token Text=":=" UId="109" />
+  <Blank Num="1" UId="110" />
+  <Access Scope="LocalVariable" UId="111">
+    <Symbol UId="112">
+      <Component Name="statDone" UId="113" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="114" />
+  <NewLine Num="1" UId="115" />
+  <Blank Num="4" UId="116" />
+  <Access Scope="LocalVariable" UId="117">
+    <Symbol UId="118">
+      <Component Name="Error" UId="119" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="120" />
+  <Token Text=":=" UId="121" />
+  <Blank Num="1" UId="122" />
+  <Access Scope="LocalVariable" UId="123">
+    <Symbol UId="124">
+      <Component Name="statError" UId="125" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="126" />
+  <NewLine Num="1" UId="127" />
+  <Token Text="END_REGION" UId="128" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="1A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="1B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="1D" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="1E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Manage output</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="20" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="21" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>Transfert and check data of foil profile</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="22" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

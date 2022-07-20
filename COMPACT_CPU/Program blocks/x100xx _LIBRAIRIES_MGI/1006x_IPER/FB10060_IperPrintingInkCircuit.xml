@@ -1,0 +1,2503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T06:59:50.2887268Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor />
+      <HeaderFamily />
+      <HeaderName />
+      <HeaderVersion>0.1</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="Sensor_Value" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_HighErrorThreshold" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_HighWarningThreshold" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_LowWarningThreshold" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_LowErrorThreshold" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_RawValue" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_CalibrationValue_1" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_CalibrationValue_2" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_LowWarningThreshold" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_HighWarningThreshold" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_LowErrorThreshold" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_HighErrorThreshold" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Tank_ReachLevel" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Tank_RegulationLevel" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="SystemPressurized" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="SystemDepressurized" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="ActivePump" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PumpDirection" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ActiveGeneralSolenoid" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ActiveFillingSolenoid" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_CalibrationStatus_1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_CalibrationStatus_2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_LowWarningThresholdReached" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_HighWarningThresholdReached" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_LowErrorThresholdReached" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_HighErrorThresholdReached" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_NetWeight" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_NetWeight_%" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_CalibrationDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Tank_VarnishQuantity_mm" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Tank_VarnishQuantity_%" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Tank_ReachLevelDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Tank_AutoRegulationInProgress" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_HighErrorThresholdReached" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_HighWarningThresholdReached" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_LowWarningThresholdReached" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_LowErrorThresholdReached" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_Calibrated" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="InkCircuitInError" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="AutoRegulationPositionDeviationDetected" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="InOut">
+    <Member Name="RequestAcknowledge" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_RequestCalibration_1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_RequestCalibration_2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Tank_RequestReachLevel" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Tank_RequestActiveAutoRegulation" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_ResetCalibration" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_CalibrationValueX_1" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_CalibrationValueY_1" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_CalibrationValueX_2" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Sensor_CalibrationValueY_2" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_CalibrationDataX_1" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_CalibrationDataY_1" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_CalibrationDataX_2" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BarrelWS_CalibrationDataY_2" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Static">
+    <Member Name="DirectionSended" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="AutoRegulationReachedLevelOnce" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="InkTankOperationStateDiagram" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="R_TRIG_FillTank" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_DrainTank" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_ReachLevelTank" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_AutoRegulation" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="F_TRIG_FillTank" Datatype="F_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="F_TRIG_DrainTank" Datatype="F_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="F_TRIG_ReachLevelTank" Datatype="F_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="F_TRIG_AutoRegulation" Datatype="F_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TON_AutoRegulationPositionDeviation" Datatype="TON_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TON_SendActivationAfterDirection" Datatype="TON_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TON_FillTankSafety" Datatype="TON_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TON_OverPressure" Datatype="TON_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="FB10030_AnalogicalSensor_MicrosonicUltrasonicSensor_TankLevel" Datatype="&quot;FB10030_AnalogicalSensor&quot;" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="RawValue" Datatype="Int" /><Member Name="CalibrationValue_1" Datatype="Real" /><Member Name="CalibrationValue_2" Datatype="Real" /><Member Name="Unit" Datatype="SInt" /><Member Name="ReverseScale" Datatype="Bool" /><Member Name="HighErrorThreshold" Datatype="Real" /><Member Name="HighWarningThreshold" Datatype="Real" /><Member Name="LowWarningThreshold" Datatype="Real" /><Member Name="LowErrorThreshold" Datatype="Real" /></Section><Section Name="Output"><Member Name="SensorCalibrated" Datatype="Bool" /><Member Name="CalibrationStatus_1" Datatype="Bool" /><Member Name="CalibrationStatus_2" Datatype="Bool" /><Member Name="ActualValue" Datatype="Real" /><Member Name="ActualValue_%" Datatype="Real" /><Member Name="HighErrorThresholdReached" Datatype="Bool" /><Member Name="HighWarningThresholdReached" Datatype="Bool" /><Member Name="LowWarningThresholdReached" Datatype="Bool" /><Member Name="LowErrorThresholdReached" Datatype="Bool" /></Section><Section Name="InOut"><Member Name="RequestCalibration_1" Datatype="Bool" /><Member Name="RequestResetCalibration" Datatype="Bool" /><Member Name="RequestCalibration_2" Datatype="Bool" /><Member Name="CalibrationDataX_1" Datatype="Real" /><Member Name="CalibrationDataY_1" Datatype="Real" /><Member Name="CalibrationDataX_2" Datatype="Real" /><Member Name="CalibrationDataY_2" Datatype="Real" /></Section><Section Name="Static" /></Sections></Member>
+    <Member Name="FB10030_AnalogicalSensor_TLMScale_VarnishBarrel" Datatype="&quot;FB10030_AnalogicalSensor&quot;" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="RawValue" Datatype="Int" /><Member Name="CalibrationValue_1" Datatype="Real" /><Member Name="CalibrationValue_2" Datatype="Real" /><Member Name="Unit" Datatype="SInt" /><Member Name="ReverseScale" Datatype="Bool" /><Member Name="HighErrorThreshold" Datatype="Real" /><Member Name="HighWarningThreshold" Datatype="Real" /><Member Name="LowWarningThreshold" Datatype="Real" /><Member Name="LowErrorThreshold" Datatype="Real" /></Section><Section Name="Output"><Member Name="SensorCalibrated" Datatype="Bool" /><Member Name="CalibrationStatus_1" Datatype="Bool" /><Member Name="CalibrationStatus_2" Datatype="Bool" /><Member Name="ActualValue" Datatype="Real" /><Member Name="ActualValue_%" Datatype="Real" /><Member Name="HighErrorThresholdReached" Datatype="Bool" /><Member Name="HighWarningThresholdReached" Datatype="Bool" /><Member Name="LowWarningThresholdReached" Datatype="Bool" /><Member Name="LowErrorThresholdReached" Datatype="Bool" /></Section><Section Name="InOut"><Member Name="RequestCalibration_1" Datatype="Bool" /><Member Name="RequestResetCalibration" Datatype="Bool" /><Member Name="RequestCalibration_2" Datatype="Bool" /><Member Name="CalibrationDataX_1" Datatype="Real" /><Member Name="CalibrationDataY_1" Datatype="Real" /><Member Name="CalibrationDataX_2" Datatype="Real" /><Member Name="CalibrationDataY_2" Datatype="Real" /></Section><Section Name="Static" /></Sections></Member>
+  </Section>
+  <Section Name="Temp" />
+  <Section Name="Constant">
+    <Member Name="WAIT_FOR_OPERATION_REQUEST" Datatype="Int" Accessibility="Public">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="FILL_TANK" Datatype="Int" Accessibility="Public">
+      <StartValue>10</StartValue>
+    </Member>
+    <Member Name="DRAIN_TANK" Datatype="Int" Accessibility="Public">
+      <StartValue>20</StartValue>
+    </Member>
+    <Member Name="REACH_LEVEL_TANK" Datatype="Int" Accessibility="Public">
+      <StartValue>30</StartValue>
+    </Member>
+    <Member Name="AUTO_REGULATION" Datatype="Int" Accessibility="Public">
+      <StartValue>40</StartValue>
+    </Member>
+    <Member Name="OPERATION_DONE" Datatype="Int" Accessibility="Public">
+      <StartValue>50</StartValue>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>FB10060_IperPrintingInkCircuit</Name>
+      <Number>10060</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>Hauteur du Tank 115mm
+Zone du capteur 97mm</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="GlobalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="FirstScan" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="THEN" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalVariable" UId="30">
+    <Symbol UId="31">
+      <Component Name="DirectionSended" UId="32" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="33" />
+  <Token Text=":=" UId="34" />
+  <Blank Num="1" UId="35" />
+  <Access Scope="LiteralConstant" UId="36">
+    <Constant UId="37">
+      <ConstantValue UId="39">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="40" />
+  <NewLine Num="1" UId="41" />
+  <Blank Num="4" UId="42" />
+  <Access Scope="LocalVariable" UId="43">
+    <Symbol UId="44">
+      <Component Name="Tank_ReachLevelDone" UId="45" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="46" />
+  <Token Text=":=" UId="47" />
+  <Blank Num="1" UId="48" />
+  <Access Scope="LiteralConstant" UId="49">
+    <Constant UId="50">
+      <ConstantValue UId="52">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="53" />
+  <NewLine Num="1" UId="54" />
+  <Blank Num="4" UId="55" />
+  <Access Scope="LocalVariable" UId="56">
+    <Symbol UId="57">
+      <Component Name="InkTankOperationStateDiagram" UId="58" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="59" />
+  <Token Text=":=" UId="60" />
+  <Blank Num="1" UId="61" />
+  <Access Scope="LocalConstant" UId="62">
+    <Constant Name="WAIT_FOR_OPERATION_REQUEST" UId="63" />
+  </Access>
+  <Token Text=";" UId="66" />
+  <NewLine Num="1" UId="67" />
+  <Token Text="END_IF" UId="68" />
+  <Token Text=";" UId="69" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>First Scan</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="REGION" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Text UId="23">EDGE SIGNALS</Text>
+  <NewLine Num="1" UId="24" />
+  <Blank Num="4" UId="25" />
+  <Access Scope="LocalVariable" UId="26">
+    <Symbol UId="27">
+      <Component Name="R_TRIG_ReachLevelTank" UId="28" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="29">
+    <Instruction UId="30">
+      <Token Text="(" UId="31" />
+      <Parameter Name="CLK" UId="32">
+        <Blank Num="1" UId="33" />
+        <Token Text=":=" UId="34" />
+        <Blank Num="1" UId="35" />
+        <Access Scope="LocalVariable" UId="36">
+          <Symbol UId="37">
+            <Component Name="Tank_RequestReachLevel" UId="38" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="39" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="40" />
+  <NewLine Num="1" UId="41" />
+  <Blank Num="4" UId="42" />
+  <Access Scope="LocalVariable" UId="43">
+    <Symbol UId="44">
+      <Component Name="R_TRIG_AutoRegulation" UId="45" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="46">
+    <Instruction UId="47">
+      <Token Text="(" UId="48" />
+      <Parameter Name="CLK" UId="49">
+        <Blank Num="1" UId="50" />
+        <Token Text=":=" UId="51" />
+        <Blank Num="1" UId="52" />
+        <Access Scope="LocalVariable" UId="53">
+          <Symbol UId="54">
+            <Component Name="Tank_RequestActiveAutoRegulation" UId="55" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="56" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="57" />
+  <NewLine Num="1" UId="58" />
+  <Blank Num="4" UId="59" />
+  <NewLine Num="1" UId="60" />
+  <Blank Num="4" UId="61" />
+  <Access Scope="LocalVariable" UId="62">
+    <Symbol UId="63">
+      <Component Name="F_TRIG_ReachLevelTank" UId="64" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="65">
+    <Instruction UId="66">
+      <Token Text="(" UId="67" />
+      <Parameter Name="CLK" UId="68">
+        <Blank Num="1" UId="69" />
+        <Token Text=":=" UId="70" />
+        <Blank Num="1" UId="71" />
+        <Access Scope="LocalVariable" UId="72">
+          <Symbol UId="73">
+            <Component Name="Tank_RequestReachLevel" UId="74" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="75" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="76" />
+  <NewLine Num="1" UId="77" />
+  <Blank Num="4" UId="78" />
+  <Access Scope="LocalVariable" UId="79">
+    <Symbol UId="80">
+      <Component Name="F_TRIG_AutoRegulation" UId="81" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="82">
+    <Instruction UId="83">
+      <Token Text="(" UId="84" />
+      <Parameter Name="CLK" UId="85">
+        <Blank Num="1" UId="86" />
+        <Token Text=":=" UId="87" />
+        <Blank Num="1" UId="88" />
+        <Access Scope="LocalVariable" UId="89">
+          <Symbol UId="90">
+            <Component Name="Tank_RequestActiveAutoRegulation" UId="91" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="92" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="93" />
+  <NewLine Num="1" UId="94" />
+  <Token Text="END_REGION" UId="95" />
+  <NewLine Num="2" UId="96" />
+  <Token Text="REGION" UId="97" />
+  <Blank Num="1" UId="98" />
+  <Text UId="99">TIMERS</Text>
+  <NewLine Num="1" UId="100" />
+  <Blank Num="4" UId="101" />
+  <Access Scope="LocalVariable" UId="102">
+    <Symbol UId="103">
+      <Component Name="TON_AutoRegulationPositionDeviation" UId="104" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="105">
+    <Instruction UId="106">
+      <Token Text="(" UId="107" />
+      <Parameter Name="IN" UId="108">
+        <Blank Num="1" UId="109" />
+        <Token Text=":=" UId="110" />
+        <Blank Num="1" UId="111" />
+        <Access Scope="LocalVariable" UId="112">
+          <Symbol UId="113">
+            <Component Name="AutoRegulationReachedLevelOnce" UId="114" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="115" />
+        <Token Text="AND" UId="116" />
+        <Blank Num="1" UId="117" />
+        <Token Text="NOT" UId="118" />
+        <Blank Num="1" UId="119" />
+        <Token Text="(" UId="120" />
+        <Access Scope="Call" UId="121">
+          <CallInfo UId="122" BlockType="FC">
+            <Instance Scope="GlobalVariable" UId="124">
+              <Component Name="FC10021_TolerenceRelation" UId="123" />
+            </Instance>
+            <Token Text="(" UId="125" />
+            <Parameter Name="X" UId="126">
+              <Blank Num="1" UId="127" />
+              <Token Text=":=" UId="128" />
+              <Blank Num="1" UId="129" />
+              <Access Scope="LocalVariable" UId="130">
+                <Symbol UId="131">
+                  <Component Name="Tank_VarnishQuantity_mm" UId="132" />
+                </Symbol>
+              </Access>
+            </Parameter>
+            <Token Text="," UId="133" />
+            <Blank Num="1" UId="134" />
+            <Parameter Name="Y" UId="135">
+              <Blank Num="1" UId="136" />
+              <Token Text=":=" UId="137" />
+              <Blank Num="1" UId="138" />
+              <Access Scope="LocalVariable" UId="139">
+                <Symbol UId="140">
+                  <Component Name="Tank_RegulationLevel" UId="141" />
+                </Symbol>
+              </Access>
+            </Parameter>
+            <Token Text="," UId="142" />
+            <Blank Num="1" UId="143" />
+            <Parameter Name="Tolerance" UId="144">
+              <Blank Num="1" UId="145" />
+              <Token Text=":=" UId="146" />
+              <Blank Num="1" UId="147" />
+              <Access Scope="LiteralConstant" UId="148">
+                <Constant UId="149">
+                  <ConstantValue UId="151">10.0</ConstantValue>
+                </Constant>
+              </Access>
+            </Parameter>
+            <Token Text=")" UId="153" />
+          </CallInfo>
+        </Access>
+        <Token Text=")" UId="154" />
+      </Parameter>
+      <Token Text="," UId="155" />
+      <NewLine Num="1" UId="156" />
+      <Blank Num="41" UId="157" />
+      <Parameter Name="PT" UId="158">
+        <Blank Num="1" UId="159" />
+        <Token Text=":=" UId="160" />
+        <Blank Num="1" UId="161" />
+        <Access Scope="TypedConstant" UId="162">
+          <Constant UId="163">
+            <ConstantValue UId="164">T#5s</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="165" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="166" />
+  <NewLine Num="1" UId="167" />
+  <Blank Num="4" UId="168" />
+  <Access Scope="LocalVariable" UId="169">
+    <Symbol UId="170">
+      <Component Name="TON_SendActivationAfterDirection" UId="171" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="172">
+    <Instruction UId="173">
+      <Token Text="(" UId="174" />
+      <Parameter Name="IN" UId="175">
+        <Blank Num="1" UId="176" />
+        <Token Text=":=" UId="177" />
+        <Blank Num="1" UId="178" />
+        <Access Scope="LocalVariable" UId="179">
+          <Symbol UId="180">
+            <Component Name="InkTankOperationStateDiagram" UId="181" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="182" />
+        <Token Text="=" UId="183" />
+        <Blank Num="1" UId="184" />
+        <Access Scope="LocalConstant" UId="185">
+          <Constant Name="FILL_TANK" UId="186" />
+        </Access>
+        <Blank Num="1" UId="189" />
+        <Token Text="OR" UId="190" />
+        <NewLine Num="1" UId="191" />
+        <Blank Num="38" UId="192" />
+        <Access Scope="LocalVariable" UId="193">
+          <Symbol UId="194">
+            <Component Name="InkTankOperationStateDiagram" UId="195" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="196" />
+        <Token Text="=" UId="197" />
+        <Blank Num="1" UId="198" />
+        <Access Scope="LocalConstant" UId="199">
+          <Constant Name="DRAIN_TANK" UId="200" />
+        </Access>
+        <Blank Num="1" UId="203" />
+        <Token Text="OR" UId="204" />
+        <NewLine Num="1" UId="205" />
+        <Blank Num="38" UId="206" />
+        <Access Scope="LocalVariable" UId="207">
+          <Symbol UId="208">
+            <Component Name="InkTankOperationStateDiagram" UId="209" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="210" />
+        <Token Text="=" UId="211" />
+        <Blank Num="1" UId="212" />
+        <Access Scope="LocalConstant" UId="213">
+          <Constant Name="REACH_LEVEL_TANK" UId="214" />
+        </Access>
+        <Blank Num="1" UId="217" />
+        <Token Text="OR" UId="218" />
+        <NewLine Num="1" UId="219" />
+        <Blank Num="38" UId="220" />
+        <Access Scope="LocalVariable" UId="221">
+          <Symbol UId="222">
+            <Component Name="InkTankOperationStateDiagram" UId="223" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="224" />
+        <Token Text="=" UId="225" />
+        <Blank Num="1" UId="226" />
+        <Access Scope="LocalConstant" UId="227">
+          <Constant Name="AUTO_REGULATION" UId="228" />
+        </Access>
+      </Parameter>
+      <Token Text="," UId="231" />
+      <NewLine Num="1" UId="232" />
+      <Blank Num="38" UId="233" />
+      <Parameter Name="PT" UId="234">
+        <Blank Num="1" UId="235" />
+        <Token Text=":=" UId="236" />
+        <Blank Num="1" UId="237" />
+        <Access Scope="TypedConstant" UId="238">
+          <Constant UId="239">
+            <ConstantValue UId="240">T#20ms</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="241" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="242" />
+  <Blank Num="1" UId="243" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="244">
+    <Text UId="245">Time direction signal sended and pump activation necessary for the electronical card</Text>
+  </LineComment>
+  <NewLine Num="1" UId="246" />
+  <Blank Num="4" UId="247" />
+  <Access Scope="LocalVariable" UId="248">
+    <Symbol UId="249">
+      <Component Name="TON_FillTankSafety" UId="250" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="251">
+    <Instruction UId="252">
+      <Token Text="(" UId="253" />
+      <Parameter Name="IN" UId="254">
+        <Blank Num="1" UId="255" />
+        <Token Text=":=" UId="256" />
+        <Blank Num="1" UId="257" />
+        <Access Scope="LocalVariable" UId="258">
+          <Symbol UId="259">
+            <Component Name="ActivePump" UId="260" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="261" />
+        <Token Text="AND" UId="262" />
+        <Blank Num="1" UId="263" />
+        <Access Scope="LocalVariable" UId="264">
+          <Symbol UId="265">
+            <Component Name="PumpDirection" UId="266" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="267" />
+      <NewLine Num="1" UId="268" />
+      <Blank Num="24" UId="269" />
+      <Parameter Name="PT" UId="270">
+        <Blank Num="1" UId="271" />
+        <Token Text=":=" UId="272" />
+        <Blank Num="1" UId="273" />
+        <Access Scope="TypedConstant" UId="274">
+          <Constant UId="275">
+            <ConstantValue UId="276">T#380s</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="277" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="278" />
+  <Blank Num="2" UId="279" />
+  <NewLine Num="1" UId="280" />
+  <Token Text="END_REGION" UId="281" />
+  <Blank Num="2" UId="282" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="F" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="10" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Edge Signals &amp; Timers</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="11" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="12" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="TON_SendActivationAfterDirection" UId="25" />
+      <Token Text="." UId="26" />
+      <Component Name="Q" UId="27" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="28" />
+  <Token Text="THEN" UId="29" />
+  <NewLine Num="1" UId="30" />
+  <Blank Num="4" UId="31" />
+  <Access Scope="LocalVariable" UId="32">
+    <Symbol UId="33">
+      <Component Name="DirectionSended" UId="34" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="35" />
+  <Token Text=":=" UId="36" />
+  <Blank Num="1" UId="37" />
+  <Access Scope="LiteralConstant" UId="38">
+    <Constant UId="39">
+      <ConstantValue UId="41">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="42" />
+  <NewLine Num="1" UId="43" />
+  <Token Text="END_IF" UId="44" />
+  <Token Text=";" UId="45" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="13" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="14" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="15" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="16" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="17" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Tank Commands Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="18" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="LocalVariable" UId="21">
+      <Symbol>
+        <Component Name="BarrelWS_RawValue" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="22">
+      <Symbol>
+        <Component Name="BarrelWS_CalibrationValue_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="23">
+      <Symbol>
+        <Component Name="BarrelWS_CalibrationValue_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="24">
+      <Constant>
+        <ConstantType>SInt</ConstantType>
+        <ConstantValue>1</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LocalVariable" UId="25">
+      <Symbol>
+        <Component Name="BarrelWS_HighErrorThreshold" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="26">
+      <Symbol>
+        <Component Name="BarrelWS_HighWarningThreshold" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="27">
+      <Symbol>
+        <Component Name="BarrelWS_LowWarningThreshold" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="28">
+      <Symbol>
+        <Component Name="BarrelWS_LowErrorThreshold" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="29">
+      <Symbol>
+        <Component Name="BarrelWS_RequestCalibration_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="30">
+      <Symbol>
+        <Component Name="BarrelWS_RequestCalibration_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="31">
+      <Symbol>
+        <Component Name="BarrelWS_ResetCalibration" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="32">
+      <Symbol>
+        <Component Name="BarrelWS_CalibrationDataX_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="33">
+      <Symbol>
+        <Component Name="BarrelWS_CalibrationDataY_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="34">
+      <Symbol>
+        <Component Name="BarrelWS_CalibrationDataX_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="35">
+      <Symbol>
+        <Component Name="BarrelWS_CalibrationDataY_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="36">
+      <Symbol>
+        <Component Name="BarrelWS_CalibrationDone" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="37">
+      <Symbol>
+        <Component Name="BarrelWS_CalibrationStatus_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="38">
+      <Symbol>
+        <Component Name="BarrelWS_CalibrationStatus_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="39">
+      <Symbol>
+        <Component Name="BarrelWS_NetWeight" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="40">
+      <Symbol>
+        <Component Name="BarrelWS_NetWeight_%" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="41">
+      <Symbol>
+        <Component Name="BarrelWS_HighErrorThresholdReached" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="42">
+      <Symbol>
+        <Component Name="BarrelWS_HighWarningThresholdReached" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="43">
+      <Symbol>
+        <Component Name="BarrelWS_LowWarningThresholdReached" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="44">
+      <Symbol>
+        <Component Name="BarrelWS_LowErrorThresholdReached" />
+      </Symbol>
+    </Access>
+    <Call UId="45">
+      <CallInfo Name="FB10030_AnalogicalSensor" BlockType="FB">
+        <Instance Scope="LocalVariable" UId="46">
+          <Component Name="FB10030_AnalogicalSensor_TLMScale_VarnishBarrel" />
+        </Instance>
+        <Parameter Name="RawValue" Section="Input" Type="Int" />
+        <Parameter Name="CalibrationValue_1" Section="Input" Type="Real" />
+        <Parameter Name="CalibrationValue_2" Section="Input" Type="Real" />
+        <Parameter Name="Unit" Section="Input" Type="SInt" />
+        <Parameter Name="ReverseScale" Section="Input" Type="Bool" />
+        <Parameter Name="HighErrorThreshold" Section="Input" Type="Real" />
+        <Parameter Name="HighWarningThreshold" Section="Input" Type="Real" />
+        <Parameter Name="LowWarningThreshold" Section="Input" Type="Real" />
+        <Parameter Name="LowErrorThreshold" Section="Input" Type="Real" />
+        <Parameter Name="SensorCalibrated" Section="Output" Type="Bool" />
+        <Parameter Name="CalibrationStatus_1" Section="Output" Type="Bool" />
+        <Parameter Name="CalibrationStatus_2" Section="Output" Type="Bool" />
+        <Parameter Name="ActualValue" Section="Output" Type="Real" />
+        <Parameter Name="ActualValue_%" Section="Output" Type="Real" />
+        <Parameter Name="HighErrorThresholdReached" Section="Output" Type="Bool" />
+        <Parameter Name="HighWarningThresholdReached" Section="Output" Type="Bool" />
+        <Parameter Name="LowWarningThresholdReached" Section="Output" Type="Bool" />
+        <Parameter Name="LowErrorThresholdReached" Section="Output" Type="Bool" />
+        <Parameter Name="RequestCalibration_1" Section="InOut" Type="Bool" />
+        <Parameter Name="RequestResetCalibration" Section="InOut" Type="Bool" />
+        <Parameter Name="RequestCalibration_2" Section="InOut" Type="Bool" />
+        <Parameter Name="CalibrationDataX_1" Section="InOut" Type="Real" />
+        <Parameter Name="CalibrationDataY_1" Section="InOut" Type="Real" />
+        <Parameter Name="CalibrationDataX_2" Section="InOut" Type="Real" />
+        <Parameter Name="CalibrationDataY_2" Section="InOut" Type="Real" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="48">
+      <Powerrail />
+      <NameCon UId="45" Name="en" />
+    </Wire>
+    <Wire UId="49">
+      <IdentCon UId="21" />
+      <NameCon UId="45" Name="RawValue" />
+    </Wire>
+    <Wire UId="50">
+      <IdentCon UId="22" />
+      <NameCon UId="45" Name="CalibrationValue_1" />
+    </Wire>
+    <Wire UId="51">
+      <IdentCon UId="23" />
+      <NameCon UId="45" Name="CalibrationValue_2" />
+    </Wire>
+    <Wire UId="52">
+      <IdentCon UId="24" />
+      <NameCon UId="45" Name="Unit" />
+    </Wire>
+    <Wire UId="53">
+      <OpenCon UId="47" />
+      <NameCon UId="45" Name="ReverseScale" />
+    </Wire>
+    <Wire UId="54">
+      <IdentCon UId="25" />
+      <NameCon UId="45" Name="HighErrorThreshold" />
+    </Wire>
+    <Wire UId="55">
+      <IdentCon UId="26" />
+      <NameCon UId="45" Name="HighWarningThreshold" />
+    </Wire>
+    <Wire UId="56">
+      <IdentCon UId="27" />
+      <NameCon UId="45" Name="LowWarningThreshold" />
+    </Wire>
+    <Wire UId="57">
+      <IdentCon UId="28" />
+      <NameCon UId="45" Name="LowErrorThreshold" />
+    </Wire>
+    <Wire UId="58">
+      <IdentCon UId="29" />
+      <NameCon UId="45" Name="RequestCalibration_1" />
+    </Wire>
+    <Wire UId="59">
+      <IdentCon UId="30" />
+      <NameCon UId="45" Name="RequestCalibration_2" />
+    </Wire>
+    <Wire UId="60">
+      <IdentCon UId="31" />
+      <NameCon UId="45" Name="RequestResetCalibration" />
+    </Wire>
+    <Wire UId="61">
+      <IdentCon UId="32" />
+      <NameCon UId="45" Name="CalibrationDataX_1" />
+    </Wire>
+    <Wire UId="62">
+      <IdentCon UId="33" />
+      <NameCon UId="45" Name="CalibrationDataY_1" />
+    </Wire>
+    <Wire UId="63">
+      <IdentCon UId="34" />
+      <NameCon UId="45" Name="CalibrationDataX_2" />
+    </Wire>
+    <Wire UId="64">
+      <IdentCon UId="35" />
+      <NameCon UId="45" Name="CalibrationDataY_2" />
+    </Wire>
+    <Wire UId="65">
+      <NameCon UId="45" Name="SensorCalibrated" />
+      <IdentCon UId="36" />
+    </Wire>
+    <Wire UId="66">
+      <NameCon UId="45" Name="CalibrationStatus_1" />
+      <IdentCon UId="37" />
+    </Wire>
+    <Wire UId="67">
+      <NameCon UId="45" Name="CalibrationStatus_2" />
+      <IdentCon UId="38" />
+    </Wire>
+    <Wire UId="68">
+      <NameCon UId="45" Name="ActualValue" />
+      <IdentCon UId="39" />
+    </Wire>
+    <Wire UId="69">
+      <NameCon UId="45" Name="ActualValue_%" />
+      <IdentCon UId="40" />
+    </Wire>
+    <Wire UId="70">
+      <NameCon UId="45" Name="HighErrorThresholdReached" />
+      <IdentCon UId="41" />
+    </Wire>
+    <Wire UId="71">
+      <NameCon UId="45" Name="HighWarningThresholdReached" />
+      <IdentCon UId="42" />
+    </Wire>
+    <Wire UId="72">
+      <NameCon UId="45" Name="LowWarningThresholdReached" />
+      <IdentCon UId="43" />
+    </Wire>
+    <Wire UId="73">
+      <NameCon UId="45" Name="LowErrorThresholdReached" />
+      <IdentCon UId="44" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="1A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="1B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="1D" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="1E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Ink Barrel Weigh Scale Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="20" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="LocalVariable" UId="21">
+      <Symbol>
+        <Component Name="Sensor_Value" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="22">
+      <Symbol>
+        <Component Name="Sensor_HighErrorThreshold" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="23">
+      <Symbol>
+        <Component Name="Sensor_HighWarningThreshold" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="24">
+      <Symbol>
+        <Component Name="Sensor_LowWarningThreshold" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="25">
+      <Symbol>
+        <Component Name="Sensor_LowErrorThreshold" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="26">
+      <Symbol>
+        <Component Name="Sensor_CalibrationValueX_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="27">
+      <Symbol>
+        <Component Name="Sensor_CalibrationValueY_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="28">
+      <Symbol>
+        <Component Name="Sensor_CalibrationValueX_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="29">
+      <Symbol>
+        <Component Name="Sensor_CalibrationValueY_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="30">
+      <Symbol>
+        <Component Name="Sensor_Calibrated" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="31">
+      <Symbol>
+        <Component Name="Tank_VarnishQuantity_mm" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="32">
+      <Symbol>
+        <Component Name="Tank_VarnishQuantity_%" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="33">
+      <Symbol>
+        <Component Name="Sensor_HighErrorThresholdReached" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="34">
+      <Symbol>
+        <Component Name="Sensor_HighWarningThresholdReached" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="35">
+      <Symbol>
+        <Component Name="Sensor_LowWarningThresholdReached" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="36">
+      <Symbol>
+        <Component Name="Sensor_LowErrorThresholdReached" />
+      </Symbol>
+    </Access>
+    <Call UId="37">
+      <CallInfo Name="FB10030_AnalogicalSensor" BlockType="FB">
+        <Instance Scope="LocalVariable" UId="38">
+          <Component Name="FB10030_AnalogicalSensor_MicrosonicUltrasonicSensor_TankLevel" />
+        </Instance>
+        <Parameter Name="RawValue" Section="Input" Type="Int" />
+        <Parameter Name="CalibrationValue_1" Section="Input" Type="Real" />
+        <Parameter Name="CalibrationValue_2" Section="Input" Type="Real" />
+        <Parameter Name="Unit" Section="Input" Type="SInt" />
+        <Parameter Name="ReverseScale" Section="Input" Type="Bool" />
+        <Parameter Name="HighErrorThreshold" Section="Input" Type="Real" />
+        <Parameter Name="HighWarningThreshold" Section="Input" Type="Real" />
+        <Parameter Name="LowWarningThreshold" Section="Input" Type="Real" />
+        <Parameter Name="LowErrorThreshold" Section="Input" Type="Real" />
+        <Parameter Name="SensorCalibrated" Section="Output" Type="Bool" />
+        <Parameter Name="CalibrationStatus_1" Section="Output" Type="Bool" />
+        <Parameter Name="CalibrationStatus_2" Section="Output" Type="Bool" />
+        <Parameter Name="ActualValue" Section="Output" Type="Real" />
+        <Parameter Name="ActualValue_%" Section="Output" Type="Real" />
+        <Parameter Name="HighErrorThresholdReached" Section="Output" Type="Bool" />
+        <Parameter Name="HighWarningThresholdReached" Section="Output" Type="Bool" />
+        <Parameter Name="LowWarningThresholdReached" Section="Output" Type="Bool" />
+        <Parameter Name="LowErrorThresholdReached" Section="Output" Type="Bool" />
+        <Parameter Name="RequestCalibration_1" Section="InOut" Type="Bool" />
+        <Parameter Name="RequestResetCalibration" Section="InOut" Type="Bool" />
+        <Parameter Name="RequestCalibration_2" Section="InOut" Type="Bool" />
+        <Parameter Name="CalibrationDataX_1" Section="InOut" Type="Real" />
+        <Parameter Name="CalibrationDataY_1" Section="InOut" Type="Real" />
+        <Parameter Name="CalibrationDataX_2" Section="InOut" Type="Real" />
+        <Parameter Name="CalibrationDataY_2" Section="InOut" Type="Real" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="48">
+      <Powerrail />
+      <NameCon UId="37" Name="en" />
+    </Wire>
+    <Wire UId="49">
+      <IdentCon UId="21" />
+      <NameCon UId="37" Name="RawValue" />
+    </Wire>
+    <Wire UId="50">
+      <OpenCon UId="39" />
+      <NameCon UId="37" Name="CalibrationValue_1" />
+    </Wire>
+    <Wire UId="51">
+      <OpenCon UId="40" />
+      <NameCon UId="37" Name="CalibrationValue_2" />
+    </Wire>
+    <Wire UId="52">
+      <OpenCon UId="41" />
+      <NameCon UId="37" Name="Unit" />
+    </Wire>
+    <Wire UId="53">
+      <OpenCon UId="42" />
+      <NameCon UId="37" Name="ReverseScale" />
+    </Wire>
+    <Wire UId="54">
+      <IdentCon UId="22" />
+      <NameCon UId="37" Name="HighErrorThreshold" />
+    </Wire>
+    <Wire UId="55">
+      <IdentCon UId="23" />
+      <NameCon UId="37" Name="HighWarningThreshold" />
+    </Wire>
+    <Wire UId="56">
+      <IdentCon UId="24" />
+      <NameCon UId="37" Name="LowWarningThreshold" />
+    </Wire>
+    <Wire UId="57">
+      <IdentCon UId="25" />
+      <NameCon UId="37" Name="LowErrorThreshold" />
+    </Wire>
+    <Wire UId="58">
+      <OpenCon UId="43" />
+      <NameCon UId="37" Name="RequestCalibration_1" />
+    </Wire>
+    <Wire UId="59">
+      <OpenCon UId="44" />
+      <NameCon UId="37" Name="RequestCalibration_2" />
+    </Wire>
+    <Wire UId="60">
+      <OpenCon UId="45" />
+      <NameCon UId="37" Name="RequestResetCalibration" />
+    </Wire>
+    <Wire UId="61">
+      <IdentCon UId="26" />
+      <NameCon UId="37" Name="CalibrationDataX_1" />
+    </Wire>
+    <Wire UId="62">
+      <IdentCon UId="27" />
+      <NameCon UId="37" Name="CalibrationDataY_1" />
+    </Wire>
+    <Wire UId="63">
+      <IdentCon UId="28" />
+      <NameCon UId="37" Name="CalibrationDataX_2" />
+    </Wire>
+    <Wire UId="64">
+      <IdentCon UId="29" />
+      <NameCon UId="37" Name="CalibrationDataY_2" />
+    </Wire>
+    <Wire UId="65">
+      <NameCon UId="37" Name="SensorCalibrated" />
+      <IdentCon UId="30" />
+    </Wire>
+    <Wire UId="66">
+      <NameCon UId="37" Name="CalibrationStatus_1" />
+      <OpenCon UId="46" />
+    </Wire>
+    <Wire UId="67">
+      <NameCon UId="37" Name="CalibrationStatus_2" />
+      <OpenCon UId="47" />
+    </Wire>
+    <Wire UId="68">
+      <NameCon UId="37" Name="ActualValue" />
+      <IdentCon UId="31" />
+    </Wire>
+    <Wire UId="69">
+      <NameCon UId="37" Name="ActualValue_%" />
+      <IdentCon UId="32" />
+    </Wire>
+    <Wire UId="70">
+      <NameCon UId="37" Name="HighErrorThresholdReached" />
+      <IdentCon UId="33" />
+    </Wire>
+    <Wire UId="71">
+      <NameCon UId="37" Name="HighWarningThresholdReached" />
+      <IdentCon UId="34" />
+    </Wire>
+    <Wire UId="72">
+      <NameCon UId="37" Name="LowWarningThresholdReached" />
+      <IdentCon UId="35" />
+    </Wire>
+    <Wire UId="73">
+      <NameCon UId="37" Name="LowErrorThresholdReached" />
+      <IdentCon UId="36" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="21" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="22" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="23" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="24" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="25" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Tank Level Sensor Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="26" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="27" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="CASE" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="InkTankOperationStateDiagram" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="OF" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalConstant" UId="30">
+    <Constant Name="WAIT_FOR_OPERATION_REQUEST" UId="31" />
+  </Access>
+  <Token Text=":" UId="34" />
+  <NewLine Num="1" UId="35" />
+  <Blank Num="8" UId="36" />
+  <Token Text="IF" UId="37" />
+  <Blank Num="1" UId="38" />
+  <Access Scope="LocalVariable" UId="39">
+    <Symbol UId="40">
+      <Component Name="R_TRIG_ReachLevelTank" UId="41" />
+      <Token Text="." UId="42" />
+      <Component Name="Q" UId="43" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="44" />
+  <Token Text="THEN" UId="45" />
+  <NewLine Num="1" UId="46" />
+  <Blank Num="12" UId="47" />
+  <Access Scope="LocalVariable" UId="48">
+    <Symbol UId="49">
+      <Component Name="Tank_ReachLevelDone" UId="50" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="51" />
+  <Token Text=":=" UId="52" />
+  <Blank Num="1" UId="53" />
+  <Access Scope="LiteralConstant" UId="54">
+    <Constant UId="55">
+      <ConstantValue UId="57">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="58" />
+  <NewLine Num="1" UId="59" />
+  <Blank Num="12" UId="60" />
+  <Access Scope="LocalVariable" UId="61">
+    <Symbol UId="62">
+      <Component Name="PumpDirection" UId="63" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="64" />
+  <Token Text=":=" UId="65" />
+  <Blank Num="1" UId="66" />
+  <Access Scope="LiteralConstant" UId="67">
+    <Constant UId="68">
+      <ConstantValue UId="70">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="71" />
+  <NewLine Num="1" UId="72" />
+  <Blank Num="12" UId="73" />
+  <Access Scope="LocalVariable" UId="74">
+    <Symbol UId="75">
+      <Component Name="InkTankOperationStateDiagram" UId="76" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="77" />
+  <Token Text=":=" UId="78" />
+  <Blank Num="1" UId="79" />
+  <Access Scope="LocalConstant" UId="80">
+    <Constant Name="REACH_LEVEL_TANK" UId="81" />
+  </Access>
+  <Token Text=";" UId="84" />
+  <NewLine Num="1" UId="85" />
+  <Blank Num="8" UId="86" />
+  <Token Text="ELSIF" UId="87" />
+  <Blank Num="1" UId="88" />
+  <Access Scope="LocalVariable" UId="89">
+    <Symbol UId="90">
+      <Component Name="R_TRIG_AutoRegulation" UId="91" />
+      <Token Text="." UId="92" />
+      <Component Name="Q" UId="93" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="94" />
+  <Token Text="THEN" UId="95" />
+  <NewLine Num="1" UId="96" />
+  <Blank Num="12" UId="97" />
+  <Access Scope="LocalVariable" UId="98">
+    <Symbol UId="99">
+      <Component Name="Tank_ReachLevelDone" UId="100" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="101" />
+  <Token Text=":=" UId="102" />
+  <Blank Num="1" UId="103" />
+  <Access Scope="LiteralConstant" UId="104">
+    <Constant UId="105">
+      <ConstantValue UId="107">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="108" />
+  <NewLine Num="1" UId="109" />
+  <Blank Num="12" UId="110" />
+  <Access Scope="LocalVariable" UId="111">
+    <Symbol UId="112">
+      <Component Name="PumpDirection" UId="113" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="114" />
+  <Token Text=":=" UId="115" />
+  <Blank Num="1" UId="116" />
+  <Access Scope="LiteralConstant" UId="117">
+    <Constant UId="118">
+      <ConstantValue UId="120">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="121" />
+  <NewLine Num="1" UId="122" />
+  <Blank Num="12" UId="123" />
+  <Access Scope="LocalVariable" UId="124">
+    <Symbol UId="125">
+      <Component Name="InkTankOperationStateDiagram" UId="126" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="127" />
+  <Token Text=":=" UId="128" />
+  <Blank Num="1" UId="129" />
+  <Access Scope="LocalConstant" UId="130">
+    <Constant Name="AUTO_REGULATION" UId="131" />
+  </Access>
+  <Token Text=";" UId="134" />
+  <NewLine Num="1" UId="135" />
+  <Blank Num="8" UId="136" />
+  <Token Text="END_IF" UId="137" />
+  <Token Text=";" UId="138" />
+  <NewLine Num="1" UId="139" />
+  <Blank Num="4" UId="140" />
+  <Access Scope="LocalConstant" UId="141">
+    <Constant Name="REACH_LEVEL_TANK" UId="142" />
+  </Access>
+  <Token Text=":" UId="145" />
+  <NewLine Num="1" UId="146" />
+  <Blank Num="8" UId="147" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="148">
+    <Text UId="149">Signals Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="150" />
+  <Blank Num="8" UId="151" />
+  <Token Text="IF" UId="152" />
+  <Blank Num="1" UId="153" />
+  <Access Scope="LocalVariable" UId="154">
+    <Symbol UId="155">
+      <Component Name="DirectionSended" UId="156" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="157" />
+  <Token Text="THEN" UId="158" />
+  <NewLine Num="1" UId="159" />
+  <Blank Num="12" UId="160" />
+  <Access Scope="LocalVariable" UId="161">
+    <Symbol UId="162">
+      <Component Name="ActivePump" UId="163" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="164" />
+  <Token Text=":=" UId="165" />
+  <Blank Num="1" UId="166" />
+  <Access Scope="LiteralConstant" UId="167">
+    <Constant UId="168">
+      <ConstantValue UId="170">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="171" />
+  <NewLine Num="1" UId="172" />
+  <Blank Num="12" UId="173" />
+  <Token Text="IF" UId="174" />
+  <Blank Num="1" UId="175" />
+  <Access Scope="LocalVariable" UId="176">
+    <Symbol UId="177">
+      <Component Name="Tank_VarnishQuantity_mm" UId="178" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="179" />
+  <Token Text="&gt;=" UId="180" />
+  <Blank Num="1" UId="181" />
+  <Access Scope="LocalVariable" UId="182">
+    <Symbol UId="183">
+      <Component Name="Tank_ReachLevel" UId="184" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="185" />
+  <Token Text="THEN" UId="186" />
+  <NewLine Num="1" UId="187" />
+  <Blank Num="16" UId="188" />
+  <Access Scope="LocalVariable" UId="189">
+    <Symbol UId="190">
+      <Component Name="ActiveGeneralSolenoid" UId="191" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="192" />
+  <Token Text=":=" UId="193" />
+  <Blank Num="1" UId="194" />
+  <Access Scope="LiteralConstant" UId="195">
+    <Constant UId="196">
+      <ConstantValue UId="198">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="199" />
+  <NewLine Num="1" UId="200" />
+  <Blank Num="16" UId="201" />
+  <Access Scope="LocalVariable" UId="202">
+    <Symbol UId="203">
+      <Component Name="ActiveFillingSolenoid" UId="204" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="205" />
+  <Token Text=":=" UId="206" />
+  <Blank Num="1" UId="207" />
+  <Access Scope="LiteralConstant" UId="208">
+    <Constant UId="209">
+      <ConstantValue UId="211">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="212" />
+  <NewLine Num="1" UId="213" />
+  <Blank Num="16" UId="214" />
+  <Access Scope="LocalVariable" UId="215">
+    <Symbol UId="216">
+      <Component Name="PumpDirection" UId="217" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="218" />
+  <Token Text=":=" UId="219" />
+  <Blank Num="1" UId="220" />
+  <Access Scope="LiteralConstant" UId="221">
+    <Constant UId="222">
+      <ConstantValue UId="224">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="225" />
+  <NewLine Num="1" UId="226" />
+  <Blank Num="12" UId="227" />
+  <Token Text="ELSIF" UId="228" />
+  <Blank Num="1" UId="229" />
+  <Access Scope="LocalVariable" UId="230">
+    <Symbol UId="231">
+      <Component Name="Tank_VarnishQuantity_mm" UId="232" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="233" />
+  <Token Text="&lt;" UId="234" />
+  <Blank Num="1" UId="235" />
+  <Access Scope="LocalVariable" UId="236">
+    <Symbol UId="237">
+      <Component Name="Tank_ReachLevel" UId="238" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="239" />
+  <Token Text="THEN" UId="240" />
+  <NewLine Num="1" UId="241" />
+  <Blank Num="16" UId="242" />
+  <Access Scope="LocalVariable" UId="243">
+    <Symbol UId="244">
+      <Component Name="ActiveGeneralSolenoid" UId="245" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="246" />
+  <Token Text=":=" UId="247" />
+  <Blank Num="1" UId="248" />
+  <Access Scope="LiteralConstant" UId="249">
+    <Constant UId="250">
+      <ConstantValue UId="252">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="253" />
+  <NewLine Num="1" UId="254" />
+  <Blank Num="16" UId="255" />
+  <Access Scope="LocalVariable" UId="256">
+    <Symbol UId="257">
+      <Component Name="ActiveFillingSolenoid" UId="258" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="259" />
+  <Token Text=":=" UId="260" />
+  <Blank Num="1" UId="261" />
+  <Access Scope="LiteralConstant" UId="262">
+    <Constant UId="263">
+      <ConstantValue UId="265">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="266" />
+  <NewLine Num="1" UId="267" />
+  <Blank Num="16" UId="268" />
+  <Access Scope="LocalVariable" UId="269">
+    <Symbol UId="270">
+      <Component Name="PumpDirection" UId="271" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="272" />
+  <Token Text=":=" UId="273" />
+  <Blank Num="1" UId="274" />
+  <Access Scope="LiteralConstant" UId="275">
+    <Constant UId="276">
+      <ConstantValue UId="278">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="279" />
+  <NewLine Num="1" UId="280" />
+  <Blank Num="12" UId="281" />
+  <Token Text="END_IF" UId="282" />
+  <Token Text=";" UId="283" />
+  <NewLine Num="1" UId="284" />
+  <Blank Num="8" UId="285" />
+  <Token Text="END_IF" UId="286" />
+  <Token Text=";" UId="287" />
+  <NewLine Num="1" UId="288" />
+  <Blank Num="8" UId="289" />
+  <NewLine Num="1" UId="290" />
+  <Blank Num="8" UId="291" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="292">
+    <Text UId="293">Condition To Go To Next Step</Text>
+  </LineComment>
+  <NewLine Num="1" UId="294" />
+  <Blank Num="8" UId="295" />
+  <Token Text="IF" UId="296" />
+  <NewLine Num="1" UId="297" />
+  <Blank Num="12" UId="298" />
+  <Access Scope="Call" UId="299">
+    <CallInfo UId="300" BlockType="FC">
+      <Instance Scope="GlobalVariable" UId="302">
+        <Component Name="FC10021_TolerenceRelation" UId="301" />
+      </Instance>
+      <Token Text="(" UId="303" />
+      <Parameter Name="X" UId="304">
+        <Blank Num="1" UId="305" />
+        <Token Text=":=" UId="306" />
+        <Blank Num="1" UId="307" />
+        <Access Scope="LocalVariable" UId="308">
+          <Symbol UId="309">
+            <Component Name="Tank_VarnishQuantity_mm" UId="310" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="311" />
+      <Blank Num="1" UId="312" />
+      <Parameter Name="Y" UId="313">
+        <Blank Num="1" UId="314" />
+        <Token Text=":=" UId="315" />
+        <Blank Num="1" UId="316" />
+        <Access Scope="LocalVariable" UId="317">
+          <Symbol UId="318">
+            <Component Name="Tank_ReachLevel" UId="319" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="320" />
+      <Blank Num="1" UId="321" />
+      <Parameter Name="Tolerance" UId="322">
+        <Blank Num="1" UId="323" />
+        <Token Text=":=" UId="324" />
+        <Blank Num="1" UId="325" />
+        <Access Scope="LiteralConstant" UId="326">
+          <Constant UId="327">
+            <ConstantValue UId="329">0.1</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="331" />
+    </CallInfo>
+  </Access>
+  <Blank Num="1" UId="332" />
+  <Token Text="OR" UId="333" />
+  <NewLine Num="1" UId="334" />
+  <Blank Num="12" UId="335" />
+  <Access Scope="LocalVariable" UId="336">
+    <Symbol UId="337">
+      <Component Name="F_TRIG_ReachLevelTank" UId="338" />
+      <Token Text="." UId="339" />
+      <Component Name="Q" UId="340" />
+    </Symbol>
+  </Access>
+  <NewLine Num="1" UId="341" />
+  <Blank Num="8" UId="342" />
+  <Token Text="THEN" UId="343" />
+  <NewLine Num="1" UId="344" />
+  <Blank Num="12" UId="345" />
+  <Access Scope="LocalVariable" UId="346">
+    <Symbol UId="347">
+      <Component Name="ActiveGeneralSolenoid" UId="348" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="349" />
+  <Token Text=":=" UId="350" />
+  <Blank Num="1" UId="351" />
+  <Access Scope="LiteralConstant" UId="352">
+    <Constant UId="353">
+      <ConstantValue UId="355">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="356" />
+  <NewLine Num="1" UId="357" />
+  <Blank Num="12" UId="358" />
+  <Access Scope="LocalVariable" UId="359">
+    <Symbol UId="360">
+      <Component Name="ActiveFillingSolenoid" UId="361" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="362" />
+  <Token Text=":=" UId="363" />
+  <Blank Num="1" UId="364" />
+  <Access Scope="LiteralConstant" UId="365">
+    <Constant UId="366">
+      <ConstantValue UId="368">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="369" />
+  <NewLine Num="1" UId="370" />
+  <Blank Num="12" UId="371" />
+  <Access Scope="LocalVariable" UId="372">
+    <Symbol UId="373">
+      <Component Name="ActivePump" UId="374" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="375" />
+  <Token Text=":=" UId="376" />
+  <Blank Num="1" UId="377" />
+  <Access Scope="LiteralConstant" UId="378">
+    <Constant UId="379">
+      <ConstantValue UId="381">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="382" />
+  <NewLine Num="1" UId="383" />
+  <Blank Num="12" UId="384" />
+  <Access Scope="LocalVariable" UId="385">
+    <Symbol UId="386">
+      <Component Name="PumpDirection" UId="387" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="388" />
+  <Token Text=":=" UId="389" />
+  <Blank Num="1" UId="390" />
+  <Access Scope="LiteralConstant" UId="391">
+    <Constant UId="392">
+      <ConstantValue UId="394">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="395" />
+  <NewLine Num="1" UId="396" />
+  <Blank Num="12" UId="397" />
+  <Access Scope="LocalVariable" UId="398">
+    <Symbol UId="399">
+      <Component Name="Tank_ReachLevelDone" UId="400" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="401" />
+  <Token Text=":=" UId="402" />
+  <Blank Num="1" UId="403" />
+  <Access Scope="LiteralConstant" UId="404">
+    <Constant UId="405">
+      <ConstantValue UId="407">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="408" />
+  <NewLine Num="1" UId="409" />
+  <Blank Num="12" UId="410" />
+  <Access Scope="LocalVariable" UId="411">
+    <Symbol UId="412">
+      <Component Name="DirectionSended" UId="413" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="414" />
+  <Token Text=":=" UId="415" />
+  <Blank Num="1" UId="416" />
+  <Access Scope="LiteralConstant" UId="417">
+    <Constant UId="418">
+      <ConstantValue UId="420">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="421" />
+  <NewLine Num="1" UId="422" />
+  <Blank Num="12" UId="423" />
+  <Access Scope="Call" UId="424">
+    <Instruction Name="RESET_TIMER" UId="425">
+      <Token Text="(" UId="426" />
+      <NamelessParameter UId="427">
+        <Access Scope="LocalVariable" UId="428">
+          <Symbol UId="429">
+            <Component Name="TON_SendActivationAfterDirection" UId="430" />
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="431" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="432" />
+  <NewLine Num="1" UId="433" />
+  <Blank Num="12" UId="434" />
+  <Access Scope="LocalVariable" UId="435">
+    <Symbol UId="436">
+      <Component Name="InkTankOperationStateDiagram" UId="437" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="438" />
+  <Token Text=":=" UId="439" />
+  <Blank Num="1" UId="440" />
+  <Access Scope="LocalConstant" UId="441">
+    <Constant Name="OPERATION_DONE" UId="442" />
+  </Access>
+  <Token Text=";" UId="445" />
+  <NewLine Num="1" UId="446" />
+  <Blank Num="8" UId="447" />
+  <Token Text="END_IF" UId="448" />
+  <Token Text=";" UId="449" />
+  <NewLine Num="1" UId="450" />
+  <Blank Num="4" UId="451" />
+  <Access Scope="LocalConstant" UId="452">
+    <Constant Name="AUTO_REGULATION" UId="453" />
+  </Access>
+  <Token Text=":" UId="456" />
+  <NewLine Num="1" UId="457" />
+  <Blank Num="8" UId="458" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="459">
+    <Text UId="460">Signals Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="461" />
+  <Blank Num="8" UId="462" />
+  <Access Scope="LocalVariable" UId="463">
+    <Symbol UId="464">
+      <Component Name="Tank_AutoRegulationInProgress" UId="465" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="466" />
+  <Token Text=":=" UId="467" />
+  <Blank Num="1" UId="468" />
+  <Access Scope="LiteralConstant" UId="469">
+    <Constant UId="470">
+      <ConstantValue UId="472">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="473" />
+  <NewLine Num="1" UId="474" />
+  <Blank Num="8" UId="475" />
+  <Token Text="IF" UId="476" />
+  <Blank Num="1" UId="477" />
+  <Access Scope="LocalVariable" UId="478">
+    <Symbol UId="479">
+      <Component Name="DirectionSended" UId="480" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="481" />
+  <Token Text="THEN" UId="482" />
+  <NewLine Num="1" UId="483" />
+  <Blank Num="12" UId="484" />
+  <Token Text="IF" UId="485" />
+  <Blank Num="1" UId="486" />
+  <Access Scope="LocalVariable" UId="487">
+    <Symbol UId="488">
+      <Component Name="Tank_VarnishQuantity_mm" UId="489" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="490" />
+  <Token Text="&gt;=" UId="491" />
+  <Blank Num="1" UId="492" />
+  <Access Scope="LocalVariable" UId="493">
+    <Symbol UId="494">
+      <Component Name="Tank_RegulationLevel" UId="495" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="496" />
+  <Token Text="THEN" UId="497" />
+  <NewLine Num="1" UId="498" />
+  <Blank Num="16" UId="499" />
+  <Access Scope="LocalVariable" UId="500">
+    <Symbol UId="501">
+      <Component Name="ActivePump" UId="502" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="503" />
+  <Token Text=":=" UId="504" />
+  <Blank Num="1" UId="505" />
+  <Access Scope="LiteralConstant" UId="506">
+    <Constant UId="507">
+      <ConstantValue UId="509">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="510" />
+  <NewLine Num="1" UId="511" />
+  <Blank Num="16" UId="512" />
+  <Access Scope="LocalVariable" UId="513">
+    <Symbol UId="514">
+      <Component Name="ActiveGeneralSolenoid" UId="515" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="516" />
+  <Token Text=":=" UId="517" />
+  <Blank Num="1" UId="518" />
+  <Access Scope="LiteralConstant" UId="519">
+    <Constant UId="520">
+      <ConstantValue UId="522">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="523" />
+  <NewLine Num="1" UId="524" />
+  <Blank Num="16" UId="525" />
+  <Access Scope="LocalVariable" UId="526">
+    <Symbol UId="527">
+      <Component Name="ActiveFillingSolenoid" UId="528" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="529" />
+  <Token Text=":=" UId="530" />
+  <Blank Num="1" UId="531" />
+  <Access Scope="LiteralConstant" UId="532">
+    <Constant UId="533">
+      <ConstantValue UId="535">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="536" />
+  <NewLine Num="1" UId="537" />
+  <Blank Num="16" UId="538" />
+  <Access Scope="LocalVariable" UId="539">
+    <Symbol UId="540">
+      <Component Name="AutoRegulationReachedLevelOnce" UId="541" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="542" />
+  <Token Text=":=" UId="543" />
+  <Blank Num="1" UId="544" />
+  <Access Scope="LiteralConstant" UId="545">
+    <Constant UId="546">
+      <ConstantValue UId="548">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="549" />
+  <NewLine Num="1" UId="550" />
+  <Blank Num="12" UId="551" />
+  <Token Text="ELSIF" UId="552" />
+  <Blank Num="1" UId="553" />
+  <Access Scope="LocalVariable" UId="554">
+    <Symbol UId="555">
+      <Component Name="Tank_VarnishQuantity_mm" UId="556" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="557" />
+  <Token Text="&lt;" UId="558" />
+  <Blank Num="1" UId="559" />
+  <Access Scope="LocalVariable" UId="560">
+    <Symbol UId="561">
+      <Component Name="Tank_RegulationLevel" UId="562" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="563" />
+  <Token Text="-" UId="564" />
+  <Blank Num="1" UId="565" />
+  <Access Scope="LiteralConstant" UId="566">
+    <Constant UId="567">
+      <ConstantValue UId="569">1.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="570" />
+  <Token Text="THEN" UId="571" />
+  <NewLine Num="1" UId="572" />
+  <Blank Num="16" UId="573" />
+  <Access Scope="LocalVariable" UId="574">
+    <Symbol UId="575">
+      <Component Name="ActivePump" UId="576" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="577" />
+  <Token Text=":=" UId="578" />
+  <Blank Num="1" UId="579" />
+  <Access Scope="LiteralConstant" UId="580">
+    <Constant UId="581">
+      <ConstantValue UId="583">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="584" />
+  <NewLine Num="1" UId="585" />
+  <Blank Num="16" UId="586" />
+  <Access Scope="LocalVariable" UId="587">
+    <Symbol UId="588">
+      <Component Name="ActiveGeneralSolenoid" UId="589" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="590" />
+  <Token Text=":=" UId="591" />
+  <Blank Num="1" UId="592" />
+  <Access Scope="LiteralConstant" UId="593">
+    <Constant UId="594">
+      <ConstantValue UId="596">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="597" />
+  <NewLine Num="1" UId="598" />
+  <Blank Num="16" UId="599" />
+  <Access Scope="LocalVariable" UId="600">
+    <Symbol UId="601">
+      <Component Name="ActiveFillingSolenoid" UId="602" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="603" />
+  <Token Text=":=" UId="604" />
+  <Blank Num="1" UId="605" />
+  <Access Scope="LiteralConstant" UId="606">
+    <Constant UId="607">
+      <ConstantValue UId="609">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="610" />
+  <NewLine Num="1" UId="611" />
+  <Blank Num="16" UId="612" />
+  <Access Scope="LocalVariable" UId="613">
+    <Symbol UId="614">
+      <Component Name="PumpDirection" UId="615" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="616" />
+  <Token Text=":=" UId="617" />
+  <Blank Num="1" UId="618" />
+  <Access Scope="LiteralConstant" UId="619">
+    <Constant UId="620">
+      <ConstantValue UId="622">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="623" />
+  <NewLine Num="1" UId="624" />
+  <Blank Num="16" UId="625" />
+  <Access Scope="LocalVariable" UId="626">
+    <Symbol UId="627">
+      <Component Name="AutoRegulationReachedLevelOnce" UId="628" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="629" />
+  <Token Text=":=" UId="630" />
+  <Blank Num="1" UId="631" />
+  <Access Scope="LiteralConstant" UId="632">
+    <Constant UId="633">
+      <ConstantValue UId="635">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="636" />
+  <NewLine Num="1" UId="637" />
+  <Blank Num="12" UId="638" />
+  <Token Text="END_IF" UId="639" />
+  <Token Text=";" UId="640" />
+  <NewLine Num="1" UId="641" />
+  <Blank Num="8" UId="642" />
+  <Token Text="END_IF" UId="643" />
+  <Token Text=";" UId="644" />
+  <NewLine Num="1" UId="645" />
+  <Blank Num="8" UId="646" />
+  <NewLine Num="1" UId="647" />
+  <Blank Num="8" UId="648" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="649">
+    <Text UId="650">Condition To Go to Next Step</Text>
+  </LineComment>
+  <NewLine Num="1" UId="651" />
+  <Blank Num="8" UId="652" />
+  <Token Text="IF" UId="653" />
+  <Blank Num="1" UId="654" />
+  <Access Scope="LocalVariable" UId="655">
+    <Symbol UId="656">
+      <Component Name="F_TRIG_AutoRegulation" UId="657" />
+      <Token Text="." UId="658" />
+      <Component Name="Q" UId="659" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="660" />
+  <Token Text="OR" UId="661" />
+  <Blank Num="1" UId="662" />
+  <Access Scope="LocalVariable" UId="663">
+    <Symbol UId="664">
+      <Component Name="TON_FillTankSafety" UId="665" />
+      <Token Text="." UId="666" />
+      <Component Name="Q" UId="667" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="668" />
+  <Token Text="THEN" UId="669" />
+  <NewLine Num="1" UId="670" />
+  <Blank Num="12" UId="671" />
+  <Access Scope="LocalVariable" UId="672">
+    <Symbol UId="673">
+      <Component Name="Tank_AutoRegulationInProgress" UId="674" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="675" />
+  <Token Text=":=" UId="676" />
+  <Blank Num="1" UId="677" />
+  <Access Scope="LiteralConstant" UId="678">
+    <Constant UId="679">
+      <ConstantValue UId="681">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="682" />
+  <NewLine Num="1" UId="683" />
+  <Blank Num="12" UId="684" />
+  <Access Scope="LocalVariable" UId="685">
+    <Symbol UId="686">
+      <Component Name="ActiveGeneralSolenoid" UId="687" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="688" />
+  <Token Text=":=" UId="689" />
+  <Blank Num="1" UId="690" />
+  <Access Scope="LiteralConstant" UId="691">
+    <Constant UId="692">
+      <ConstantValue UId="694">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="695" />
+  <NewLine Num="1" UId="696" />
+  <Blank Num="12" UId="697" />
+  <Access Scope="LocalVariable" UId="698">
+    <Symbol UId="699">
+      <Component Name="ActiveFillingSolenoid" UId="700" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="701" />
+  <Token Text=":=" UId="702" />
+  <Blank Num="1" UId="703" />
+  <Access Scope="LiteralConstant" UId="704">
+    <Constant UId="705">
+      <ConstantValue UId="707">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="708" />
+  <NewLine Num="1" UId="709" />
+  <Blank Num="12" UId="710" />
+  <Access Scope="LocalVariable" UId="711">
+    <Symbol UId="712">
+      <Component Name="ActivePump" UId="713" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="714" />
+  <Token Text=":=" UId="715" />
+  <Blank Num="1" UId="716" />
+  <Access Scope="LiteralConstant" UId="717">
+    <Constant UId="718">
+      <ConstantValue UId="720">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="721" />
+  <NewLine Num="1" UId="722" />
+  <Blank Num="12" UId="723" />
+  <Access Scope="LocalVariable" UId="724">
+    <Symbol UId="725">
+      <Component Name="PumpDirection" UId="726" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="727" />
+  <Token Text=":=" UId="728" />
+  <Blank Num="1" UId="729" />
+  <Access Scope="LiteralConstant" UId="730">
+    <Constant UId="731">
+      <ConstantValue UId="733">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="734" />
+  <NewLine Num="1" UId="735" />
+  <Blank Num="12" UId="736" />
+  <Access Scope="LocalVariable" UId="737">
+    <Symbol UId="738">
+      <Component Name="DirectionSended" UId="739" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="740" />
+  <Token Text=":=" UId="741" />
+  <Blank Num="1" UId="742" />
+  <Access Scope="LiteralConstant" UId="743">
+    <Constant UId="744">
+      <ConstantValue UId="746">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="747" />
+  <NewLine Num="1" UId="748" />
+  <Blank Num="12" UId="749" />
+  <Access Scope="LocalVariable" UId="750">
+    <Symbol UId="751">
+      <Component Name="AutoRegulationReachedLevelOnce" UId="752" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="753" />
+  <Token Text=":=" UId="754" />
+  <Blank Num="1" UId="755" />
+  <Access Scope="LiteralConstant" UId="756">
+    <Constant UId="757">
+      <ConstantValue UId="759">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="760" />
+  <NewLine Num="1" UId="761" />
+  <Blank Num="12" UId="762" />
+  <Access Scope="Call" UId="763">
+    <Instruction Name="RESET_TIMER" UId="764">
+      <Token Text="(" UId="765" />
+      <NamelessParameter UId="766">
+        <Access Scope="LocalVariable" UId="767">
+          <Symbol UId="768">
+            <Component Name="TON_SendActivationAfterDirection" UId="769" />
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="770" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="771" />
+  <NewLine Num="1" UId="772" />
+  <Blank Num="12" UId="773" />
+  <Access Scope="LocalVariable" UId="774">
+    <Symbol UId="775">
+      <Component Name="InkTankOperationStateDiagram" UId="776" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="777" />
+  <Token Text=":=" UId="778" />
+  <Blank Num="1" UId="779" />
+  <Access Scope="LocalConstant" UId="780">
+    <Constant Name="OPERATION_DONE" UId="781" />
+  </Access>
+  <Token Text=";" UId="784" />
+  <NewLine Num="1" UId="785" />
+  <Blank Num="8" UId="786" />
+  <Token Text="END_IF" UId="787" />
+  <Token Text=";" UId="788" />
+  <NewLine Num="1" UId="789" />
+  <Blank Num="4" UId="790" />
+  <Access Scope="LocalConstant" UId="791">
+    <Constant Name="OPERATION_DONE" UId="792" />
+  </Access>
+  <Token Text=":" UId="795" />
+  <NewLine Num="1" UId="796" />
+  <Blank Num="8" UId="797" />
+  <Access Scope="LocalVariable" UId="798">
+    <Symbol UId="799">
+      <Component Name="InkTankOperationStateDiagram" UId="800" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="801" />
+  <Token Text=":=" UId="802" />
+  <Blank Num="1" UId="803" />
+  <Access Scope="LocalConstant" UId="804">
+    <Constant Name="WAIT_FOR_OPERATION_REQUEST" UId="805" />
+  </Access>
+  <Token Text=";" UId="808" />
+  <NewLine Num="1" UId="809" />
+  <Token Text="END_CASE" UId="810" />
+  <Token Text=";" UId="811" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="28" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="29" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="2B" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="2C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Tank Ink Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="2E" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <LineComment Inserted="false" NoClosingBracket="false" UId="21">
+    <Text UId="22">Ink Circuit Error Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="23" />
+  <Token Text="IF" UId="24" />
+  <Blank Num="1" UId="25" />
+  <Access Scope="LocalVariable" UId="26">
+    <Symbol UId="27">
+      <Component Name="TON_FillTankSafety" UId="28" />
+      <Token Text="." UId="29" />
+      <Component Name="Q" UId="30" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="31" />
+  <Token Text="OR" UId="32" />
+  <Blank Num="1" UId="33" />
+  <Access Scope="LocalVariable" UId="34">
+    <Symbol UId="35">
+      <Component Name="Sensor_Value" UId="36" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="37" />
+  <Token Text="&lt;" UId="38" />
+  <Blank Num="1" UId="39" />
+  <Access Scope="LiteralConstant" UId="40">
+    <Constant UId="41">
+      <ConstantValue UId="43">200.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="44" />
+  <Token Text="OR" UId="45" />
+  <Blank Num="1" UId="46" />
+  <Token Text="NOT" UId="47" />
+  <Token Text="(" UId="48" />
+  <Access Scope="LocalVariable" UId="49">
+    <Symbol UId="50">
+      <Component Name="Sensor_Calibrated" UId="51" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="52" />
+  <Blank Num="1" UId="53" />
+  <Token Text="OR" UId="54" />
+  <Blank Num="1" UId="55" />
+  <Token Text="NOT" UId="56" />
+  <Token Text="(" UId="57" />
+  <Access Scope="LocalVariable" UId="58">
+    <Symbol UId="59">
+      <Component Name="BarrelWS_CalibrationDone" UId="60" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="61" />
+  <Blank Num="1" UId="62" />
+  <Token Text="THEN" UId="63" />
+  <NewLine Num="1" UId="64" />
+  <Blank Num="4" UId="65" />
+  <Access Scope="LocalVariable" UId="66">
+    <Symbol UId="67">
+      <Component Name="InkCircuitInError" UId="68" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="69" />
+  <Token Text=":=" UId="70" />
+  <Blank Num="1" UId="71" />
+  <Access Scope="LiteralConstant" UId="72">
+    <Constant UId="73">
+      <ConstantValue UId="75">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="76" />
+  <NewLine Num="1" UId="77" />
+  <Token Text="ELSIF" UId="78" />
+  <Blank Num="1" UId="79" />
+  <Access Scope="LocalVariable" UId="80">
+    <Symbol UId="81">
+      <Component Name="RequestAcknowledge" UId="82" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="83" />
+  <Token Text="THEN" UId="84" />
+  <NewLine Num="1" UId="85" />
+  <Blank Num="4" UId="86" />
+  <Access Scope="LocalVariable" UId="87">
+    <Symbol UId="88">
+      <Component Name="InkCircuitInError" UId="89" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="90" />
+  <Token Text=":=" UId="91" />
+  <Blank Num="1" UId="92" />
+  <Access Scope="LiteralConstant" UId="93">
+    <Constant UId="94">
+      <ConstantValue UId="96">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="97" />
+  <NewLine Num="1" UId="98" />
+  <Token Text="END_IF" UId="99" />
+  <Token Text=";" UId="100" />
+  <NewLine Num="2" UId="101" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="102">
+    <Text UId="103">Auto Regulation Position Deviation Error Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="104" />
+  <Token Text="IF" UId="105" />
+  <Blank Num="1" UId="106" />
+  <Access Scope="LocalVariable" UId="107">
+    <Symbol UId="108">
+      <Component Name="TON_AutoRegulationPositionDeviation" UId="109" />
+      <Token Text="." UId="110" />
+      <Component Name="Q" UId="111" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="112" />
+  <Token Text="THEN" UId="113" />
+  <NewLine Num="1" UId="114" />
+  <Blank Num="4" UId="115" />
+  <Access Scope="LocalVariable" UId="116">
+    <Symbol UId="117">
+      <Component Name="AutoRegulationPositionDeviationDetected" UId="118" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="119" />
+  <Token Text=":=" UId="120" />
+  <Blank Num="1" UId="121" />
+  <Access Scope="LiteralConstant" UId="122">
+    <Constant UId="123">
+      <ConstantValue UId="125">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="126" />
+  <NewLine Num="1" UId="127" />
+  <Token Text="ELSIF" UId="128" />
+  <Blank Num="1" UId="129" />
+  <Access Scope="LocalVariable" UId="130">
+    <Symbol UId="131">
+      <Component Name="RequestAcknowledge" UId="132" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="133" />
+  <Token Text="THEN" UId="134" />
+  <NewLine Num="1" UId="135" />
+  <Blank Num="4" UId="136" />
+  <Access Scope="LocalVariable" UId="137">
+    <Symbol UId="138">
+      <Component Name="AutoRegulationPositionDeviationDetected" UId="139" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="140" />
+  <Token Text=":=" UId="141" />
+  <Blank Num="1" UId="142" />
+  <Access Scope="LiteralConstant" UId="143">
+    <Constant UId="144">
+      <ConstantValue UId="146">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="147" />
+  <NewLine Num="1" UId="148" />
+  <Token Text="END_IF" UId="149" />
+  <Token Text=";" UId="150" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="2F" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="30" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="31" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="32" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="33" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Error Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="34" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="35" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="36" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="37" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

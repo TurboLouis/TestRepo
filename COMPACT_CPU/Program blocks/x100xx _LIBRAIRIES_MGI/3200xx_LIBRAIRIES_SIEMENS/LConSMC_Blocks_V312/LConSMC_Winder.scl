@@ -1,0 +1,212 @@
+﻿FUNCTION_BLOCK "LConSMC_Winder"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool := FALSE;
+      speedMatch : Bool := FALSE;
+      cntrlEnable : Bool := FALSE;
+      jogPos : Bool := FALSE;
+      jogNeg : Bool := FALSE;
+      lineAxisMotionVector : "LConSMC_typeMotionVector";
+      lineAxisActualValues : "LConSMC_typeLineAxisActValues";
+      additionalVelocity : LReal := 0.0;
+      typeOfWinder : Int := "LCON_TYPE_OF_WINDER_REWIND_FROM_ABOVE";
+      controlMode : Int := 0;
+      typeOfDiameterCalc : Int := "LCON_DIAM_CALC_MODE_INTEGRAL";
+      holdDiameter : Bool := FALSE;
+      setDiameter : Bool := FALSE;
+      CntrlSetpoint : LReal := 0.0;
+      CntrlActual : LReal := 0.0;
+      tCycle : Real := 0.0;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool := FALSE;
+      active : Bool := FALSE;
+      ctrlBusy : Bool := FALSE;
+      inSync : Bool := FALSE;
+      error : Bool := FALSE;
+      errorID : DWord := 16#0000_0000;
+      winderMotionVector : "LConSMC_typeActualDynamics";
+   END_VAR
+
+   VAR_IN_OUT 
+      winderAxis : DB_ANY;
+      diameter : LReal;
+      winderConfig : "LConSMC_typeWinderConfig";
+      winderDiag : "LConSMC_typeWinderDiag";
+   END_VAR
+
+   VAR 
+      statEnableOld : Bool;
+      statValid : Bool;
+      statTypeOfAxis : Int;
+      instWinderSpeed : "LConSMC_WinderSpeed";
+      instWinderPos : "LConSMC_WinderPos";
+      instWinderSync : "LConSMC_WinderSync";
+   END_VAR
+
+   VAR CONSTANT 
+      INVALID_AXIS : Int := 0;
+      SPEED_AXIS : Int := 1;
+      POSITIONING_AXIS : Int := 2;
+      SYNCHRONOUS_AXIS : Int := 3;
+      UNIT_ID : DWord := 16#5105_0000;
+      NO_ERROR : DWord := 16#0000_0000;
+   END_VAR
+
+
+BEGIN
+	//----------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Erlangen, Germany
+	//----------------------------------------------------------------------------------------------------------------------
+	//functionality : Winder function block for different technology objects (w/ diam calc, TPID, Mprec)
+	//assignment    : OB6x/PostServo-OB     
+	//======================================================================================================================
+	//change log table:
+	//version     date          expert in charge          changes applied
+	//01.00.00    22.08.2017    APC Erlangen              Creation
+	//01.00.01    25.07.2018    APC Erlangen              - New function: Use speed sepoint/actual speed value
+	//                                                                    for friction torque precontrol (*c_00008*)
+	//                                                    - Bugfix calculating actual velocity (*c_00010*)
+	//                                                    - Calc output "setdriveSpeed" on drive side (*c_00011*)
+	//                                                    - Deleted input "openBrake"
+	//02.00.00    23.10.2019    APC ERL                   - called via DB_Any
+	//02.00.01    29.04.2020    APC ERL                   - Bugfix: Parametrizable deceleration possible via new datatype
+	//                                                      for winderMotionVector (*c_00025*)
+	//02.00.02    29.01.2021    APC ERL                   - Changed input "axis" to from input paramter to InOut parameter
+	//02.00.03    22.06.2021    APC ERL                   - see LConSMC_aVersion
+	//======================================================================================================================
+	
+	IF #enable AND NOT #statEnableOld THEN
+	    #error := FALSE;
+	    #errorID := #NO_ERROR;
+	    CASE TypeOfDB(#winderAxis) OF
+	        TO_SpeedAxis:
+	            #statTypeOfAxis := #SPEED_AXIS;
+	        TO_PositioningAxis:
+	            #statTypeOfAxis := #POSITIONING_AXIS;
+	        TO_SynchronousAxis:
+	            #statTypeOfAxis := #SYNCHRONOUS_AXIS;
+	        ELSE
+	            #statTypeOfAxis := #INVALID_AXIS;
+	            #error := TRUE;
+	            #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_TYPE_OF_AXIS";
+	            RETURN;
+	    END_CASE;
+	    #statValid := TRUE;
+	    #winderDiag.typeOfAxis := #statTypeOfAxis;
+	END_IF;
+	#statEnableOld := #enable;
+	IF NOT #statValid THEN
+	    #error := #enable;
+	    IF NOT #enable THEN
+	        #errorID := #NO_ERROR;
+	    END_IF;
+	    RETURN;
+	END_IF;
+	// Position based control mode only possible for positioning or synchronous axis
+	
+	CASE #statTypeOfAxis OF
+	    #SPEED_AXIS:
+	        IF #typeOfDiameterCalc = "LCON_DIAM_CALC_MODE_POSITION" THEN
+	            #statValid := FALSE;
+	            #error := TRUE;
+	            #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_DIAMETER_MODE";
+	            RETURN;
+	        END_IF;
+	        #instWinderSpeed(enable := #enable,
+	                         speedMatch := #speedMatch,
+	                         cntrlEnable := #cntrlEnable,
+	                         jogPos := #jogPos,
+	                         jogNeg := #jogNeg,
+	                         lineAxisMotionVector := #lineAxisMotionVector,
+	                         lineAxisActualValues := #lineAxisActualValues,
+	                         additionalVelocity := #additionalVelocity,
+	                         shaftFeedback := 0.0,
+	                         typeOfWinder := #typeOfWinder,
+	                         controlMode := #controlMode,
+	                         typeOfDiameterCalc := #typeOfDiameterCalc,
+	                         holdDiameter := #holdDiameter,
+	                         setDiameter := #setDiameter,
+	                         CntrlSetpoint := #CntrlSetpoint,
+	                         CntrlActual := #CntrlActual,
+	                         tCycle := #tCycle,
+	                         winderAxis := #winderAxis,
+	                         busy => #busy,
+	                         active => #active,
+	                         ctrlBusy => #ctrlBusy,
+	                         inSync => #inSync,
+	                         error => #error,
+	                         errorID => #errorID,
+	                         winderMotionVector => #winderMotionVector,
+	                         diameter := #diameter,
+	                         winderConfig := #winderConfig,
+	                         winderDiag := #winderDiag);
+	        
+	    #POSITIONING_AXIS:
+	        #instWinderPos(enable := #enable,
+	                       speedMatch := #speedMatch,
+	                       cntrlEnable := #cntrlEnable,
+	                       jogPos := #jogPos,
+	                       jogNeg := #jogNeg,
+	                       lineAxisMotionVector := #lineAxisMotionVector,
+	                       lineAxisActualValues := #lineAxisActualValues,
+	                       additionalVelocity := #additionalVelocity,
+	                       shaftFeedback := SEL(G := #typeOfDiameterCalc = "LCON_DIAM_CALC_MODE_POSITION", IN0 := 0.0, IN1 := "LConSMC_GetWinderActPosPosAxis"(#winderAxis)),
+	                       typeOfWinder := #typeOfWinder,
+	                       controlMode := #controlMode,
+	                       typeOfDiameterCalc := #typeOfDiameterCalc,
+	                       holdDiameter := #holdDiameter,
+	                       setDiameter := #setDiameter,
+	                       CntrlSetpoint := #CntrlSetpoint,
+	                       CntrlActual := #CntrlActual,
+	                       tCycle := #tCycle,
+	                       winderAxis := #winderAxis,
+	                       busy => #busy,
+	                       active => #active,
+	                       ctrlBusy => #ctrlBusy,
+	                       inSync => #inSync,
+	                       error => #error,
+	                       errorID => #errorID,
+	                       winderMotionVector => #winderMotionVector,
+	                       diameter := #diameter,
+	                       winderConfig := #winderConfig,
+	                       winderDiag := #winderDiag);
+	        
+	    #SYNCHRONOUS_AXIS:
+	        #instWinderSync(enable := #enable,
+	                        speedMatch := #speedMatch,
+	                        cntrlEnable := #cntrlEnable,
+	                        jogPos := #jogPos,
+	                        jogNeg := #jogNeg,
+	                        lineAxisMotionVector := #lineAxisMotionVector,
+	                        lineAxisActualValues := #lineAxisActualValues,
+	                        additionalVelocity := #additionalVelocity,
+	                        shaftFeedback := SEL(G := #typeOfDiameterCalc = "LCON_DIAM_CALC_MODE_POSITION", IN0 := 0.0, IN1 := "LConSMC_GetWinderActPosSyncAxis"(#winderAxis)),
+	                        typeOfWinder := #typeOfWinder,
+	                        controlMode := #controlMode,
+	                        typeOfDiameterCalc := #typeOfDiameterCalc,
+	                        holdDiameter := #holdDiameter,
+	                        setDiameter := #setDiameter,
+	                        CntrlSetpoint := #CntrlSetpoint,
+	                        CntrlActual := #CntrlActual,
+	                        tCycle := #tCycle,
+	                        winderAxis := #winderAxis,
+	                        busy => #busy,
+	                        active => #active,
+	                        ctrlBusy => #ctrlBusy,
+	                        inSync => #inSync,
+	                        error => #error,
+	                        errorID => #errorID,
+	                        winderMotionVector => #winderMotionVector,
+	                        diameter := #diameter,
+	                        winderConfig := #winderConfig,
+	                        winderDiag := #winderDiag);
+	    ELSE
+	        ;
+	END_CASE;
+	
+	
+END_FUNCTION_BLOCK
+

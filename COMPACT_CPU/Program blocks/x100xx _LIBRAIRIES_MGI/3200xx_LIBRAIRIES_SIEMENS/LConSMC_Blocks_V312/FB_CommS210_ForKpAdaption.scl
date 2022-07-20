@@ -1,0 +1,232 @@
+﻿FUNCTION_BLOCK "FB_CommS210_ForKpAdaption"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool;
+      kpAdaptionValue : Real;
+      minKpValue : Real;
+      maxKpValue : Real;
+      reelMaxWitdth : LReal;
+      hardwareId : HW_IO;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy { ExternalWritable := 'False'} : Bool;
+      error : Bool;
+      errorID : DWord;
+      actualKpValue : Real;
+      status : Word;
+      errorValue : Word;
+   END_VAR
+
+   VAR_IN_OUT 
+      requestBuffer : "LAcycCom_typeRequestBuffer";
+      winderConfig : "LConSMC_typeWinderConfig";
+   END_VAR
+
+   VAR 
+      statFirstCycle : Bool;
+      statExecuteWrite : Bool;
+      statWriteDone : Bool;
+      statWriteBusy : Bool;
+      statWriteError : Bool;
+      statExecuteRead : Bool;
+      statReadDone : Bool;
+      statReadBusy : Bool;
+      statReadError : Bool;
+      statFBState { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : DInt := #FB_STATE_IDLE;
+      statWriteStatus : Word;
+      statWriteErrorValue : Word;
+      statReadStatus : Word;
+      statReadErrorValue : Word;
+      statErrorID : DWord;
+      statXinput : LReal;
+      statX1 : LReal;
+      statY1 : LReal;
+      statX2 : LReal;
+      statY2 : LReal;
+      statYoutput : LReal;
+      statKpValue : Real;
+      statKpAdaptionValueOld : Real;
+      statReadRealValue : Real;
+      statLAcycCom_WriteDriveSingleParam { S7_SetPoint := 'False'} : "LAcycCom_WriteDriveSingleParam";
+      statLAcycCom_ReadDriveSingleParam : "LAcycCom_ReadDriveSingleParam";
+      statWriteDiag : "LAcycCom_typeDriveDiagnostics";
+      statReadDiag : "LAcycCom_typeDriveDiagnostics";
+   END_VAR
+
+   VAR CONSTANT 
+      driveObjectId : Int := 1;
+      parameterNumber : UInt := 1460;
+      index : UInt;
+      NO_ERROR : Word := 16#0000;
+      WRITE_PARAMETER_ERROR : Word := 16#8900;
+      READ_PARAMETER_ERROR : Word := 16#8901;
+      STATUS_NO_CALL : Word := 16#7000;
+      STATUS_BUSY : Word := 16#7001;
+      FB_STATE_IDLE : DInt := 0;
+      FB_STATE_START_WRITE_PARAMETER : DInt := 10;
+      FB_STATE_WRITE_PARAMETER : DInt := 20;
+      FB_STATE_END_WRITE_PARAMETER : DInt := 30;
+      FB_STATE_START_READ_PARAMETER : DInt := 40;
+      FB_STATE_READ_PARAMETER : DInt := 50;
+      FB_STATE_END_READ_PARAMETER : DInt := 60;
+      FB_STATE_END_PROCESS : DInt := 70;
+      FB_STATE_ERROR : DInt := 999;
+   END_VAR
+
+
+BEGIN
+	// APC_FR ****** V1.0 ****** 02-14-2022 ****** HB
+	// use with LConSMC_KpAdaption block with external mode = true
+	
+	REGION INITIALISATION
+	    IF #enable AND NOT #statFirstCycle THEN
+	        #busy := TRUE;
+	        #statFirstCycle := TRUE;
+	        #status := #STATUS_BUSY;
+	        #statErrorID := #NO_ERROR;
+	        #statFBState := #FB_STATE_IDLE;
+	        #statKpAdaptionValueOld := 0.0;
+	    ELSIF NOT #enable THEN
+	        #busy := FALSE;
+	        #statFirstCycle := FALSE;
+	        #statExecuteWrite := FALSE;
+	        #statExecuteRead := FALSE;
+	        #error := FALSE;
+	        #errorID := 16#0000;
+	        #status := #STATUS_NO_CALL;
+	    END_IF;
+	    
+	END_REGION
+	
+	IF NOT #enable THEN
+	    RETURN;
+	END_IF;
+	
+	REGION External connection   
+	    #statXinput := REAL_TO_LREAL(#kpAdaptionValue); // adaption value from LConSMC_KpAdaption block
+	    #statX1 := (#winderConfig.diamConfig.minDia / #winderConfig.diamConfig.maxDia) * 100.0; // start adaption point is core diameter
+	    #statX2 := 100.0; // final adaption point is maximum diameter
+	    #statY1 := REAL_TO_LREAL(#minKpValue); // minimum Kp value : empty reel
+	    #statY2 := REAL_TO_LREAL(#maxKpValue); // maximun Kp value : full reel
+	    
+	END_REGION
+	
+	REGION KP VALUE FOR SINAMICS S210 
+	    #statYoutput := "LConSMC_Linear"(x := #statXinput, x1 := #statX1, y1 := #statY1, x2 := #statX2, y2 := #statY2);
+	    #statKpValue := LREAL_TO_REAL(#statYoutput * (#winderConfig.torquePrecontrolConfig.MaterialWidth / #reelMaxWitdth)); // correction with web width
+	    #statKpValue := LIMIT(MN := #minKpValue, IN := #statKpValue, MX := #maxKpValue);
+	    
+	    CASE #statFBState OF // State of FB
+	        #FB_STATE_IDLE:
+	            IF #kpAdaptionValue > (#statKpAdaptionValueOld + 1.0)
+	                OR #kpAdaptionValue < (#statKpAdaptionValueOld - 1.0) THEN // change Kp if adation value variation > 1.0%
+	                #status := #STATUS_BUSY;
+	                #statFBState := #FB_STATE_START_WRITE_PARAMETER;
+	                #statKpAdaptionValueOld := #kpAdaptionValue;
+	            ELSE
+	                //IF #statReadRealValue = 0 THEN
+	                 //   #statFBState := #FB_STATE_START_READ_PARAMETER;
+	                //END_IF;
+	                ;
+	            END_IF;
+	            
+	        #FB_STATE_START_WRITE_PARAMETER:
+	            #statExecuteWrite := TRUE;
+	            IF #statWriteBusy THEN
+	                #statFBState := #FB_STATE_WRITE_PARAMETER;
+	            END_IF;
+	            
+	        #FB_STATE_WRITE_PARAMETER:
+	            IF #statWriteDone THEN
+	                #statErrorID := #NO_ERROR;
+	                #statFBState := #FB_STATE_END_WRITE_PARAMETER;
+	            ELSIF #statWriteError THEN
+	                #statErrorID := #statWriteStatus;
+	                #errorValue := #statWriteErrorValue;
+	                #status := #WRITE_PARAMETER_ERROR;
+	                #statFBState := #FB_STATE_ERROR;
+	            END_IF;
+	            
+	        #FB_STATE_END_WRITE_PARAMETER:
+	            #statExecuteWrite := FALSE;
+	            #statFBState := #FB_STATE_START_READ_PARAMETER;
+	            
+	        #FB_STATE_START_READ_PARAMETER:
+	            #statExecuteRead := TRUE;
+	            IF #statReadBusy THEN
+	                #statFBState := #FB_STATE_READ_PARAMETER;
+	            END_IF;
+	            
+	        #FB_STATE_READ_PARAMETER:
+	            IF #statReadDone THEN
+	                #statErrorID := #NO_ERROR;
+	                #statFBState := #FB_STATE_END_READ_PARAMETER;
+	            ELSIF #statReadError THEN
+	                #statErrorID := #statReadStatus;
+	                #errorValue := #statReadErrorValue;
+	                #status := #READ_PARAMETER_ERROR;
+	                #statFBState := #FB_STATE_ERROR;
+	            END_IF;
+	            
+	        #FB_STATE_END_READ_PARAMETER:
+	            #statExecuteRead := FALSE;
+	            #statFBState := #FB_STATE_END_PROCESS;
+	            
+	        #FB_STATE_END_PROCESS:
+	            IF NOT #statWriteBusy AND NOT #statReadBusy THEN
+	                #statFBState := #FB_STATE_IDLE;
+	            END_IF;
+	            
+	        #FB_STATE_ERROR:
+	            #statExecuteWrite := FALSE;
+	            #statExecuteRead := FALSE;
+	            #statFBState := #FB_STATE_IDLE;
+	            
+	            
+	    END_CASE;
+	    
+	    
+	END_REGION
+	
+	REGION FB CALL
+	    #statLAcycCom_WriteDriveSingleParam(execute := #statExecuteWrite,
+	                                        driveObjectId := #driveObjectId,
+	                                        hardwareId := #hardwareId,
+	                                        parameterNumber := #parameterNumber,
+	                                        index := #index,
+	                                        value := #statKpValue,
+	                                        done => #statWriteDone,
+	                                        busy => #statWriteBusy,
+	                                        error => #statWriteError,
+	                                        status => #statWriteStatus,
+	                                        errorValue => #statWriteErrorValue,
+	                                        diagnostics => #statWriteDiag,
+	                                        requestBuffer := #requestBuffer);
+	    
+	    #statLAcycCom_ReadDriveSingleParam(execute:= #statExecuteRead,
+	                                       driveObjectId:= #driveObjectId,
+	                                       hardwareId:= #hardwareId,
+	                                       parameterNumber:= #parameterNumber,
+	                                       index:= #index,
+	                                       done=> #statReadDone,
+	                                       busy=> #statReadBusy,
+	                                       error=> #statReadError,
+	                                       status=> #statReadStatus,
+	                                       realValue=> #statReadRealValue,
+	                                       errorValue=> #statReadErrorValue,
+	                                       diagnostics=> #statReadDiag,
+	                                       requestBuffer:= #requestBuffer);
+	    
+	END_REGION
+	
+	REGION OUTPUT   
+	    #actualKpValue := #statReadRealValue;
+	    #errorID := #statErrorID;
+	    #errorValue := #statWriteErrorValue;
+	    
+	END_REGION
+	
+END_FUNCTION_BLOCK
+

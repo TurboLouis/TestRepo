@@ -1,0 +1,89 @@
+﻿FUNCTION_BLOCK "LConSMC_GetAxisConfigurationSpeed"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      execute : Bool;
+      axis {InstructionName := 'TO_SpeedAxis'; LibVersion := '5.0'} : TO_SpeedAxis;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool;
+      done : Bool;
+      error : Bool;
+   END_VAR
+
+   VAR_IN_OUT 
+      referenceTorque : LReal;
+      loadGear : "LConSMC_typeLoadGear";
+      velocityUnit : UDInt;
+      torqueUnit : UDInt;
+   END_VAR
+
+   VAR 
+      executeOld : Bool;
+      statBusy : Bool;
+      statDone : Bool;
+      statError : Bool;
+   END_VAR
+
+   VAR CONSTANT 
+      FB_ID : DWord := 16#3110_0000;
+   END_VAR
+
+
+BEGIN
+	//----------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Erlangen, Germany
+	//----------------------------------------------------------------------------------------------------------------------
+	//functionality : Get necessary TO configuration for winder/sectional drive
+	//assignment    : OB6x/PostServo-OB     
+	//======================================================================================================================
+	//change log table:
+	//version     date          expert in charge          changes applied
+	//01.00.00    20.03.2019    APC Erlangen              Creation
+	//======================================================================================================================
+	//
+	
+	IF #execute AND NOT #executeOld THEN
+	    #statBusy := TRUE;
+	    #statDone := FALSE;
+	    #error := FALSE;
+	    #statError := FALSE;
+	    #referenceTorque := 0;
+	    #loadGear.denominator := 1;
+	    #loadGear.numerator := 0;
+	    #velocityUnit := 0;
+	    #torqueUnit := 0;
+	END_IF;
+	
+	IF #statBusy THEN
+	    IF #axis.StatusDrive.CommunicationOK
+	        AND (#axis.StatusDrive.AdaptionState = 2  // ADAPTED
+	        OR #axis.StatusDrive.AdaptionState = 3)   // NOT APPLICABLE
+	    THEN
+	        #referenceTorque := #axis.Actor.DriveParameter.ReferenceTorque;
+	        #loadGear.numerator := #axis.LoadGear.Numerator;
+	        #loadGear.denominator := #axis.LoadGear.Denominator;
+	        #velocityUnit := #axis.Units.VelocityUnit;
+	        #torqueUnit := #axis.Units.TorqueUnit;
+	        #statBusy := FALSE;
+	        #statDone := TRUE;
+	    ELSIF #axis.StatusDrive.AdaptionState = 4 THEN  //APDATION_ERROR
+	        #statBusy := FALSE;
+	        #statError := TRUE;
+	    ELSE
+	        ;
+	    END_IF;
+	ELSE
+	    #statDone := #statDone AND #execute;
+	    #statError := #statError AND #execute;
+	END_IF;
+	
+	
+	#busy := #statBusy;
+	#done := #statDone;
+	#error := #statError;
+	
+	#executeOld := #execute;
+END_FUNCTION_BLOCK
+

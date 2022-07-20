@@ -1,0 +1,54 @@
+﻿FUNCTION "LConSMC_RestDiameterCalc" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      webThickness : LReal;
+      actualDiameter : LReal;
+      length : LReal;
+      rewind : Bool;
+   END_VAR
+
+   VAR_TEMP 
+      tmpTempReal : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#4002_0000;
+      Pi : Real := 3.141592;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : RestDiameterCalc
+	//functionality : Target diameter calculation
+	//assignment    : Any
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge            changes applied
+	//V1.0      10.07.2012    APC GMC group               Creation
+	//V1.1      17.11.2016    APC ERL                     adapted to styleguide
+	//=========================================================================================================================
+	
+	IF #rewind THEN
+	    #tmpTempReal := (#actualDiameter * #actualDiameter) / 4 + (#webThickness * #length) / #Pi;
+	    IF #tmpTempReal > 0.0 THEN
+	        #LConSMC_RestDiameterCalc := 2.0 * SQRT(#tmpTempReal);
+	    ELSE
+	        #LConSMC_RestDiameterCalc := 0.0;
+	    END_IF;
+	ELSE
+	    #tmpTempReal := (#actualDiameter * #actualDiameter) / 4 - (#webThickness * #length) / #Pi;
+	    
+	    IF #tmpTempReal > 0.0 THEN
+	        #LConSMC_RestDiameterCalc := 2.0 * SQRT(#tmpTempReal);
+	    ELSE
+	        #LConSMC_RestDiameterCalc := 0.0;
+	    END_IF;
+	END_IF;
+	
+END_FUNCTION
+

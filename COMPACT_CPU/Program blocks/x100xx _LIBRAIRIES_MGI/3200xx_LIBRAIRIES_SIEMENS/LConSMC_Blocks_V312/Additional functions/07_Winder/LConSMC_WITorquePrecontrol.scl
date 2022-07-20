@@ -1,0 +1,265 @@
+﻿FUNCTION_BLOCK "LConSMC_WITorquePrecontrol"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool := FALSE;
+      torqueOn : Bool := FALSE;
+      metricUnits : Bool := TRUE;
+      typeOfWinder : Int := 0;
+      drivespeed : LReal := 0.0;
+      lineSpeed : LReal;
+      lineAcceleration : LReal := 0.0;
+      diamActVal : LReal := 0.0;
+      tensionSetpoint : LReal := 0.0;
+      density : LReal;
+      diamMin : LReal;
+      diamMax : LReal;
+      width : LReal;
+      fillFactor : LReal;
+      JFix : LReal;
+      JMandrel : LReal;
+      JMot : LReal;
+      gearRatio : LReal;
+      frictionAdjustment : LReal;
+      tensionAdjustment : LReal;
+      accaelerationAdjustment : LReal := 1.0;
+      dDdTAdjustment : LReal;
+      sizeOfArray : Int := 20;
+      xn_speedValues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+      yn_torqueValues : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+      tCycle : LReal;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool;
+      error : Bool := FALSE;
+      errorID : DWord := 16#0000_0000;
+      totalinertia : LReal := 0.0;
+      mass : LReal := 0.0;
+      preCtrlMotor : LReal := 0.0;
+      totalTorquePreCtrl : LReal := 0.0;
+      variableInertia : LReal := 0.0;
+      maxInertia : LReal := 0.0;
+      tensionTorque : LReal := 0.0;
+   END_VAR
+
+   VAR 
+      instTableChar : "LConSMC_TableChar";
+      statAlpha : LReal;
+      statMfrict : LReal;
+      statMAccel : LReal;
+      statDiamActVal2 : LReal;
+      statDiamMin2 : LReal;
+      statDiamMax2 : LReal;
+      statGearRatio2 : LReal;
+      statWidth2 : LReal;
+      statSignWinderspeed : Int;
+      statEnableold : Bool;
+      statBusy : Bool := FALSE;
+      statMdDdt : LReal;
+      statDiamActOld { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#4102_0000;
+      PI : Real := 3.141592;
+      NO_ERROR : DWord := 16#0000_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : WITorquePrecontrol
+	//functionality : Torque Precontrol Calculation for axial winder
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge              changes applied
+	//V1.0      06.08.2012    APC GMC group                 Creation
+	//V1.1      17.11.2016    APC ERL                       adapted to styleguide; warning "variable might not be initialized" removed
+	//V1.2      20.07.2018    APC ERL                       additional input "accelerationAdjustment"
+	//V1.3      05.09.2019    APC ERL                       correct calculation of tension torque in anglo american units
+	//V2.0      21.06.2021    APC ERL                       New inputs "tCycle" and "dDdTAdjustment"
+	//                                                      New functionality to precontrol acceleration torque based on diameter change (*c_00035*)
+	//========================================================================================================================
+	
+	#preCtrlMotor := 0.0;
+	#totalTorquePreCtrl := 0.0;
+	#tensionTorque := 0.0;
+	#totalinertia := 0.0;
+	#variableInertia := 0.0;
+	#maxInertia := 0.0;
+	#mass := 0.0;
+	
+	
+	IF #enable AND NOT (#statEnableold) THEN                                           // Rising edge init
+	    #instTableChar(enable := false,
+	                   x := LREAL_TO_REAL((ABS(#drivespeed))),
+	                   sizeOfArray := #sizeOfArray,
+	                   xn := #xn_speedValues,
+	                   yn := #yn_torqueValues);
+	    
+	    #error := (#gearRatio <= 0.0)
+	    OR (#density < 0.0)
+	    OR (#diamMin <= 0.0)
+	    OR (#diamMax <= #diamMin)
+	    OR (#width < 0.0)
+	    OR (#fillFactor <= 0.0)
+	    OR (#JFix < 0.0)
+	    OR (#JMandrel < 0.0)
+	    OR (#JMot < 0.0)
+	    OR #typeOfWinder < 0
+	    OR #typeOfWinder > 3;
+	    
+	    IF #error THEN
+	        #statBusy := FALSE;
+	        #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";   // One or more Configuration Data are wrong or not plausible
+	    ELSIF #tCycle < 0.0 THEN
+	        #statBusy := FALSE;
+	        #error := TRUE;
+	        #errorID := #UNIT_ID OR "LCON_ERROR_CYCLE_TIME_ZERO";   // Invalid cycle time
+	    ELSE
+	        #statBusy := TRUE;
+	        #errorID := #NO_ERROR;
+	    END_IF;
+	    #statEnableold := #enable;
+	    #statDiamActOld := #diamActVal;
+	    RETURN;
+	END_IF;
+	
+	IF NOT (#enable) AND #statEnableold THEN            // falling edge, disable
+	    #instTableChar(enable := false,
+	                   x := LREAL_TO_REAL((ABS(#drivespeed))),
+	                   sizeOfArray := #sizeOfArray,
+	                   xn := #xn_speedValues,
+	                   yn := #yn_torqueValues);
+	    
+	    #statBusy := FALSE;
+	    #error := FALSE;
+	    #errorID := #NO_ERROR;
+	    #statEnableold := #enable;
+	    RETURN;
+	END_IF;
+	
+	
+	IF #statBusy THEN
+	    IF (#diamActVal <= 0.0) OR (#diamActVal < #diamMin) THEN
+	        #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_INPUT_PARAMETER";                             // Calculated diameter Value is not plausible
+	        #error := TRUE;
+	        #statBusy := FALSE;
+	    END_IF;
+	    
+	    IF #metricUnits THEN
+	        #statDiamActVal2 := #diamActVal * #diamActVal;
+	        #statDiamMin2 := #diamMin * #diamMin;
+	        #statDiamMax2 := #diamMax * #diamMax;
+	        #statWidth2 := #width;
+	    ELSE
+	        #statDiamActVal2 := #diamActVal * #diamActVal / 144.0;                     // Conversion from inches to Foot
+	        #statDiamMin2 := #diamMin * #diamMin / 144.0;
+	        #statDiamMax2 := #diamMax * #diamMax / 144.0;
+	        #statWidth2 := #width / 12.0;
+	    END_IF;
+	    //SQUARE OF GEAR RATIO
+	    #statGearRatio2 := #gearRatio * #gearRatio;
+	    //CALCULATION OF MASS
+	    #mass := (#statDiamActVal2 - #statDiamMin2) / 4.0                     // mass = PI * width * fillFactor * density * (diamActVal**2 - diamMin **2) / 4.0 [m]
+	    * (#density * #statWidth2)
+	    * (#fillFactor * #PI);
+	    
+	    // CALCULATION OF VARIABLE INERTIA                       
+	    #variableInertia := (#statDiamActVal2 + #statDiamMin2) / 8.0
+	    * (#mass / #statGearRatio2);                                 // totalinertia = mass * (diamActVal**2 + diamMin **2) / 8.0  
+	    
+	    //CALCULATION OF TOTAL INERTIA                        
+	    #totalinertia := #variableInertia                                      // totalInertia = ( jV + jMandrel + jFix ) / gearRatio**2  + jMot
+	    + #JMandrel / #statGearRatio2
+	    + #JMot
+	    + #JFix;
+	    //CALCULATION OF MAX INERTIA                          
+	    #maxInertia := ((((#statDiamMax2 - #statDiamMin2) / 4.0
+	    * #density * #statWidth2 * #fillFactor * #PI)
+	    * (#statDiamMax2 + #statDiamMin2) / 8.0) + #JMandrel) / #statGearRatio2
+	    + #JMot
+	    + #JFix;
+	    
+	    
+	    IF #torqueOn THEN
+	        
+	        // ACCELERATION PRECONTROL
+	        IF #metricUnits THEN
+	            #statAlpha := (#lineAcceleration * #gearRatio / (#diamActVal / 2.0));    // alpha = (acceleration * gearRatio) / ( diamActVal / 2.0 ) [ 1/s ]
+	        ELSE
+	            #statAlpha := (#lineAcceleration * #gearRatio / (#diamActVal / 2.0 / 12.0));    // alpha = (acceleration * gearRatio) / ( diamActVal / 2.0 ) [ 1/s]  
+	        END_IF;
+	        #statMAccel := #statAlpha * #totalinertia * #accaelerationAdjustment;      // [Nm / lbf ft]
+	        
+	        // FRICTION CONTROL
+	        IF #drivespeed <> 0.0 THEN
+	            #statSignWinderspeed := LREAL_TO_INT(#drivespeed / ABS(#drivespeed));
+	        ELSE
+	            #statSignWinderspeed := 0;
+	        END_IF;
+	        
+	        IF (#frictionAdjustment <> 0.0) THEN
+	            #instTableChar(enable := true,
+	                           x := LREAL_TO_REAL((ABS(#drivespeed))),
+	                           sizeOfArray := #sizeOfArray,
+	                           xn := #xn_speedValues,
+	                           yn := #yn_torqueValues);
+	            
+	            IF (#instTableChar.error) THEN                                            // If there's no error yet or its prio is below new prio
+	                #statMfrict := 0.0;
+	                #error := TRUE;
+	                #errorID := #UNIT_ID OR DWORD_TO_WORD(#instTableChar.errorID);
+	            ELSE
+	                #statMfrict := #instTableChar.y * #frictionAdjustment * #statSignWinderspeed;    // [Nm / lbf ft]
+	            END_IF;
+	        ELSE
+	            #statMfrict := 0.0;
+	        END_IF;
+	        
+	        // dD/dT PRECONTROL (*c_00035*)
+	        IF #dDdTAdjustment > 0.0 THEN
+	            IF #metricUnits THEN
+	                #statMdDdt := ((2.0 * #gearRatio * #totalinertia * #lineSpeed / 60.0) / (#tCycle / 1000.0)) * (1.0 / #diamActVal - 1.0 / #statDiamActOld);
+	            ELSE
+	                #statMdDdt := ((2.0 * #gearRatio * #totalinertia * #lineSpeed / 60.0) / (#tCycle / 1000.0)) * (1.0 / (#diamActVal / 12.0) - 1.0 / (#statDiamActOld / 12.0));
+	            END_IF;
+	            #statMdDdt *= #dDdTAdjustment;
+	        ELSE
+	            #statMdDdt := 0.0;
+	        END_IF;
+	        #statDiamActOld := #diamActVal;
+	        
+	        // TENSION PRECONTROL
+	        IF #metricUnits THEN
+	            #tensionTorque := ((#tensionSetpoint * #tensionAdjustment) * (#diamActVal / 2.0)) / #gearRatio;     // [M] Motor torque (Nm) required for tension =[tension(N) * radius(M)/gear ratio i.e.T=F*r]
+	        ELSE
+	            #tensionTorque := ((#tensionSetpoint * #tensionAdjustment) * (#diamActVal / 2.0 / 12.0)) / #gearRatio;  // [lbf ft]
+	            //#tensionTorque := (((#tensionSetpoint * #tensionAdjustment) * 4.448222) * ((#diamActVal / 2.0) * 0.0254) / #gearRatio);
+	        END_IF;
+	        
+	        // TORQUE ADDITION
+	        // Invert MAccel for _BELOW
+	        IF #typeOfWinder = "LCON_TYPE_OF_WINDER_REWIND_FROM_BELOW" OR #typeOfWinder = "LCON_TYPE_OF_WINDER_UNWIND_FROM_BELOW" THEN
+	            #statMAccel := - #statMAccel;
+	            #statMdDdt := - #statMdDdt;
+	        END_IF;
+	        // Invert tensionTorque
+	        IF #typeOfWinder = "LCON_TYPE_OF_WINDER_REWIND_FROM_BELOW" OR #typeOfWinder = "LCON_TYPE_OF_WINDER_UNWIND_FROM_ABOVE" THEN
+	            #tensionTorque := - #tensionTorque;
+	        END_IF;
+	        #preCtrlMotor := #statMAccel + #statMfrict + #statMdDdt;                // Friction, acceleration and dD/dt compensation
+	        #totalTorquePreCtrl := #preCtrlMotor + #tensionTorque;                  // Add tension torque
+	    END_IF;
+	END_IF;
+	
+	// set outputs
+	#busy := #statBusy;
+	
+END_FUNCTION_BLOCK
+

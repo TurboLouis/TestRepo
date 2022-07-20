@@ -1,0 +1,862 @@
+﻿FUNCTION_BLOCK "LAcycCom_RTCSinamicsAcyclic"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AcycCom
+VERSION : 1.5
+   VAR_INPUT 
+      execute : Bool;
+      hardwareId : HW_IO;
+   END_VAR
+
+   VAR_OUTPUT 
+      done { ExternalWritable := 'False'} : Bool;
+      busy { ExternalWritable := 'False'} : Bool;
+      error { ExternalWritable := 'False'} : Bool;
+      status { ExternalWritable := 'False'} : Word := #STATUS_NO_CALL;
+      diagnostics { ExternalWritable := 'False'} : "LAcycCom_typeDriveDiagnostics";
+   END_VAR
+
+   VAR_IN_OUT 
+      requestBuffer : "LAcycCom_typeRequestBuffer";
+   END_VAR
+
+   VAR 
+      statBusy { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statDone { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statError { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statExecuteOld { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statCmdBusy { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statCmdDone { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statCmdError { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statTimerStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statRefNo { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte := 16#00;
+      statStatus { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Word := #STATUS_NO_CALL;
+      statSubfunctionStatus { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Word := 16#0000;
+      statWithoutResourceManager { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statStateNumber { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : SInt := 0;
+      statFBState { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : SInt := #FB_IDLE;
+      statFBSubState { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : SInt := #FB_BUSY_PREPARE;
+      statFBSubStateOld { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : SInt := #FB_BUSY_PREPARE;
+      statErrorCount { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : UInt := 0;
+      statAllocatedIndex { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int := 0;
+      statFirstParameterError { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int := -1;
+      statHardwareId { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : HW_IO := 16#0000;
+      statPrepared { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statWarningRetriggering { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      statDataRecordNo { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : DInt;
+      statCPUTime {InstructionName := 'DTL'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : DTL := DTL#1990-01-01-00:00:00;
+      statParameter { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Array[0..#NO_OF_PARAMETERS_UPPER_LIM] of Struct
+         parameterNo { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : UInt;
+         index { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : UInt;
+         value { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Real;
+         format { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+         errorValue { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+      END_STRUCT;
+      statReqWriteParameter { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Struct
+         header { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Struct
+            refNo { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+            reqId { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+            doId { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+            parameterNo { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+         END_STRUCT;
+         data { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Array[0..#LENGTH_WRITE_PARAMETER_TELEGRAM_UPPER_LIM] of Byte;
+      END_STRUCT;
+      statRespParameter { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Struct
+         header { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Struct
+            refNo { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+            reqId { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+            doId { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+            parameterNo { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+         END_STRUCT;
+         data { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Array[0..#LENGTH_READ_PARAMETER_TELEGRAM_UPPER_LIM] of Byte;
+      END_STRUCT;
+      instWRREC {InstructionName := 'WRREC'; LibVersion := '1.1'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : WRREC;
+      instRDREC {InstructionName := 'RDREC'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : RDREC;
+      instIECTimer {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+   END_VAR
+
+   VAR_TEMP 
+      tempCmdValid : Bool;
+      tempPointer : Int;
+      tempLoopIndexI : Int;
+      tempRetVal : Int;
+      tempLastQueueElement : Int;
+      tempStatusWord : Word;
+      tempCmdStatus : DWord;
+      tempDWord : DWord;
+      tempVoidDiagnostics : "LAcycCom_typeDriveDiagnostics";
+      tempVoidHeader : Struct
+         reqRef : Byte;
+         reqId : Byte;
+         axisNo : Byte;
+         parameterNo : Byte;
+      END_STRUCT;
+   END_VAR
+
+   VAR CONSTANT 
+      FB_IDLE : SInt := 0;
+      FB_FIRST_CYCLE : SInt := 1;
+      FB_ALLOCATE : SInt := 2;
+      FB_GET_RESOURCE : SInt := 3;
+      FB_BUSY : SInt := 4;
+      FB_RELEASE : SInt := 5;
+      FB_DONE : SInt := 6;
+      FB_ERROR : SInt := 7;
+      FB_BUSY_PREPARE : SInt := 10;
+      FB_BUSY_WRREC : SInt := 11;
+      FB_BUSY_RDREC : SInt := 12;
+      FB_BUSY_WAIT : SInt := 13;
+      FORMAT_INTEGER_8 : SInt := 2;
+      FORMAT_INTEGER_16 : SInt := 3;
+      FORMAT_INTEGER_32 : SInt := 4;
+      FORMAT_UNSIGNED_8 : SInt := 5;
+      FORMAT_UNSIGNED_16 : SInt := 6;
+      FORMAT_UNSIGNED_32 : SInt := 7;
+      FORMAT_FLOATING_POINT : SInt := 8;
+      FORMAT_OCTET_STRING : SInt := 10;
+      FORMAT_TIME_DIFFERENCE : SInt := 13;
+      FORMAT_ZERO : SInt := 64;
+      FORMAT_BYTE : SInt := 65;
+      FORMAT_WORD : SInt := 66;
+      FORMAT_DOUBLE_WORD : SInt := 67;
+      FORMAT_ERROR : Byte := 16#44;
+      MAX_ERROR_COUNT : UInt := 40;
+      NO_PARAMETER_ERROR : Int := -1;
+      NO_OF_PARAMETERS_UPPER_LIM : Int := 3;
+      LENGTH_WRITE_PARAMETER_TELEGRAM_UPPER_LIM : Int := 43;
+      LENGTH_READ_PARAMETER_TELEGRAM_UPPER_LIM : Int := 23;
+      ALL_ELEMENTS_OCCUPIED : Int := -1;
+      TIMER_ALLOCATION : Time := T#10S;
+      TIMER_TEMP_ERROR : Time := T#100MS;
+      DATE_OFFSET : UDInt := 7305;
+      STATUS_EXECUTION_FINISHED : Word := 16#0000;
+      STATUS_NO_CALL : Word := 16#7000;
+      STATUS_FIRST_CALL : Word := 16#7001;
+      STATUS_ALLOCATE : Word := 16#7002;
+      STATUS_GET_RESOURCE : Word := 16#7003;
+      STATUS_BUSY : Word := 16#7004;
+      STATUS_RELEASE : Word := 16#7005;
+      WARN_EXECUTE_SET_DURING_PROCESSING : Word := 16#7101;
+      ERR_REQUEST_REJECTED : Word := 16#8004;
+      ERR_RESOURCE_RELEASED : Word := 16#8005;
+      ERR_AMBIGUOUS_FB_CALL : Word := 16#8006;
+      ERR_INVALID_BUF_INDEX : Word := 16#8201;
+      ERR_COMMAND_TIMEOUT : Word := 16#8600;
+      ERR_RDREC_TEMP_COUNTER : Word := 16#8601;
+      ERR_WRREC_TEMP_COUNTER : Word := 16#8602;
+      ERR_WRREC : Word := 16#8603;
+      ERR_RDREC : Word := 16#8604;
+      ERR_REFERENCE_NO : Word := 16#8605;
+      ERR_RESPONSE_ID : Word := 16#8606;
+      ERR_PARAMETER_NO : Word := 16#8607;
+      ERR_DRIVE_OBJECT_NO : Word := 16#8608;
+      ERR_ALLOCATION_TIME : Word := 16#8609;
+      ERR_UNDEFINED_STATE : Word := 16#8611;
+      ERR_UNDEFINED_SUBSTATE : Word := 16#8612;
+      ERR_RD_LOC_T : Word := 16#8614;
+      ERR_PARAMETER : Word := 16#8619;
+      COUNT_OF_ELEMENTS : Int := 4;
+   END_VAR
+
+
+BEGIN
+	//==========================================================================================
+	// SIEMENS AG
+	// (c)Copyright 2017 All Rights Reserved
+	//------------------------------------------------------------------------------------------
+	// Library: LAcycCom
+	// Tested with: S7-1513-1 PN
+	// Engineering: TIA Portal V15
+	// Restrictions: ---
+	// Requirements: S7-1200 / S7-1500
+	//               FB LAcycCom_ResourceManager is required
+	// Functionality: FB sets the UTC time in SINAMICS drive system (acyclic)
+	//------------------------------------------------------------------------------------------
+	// Change log table:
+	// Version    Date          Expert in charge    Changes applied
+	// 01.03.01   29.04.2016    AL                  release
+	// 01.03.02   22.11.2017    AL                  added support of SINAMICS with FW >= 4.8 (added writing of p3100 = 1)
+	//                                              added handling of error 80A0 (RDREC)
+	//                                              added handling of error 80A1 (WRREC)
+	//                                              added errorValue to "LAcycCom_typeDriveDiagnostics"
+	// 01.03.03   13.03.2018    AL                  values of MAX_ERROR_COUNT and TIMER_TEMP_ERROR changed
+	// 01.05.01   11.10.2019    AL                  bugfix lockBuffer 
+	//                                              
+	//------------------------------------------------------------------------------------------
+	// Function block: LAcycCom_RTCSinamicsAcyclic
+	//===========================================================================================
+	
+	
+	// Check if FB is triggered
+	IF (#execute = TRUE) AND (#statExecuteOld = FALSE) AND (#statBusy = TRUE) THEN
+	  // Input execute is set during processing
+	  #statStatus := #WARN_EXECUTE_SET_DURING_PROCESSING;
+	  #statWarningRetriggering := TRUE;
+	  #statExecuteOld := #execute;
+	  
+	ELSIF (#execute = TRUE) AND (#statExecuteOld = FALSE) THEN
+	  // First call
+	  // Initialisation
+	  #statDone := FALSE;
+	  #statError := FALSE;
+	  #statStatus := #STATUS_FIRST_CALL;
+	  #statAllocatedIndex := 0;
+	  #statSubfunctionStatus := 16#0;
+	  #statStateNumber := 0;
+	  #statFirstParameterError := -1;
+	  #statCmdBusy := FALSE;
+	  #statCmdDone := FALSE;
+	  #statCmdError := FALSE;
+	  #statErrorCount := 0;
+	  #statWarningRetriggering := FALSE;
+	  #statFBSubState := #FB_BUSY_PREPARE;
+	  #statFBState := #FB_FIRST_CYCLE;
+	  #statError := FALSE;
+	  #statPrepared := FALSE;
+	  
+	  //-----------------------------------------------------------------------------------
+	  // Empty and initialize diagnostics
+	  #statHardwareId := #hardwareId;
+	  #diagnostics := #tempVoidDiagnostics;
+	  #diagnostics.driveObjectId := 0;
+	  #diagnostics.hardwareId := #statHardwareId;
+	  #diagnostics.parameterCount := #COUNT_OF_ELEMENTS;
+	  #diagnostics.firstParameterError := #statFirstParameterError; // V1.3.2
+	  #diagnostics.errorValue := 16#FF; // V1.3.2
+	  
+	  #instIECTimer(IN := FALSE,
+	                PT := #TIMER_ALLOCATION);
+	  
+	  #statBusy := TRUE;
+	  
+	  // Reset other outputs
+	  #status := #STATUS_FIRST_CALL;
+	  
+	  #busy := #statBusy;
+	  #error := #statError;
+	  
+	  #statExecuteOld := #execute;
+	  
+	  // FB is currently inactive
+	ELSIF (#execute = FALSE) AND (#statBusy = FALSE) AND
+	  (#statError = TRUE OR #statDone = TRUE)
+	THEN
+	  #statError := FALSE;
+	  #statBusy := FALSE;
+	  #statDone := FALSE;
+	  #statFBState := #FB_IDLE;
+	  
+	  // Write outputs
+	  #status := #STATUS_NO_CALL;
+	  #busy := #statBusy;
+	  #done := #statDone;
+	  #error := #statError;
+	  
+	  #statExecuteOld := #execute;
+	  RETURN;
+	  
+	  // FB is currently executed and not finished
+	ELSIF #statBusy = TRUE THEN
+	  #statExecuteOld := #execute;
+	  
+	  // FB finished request
+	ELSE
+	  #statExecuteOld := #execute;
+	  RETURN; // Wait for start of functionality 
+	END_IF;
+	//----------------------------------------------------------------------------------------------
+	
+	
+	IF (#statBusy = TRUE) AND (#statError = FALSE) THEN  // Functionality running
+	  CASE #statFBState OF
+	    #FB_FIRST_CYCLE:  // First cycle state
+	      
+	      // Clearing the sending write buffer
+	      #statReqWriteParameter.header := #tempVoidHeader;
+	      FOR #tempLoopIndexI := 0 TO #LENGTH_WRITE_PARAMETER_TELEGRAM_UPPER_LIM DO
+	        #statReqWriteParameter.data[#tempLoopIndexI] := 16#00;
+	      END_FOR;
+	      
+	      // Clearing the receive buffer
+	      #statRespParameter.header := #tempVoidHeader;
+	      FOR #tempLoopIndexI := 0 TO #LENGTH_READ_PARAMETER_TELEGRAM_UPPER_LIM DO
+	        #statRespParameter.data[#tempLoopIndexI] := 16#00;
+	      END_FOR;
+	      
+	      // Initalisation after start
+	      FOR #tempLoopIndexI := 0 TO #COUNT_OF_ELEMENTS - 1 DO
+	        #statParameter[#tempLoopIndexI].errorValue := 16#FF;
+	        #statParameter[#tempLoopIndexI].format := 16#0;
+	        #statParameter[#tempLoopIndexI].index := 0;
+	        #statParameter[#tempLoopIndexI].parameterNo := 0;
+	        #statParameter[#tempLoopIndexI].value := 0.0;
+	      END_FOR;
+	      
+	      // Next state is depending on the FB mode
+	      IF (#statWithoutResourceManager = FALSE) THEN
+	        #statStatus := #STATUS_ALLOCATE;
+	        #statFBState := #FB_ALLOCATE;
+	        
+	      ELSE
+	        #statStatus := #STATUS_BUSY;
+	        #statFBState := #FB_BUSY;
+	        #statFBSubState := #FB_BUSY_PREPARE;
+	      END_IF;
+	      
+	    #FB_ALLOCATE:
+	      // Allocation of a buffer element
+	      IF (#requestBuffer.header.lockBuffer = FALSE) AND (#requestBuffer.header.nextFreeElement >= 0) AND (#requestBuffer.header.nextFreeElement <= "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM") THEN
+	        #requestBuffer.header.lockBuffer := TRUE;
+	        #statAllocatedIndex := #requestBuffer.header.nextFreeElement;
+	        #requestBuffer.elements[#statAllocatedIndex].state := 16#00;
+	        #requestBuffer.elements[#statAllocatedIndex].state.%X0 := TRUE;
+	        #requestBuffer.elements[#statAllocatedIndex].hardwareId := #statHardwareId;
+	        #requestBuffer.elements[#statAllocatedIndex].queueElementNext := -1;
+	        #statTimerStart := FALSE;
+	        #statStatus := #STATUS_GET_RESOURCE;
+	        #statFBState := #FB_GET_RESOURCE;
+	        
+	        // Build up queue
+	        IF (#requestBuffer.header.firstQueueElement >= 0) THEN
+	          // Find last queue element 
+	          #tempLoopIndexI := #requestBuffer.header.firstQueueElement;
+	          WHILE (#tempLoopIndexI >= 0) DO
+	            #tempLastQueueElement := #tempLoopIndexI;
+	            #tempLoopIndexI := #requestBuffer.elements[#tempLoopIndexI].queueElementNext;
+	          END_WHILE;
+	          
+	          // Insert into list after last element
+	          #requestBuffer.elements[#tempLastQueueElement].queueElementNext := #statAllocatedIndex;
+	          #requestBuffer.elements[#statAllocatedIndex].queueElementPrevious := #tempLastQueueElement;
+	          
+	        ELSE
+	          // Element is first element in queue
+	          #requestBuffer.header.firstQueueElement := #statAllocatedIndex;
+	          #requestBuffer.elements[#statAllocatedIndex].queueElementPrevious := -1;
+	        END_IF;
+	        
+	        // Searching for the next free buffer element
+	        FOR #tempLoopIndexI := 0 TO "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM" DO
+	          IF (#requestBuffer.elements[#tempLoopIndexI].state.%X0 = FALSE) THEN
+	            #requestBuffer.header.nextFreeElement := #tempLoopIndexI;
+	            EXIT;
+	          END_IF;
+	          
+	          // All buffer elements are occupied
+	          IF (#tempLoopIndexI = "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM") THEN
+	            #requestBuffer.header.nextFreeElement := #ALL_ELEMENTS_OCCUPIED;
+	          END_IF;
+	        END_FOR;
+	        
+	        #requestBuffer.header.lockBuffer := FALSE;
+	        
+	        
+	      ELSIF (#instIECTimer.Q = TRUE) THEN
+	        #statError := TRUE;
+	        #statStateNumber := #statFBState;
+	        #statStatus := #ERR_ALLOCATION_TIME;
+	        #statFBState := #FB_ERROR;
+	        
+	      ELSE
+	        ; // Waiting until lockbit is reset and a buffer element is available
+	      END_IF; // (#buffer.lockBuffer = FALSE) AND (#buffer.actualWriteIndex >= 0)
+	      
+	      #instIECTimer(IN := #statTimerStart,
+	                    PT := #TIMER_ALLOCATION);
+	      
+	      #statTimerStart := TRUE;
+	      IF (#instIECTimer.Q = TRUE) THEN
+	        #statTimerStart := FALSE;
+	      END_IF;
+	      
+	    #FB_GET_RESOURCE:
+	      
+	      // Check buffer index for correctness
+	      IF (#statAllocatedIndex < 0) OR (#statAllocatedIndex > "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM") THEN
+	        #statError := TRUE;
+	        #statStateNumber := #statFBState;
+	        #statStatus := #ERR_INVALID_BUF_INDEX;
+	        #statFBState := #FB_ERROR;
+	        
+	      ELSE
+	        IF (#requestBuffer.elements[#statAllocatedIndex].state.%X0 = FALSE) OR
+	          (#requestBuffer.elements[#statAllocatedIndex].state.%X3 = TRUE)
+	        THEN
+	          // Job was rejected by buffer manager
+	          #statError := TRUE;
+	          #statStateNumber := #statFBState;
+	          #statStatus := #ERR_REQUEST_REJECTED;
+	          #statFBState := #FB_ERROR;
+	          
+	        ELSIF (#requestBuffer.elements[#statAllocatedIndex].state.%X2 = TRUE) THEN
+	          // Job already released
+	          #statError := TRUE;
+	          #statStateNumber := #statFBState;
+	          #statStatus := #ERR_RESOURCE_RELEASED;
+	          #statFBState := #FB_ERROR;
+	          
+	        ELSIF (#requestBuffer.elements[#statAllocatedIndex].state.%X1 = TRUE) THEN
+	          // Element is enabled
+	          #statStatus := #STATUS_BUSY;
+	          #statFBState := #FB_BUSY;
+	          #statFBSubState := #FB_BUSY_PREPARE;
+	          
+	        ELSE
+	          // Element not enabled yet
+	          // 
+	          #statStatus := #STATUS_GET_RESOURCE;
+	        END_IF;
+	        
+	      END_IF;
+	      
+	    #FB_BUSY:
+	      
+	      IF ((#requestBuffer.elements[#statAllocatedIndex].state.%X1 = TRUE) AND (#statWithoutResourceManager = FALSE)
+	        AND (#requestBuffer.elements[#statAllocatedIndex].state.%X3 = FALSE)) OR (#statWithoutResourceManager = TRUE)
+	      THEN
+	        CASE #statFBSubState OF
+	            
+	          #FB_BUSY_PREPARE, #FB_BUSY_WRREC:  // Preparing datsset; Writing the dataset configuration into the drive object
+	            //----------------------------------------------------------------------------------------------           
+	            // Prepare state
+	            IF NOT #statPrepared THEN
+	              // Reading CPU clock
+	              #tempRetVal := RD_LOC_T(#statCPUTime);  // Reading current date and time of cpu clock
+	              // Error occurred during RD_LOC_T command
+	              IF (#tempRetVal <> 0) AND (#tempRetVal <> 1) THEN
+	                #statError := TRUE;
+	                #statStateNumber := #statFBSubState;
+	                #statSubfunctionStatus := INT_TO_WORD(#tempRetVal);
+	                #statStatus := #ERR_RD_LOC_T;
+	                #statFBState := #FB_ERROR;
+	                RETURN;
+	                
+	              END_IF;
+	              
+	              // Creating header data
+	              #statRefNo := #statRefNo + 1;
+	              #statReqWriteParameter.header.refNo := #statRefNo; // Telegram reference number
+	              #statReqWriteParameter.header.reqId := 16#02;  // 0x02 = change parameters
+	              #statReqWriteParameter.header.doId := 16#01;  // Drive object identification number of CU
+	              #statReqWriteParameter.header.parameterNo := INT_TO_BYTE(#COUNT_OF_ELEMENTS);  // Count of parameters
+	              
+	              // Copying the dataset into a static variable
+	              #statParameter[0].index := 0;
+	              #statParameter[0].parameterNo := 3100; // RTC time stamp mode
+	              #statParameter[0].format := SINT_TO_BYTE(#FORMAT_UNSIGNED_16);
+	              #statParameter[0].value := 1.0;
+	              
+	              #statParameter[1].index := 0;
+	              #statParameter[1].parameterNo := 3103; // p3103 UTC Synchronizationprocedure
+	              #statParameter[1].format := SINT_TO_BYTE(#FORMAT_INTEGER_16);
+	              #statParameter[1].value := 2; // Simple (not exact) set UTC time with p3101
+	              
+	              #statParameter[2].index := 1; // Days
+	              #statParameter[2].parameterNo := 3101; // RTC UTC time
+	              #statParameter[2].format := SINT_TO_BYTE(#FORMAT_UNSIGNED_32);
+	              #statParameter[2].value := UDINT_TO_REAL(DATE_TO_UDINT(DTL_TO_DATE(#statCPUTime)) + #DATE_OFFSET); // RTC time (days); 7305 days = 20 year (between 1.1.1970 and 1.1.1990)
+	              
+	              #statParameter[3].index := 0; // ms
+	              #statParameter[3].parameterNo := 3101; // RTC UTC time
+	              #statParameter[3].format := SINT_TO_BYTE(#FORMAT_UNSIGNED_32);
+	              #statParameter[3].value := UDINT_TO_REAL(TOD_TO_UDINT(DTL_TO_TOD(#statCPUTime))); // RTC time (msec)
+	              
+	              // Create telegram body
+	              #tempPointer := 0;
+	              FOR #tempLoopIndexI := 0 TO #COUNT_OF_ELEMENTS - 1 DO
+	                
+	                #statReqWriteParameter.data[#tempPointer] := 16#10; // Attribute of parameters (0x10=Value, 0x30=Text)
+	                #statReqWriteParameter.data[#tempPointer + 1] := 16#01; // No. of elements (DEC: for single elements=1) 
+	                
+	                // Parameter number
+	                #statReqWriteParameter.data[#tempPointer + 2] := #statParameter[#tempLoopIndexI].parameterNo.%B1;
+	                #statReqWriteParameter.data[#tempPointer + 3] := #statParameter[#tempLoopIndexI].parameterNo.%B0;
+	                
+	                // Subindex of parameter
+	                #statReqWriteParameter.data[#tempPointer + 4] := #statParameter[#tempLoopIndexI].index.%B1;
+	                #statReqWriteParameter.data[#tempPointer + 5] := #statParameter[#tempLoopIndexI].index.%B0;
+	                
+	                #tempPointer := #tempPointer + 6; // Points to the next parameter address
+	              END_FOR;
+	              
+	              FOR #tempLoopIndexI := 0 TO #COUNT_OF_ELEMENTS - 1 DO
+	                // Parameter value(s) 
+	                #statReqWriteParameter.data[#tempPointer] := #statParameter[#tempLoopIndexI].format; // Format of parameter
+	                #statReqWriteParameter.data[#tempPointer + 1] := 16#01; // Count of values
+	                CASE BYTE_TO_SINT(#statParameter[#tempLoopIndexI].format) OF
+	                  #FORMAT_UNSIGNED_16: // 2 Byte
+	                    // Values
+	                    #tempDWord := UDINT_TO_DWORD(REAL_TO_UDINT(#statParameter[#tempLoopIndexI].value));
+	                    #statReqWriteParameter.data[#tempPointer + 2] := #tempDWord.%B1;
+	                    #statReqWriteParameter.data[#tempPointer + 3] := #tempDWord.%B0;
+	                    #tempPointer := #tempPointer + 4;  // Points to the next parameter address
+	                    
+	                  #FORMAT_UNSIGNED_32: //4 Byte
+	                    // Values    
+	                    #tempDWord := UDINT_TO_DWORD(REAL_TO_UDINT(#statParameter[#tempLoopIndexI].value));
+	                    #statReqWriteParameter.data[#tempPointer + 2] := #tempDWord.%B3;
+	                    #statReqWriteParameter.data[#tempPointer + 3] := #tempDWord.%B2;
+	                    #statReqWriteParameter.data[#tempPointer + 4] := #tempDWord.%B1;
+	                    #statReqWriteParameter.data[#tempPointer + 5] := #tempDWord.%B0;
+	                    
+	                    #tempPointer := #tempPointer + 6; // Points to the next parameter address
+	                    
+	                  #FORMAT_INTEGER_16: // 2 Byte
+	                    // Values 
+	                    #tempDWord := DINT_TO_DWORD(REAL_TO_DINT(#statParameter[#tempLoopIndexI].value));
+	                    #statReqWriteParameter.data[#tempPointer + 2] := #tempDWord.%B1;
+	                    #statReqWriteParameter.data[#tempPointer + 3] := #tempDWord.%B0;
+	                    
+	                    #tempPointer := #tempPointer + 4; // Points to the next parameter address
+	                  ELSE
+	                    ;
+	                END_CASE;
+	                
+	              END_FOR;
+	              
+	              #statStatus := #STATUS_BUSY;
+	              #statFBState := #FB_BUSY;
+	              #statFBSubState := #FB_BUSY_WRREC;
+	              
+	              #statPrepared := TRUE; // Prepare state is complete, immediately go to WRREC state
+	            END_IF;
+	            //----------------------------------------------------------------------------------------------           
+	            // WRREC state
+	            IF (#statCmdBusy = FALSE) THEN
+	              // Resets WRREC command
+	              #instWRREC(REQ := FALSE);
+	              
+	            END_IF; // #statCmdBusy = FALSE
+	            
+	            // WRREC command
+	            #instWRREC(REQ := TRUE,                                                     // Transfer data record
+	                       ID := #statHardwareId,                                           // ID number of the hardware component
+	                       INDEX := 47,                                                // Data record number
+	                       LEN := 0,                                                        // Maximum length of the data record to be transferred in bytes         
+	                       DONE => #statCmdDone,                                            // Data record was transferred          
+	                       BUSY => #statCmdBusy,                                            // The writing process is not yet complete
+	                       ERROR => #statCmdError,                                          // An error occurred during the writing process
+	                       STATUS => #tempCmdStatus,                                        // Status[1] = Error => Status[2] Error Decode + Status[3] Error Code
+	                       RECORD := #statReqWriteParameter);                               // Data record     
+	            
+	            // Error occurred
+	            IF (#statCmdError = TRUE) AND (#statError = FALSE) THEN
+	              #tempStatusWord.%B0 := #tempCmdStatus.%B1;
+	              #tempStatusWord.%B1 := #tempCmdStatus.%B2;
+	              
+	              // Temporary command status (80A1, 80A7, 80B5, 80C0, 80C1, 80C2, 80C3 oder 80C4) are valid and retry command
+	              IF (#tempStatusWord = 16#80A1) OR  // Negative acknowledgment when writing to the module
+	                (#tempStatusWord = 16#80A7) OR  // DP slave or module is occupied (temporary error)
+	                (#tempStatusWord = 16#80B5) OR   // DP slave or module not ready             
+	                (#tempStatusWord = 16#80C0) OR   // The data can only be written when the CPU is in STOP mode. Note: this means that writing by the user program is not possible. You can only write the data online with PG/PC.
+	                (#tempStatusWord = 16#80C1) OR   // The data of the previous write job on the module for the same data record have not yet been processed by the module.      
+	                (#tempStatusWord = 16#80C2) OR   // The module is currently processing the maximum possible number of jobs for a CPU.
+	                (#tempStatusWord = 16#80C3) OR   // The required operating resources are currently occupied.
+	                (#tempStatusWord = 16#80C4) THEN // Internal temporary error. Job could not be executed. Repeat the job. If this error occurs often, check your installation for sources of electrical interference.
+	                
+	                IF (#statErrorCount >= #MAX_ERROR_COUNT) THEN
+	                  #statError := TRUE;
+	                  #statStateNumber := #statFBSubState;
+	                  #statSubfunctionStatus := #tempStatusWord;
+	                  #statStatus := #ERR_WRREC_TEMP_COUNTER;
+	                  #statFBState := #FB_ERROR;
+	                  
+	                ELSE
+	                  #statErrorCount := #statErrorCount + 1;  // Increment internal error counter
+	                  #statFBSubStateOld := #statFBSubState;
+	                  #statFBSubState := #FB_BUSY_WAIT;
+	                END_IF;
+	                
+	              ELSE
+	                #statError := TRUE;
+	                #statStateNumber := #statFBSubState;
+	                #statSubfunctionStatus := #tempStatusWord;
+	                #statStatus := #ERR_WRREC;
+	                #statFBState := #FB_ERROR;
+	              END_IF;
+	              
+	            ELSIF (#statCmdDone = TRUE) AND (#statError = FALSE) AND (#statFBSubState = #FB_BUSY_WRREC) THEN
+	              #statErrorCount := 0;  // V1.5.1 Reset error counter
+	              #statFBSubState := #FB_BUSY_RDREC; // WRREC completed and continue with RDREC
+	              
+	            END_IF; // #statCmdError = TRUE
+	            
+	          #FB_BUSY_RDREC:  // Reading the values from the drive object
+	            // Resets RDREC command
+	            
+	            IF (#statCmdBusy = FALSE) THEN
+	              #instRDREC(REQ := FALSE,
+	                         RECORD := #statRespParameter);
+	            END_IF;
+	            
+	            #instRDREC(REQ := TRUE,                                                     // Transfer data record
+	                       ID := #statHardwareId,                                           // ID number of the hardware component        
+	                       INDEX := 47,                                                // Data record number
+	                       MLEN := 0,                                                       // Maximum length in bytes of the data record information to be read
+	                       VALID => #tempCmdValid,                                          // New data record was received and is valid   
+	                       BUSY => #statCmdBusy,                                            // The reading process is not yet complete
+	                       ERROR => #statCmdError,                                          // An error occurred during the reading process
+	                       STATUS => #tempCmdStatus,                                        // Status[1] = Error => Status[2] Error Decode + Status[3] Error Code 
+	                       RECORD := #statRespParameter);                                   // Destination area for the data record read 
+	            
+	            // Error occurred
+	            IF (#statCmdError = TRUE) THEN
+	              // Get the error information from the status information
+	              #tempStatusWord.%B0 := #tempCmdStatus.%B1;
+	              #tempStatusWord.%B1 := #tempCmdStatus.%B2;
+	              
+	              // Temporary command status (80A0, 80A7, 80B5, 80C0, 80C1, 80C2, 80C3 oder 80C4) are valid and retry command
+	              IF (#tempStatusWord = 16#80A0) OR  // Negative acknowledgment when reading the module
+	                (#tempStatusWord = 16#80A7) OR   // DP slave or module is occupied (temporary error)
+	                (#tempStatusWord = 16#80B5) OR   // DP slave or module not ready             
+	                (#tempStatusWord = 16#80C0) OR   // The data can only be written when the CPU is in STOP mode. Note: this means that writing by the user program is not possible. You can only write the data online with PG/PC.
+	                (#tempStatusWord = 16#80C1) OR   // The data of the previous write job on the module for the same data record have not yet been processed by the module.      
+	                (#tempStatusWord = 16#80C2) OR   // The module is currently processing the maximum possible number of jobs for a CPU.
+	                (#tempStatusWord = 16#80C3) OR   // The required operating resources are currently occupied.
+	                (#tempStatusWord = 16#80C4) THEN // Internal temporary error. Job could not be executed. Repeat the job. If this error occurs often, check your installation for sources of electrical interference.
+	                
+	                IF (#statErrorCount >= #MAX_ERROR_COUNT) THEN
+	                  #statError := TRUE;
+	                  #statStateNumber := #statFBSubState;
+	                  #statSubfunctionStatus := #tempStatusWord;
+	                  #statStatus := #ERR_RDREC_TEMP_COUNTER;
+	                  #statFBState := #FB_ERROR;
+	                  
+	                ELSE
+	                  #statErrorCount := #statErrorCount + 1;  // Increment internal error counter
+	                  #statFBSubStateOld := #statFBSubState;
+	                  // V1.3.2. If error 80A0 then should be retry with WRREC command
+	                  IF (#tempStatusWord = 16#80A0) THEN
+	                    #statFBSubStateOld := #FB_BUSY_WRREC;
+	                  END_IF;
+	                  #statFBSubState := #FB_BUSY_WAIT;
+	                END_IF; // #statErrorCount >= #MAX_ERROR_COUNT
+	                
+	              ELSE
+	                #statError := TRUE;
+	                #statStateNumber := #statFBSubState;
+	                #statSubfunctionStatus := #tempStatusWord;
+	                #statStatus := #ERR_RDREC;
+	                #statFBState := #FB_ERROR;
+	              END_IF;
+	              
+	              // Error : Reference number of the request does not match with the response reference number 
+	            ELSIF (#statCmdBusy = FALSE) AND
+	              (#statRefNo <> BYTE_TO_INT(#statRespParameter.header.refNo)) AND
+	              (#tempCmdValid = TRUE) THEN
+	              
+	              #statError := TRUE;
+	              #statStateNumber := #statFBSubState;
+	              #statStatus := #ERR_REFERENCE_NO;
+	              #statFBState := #FB_ERROR;
+	              
+	              // Error : Wrong response from the drive object (reqId: 16#01 - reading parameter successful; 16#81: reading parameter finished with error)  
+	            ELSIF NOT (#statRespParameter.header.reqId = 16#81 OR #statRespParameter.header.reqId = 16#01 OR #statRespParameter.header.reqId = 16#02 OR #statRespParameter.header.reqId = 16#82) AND
+	              (#statCmdBusy = FALSE) AND
+	              (#tempCmdValid = TRUE) THEN
+	              #statError := TRUE;
+	              #statStateNumber := #statFBSubState;
+	              #statStatus := #ERR_RESPONSE_ID;
+	              #statFBState := #FB_ERROR;
+	              
+	              // Error : The received number of parameters does not match with the requested number of parameters
+	            ELSIF (#statCmdBusy = FALSE) AND
+	              (BYTE_TO_INT(#statRespParameter.header.parameterNo) <> #COUNT_OF_ELEMENTS) AND
+	              (#tempCmdValid = TRUE) THEN
+	              
+	              #statError := TRUE;
+	              #statStateNumber := #statFBSubState;
+	              #statStatus := #ERR_PARAMETER_NO;
+	              #statFBState := #FB_ERROR;
+	              
+	              // Error : The drive object does not match with the responsed DO
+	            ELSIF (#statCmdBusy = FALSE) AND
+	              (#statRespParameter.header.doId <> 1) AND
+	              (#tempCmdValid = TRUE) THEN
+	              
+	              #statError := TRUE;
+	              #statStateNumber := #statFBSubState;
+	              #statStatus := #ERR_DRIVE_OBJECT_NO;
+	              #statFBState := #FB_ERROR;
+	              
+	              // No error occurred during reading parameters
+	            ELSIF (#statCmdBusy = FALSE) AND (#tempCmdValid = TRUE) AND (#statError = FALSE) THEN
+	              // Analyse of the response buffer
+	              
+	              // Error occurred during writing process (changing parameter values) 
+	              IF (#statRespParameter.header.reqId = 16#82) THEN  // reqId: 16#82 (Error occurred during writing paramaters)
+	                #tempPointer := 0;
+	                
+	                FOR #tempLoopIndexI := 0 TO #COUNT_OF_ELEMENTS - 1 DO
+	                  // Parameter error
+	                  IF (#statRespParameter.data[#tempPointer] = #FORMAT_ERROR) THEN
+	                    
+	                    #statParameter[#tempLoopIndexI].errorValue := #statRespParameter.data[#tempPointer + 3]; // V1.3.2
+	                    // Save first parameter error in telegram
+	                    IF (#statFirstParameterError = #NO_PARAMETER_ERROR) THEN
+	                      #statFirstParameterError := #tempLoopIndexI;
+	                      #diagnostics.firstParameterError := #statFirstParameterError;
+	                      #diagnostics.errorValue := #statParameter[#tempLoopIndexI].errorValue; // V1.3.2
+	                      #statError := TRUE;
+	                      #statStateNumber := #statFBSubState;
+	                      #statStatus := #ERR_PARAMETER;
+	                      #statFBState := #FB_ERROR;
+	                    END_IF;
+	                    
+	                    #tempPointer := #tempPointer + 6;  // Points to the next parameter address
+	                    
+	                    // Parameter without errors  
+	                  ELSE
+	                    #statParameter[#tempLoopIndexI].errorValue := 16#FF;
+	                    #tempPointer := #tempPointer + 2;
+	                  END_IF;
+	                  
+	                END_FOR;
+	              END_IF; // Error occurred during writing process (changing parameter values)
+	              
+	              // Next state is depending on the FB mode
+	              IF (#statWithoutResourceManager = FALSE) AND (#statError = FALSE) THEN
+	                #statStatus := #STATUS_RELEASE;
+	                #statFBState := #FB_RELEASE;
+	                
+	              ELSIF (#statWithoutResourceManager = TRUE) AND (#statError = FALSE) THEN
+	                #statStatus := #STATUS_EXECUTION_FINISHED;
+	                #statFBState := #FB_DONE;
+	                
+	              END_IF; // #statMode = #MODE_WITH_BUFFER_MANAGER
+	              
+	              
+	            END_IF; // #statCmdError = TRUE
+	            
+	            
+	          #FB_BUSY_WAIT:
+	            // Timer for temporary errors 
+	            #instIECTimer(IN := #statTimerStart,
+	                          PT := #TIMER_TEMP_ERROR);
+	            
+	            #statTimerStart := TRUE;
+	            IF (#instIECTimer.Q = TRUE) THEN
+	              #statTimerStart := FALSE;
+	              #statFBSubState := #statFBSubStateOld;
+	            END_IF;
+	            
+	          ELSE
+	            #statError := TRUE;
+	            #statStatus := #ERR_UNDEFINED_SUBSTATE;
+	            #statStateNumber := #statFBState;
+	            #statFBState := #FB_ERROR;
+	        END_CASE;
+	        
+	      ELSE
+	        #statError := TRUE;
+	        #statStatus := #ERR_COMMAND_TIMEOUT;
+	        #statStateNumber := #statFBState;
+	        #statFBState := #FB_ERROR;
+	      END_IF; // ((#buffer.element[#statAllocatedIndex].enable = TRUE) AND (#statMode = #MODE_WITH_BUFFER_MANAGER)) OR #statMode = #MODE_WITHOUT_BUFFER_MANAGER
+	      
+	    #FB_RELEASE:
+	      // Check buffer index for correctness
+	      IF (#statAllocatedIndex < 0) OR (#statAllocatedIndex > "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM") THEN
+	        #statError := TRUE;
+	        #statStatus := #ERR_INVALID_BUF_INDEX;
+	        #statStateNumber := #statFBState;
+	        #statFBState := #FB_ERROR;
+	        
+	      ELSIF (#requestBuffer.header.lockBuffer = FALSE) THEN // V1.5.1
+	        #requestBuffer.header.lockBuffer := TRUE;
+	        IF (#requestBuffer.elements[#statAllocatedIndex].state.%X0 = TRUE) THEN
+	          #requestBuffer.elements[#statAllocatedIndex].state.%X2 := TRUE;
+	        ELSE
+	          ;
+	        END_IF;
+	        #requestBuffer.header.lockBuffer := FALSE;
+	        #statStatus := #STATUS_EXECUTION_FINISHED;
+	        #statFBState := #FB_DONE;
+	        
+	      END_IF;
+	      
+	    ELSE
+	      #statError := TRUE;
+	      #statStatus := #ERR_UNDEFINED_STATE;
+	      #statStateNumber := #statFBState;
+	      #statFBState := #FB_ERROR;
+	  END_CASE;
+	  
+	  // If input execute is set during processing
+	  IF #statWarningRetriggering = TRUE AND #statError = FALSE THEN
+	    #statStatus := #WARN_EXECUTE_SET_DURING_PROCESSING;
+	  END_IF;
+	  
+	END_IF;
+	
+	//----------------------------------------------------------------------------------------------
+	// Write outputs and error handling
+	//----------------------------------------------------------------------------------------------
+	
+	// Error occurred in request
+	IF (#statFBState = #FB_ERROR) THEN
+	  
+	  // Release the allocated element when error occurs
+	  IF (#statStateNumber <> #FB_FIRST_CYCLE) AND (#statStateNumber <> #FB_ALLOCATE)
+	    AND (#statBusy = TRUE) AND (#statWithoutResourceManager = FALSE)
+	  THEN
+	    IF #requestBuffer.header.lockBuffer = FALSE THEN  // V1.5.1
+	      #requestBuffer.header.lockBuffer := TRUE;
+	      IF (#requestBuffer.elements[#statAllocatedIndex].state.%X0 = TRUE) THEN
+	        #requestBuffer.elements[#statAllocatedIndex].state.%X2 := TRUE;
+	      ELSE
+	        ;
+	      END_IF;
+	      #requestBuffer.header.lockBuffer := FALSE;
+	      
+	      // Write diagnostics
+	      #diagnostics.stateNumber := #statStateNumber;
+	      #diagnostics.subfunctionStatus := #statSubfunctionStatus;
+	      #diagnostics.status := #statStatus;
+	      #statBusy := FALSE;
+	      #statDone := FALSE;
+	      
+	    END_IF;
+	    
+	  ELSE
+	    // Write diagnostics
+	    #diagnostics.stateNumber := #statStateNumber;
+	    #diagnostics.subfunctionStatus := #statSubfunctionStatus;
+	    #diagnostics.status := #statStatus;
+	    #statBusy := FALSE;
+	    #statDone := FALSE;
+	  END_IF;
+	  
+	  // Request finished
+	ELSIF (#statFBState = #FB_DONE) THEN
+	  
+	  // Output for one cycle minimum
+	  IF (#execute = FALSE) AND (#statDone = TRUE) THEN
+	    #statDone := FALSE;
+	    #statStatus := #STATUS_NO_CALL;
+	    #statFBState := #FB_IDLE;
+	    
+	  ELSE
+	    #statDone := TRUE;
+	    #statBusy := FALSE;
+	  END_IF;
+	  // If input execute is set during processing
+	  IF #statWarningRetriggering = TRUE THEN
+	    #statStatus := #ERR_AMBIGUOUS_FB_CALL;
+	    #diagnostics.status := #statStatus;
+	    #statError := TRUE;
+	    #statDone := FALSE;
+	  END_IF;
+	END_IF;
+	
+	// Write static values to outputs
+	IF #statBusy = FALSE OR #statError = FALSE
+	THEN  // V1.5.1
+	  #error := #statError;
+	  #status := #statStatus;
+	END_IF;
+	#busy := #statBusy;
+	#done := #statDone;
+	//----------------------------------------------------------------------------------------------
+END_FUNCTION_BLOCK
+

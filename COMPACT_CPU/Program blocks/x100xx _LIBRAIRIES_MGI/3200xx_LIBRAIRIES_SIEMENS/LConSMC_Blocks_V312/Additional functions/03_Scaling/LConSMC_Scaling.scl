@@ -1,0 +1,38 @@
+﻿FUNCTION "LConSMC_Scaling" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      x : LReal;
+      maxValue : LReal;
+      base : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#000A_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : Scaling
+	//functionality : Scaling Functionality
+	//assignment    : Any
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge              changes applied
+	//V1.0      26.07.2012    APC GMC group                 Creation
+	//=========================================================================================================================
+	
+	IF (#base <> 0.0) THEN
+	  #LConSMC_Scaling := #x * #maxValue / #base;
+	ELSE
+	  #LConSMC_Scaling := 0;
+	END_IF;
+	
+	
+	
+END_FUNCTION
+

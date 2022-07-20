@@ -1,0 +1,25 @@
+﻿FUNCTION "LAxisCtrl_UnpubAxisSensorType" : DInt
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis : DB_ANY;
+      index : Int;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	CASE TypeOfDB(#axis) OF
+	  TO_PositioningAxis:
+	    #LAxisCtrl_UnpubAxisSensorType := "LAxisCtrl_UnpubSensorTypePosAxis"(axis := #axis, index := #index);
+	    
+	  TO_SynchronousAxis:
+	    #LAxisCtrl_UnpubAxisSensorType := "LAxisCtrl_UnpubSensorTypeSyncAxis"(axis := #axis, index := #index);
+	    
+	  ELSE
+	    #LAxisCtrl_UnpubAxisSensorType := 0; // Incremental
+	END_CASE;
+END_FUNCTION
+

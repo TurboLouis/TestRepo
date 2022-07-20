@@ -1,0 +1,83 @@
+﻿FUNCTION_BLOCK "CalcSpeed"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      numPulsePerRot : Int;
+      elapsedTime { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : UDInt;
+      edgeCount { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : UDInt;
+   END_VAR
+
+   VAR_OUTPUT 
+      overflow { ExternalWritable := 'False'} : Bool;
+      speed { ExternalWritable := 'False'} : Real;
+   END_VAR
+
+   VAR 
+      statPeriod { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Real;
+      statOverflow { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+   END_VAR
+
+   VAR CONSTANT 
+      BILLION : Real := 1.0E+09;
+      OVERFLOW_VALUE : UDInt := 4294967295;
+   END_VAR
+
+
+BEGIN
+	//=============================================================================
+	//SIEMENS AG
+	//(c)Copyright 2016 All Rights Reserved
+	//-----------------------------------------------------------------------------
+	//Library:       -
+	//Tested with:   S7-1200 V4.2
+	//Engineering:   TIA Portal V14
+	//Restrictions:  -
+	//Requirements:  S7-1200
+	//Functionality: Basic axis functions, as power, reset, home and jog
+	//-----------------------------------------------------------------------------
+	//Change log table:
+	//Version  Date       Expert in charge Changes applied
+	//01.00.00 09.11.2016 Online Support   First released version
+	//=============================================================================
+	
+	// #elapsedTime (range): 0 to 4.294.967.280
+	// #elapsedTime (overflow): 4.294.967.295 (0xFFFF FFFF)
+	
+	// If EdgeCount and ElapsedTime is valid, calculate the period
+	IF (#edgeCount > 0)
+	  AND (#elapsedTime > 0)
+	  AND (#elapsedTime <= 4294967280)
+	THEN
+	  // Calculate the period in nanoseconds 
+	  #statPeriod := #elapsedTime / #edgeCount;
+	  // Calculate the period in seconds 
+	  #statPeriod := #numPulsePerRot * #statPeriod / #BILLION;
+	END_IF;
+	
+	// Check overflow (the period between two pulse edges exceeds 4.295 seconds)
+	IF (#elapsedTime = #OVERFLOW_VALUE)
+	THEN
+	  #statOverflow := TRUE;
+	ELSE
+	  #statOverflow := FALSE;
+	END_IF;
+	
+	// Set period to zero, if overflow
+	IF(#statOverflow = TRUE)
+	THEN
+	  #statPeriod := 0;
+	END_IF;
+	
+	// Calculate speed in rpm
+	IF (#statPeriod > 0)
+	THEN
+	  #speed := 1 / #statPeriod * 60.0;
+	ELSE
+	  #speed := 0;
+	END_IF;
+	
+	// Set output overflow
+	#overflow := #statOverflow;
+	
+END_FUNCTION_BLOCK
+

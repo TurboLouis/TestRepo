@@ -1,0 +1,3868 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T06:59:37.5326047Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor>Anirouddh</HeaderAuthor>
+      <HeaderFamily>1000x_SYSTEM</HeaderFamily>
+      <HeaderName />
+      <HeaderVersion>1.0</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="NumberOfLoggingBooleans" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="NumberOfLoggingInterger" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="NumberOfLoggingReals" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="LogGenerationDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="LogBufferResetDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="LogFile" Datatype="Array[0..1999] of String" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="InOut">
+    <Member Name="Enable" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="GenerateLogFile" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Reset" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Array_LoggingBooleans" Datatype="Array[0..499] of Bool" Accessibility="Public" />
+    <Member Name="Array_LoggingBooleans_VariableName" Datatype="Array[0..499] of String" Accessibility="Public" />
+    <Member Name="Array_LoggingIntegers" Datatype="Array[0..499] of Int" Accessibility="Public" />
+    <Member Name="Array_LoggingIntegers_VariableName" Datatype="Array[0..499] of String" Accessibility="Public" />
+    <Member Name="Array_LoggingReals" Datatype="Array[0..499] of Real" Accessibility="Public" />
+    <Member Name="Array_LoggingReals_VariableName" Datatype="Array[0..499] of String" Accessibility="Public" />
+  </Section>
+  <Section Name="Static">
+    <Member Name="BufferLog_SecondPart_Full" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="i" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="j" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="k1" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="k2" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="shift" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="NumberOfLoggingVariables" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferSize" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="LastEmptyIndex" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="GenerateLogStateDiagram" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="ResetLogBufferStateDiagram" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="NumberOfRecordedElement" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="LogTimeStamp" Datatype="DTL" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="R_TRIG_Reset" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_Clock0.5Hz" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_GenerateLogFile" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_ArrayFull" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="F_TRIG_Reset" Datatype="F_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="Array_LoggingBooleans_RTRIGS" Datatype="Array[0..499] of R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="Array_LoggingBooleans_FTRIGS" Datatype="Array[0..499] of F_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="Array_LoggingIntegers_PreviousValues" Datatype="Array[0..499] of Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Array_LoggingIntegers_Changed" Datatype="Array[0..499] of R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="Array_LoggingReals_PreviousValues" Datatype="Array[0..499] of Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="Array_LoggingReals_Changed" Datatype="Array[0..499] of R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="BufferLog_TimeStamp_FirstPart" Datatype="Array[0..999] of DTL" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferLog_VariableName_FirstPart" Datatype="Array[0..999] of String" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferLog_PreviousValue_FirstPart" Datatype="Array[0..999] of String" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferLog_CurrentValue_FirstPart" Datatype="Array[0..999] of String" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferLog_TimeStamp_SecondPart" Datatype="Array[0..999] of DTL" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferLog_VariableName_SecondPart" Datatype="Array[0..999] of String" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferLog_PreviousValue_SecondPart" Datatype="Array[0..999] of String" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferLog_CurrentValue_SecondPart" Datatype="Array[0..999] of String" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferLog_EmptyDTL" Datatype="Array[0..999] of DTL" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="BufferLog_EmptyString" Datatype="Array[0..999] of String" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Temp">
+    <Member Name="DateTimeReturnValue" Datatype="Int" />
+  </Section>
+  <Section Name="Constant">
+    <Member Name="WAIT_FOR_BUFFER_RESET" Datatype="Int" Accessibility="Public">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="RESETTING_IN_PROGRESS" Datatype="Int" Accessibility="Public">
+      <StartValue>10</StartValue>
+    </Member>
+    <Member Name="BUFFER_RESET_DONE" Datatype="Int" Accessibility="Public">
+      <StartValue>20</StartValue>
+    </Member>
+    <Member Name="===========" Datatype="Bool" Accessibility="Public" />
+    <Member Name="WAIT_FOR_LOG_GENERATION_REQUEST" Datatype="Int" Accessibility="Public">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="GENERATE_LOG_FIRST_PART" Datatype="Int" Accessibility="Public">
+      <StartValue>10</StartValue>
+    </Member>
+    <Member Name="GENERATE_LOG_SECOND_PART" Datatype="Int" Accessibility="Public">
+      <StartValue>20</StartValue>
+    </Member>
+    <Member Name="RESET_BUFFER" Datatype="Int" Accessibility="Public">
+      <StartValue>30</StartValue>
+    </Member>
+    <Member Name="ENABLE_LOG" Datatype="Int" Accessibility="Public">
+      <StartValue>40</StartValue>
+    </Member>
+    <Member Name="LOG_GENERATION_DONE" Datatype="Int" Accessibility="Public">
+      <StartValue>50</StartValue>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>FB10005_Logs</Name>
+      <Number>10005</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>Release note : 
+1.0 - Feature developped</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="GlobalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="FirstScan" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="THEN" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalVariable" UId="30">
+    <Symbol UId="31">
+      <Component Name="Reset" UId="32" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="33" />
+  <Token Text=":=" UId="34" />
+  <Blank Num="1" UId="35" />
+  <Access Scope="LiteralConstant" UId="36">
+    <Constant UId="37">
+      <ConstantValue UId="39">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="40" />
+  <NewLine Num="1" UId="41" />
+  <Blank Num="4" UId="42" />
+  <Access Scope="LocalVariable" UId="43">
+    <Symbol UId="44">
+      <Component Name="LogGenerationDone" UId="45" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="46" />
+  <Token Text=":=" UId="47" />
+  <Blank Num="1" UId="48" />
+  <Access Scope="LiteralConstant" UId="49">
+    <Constant UId="50">
+      <ConstantValue UId="52">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="53" />
+  <NewLine Num="1" UId="54" />
+  <Blank Num="4" UId="55" />
+  <Access Scope="LocalVariable" UId="56">
+    <Symbol UId="57">
+      <Component Name="LastEmptyIndex" UId="58" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="59" />
+  <Token Text=":=" UId="60" />
+  <Blank Num="1" UId="61" />
+  <Access Scope="LiteralConstant" UId="62">
+    <Constant UId="63">
+      <ConstantValue UId="65">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="66" />
+  <NewLine Num="1" UId="67" />
+  <Token Text="END_IF" UId="68" />
+  <Token Text=";" UId="69" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>First Scan</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="REGION" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Text UId="23">TIMERS</Text>
+  <NewLine Num="1" UId="24" />
+  <Token Text="END_REGION" UId="25" />
+  <NewLine Num="2" UId="26" />
+  <Token Text="REGION" UId="27" />
+  <Blank Num="1" UId="28" />
+  <Text UId="29">EDGE SIGNALS</Text>
+  <NewLine Num="1" UId="30" />
+  <Blank Num="4" UId="31" />
+  <Access Scope="LocalVariable" UId="32">
+    <Symbol UId="33">
+      <Component Name="R_TRIG_Reset" UId="34" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="35">
+    <Instruction UId="36">
+      <Token Text="(" UId="37" />
+      <Parameter Name="CLK" UId="38">
+        <Blank Num="1" UId="39" />
+        <Token Text=":=" UId="40" />
+        <Blank Num="1" UId="41" />
+        <Access Scope="LocalVariable" UId="42">
+          <Symbol UId="43">
+            <Component Name="Reset" UId="44" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="45" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="46" />
+  <NewLine Num="1" UId="47" />
+  <Blank Num="4" UId="48" />
+  <Access Scope="LocalVariable" UId="49">
+    <Symbol UId="50">
+      <Component Name="F_TRIG_Reset" UId="51" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="52">
+    <Instruction UId="53">
+      <Token Text="(" UId="54" />
+      <Parameter Name="CLK" UId="55">
+        <Blank Num="1" UId="56" />
+        <Token Text=":=" UId="57" />
+        <Blank Num="1" UId="58" />
+        <Access Scope="LocalVariable" UId="59">
+          <Symbol UId="60">
+            <Component Name="Reset" UId="61" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="62" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="63" />
+  <NewLine Num="1" UId="64" />
+  <Blank Num="4" UId="65" />
+  <Access Scope="LocalVariable" UId="66">
+    <Symbol UId="67">
+      <Component Name="R_TRIG_Clock0.5Hz" UId="68" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="69">
+    <Instruction UId="70">
+      <Token Text="(" UId="71" />
+      <Parameter Name="CLK" UId="72">
+        <Blank Num="1" UId="73" />
+        <Token Text=":=" UId="74" />
+        <Blank Num="1" UId="75" />
+        <Access Scope="GlobalVariable" UId="76">
+          <Symbol UId="77">
+            <Component Name="Clock_0.5Hz" UId="78" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="79" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="80" />
+  <NewLine Num="1" UId="81" />
+  <Blank Num="4" UId="82" />
+  <Access Scope="LocalVariable" UId="83">
+    <Symbol UId="84">
+      <Component Name="R_TRIG_GenerateLogFile" UId="85" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="86">
+    <Instruction UId="87">
+      <Token Text="(" UId="88" />
+      <Parameter Name="CLK" UId="89">
+        <Blank Num="1" UId="90" />
+        <Token Text=":=" UId="91" />
+        <Blank Num="1" UId="92" />
+        <Access Scope="LocalVariable" UId="93">
+          <Symbol UId="94">
+            <Component Name="GenerateLogFile" UId="95" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="96" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="97" />
+  <NewLine Num="1" UId="98" />
+  <Token Text="END_REGION" UId="99" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="F" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="10" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Edge Signals &amp; Timers</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="11" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="12" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Access Scope="LocalVariable" UId="21">
+    <Symbol UId="22">
+      <Component Name="NumberOfLoggingVariables" UId="23" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="24" />
+  <Token Text=":=" UId="25" />
+  <Blank Num="1" UId="26" />
+  <Access Scope="Call" UId="27">
+    <Instruction Name="MAX" UId="28">
+      <Token Text="(" UId="29" />
+      <Parameter Name="IN1" UId="30">
+        <Blank Num="1" UId="31" />
+        <Token Text=":=" UId="32" />
+        <Blank Num="1" UId="33" />
+        <Access Scope="LocalVariable" UId="34">
+          <Symbol UId="35">
+            <Component Name="NumberOfLoggingBooleans" UId="36" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="37" />
+      <Blank Num="1" UId="38" />
+      <Parameter Name="IN2" UId="39">
+        <Blank Num="1" UId="40" />
+        <Token Text=":=" UId="41" />
+        <Blank Num="1" UId="42" />
+        <Access Scope="LocalVariable" UId="43">
+          <Symbol UId="44">
+            <Component Name="NumberOfLoggingInterger" UId="45" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="46" />
+      <Blank Num="1" UId="47" />
+      <Parameter Name="IN3" UId="48">
+        <Blank Num="1" UId="49" />
+        <Token Text=":=" UId="50" />
+        <Blank Num="1" UId="51" />
+        <Access Scope="LocalVariable" UId="52">
+          <Symbol UId="53">
+            <Component Name="NumberOfLoggingReals" UId="54" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="56" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="57" />
+  <NewLine Num="1" UId="58" />
+  <Access Scope="LocalVariable" UId="59">
+    <Symbol UId="60">
+      <Component Name="BufferSize" UId="61" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="62" />
+  <Token Text=":=" UId="63" />
+  <Blank Num="1" UId="64" />
+  <Access Scope="LiteralConstant" UId="65">
+    <Constant UId="66">
+      <ConstantValue UId="68">1000</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="69" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="13" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="14" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="15" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="16" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="17" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Logs Commands</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="18" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="Enable" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="THEN" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Token Text="FOR" UId="30" />
+  <Blank Num="1" UId="31" />
+  <Access Scope="LocalVariable" UId="32">
+    <Symbol UId="33">
+      <Component Name="i" UId="34" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="35" />
+  <Token Text=":=" UId="36" />
+  <Blank Num="1" UId="37" />
+  <Access Scope="LiteralConstant" UId="38">
+    <Constant UId="39">
+      <ConstantValue UId="41">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="42" />
+  <Token Text="TO" UId="43" />
+  <Blank Num="1" UId="44" />
+  <Access Scope="LocalVariable" UId="45">
+    <Symbol UId="46">
+      <Component Name="NumberOfLoggingVariables" UId="47" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="48" />
+  <Token Text="-" UId="49" />
+  <Blank Num="1" UId="50" />
+  <Access Scope="LiteralConstant" UId="51">
+    <Constant UId="52">
+      <ConstantValue UId="54">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="55" />
+  <Token Text="DO" UId="56" />
+  <NewLine Num="1" UId="57" />
+  <Blank Num="8" UId="58" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="59">
+    <Text UId="60">Array Full Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="61" />
+  <Blank Num="8" UId="62" />
+  <Access Scope="LocalVariable" UId="63">
+    <Symbol UId="64">
+      <Component Name="BufferLog_SecondPart_Full" UId="65" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="66" />
+  <Token Text=":=" UId="67" />
+  <Blank Num="1" UId="68" />
+  <Access Scope="LiteralConstant" UId="69">
+    <Constant UId="70">
+      <ConstantValue UId="72">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="73" />
+  <NewLine Num="1" UId="74" />
+  <Blank Num="8" UId="75" />
+  <NewLine Num="1" UId="76" />
+  <Blank Num="8" UId="77" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="78">
+    <Text UId="79">Variable Change Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="80" />
+  <Blank Num="8" UId="81" />
+  <Access Scope="LocalVariable" UId="82">
+    <Symbol UId="83">
+      <Component Name="Array_LoggingBooleans_RTRIGS" UId="84">
+        <Token Text="[" UId="85" />
+        <Access Scope="LocalVariable" UId="86">
+          <Symbol UId="87">
+            <Component Name="i" UId="88" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="89" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="90">
+    <Instruction UId="91">
+      <Token Text="(" UId="92" />
+      <Parameter Name="CLK" UId="93">
+        <Blank Num="1" UId="94" />
+        <Token Text=":=" UId="95" />
+        <Blank Num="1" UId="96" />
+        <Access Scope="LocalVariable" UId="97">
+          <Symbol UId="98">
+            <Component Name="Array_LoggingBooleans" UId="99">
+              <Token Text="[" UId="100" />
+              <Access Scope="LocalVariable" UId="101">
+                <Symbol UId="102">
+                  <Component Name="i" UId="103" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="104" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="105" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="106" />
+  <NewLine Num="1" UId="107" />
+  <Blank Num="8" UId="108" />
+  <Access Scope="LocalVariable" UId="109">
+    <Symbol UId="110">
+      <Component Name="Array_LoggingBooleans_FTRIGS" UId="111">
+        <Token Text="[" UId="112" />
+        <Access Scope="LocalVariable" UId="113">
+          <Symbol UId="114">
+            <Component Name="i" UId="115" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="116" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="117">
+    <Instruction UId="118">
+      <Token Text="(" UId="119" />
+      <Parameter Name="CLK" UId="120">
+        <Blank Num="1" UId="121" />
+        <Token Text=":=" UId="122" />
+        <Blank Num="1" UId="123" />
+        <Access Scope="LocalVariable" UId="124">
+          <Symbol UId="125">
+            <Component Name="Array_LoggingBooleans" UId="126">
+              <Token Text="[" UId="127" />
+              <Access Scope="LocalVariable" UId="128">
+                <Symbol UId="129">
+                  <Component Name="i" UId="130" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="131" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="132" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="133" />
+  <NewLine Num="1" UId="134" />
+  <Blank Num="8" UId="135" />
+  <Access Scope="LocalVariable" UId="136">
+    <Symbol UId="137">
+      <Component Name="Array_LoggingIntegers_Changed" UId="138">
+        <Token Text="[" UId="139" />
+        <Access Scope="LocalVariable" UId="140">
+          <Symbol UId="141">
+            <Component Name="i" UId="142" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="143" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="144">
+    <Instruction UId="145">
+      <Token Text="(" UId="146" />
+      <Parameter Name="CLK" UId="147">
+        <Blank Num="1" UId="148" />
+        <Token Text=":=" UId="149" />
+        <Blank Num="1" UId="150" />
+        <Access Scope="LocalVariable" UId="151">
+          <Symbol UId="152">
+            <Component Name="Array_LoggingIntegers_PreviousValues" UId="153">
+              <Token Text="[" UId="154" />
+              <Access Scope="LocalVariable" UId="155">
+                <Symbol UId="156">
+                  <Component Name="i" UId="157" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="158" />
+            </Component>
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="159" />
+        <Token Text="&lt;&gt;" UId="160" />
+        <Blank Num="1" UId="161" />
+        <Access Scope="LocalVariable" UId="162">
+          <Symbol UId="163">
+            <Component Name="Array_LoggingIntegers" UId="164">
+              <Token Text="[" UId="165" />
+              <Access Scope="LocalVariable" UId="166">
+                <Symbol UId="167">
+                  <Component Name="i" UId="168" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="169" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="170" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="171" />
+  <NewLine Num="1" UId="172" />
+  <Blank Num="8" UId="173" />
+  <Access Scope="LocalVariable" UId="174">
+    <Symbol UId="175">
+      <Component Name="Array_LoggingReals_Changed" UId="176">
+        <Token Text="[" UId="177" />
+        <Access Scope="LocalVariable" UId="178">
+          <Symbol UId="179">
+            <Component Name="i" UId="180" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="181" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="182">
+    <Instruction UId="183">
+      <Token Text="(" UId="184" />
+      <Parameter Name="CLK" UId="185">
+        <Blank Num="1" UId="186" />
+        <Token Text=":=" UId="187" />
+        <Blank Num="1" UId="188" />
+        <Access Scope="LocalVariable" UId="189">
+          <Symbol UId="190">
+            <Component Name="R_TRIG_Clock0.5Hz" UId="191" />
+            <Token Text="." UId="192" />
+            <Component Name="Q" UId="193" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="194" />
+        <Token Text="AND" UId="195" />
+        <Blank Num="1" UId="196" />
+        <Access Scope="LocalVariable" UId="197">
+          <Symbol UId="198">
+            <Component Name="Array_LoggingReals_PreviousValues" UId="199">
+              <Token Text="[" UId="200" />
+              <Access Scope="LocalVariable" UId="201">
+                <Symbol UId="202">
+                  <Component Name="i" UId="203" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="204" />
+            </Component>
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="205" />
+        <Token Text="&lt;&gt;" UId="206" />
+        <Blank Num="1" UId="207" />
+        <Access Scope="LocalVariable" UId="208">
+          <Symbol UId="209">
+            <Component Name="Array_LoggingReals" UId="210">
+              <Token Text="[" UId="211" />
+              <Access Scope="LocalVariable" UId="212">
+                <Symbol UId="213">
+                  <Component Name="i" UId="214" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="215" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="216" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="217" />
+  <NewLine Num="1" UId="218" />
+  <Blank Num="8" UId="219" />
+  <NewLine Num="1" UId="220" />
+  <Blank Num="8" UId="221" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="222">
+    <Text UId="223">Time Stamp Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="224" />
+  <Blank Num="8" UId="225" />
+  <Token Text="IF" UId="226" />
+  <NewLine Num="1" UId="227" />
+  <Blank Num="12" UId="228" />
+  <Access Scope="LocalVariable" UId="229">
+    <Symbol UId="230">
+      <Component Name="Array_LoggingBooleans_RTRIGS" UId="231">
+        <Token Text="[" UId="232" />
+        <Access Scope="LocalVariable" UId="233">
+          <Symbol UId="234">
+            <Component Name="i" UId="235" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="236" />
+      </Component>
+      <Token Text="." UId="237" />
+      <Component Name="Q" UId="238" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="239" />
+  <Token Text="OR" UId="240" />
+  <NewLine Num="1" UId="241" />
+  <Blank Num="12" UId="242" />
+  <Access Scope="LocalVariable" UId="243">
+    <Symbol UId="244">
+      <Component Name="Array_LoggingBooleans_FTRIGS" UId="245">
+        <Token Text="[" UId="246" />
+        <Access Scope="LocalVariable" UId="247">
+          <Symbol UId="248">
+            <Component Name="i" UId="249" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="250" />
+      </Component>
+      <Token Text="." UId="251" />
+      <Component Name="Q" UId="252" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="253" />
+  <Token Text="OR" UId="254" />
+  <NewLine Num="1" UId="255" />
+  <Blank Num="12" UId="256" />
+  <Access Scope="LocalVariable" UId="257">
+    <Symbol UId="258">
+      <Component Name="Array_LoggingIntegers_Changed" UId="259">
+        <Token Text="[" UId="260" />
+        <Access Scope="LocalVariable" UId="261">
+          <Symbol UId="262">
+            <Component Name="i" UId="263" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="264" />
+      </Component>
+      <Token Text="." UId="265" />
+      <Component Name="Q" UId="266" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="267" />
+  <Token Text="OR" UId="268" />
+  <NewLine Num="1" UId="269" />
+  <Blank Num="12" UId="270" />
+  <Access Scope="LocalVariable" UId="271">
+    <Symbol UId="272">
+      <Component Name="Array_LoggingReals_Changed" UId="273">
+        <Token Text="[" UId="274" />
+        <Access Scope="LocalVariable" UId="275">
+          <Symbol UId="276">
+            <Component Name="i" UId="277" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="278" />
+      </Component>
+      <Token Text="." UId="279" />
+      <Component Name="Q" UId="280" />
+    </Symbol>
+  </Access>
+  <NewLine Num="1" UId="281" />
+  <Blank Num="8" UId="282" />
+  <Token Text="THEN" UId="283" />
+  <NewLine Num="1" UId="284" />
+  <Blank Num="12" UId="285" />
+  <Access Scope="LocalVariable" UId="286">
+    <Symbol UId="287">
+      <Component Name="DateTimeReturnValue" UId="288" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="289" />
+  <Token Text=":=" UId="290" />
+  <Blank Num="1" UId="291" />
+  <Access Scope="Call" UId="292">
+    <Instruction Name="RD_SYS_T" UId="293">
+      <Token Text="(" UId="294" />
+      <NamelessParameter UId="295">
+        <Access Scope="LocalVariable" UId="296">
+          <Symbol UId="297">
+            <Component Name="LogTimeStamp" UId="298" />
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="300" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="301" />
+  <NewLine Num="1" UId="302" />
+  <Blank Num="8" UId="303" />
+  <Token Text="END_IF" UId="304" />
+  <Token Text=";" UId="305" />
+  <NewLine Num="1" UId="306" />
+  <Blank Num="8" UId="307" />
+  <NewLine Num="1" UId="308" />
+  <Blank Num="8" UId="309" />
+  <Token Text="REGION" UId="310" />
+  <Blank Num="1" UId="311" />
+  <Text UId="312">BOOLEANS LOGGING MANAGEMENT</Text>
+  <NewLine Num="1" UId="313" />
+  <Blank Num="12" UId="314" />
+  <Token Text="IF" UId="315" />
+  <Blank Num="1" UId="316" />
+  <Access Scope="LocalVariable" UId="317">
+    <Symbol UId="318">
+      <Component Name="Array_LoggingBooleans_RTRIGS" UId="319">
+        <Token Text="[" UId="320" />
+        <Access Scope="LocalVariable" UId="321">
+          <Symbol UId="322">
+            <Component Name="i" UId="323" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="324" />
+      </Component>
+      <Token Text="." UId="325" />
+      <Component Name="Q" UId="326" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="327" />
+  <Token Text="OR" UId="328" />
+  <Blank Num="1" UId="329" />
+  <Access Scope="LocalVariable" UId="330">
+    <Symbol UId="331">
+      <Component Name="Array_LoggingBooleans_FTRIGS" UId="332">
+        <Token Text="[" UId="333" />
+        <Access Scope="LocalVariable" UId="334">
+          <Symbol UId="335">
+            <Component Name="i" UId="336" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="337" />
+      </Component>
+      <Token Text="." UId="338" />
+      <Component Name="Q" UId="339" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="340" />
+  <Token Text="THEN" UId="341" />
+  <NewLine Num="1" UId="342" />
+  <Blank Num="16" UId="343" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="344">
+    <Text UId="345">Logging the variable</Text>
+  </LineComment>
+  <NewLine Num="1" UId="346" />
+  <Blank Num="16" UId="347" />
+  <Access Scope="LocalVariable" UId="348">
+    <Symbol UId="349">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="350">
+        <Token Text="[" UId="351" />
+        <Access Scope="LocalVariable" UId="352">
+          <Symbol UId="353">
+            <Component Name="LastEmptyIndex" UId="354" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="355" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="356" />
+  <Token Text=":=" UId="357" />
+  <Blank Num="1" UId="358" />
+  <Access Scope="LocalVariable" UId="359">
+    <Symbol UId="360">
+      <Component Name="Array_LoggingBooleans_VariableName" UId="361">
+        <Token Text="[" UId="362" />
+        <Access Scope="LocalVariable" UId="363">
+          <Symbol UId="364">
+            <Component Name="i" UId="365" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="366" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="367" />
+  <NewLine Num="1" UId="368" />
+  <Blank Num="16" UId="369" />
+  <Access Scope="LocalVariable" UId="370">
+    <Symbol UId="371">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="372">
+        <Token Text="[" UId="373" />
+        <Access Scope="LocalVariable" UId="374">
+          <Symbol UId="375">
+            <Component Name="LastEmptyIndex" UId="376" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="377" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="378" />
+  <Token Text=":=" UId="379" />
+  <Blank Num="1" UId="380" />
+  <Access Scope="LocalVariable" UId="381">
+    <Symbol UId="382">
+      <Component Name="LogTimeStamp" UId="383" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="384" />
+  <NewLine Num="1" UId="385" />
+  <Blank Num="16" UId="386" />
+  <Token Text="IF" UId="387" />
+  <Blank Num="1" UId="388" />
+  <Access Scope="LocalVariable" UId="389">
+    <Symbol UId="390">
+      <Component Name="Array_LoggingBooleans_RTRIGS" UId="391">
+        <Token Text="[" UId="392" />
+        <Access Scope="LocalVariable" UId="393">
+          <Symbol UId="394">
+            <Component Name="i" UId="395" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="396" />
+      </Component>
+      <Token Text="." UId="397" />
+      <Component Name="Q" UId="398" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="399" />
+  <Token Text="THEN" UId="400" />
+  <NewLine Num="1" UId="401" />
+  <Blank Num="20" UId="402" />
+  <Access Scope="LocalVariable" UId="403">
+    <Symbol UId="404">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="405">
+        <Token Text="[" UId="406" />
+        <Access Scope="LocalVariable" UId="407">
+          <Symbol UId="408">
+            <Component Name="LastEmptyIndex" UId="409" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="410" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="411" />
+  <Token Text=":=" UId="412" />
+  <Blank Num="1" UId="413" />
+  <Access Scope="LiteralConstant" UId="414">
+    <Constant UId="415">
+      <ConstantValue UId="417">'FALSE'</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="418" />
+  <NewLine Num="1" UId="419" />
+  <Blank Num="20" UId="420" />
+  <Access Scope="LocalVariable" UId="421">
+    <Symbol UId="422">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="423">
+        <Token Text="[" UId="424" />
+        <Access Scope="LocalVariable" UId="425">
+          <Symbol UId="426">
+            <Component Name="LastEmptyIndex" UId="427" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="428" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="429" />
+  <Token Text=":=" UId="430" />
+  <Blank Num="1" UId="431" />
+  <Access Scope="LiteralConstant" UId="432">
+    <Constant UId="433">
+      <ConstantValue UId="435">'TRUE'</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="436" />
+  <NewLine Num="1" UId="437" />
+  <Blank Num="16" UId="438" />
+  <Token Text="ELSIF" UId="439" />
+  <Blank Num="1" UId="440" />
+  <Access Scope="LocalVariable" UId="441">
+    <Symbol UId="442">
+      <Component Name="Array_LoggingBooleans_FTRIGS" UId="443">
+        <Token Text="[" UId="444" />
+        <Access Scope="LocalVariable" UId="445">
+          <Symbol UId="446">
+            <Component Name="i" UId="447" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="448" />
+      </Component>
+      <Token Text="." UId="449" />
+      <Component Name="Q" UId="450" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="451" />
+  <Token Text="THEN" UId="452" />
+  <NewLine Num="1" UId="453" />
+  <Blank Num="20" UId="454" />
+  <Access Scope="LocalVariable" UId="455">
+    <Symbol UId="456">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="457">
+        <Token Text="[" UId="458" />
+        <Access Scope="LocalVariable" UId="459">
+          <Symbol UId="460">
+            <Component Name="LastEmptyIndex" UId="461" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="462" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="463" />
+  <Token Text=":=" UId="464" />
+  <Blank Num="1" UId="465" />
+  <Access Scope="LiteralConstant" UId="466">
+    <Constant UId="467">
+      <ConstantValue UId="469">'TRUE'</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="470" />
+  <NewLine Num="1" UId="471" />
+  <Blank Num="20" UId="472" />
+  <Access Scope="LocalVariable" UId="473">
+    <Symbol UId="474">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="475">
+        <Token Text="[" UId="476" />
+        <Access Scope="LocalVariable" UId="477">
+          <Symbol UId="478">
+            <Component Name="LastEmptyIndex" UId="479" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="480" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="481" />
+  <Token Text=":=" UId="482" />
+  <Blank Num="1" UId="483" />
+  <Access Scope="LiteralConstant" UId="484">
+    <Constant UId="485">
+      <ConstantValue UId="487">'FALSE'</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="488" />
+  <NewLine Num="1" UId="489" />
+  <Blank Num="16" UId="490" />
+  <Token Text="END_IF" UId="491" />
+  <Token Text=";" UId="492" />
+  <NewLine Num="1" UId="493" />
+  <Blank Num="16" UId="494" />
+  <NewLine Num="1" UId="495" />
+  <Blank Num="16" UId="496" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="497">
+    <Text UId="498">Array Index Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="499" />
+  <Blank Num="16" UId="500" />
+  <Access Scope="LocalVariable" UId="501">
+    <Symbol UId="502">
+      <Component Name="R_TRIG_ArrayFull" UId="503" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="504">
+    <Instruction UId="505">
+      <Token Text="(" UId="506" />
+      <Parameter Name="CLK" UId="507">
+        <Blank Num="1" UId="508" />
+        <Token Text=":=" UId="509" />
+        <Blank Num="1" UId="510" />
+        <Access Scope="LocalVariable" UId="511">
+          <Symbol UId="512">
+            <Component Name="LastEmptyIndex" UId="513" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="514" />
+        <Token Text="=" UId="515" />
+        <Blank Num="1" UId="516" />
+        <Access Scope="LocalVariable" UId="517">
+          <Symbol UId="518">
+            <Component Name="BufferSize" UId="519" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="520" />
+        <Token Text="-" UId="521" />
+        <Blank Num="1" UId="522" />
+        <Access Scope="LiteralConstant" UId="523">
+          <Constant UId="524">
+            <ConstantValue UId="526">1</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="527" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="528" />
+  <NewLine Num="1" UId="529" />
+  <Blank Num="16" UId="530" />
+  <Token Text="IF" UId="531" />
+  <Blank Num="1" UId="532" />
+  <Access Scope="LocalVariable" UId="533">
+    <Symbol UId="534">
+      <Component Name="R_TRIG_ArrayFull" UId="535" />
+      <Token Text="." UId="536" />
+      <Component Name="Q" UId="537" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="538" />
+  <Token Text="AND" UId="539" />
+  <Blank Num="1" UId="540" />
+  <Access Scope="LocalVariable" UId="541">
+    <Symbol UId="542">
+      <Component Name="BufferLog_SecondPart_Full" UId="543" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="544" />
+  <Token Text="THEN" UId="545" />
+  <NewLine Num="1" UId="546" />
+  <Blank Num="20" UId="547" />
+  <Access Scope="LocalVariable" UId="548">
+    <Symbol UId="549">
+      <Component Name="BufferLog_TimeStamp_FirstPart" UId="550" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="551" />
+  <Token Text=":=" UId="552" />
+  <Blank Num="1" UId="553" />
+  <Access Scope="LocalVariable" UId="554">
+    <Symbol UId="555">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="556" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="557" />
+  <NewLine Num="1" UId="558" />
+  <Blank Num="20" UId="559" />
+  <Access Scope="LocalVariable" UId="560">
+    <Symbol UId="561">
+      <Component Name="BufferLog_VariableName_FirstPart" UId="562" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="563" />
+  <Token Text=":=" UId="564" />
+  <Blank Num="1" UId="565" />
+  <Access Scope="LocalVariable" UId="566">
+    <Symbol UId="567">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="568" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="569" />
+  <NewLine Num="1" UId="570" />
+  <Blank Num="20" UId="571" />
+  <Access Scope="LocalVariable" UId="572">
+    <Symbol UId="573">
+      <Component Name="BufferLog_PreviousValue_FirstPart" UId="574" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="575" />
+  <Token Text=":=" UId="576" />
+  <Blank Num="1" UId="577" />
+  <Access Scope="LocalVariable" UId="578">
+    <Symbol UId="579">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="580" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="581" />
+  <NewLine Num="1" UId="582" />
+  <Blank Num="20" UId="583" />
+  <Access Scope="LocalVariable" UId="584">
+    <Symbol UId="585">
+      <Component Name="BufferLog_CurrentValue_FirstPart" UId="586" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="587" />
+  <Token Text=":=" UId="588" />
+  <Blank Num="1" UId="589" />
+  <Access Scope="LocalVariable" UId="590">
+    <Symbol UId="591">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="592" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="593" />
+  <NewLine Num="1" UId="594" />
+  <Blank Num="20" UId="595" />
+  <NewLine Num="1" UId="596" />
+  <Blank Num="20" UId="597" />
+  <Access Scope="LocalVariable" UId="598">
+    <Symbol UId="599">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="600" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="601" />
+  <Token Text=":=" UId="602" />
+  <Blank Num="1" UId="603" />
+  <Access Scope="LocalVariable" UId="604">
+    <Symbol UId="605">
+      <Component Name="BufferLog_EmptyDTL" UId="606" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="607" />
+  <NewLine Num="1" UId="608" />
+  <Blank Num="20" UId="609" />
+  <Access Scope="LocalVariable" UId="610">
+    <Symbol UId="611">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="612" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="613" />
+  <Token Text=":=" UId="614" />
+  <Blank Num="1" UId="615" />
+  <Access Scope="LocalVariable" UId="616">
+    <Symbol UId="617">
+      <Component Name="BufferLog_EmptyString" UId="618" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="619" />
+  <NewLine Num="1" UId="620" />
+  <Blank Num="20" UId="621" />
+  <Access Scope="LocalVariable" UId="622">
+    <Symbol UId="623">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="624" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="625" />
+  <Token Text=":=" UId="626" />
+  <Blank Num="1" UId="627" />
+  <Access Scope="LocalVariable" UId="628">
+    <Symbol UId="629">
+      <Component Name="BufferLog_EmptyString" UId="630" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="631" />
+  <NewLine Num="1" UId="632" />
+  <Blank Num="20" UId="633" />
+  <Access Scope="LocalVariable" UId="634">
+    <Symbol UId="635">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="636" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="637" />
+  <Token Text=":=" UId="638" />
+  <Blank Num="1" UId="639" />
+  <Access Scope="LocalVariable" UId="640">
+    <Symbol UId="641">
+      <Component Name="BufferLog_EmptyString" UId="642" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="643" />
+  <NewLine Num="1" UId="644" />
+  <Blank Num="20" UId="645" />
+  <NewLine Num="1" UId="646" />
+  <Blank Num="20" UId="647" />
+  <Access Scope="LocalVariable" UId="648">
+    <Symbol UId="649">
+      <Component Name="BufferLog_SecondPart_Full" UId="650" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="651" />
+  <Token Text=":=" UId="652" />
+  <Blank Num="1" UId="653" />
+  <Access Scope="LiteralConstant" UId="654">
+    <Constant UId="655">
+      <ConstantValue UId="657">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="658" />
+  <NewLine Num="1" UId="659" />
+  <Blank Num="20" UId="660" />
+  <Access Scope="LocalVariable" UId="661">
+    <Symbol UId="662">
+      <Component Name="LastEmptyIndex" UId="663" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="664" />
+  <Token Text=":=" UId="665" />
+  <Blank Num="1" UId="666" />
+  <Access Scope="LiteralConstant" UId="667">
+    <Constant UId="668">
+      <ConstantValue UId="670">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="671" />
+  <NewLine Num="1" UId="672" />
+  <Blank Num="16" UId="673" />
+  <Token Text="ELSE" UId="674" />
+  <NewLine Num="1" UId="675" />
+  <Blank Num="20" UId="676" />
+  <Access Scope="LocalVariable" UId="677">
+    <Symbol UId="678">
+      <Component Name="LastEmptyIndex" UId="679" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="680" />
+  <Token Text="+=" UId="681" />
+  <Blank Num="1" UId="682" />
+  <Access Scope="LiteralConstant" UId="683">
+    <Constant UId="684">
+      <ConstantValue UId="686">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="687" />
+  <NewLine Num="1" UId="688" />
+  <Blank Num="16" UId="689" />
+  <Token Text="END_IF" UId="690" />
+  <Token Text=";" UId="691" />
+  <NewLine Num="1" UId="692" />
+  <Blank Num="12" UId="693" />
+  <Token Text="END_IF" UId="694" />
+  <Token Text=";" UId="695" />
+  <NewLine Num="1" UId="696" />
+  <Blank Num="8" UId="697" />
+  <Token Text="END_REGION" UId="698" />
+  <NewLine Num="1" UId="699" />
+  <Blank Num="8" UId="700" />
+  <NewLine Num="1" UId="701" />
+  <Blank Num="8" UId="702" />
+  <Token Text="REGION" UId="703" />
+  <Blank Num="1" UId="704" />
+  <Text UId="705">INTEGERS LOGGING MANAGEMENT</Text>
+  <NewLine Num="1" UId="706" />
+  <Blank Num="12" UId="707" />
+  <Token Text="IF" UId="708" />
+  <Blank Num="1" UId="709" />
+  <Access Scope="LocalVariable" UId="710">
+    <Symbol UId="711">
+      <Component Name="Array_LoggingIntegers_Changed" UId="712">
+        <Token Text="[" UId="713" />
+        <Access Scope="LocalVariable" UId="714">
+          <Symbol UId="715">
+            <Component Name="i" UId="716" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="717" />
+      </Component>
+      <Token Text="." UId="718" />
+      <Component Name="Q" UId="719" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="720" />
+  <Token Text="THEN" UId="721" />
+  <NewLine Num="1" UId="722" />
+  <Blank Num="16" UId="723" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="724">
+    <Text UId="725">Logging The Variable</Text>
+  </LineComment>
+  <NewLine Num="1" UId="726" />
+  <Blank Num="16" UId="727" />
+  <Access Scope="LocalVariable" UId="728">
+    <Symbol UId="729">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="730">
+        <Token Text="[" UId="731" />
+        <Access Scope="LocalVariable" UId="732">
+          <Symbol UId="733">
+            <Component Name="LastEmptyIndex" UId="734" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="735" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="736" />
+  <Token Text=":=" UId="737" />
+  <Blank Num="1" UId="738" />
+  <Access Scope="LocalVariable" UId="739">
+    <Symbol UId="740">
+      <Component Name="Array_LoggingIntegers_VariableName" UId="741">
+        <Token Text="[" UId="742" />
+        <Access Scope="LocalVariable" UId="743">
+          <Symbol UId="744">
+            <Component Name="i" UId="745" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="746" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="747" />
+  <NewLine Num="1" UId="748" />
+  <Blank Num="16" UId="749" />
+  <Access Scope="LocalVariable" UId="750">
+    <Symbol UId="751">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="752">
+        <Token Text="[" UId="753" />
+        <Access Scope="LocalVariable" UId="754">
+          <Symbol UId="755">
+            <Component Name="LastEmptyIndex" UId="756" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="757" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="758" />
+  <Token Text=":=" UId="759" />
+  <Blank Num="1" UId="760" />
+  <Access Scope="LocalVariable" UId="761">
+    <Symbol UId="762">
+      <Component Name="LogTimeStamp" UId="763" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="764" />
+  <NewLine Num="1" UId="765" />
+  <Blank Num="16" UId="766" />
+  <Access Scope="LocalVariable" UId="767">
+    <Symbol UId="768">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="769">
+        <Token Text="[" UId="770" />
+        <Access Scope="LocalVariable" UId="771">
+          <Symbol UId="772">
+            <Component Name="LastEmptyIndex" UId="773" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="774" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="775" />
+  <Token Text=":=" UId="776" />
+  <Blank Num="1" UId="777" />
+  <Access Scope="Call" UId="778">
+    <CallInfo UId="779" BlockType="FC">
+      <Instance Scope="GlobalVariable" UId="781">
+        <Component Name="FC10019_RealToString" UId="780" />
+      </Instance>
+      <Token Text="(" UId="782" />
+      <NamelessParameter UId="783">
+        <Access Scope="LocalVariable" UId="784">
+          <Symbol UId="785">
+            <Component Name="Array_LoggingIntegers_PreviousValues" UId="786">
+              <Token Text="[" UId="787" />
+              <Access Scope="LocalVariable" UId="788">
+                <Symbol UId="789">
+                  <Component Name="i" UId="790" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="791" />
+            </Component>
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="793" />
+    </CallInfo>
+  </Access>
+  <Token Text=";" UId="794" />
+  <NewLine Num="1" UId="795" />
+  <Blank Num="16" UId="796" />
+  <Access Scope="LocalVariable" UId="797">
+    <Symbol UId="798">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="799">
+        <Token Text="[" UId="800" />
+        <Access Scope="LocalVariable" UId="801">
+          <Symbol UId="802">
+            <Component Name="LastEmptyIndex" UId="803" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="804" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="805" />
+  <Token Text=":=" UId="806" />
+  <Blank Num="1" UId="807" />
+  <Access Scope="Call" UId="808">
+    <CallInfo UId="809" BlockType="FC">
+      <Instance Scope="GlobalVariable" UId="811">
+        <Component Name="FC10019_RealToString" UId="810" />
+      </Instance>
+      <Token Text="(" UId="812" />
+      <NamelessParameter UId="813">
+        <Access Scope="LocalVariable" UId="814">
+          <Symbol UId="815">
+            <Component Name="Array_LoggingIntegers" UId="816">
+              <Token Text="[" UId="817" />
+              <Access Scope="LocalVariable" UId="818">
+                <Symbol UId="819">
+                  <Component Name="i" UId="820" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="821" />
+            </Component>
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="823" />
+    </CallInfo>
+  </Access>
+  <Token Text=";" UId="824" />
+  <NewLine Num="1" UId="825" />
+  <Blank Num="16" UId="826" />
+  <NewLine Num="1" UId="827" />
+  <Blank Num="16" UId="828" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="829">
+    <Text UId="830">Store The Actual Value</Text>
+  </LineComment>
+  <NewLine Num="1" UId="831" />
+  <Blank Num="16" UId="832" />
+  <Access Scope="LocalVariable" UId="833">
+    <Symbol UId="834">
+      <Component Name="Array_LoggingIntegers_PreviousValues" UId="835">
+        <Token Text="[" UId="836" />
+        <Access Scope="LocalVariable" UId="837">
+          <Symbol UId="838">
+            <Component Name="i" UId="839" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="840" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="841" />
+  <Token Text=":=" UId="842" />
+  <Blank Num="1" UId="843" />
+  <Access Scope="LocalVariable" UId="844">
+    <Symbol UId="845">
+      <Component Name="Array_LoggingIntegers" UId="846">
+        <Token Text="[" UId="847" />
+        <Access Scope="LocalVariable" UId="848">
+          <Symbol UId="849">
+            <Component Name="i" UId="850" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="851" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="852" />
+  <NewLine Num="1" UId="853" />
+  <Blank Num="16" UId="854" />
+  <NewLine Num="1" UId="855" />
+  <Blank Num="16" UId="856" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="857">
+    <Text UId="858">Array Index Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="859" />
+  <Blank Num="16" UId="860" />
+  <Access Scope="LocalVariable" UId="861">
+    <Symbol UId="862">
+      <Component Name="R_TRIG_ArrayFull" UId="863" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="864">
+    <Instruction UId="865">
+      <Token Text="(" UId="866" />
+      <Parameter Name="CLK" UId="867">
+        <Blank Num="1" UId="868" />
+        <Token Text=":=" UId="869" />
+        <Blank Num="1" UId="870" />
+        <Access Scope="LocalVariable" UId="871">
+          <Symbol UId="872">
+            <Component Name="LastEmptyIndex" UId="873" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="874" />
+        <Token Text="=" UId="875" />
+        <Blank Num="1" UId="876" />
+        <Access Scope="LocalVariable" UId="877">
+          <Symbol UId="878">
+            <Component Name="BufferSize" UId="879" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="880" />
+        <Token Text="-" UId="881" />
+        <Blank Num="1" UId="882" />
+        <Access Scope="LiteralConstant" UId="883">
+          <Constant UId="884">
+            <ConstantValue UId="886">1</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="887" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="888" />
+  <NewLine Num="1" UId="889" />
+  <Blank Num="16" UId="890" />
+  <Token Text="IF" UId="891" />
+  <Blank Num="1" UId="892" />
+  <Access Scope="LocalVariable" UId="893">
+    <Symbol UId="894">
+      <Component Name="R_TRIG_ArrayFull" UId="895" />
+      <Token Text="." UId="896" />
+      <Component Name="Q" UId="897" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="898" />
+  <Token Text="AND" UId="899" />
+  <Blank Num="1" UId="900" />
+  <Access Scope="LocalVariable" UId="901">
+    <Symbol UId="902">
+      <Component Name="BufferLog_SecondPart_Full" UId="903" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="904" />
+  <Token Text="THEN" UId="905" />
+  <NewLine Num="1" UId="906" />
+  <Blank Num="20" UId="907" />
+  <Access Scope="LocalVariable" UId="908">
+    <Symbol UId="909">
+      <Component Name="BufferLog_TimeStamp_FirstPart" UId="910" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="911" />
+  <Token Text=":=" UId="912" />
+  <Blank Num="1" UId="913" />
+  <Access Scope="LocalVariable" UId="914">
+    <Symbol UId="915">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="916" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="917" />
+  <NewLine Num="1" UId="918" />
+  <Blank Num="20" UId="919" />
+  <Access Scope="LocalVariable" UId="920">
+    <Symbol UId="921">
+      <Component Name="BufferLog_VariableName_FirstPart" UId="922" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="923" />
+  <Token Text=":=" UId="924" />
+  <Blank Num="1" UId="925" />
+  <Access Scope="LocalVariable" UId="926">
+    <Symbol UId="927">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="928" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="929" />
+  <NewLine Num="1" UId="930" />
+  <Blank Num="20" UId="931" />
+  <Access Scope="LocalVariable" UId="932">
+    <Symbol UId="933">
+      <Component Name="BufferLog_PreviousValue_FirstPart" UId="934" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="935" />
+  <Token Text=":=" UId="936" />
+  <Blank Num="1" UId="937" />
+  <Access Scope="LocalVariable" UId="938">
+    <Symbol UId="939">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="940" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="941" />
+  <NewLine Num="1" UId="942" />
+  <Blank Num="20" UId="943" />
+  <Access Scope="LocalVariable" UId="944">
+    <Symbol UId="945">
+      <Component Name="BufferLog_CurrentValue_FirstPart" UId="946" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="947" />
+  <Token Text=":=" UId="948" />
+  <Blank Num="1" UId="949" />
+  <Access Scope="LocalVariable" UId="950">
+    <Symbol UId="951">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="952" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="953" />
+  <NewLine Num="1" UId="954" />
+  <Blank Num="20" UId="955" />
+  <NewLine Num="1" UId="956" />
+  <Blank Num="20" UId="957" />
+  <Access Scope="LocalVariable" UId="958">
+    <Symbol UId="959">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="960" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="961" />
+  <Token Text=":=" UId="962" />
+  <Blank Num="1" UId="963" />
+  <Access Scope="LocalVariable" UId="964">
+    <Symbol UId="965">
+      <Component Name="BufferLog_EmptyDTL" UId="966" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="967" />
+  <NewLine Num="1" UId="968" />
+  <Blank Num="20" UId="969" />
+  <Access Scope="LocalVariable" UId="970">
+    <Symbol UId="971">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="972" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="973" />
+  <Token Text=":=" UId="974" />
+  <Blank Num="1" UId="975" />
+  <Access Scope="LocalVariable" UId="976">
+    <Symbol UId="977">
+      <Component Name="BufferLog_EmptyString" UId="978" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="979" />
+  <NewLine Num="1" UId="980" />
+  <Blank Num="20" UId="981" />
+  <Access Scope="LocalVariable" UId="982">
+    <Symbol UId="983">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="984" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="985" />
+  <Token Text=":=" UId="986" />
+  <Blank Num="1" UId="987" />
+  <Access Scope="LocalVariable" UId="988">
+    <Symbol UId="989">
+      <Component Name="BufferLog_EmptyString" UId="990" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="991" />
+  <NewLine Num="1" UId="992" />
+  <Blank Num="20" UId="993" />
+  <Access Scope="LocalVariable" UId="994">
+    <Symbol UId="995">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="996" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="997" />
+  <Token Text=":=" UId="998" />
+  <Blank Num="1" UId="999" />
+  <Access Scope="LocalVariable" UId="1000">
+    <Symbol UId="1001">
+      <Component Name="BufferLog_EmptyString" UId="1002" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1003" />
+  <NewLine Num="1" UId="1004" />
+  <Blank Num="20" UId="1005" />
+  <NewLine Num="1" UId="1006" />
+  <Blank Num="20" UId="1007" />
+  <Access Scope="LocalVariable" UId="1008">
+    <Symbol UId="1009">
+      <Component Name="BufferLog_SecondPart_Full" UId="1010" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1011" />
+  <Token Text=":=" UId="1012" />
+  <Blank Num="1" UId="1013" />
+  <Access Scope="LiteralConstant" UId="1014">
+    <Constant UId="1015">
+      <ConstantValue UId="1017">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1018" />
+  <NewLine Num="1" UId="1019" />
+  <Blank Num="20" UId="1020" />
+  <Access Scope="LocalVariable" UId="1021">
+    <Symbol UId="1022">
+      <Component Name="LastEmptyIndex" UId="1023" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1024" />
+  <Token Text=":=" UId="1025" />
+  <Blank Num="1" UId="1026" />
+  <Access Scope="LiteralConstant" UId="1027">
+    <Constant UId="1028">
+      <ConstantValue UId="1030">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1031" />
+  <NewLine Num="1" UId="1032" />
+  <Blank Num="16" UId="1033" />
+  <Token Text="ELSE" UId="1034" />
+  <NewLine Num="1" UId="1035" />
+  <Blank Num="20" UId="1036" />
+  <Access Scope="LocalVariable" UId="1037">
+    <Symbol UId="1038">
+      <Component Name="LastEmptyIndex" UId="1039" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1040" />
+  <Token Text="+=" UId="1041" />
+  <Blank Num="1" UId="1042" />
+  <Access Scope="LiteralConstant" UId="1043">
+    <Constant UId="1044">
+      <ConstantValue UId="1046">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1047" />
+  <NewLine Num="1" UId="1048" />
+  <Blank Num="16" UId="1049" />
+  <Token Text="END_IF" UId="1050" />
+  <Token Text=";" UId="1051" />
+  <NewLine Num="1" UId="1052" />
+  <Blank Num="12" UId="1053" />
+  <Token Text="END_IF" UId="1054" />
+  <Token Text=";" UId="1055" />
+  <NewLine Num="1" UId="1056" />
+  <Blank Num="8" UId="1057" />
+  <Token Text="END_REGION" UId="1058" />
+  <NewLine Num="1" UId="1059" />
+  <Blank Num="8" UId="1060" />
+  <NewLine Num="1" UId="1061" />
+  <Blank Num="8" UId="1062" />
+  <Token Text="REGION" UId="1063" />
+  <Blank Num="1" UId="1064" />
+  <Text UId="1065">REALS LOGGING MANAGEMENT</Text>
+  <NewLine Num="1" UId="1066" />
+  <Blank Num="12" UId="1067" />
+  <Token Text="IF" UId="1068" />
+  <Blank Num="1" UId="1069" />
+  <Access Scope="LocalVariable" UId="1070">
+    <Symbol UId="1071">
+      <Component Name="Array_LoggingReals_Changed" UId="1072">
+        <Token Text="[" UId="1073" />
+        <Access Scope="LocalVariable" UId="1074">
+          <Symbol UId="1075">
+            <Component Name="i" UId="1076" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1077" />
+      </Component>
+      <Token Text="." UId="1078" />
+      <Component Name="Q" UId="1079" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1080" />
+  <Token Text="THEN" UId="1081" />
+  <NewLine Num="1" UId="1082" />
+  <Blank Num="16" UId="1083" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1084">
+    <Text UId="1085">Logging The Variable</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1086" />
+  <Blank Num="16" UId="1087" />
+  <Access Scope="LocalVariable" UId="1088">
+    <Symbol UId="1089">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="1090">
+        <Token Text="[" UId="1091" />
+        <Access Scope="LocalVariable" UId="1092">
+          <Symbol UId="1093">
+            <Component Name="LastEmptyIndex" UId="1094" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1095" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1096" />
+  <Token Text=":=" UId="1097" />
+  <Blank Num="1" UId="1098" />
+  <Access Scope="LocalVariable" UId="1099">
+    <Symbol UId="1100">
+      <Component Name="Array_LoggingReals_VariableName" UId="1101">
+        <Token Text="[" UId="1102" />
+        <Access Scope="LocalVariable" UId="1103">
+          <Symbol UId="1104">
+            <Component Name="i" UId="1105" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1106" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1107" />
+  <NewLine Num="1" UId="1108" />
+  <Blank Num="16" UId="1109" />
+  <Access Scope="LocalVariable" UId="1110">
+    <Symbol UId="1111">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="1112">
+        <Token Text="[" UId="1113" />
+        <Access Scope="LocalVariable" UId="1114">
+          <Symbol UId="1115">
+            <Component Name="LastEmptyIndex" UId="1116" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1117" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1118" />
+  <Token Text=":=" UId="1119" />
+  <Blank Num="1" UId="1120" />
+  <Access Scope="LocalVariable" UId="1121">
+    <Symbol UId="1122">
+      <Component Name="LogTimeStamp" UId="1123" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1124" />
+  <NewLine Num="1" UId="1125" />
+  <Blank Num="16" UId="1126" />
+  <Access Scope="LocalVariable" UId="1127">
+    <Symbol UId="1128">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="1129">
+        <Token Text="[" UId="1130" />
+        <Access Scope="LocalVariable" UId="1131">
+          <Symbol UId="1132">
+            <Component Name="LastEmptyIndex" UId="1133" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1134" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1135" />
+  <Token Text=":=" UId="1136" />
+  <Blank Num="1" UId="1137" />
+  <Access Scope="Call" UId="1138">
+    <CallInfo UId="1139" BlockType="FC">
+      <Instance Scope="GlobalVariable" UId="1141">
+        <Component Name="FC10019_RealToString" UId="1140" />
+      </Instance>
+      <Token Text="(" UId="1142" />
+      <NamelessParameter UId="1143">
+        <Access Scope="LocalVariable" UId="1144">
+          <Symbol UId="1145">
+            <Component Name="Array_LoggingReals_PreviousValues" UId="1146">
+              <Token Text="[" UId="1147" />
+              <Access Scope="LocalVariable" UId="1148">
+                <Symbol UId="1149">
+                  <Component Name="i" UId="1150" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="1151" />
+            </Component>
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="1153" />
+    </CallInfo>
+  </Access>
+  <Token Text=";" UId="1154" />
+  <NewLine Num="1" UId="1155" />
+  <Blank Num="16" UId="1156" />
+  <Access Scope="LocalVariable" UId="1157">
+    <Symbol UId="1158">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="1159">
+        <Token Text="[" UId="1160" />
+        <Access Scope="LocalVariable" UId="1161">
+          <Symbol UId="1162">
+            <Component Name="LastEmptyIndex" UId="1163" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1164" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1165" />
+  <Token Text=":=" UId="1166" />
+  <Blank Num="1" UId="1167" />
+  <Access Scope="Call" UId="1168">
+    <CallInfo UId="1169" BlockType="FC">
+      <Instance Scope="GlobalVariable" UId="1171">
+        <Component Name="FC10019_RealToString" UId="1170" />
+      </Instance>
+      <Token Text="(" UId="1172" />
+      <NamelessParameter UId="1173">
+        <Access Scope="LocalVariable" UId="1174">
+          <Symbol UId="1175">
+            <Component Name="Array_LoggingReals" UId="1176">
+              <Token Text="[" UId="1177" />
+              <Access Scope="LocalVariable" UId="1178">
+                <Symbol UId="1179">
+                  <Component Name="i" UId="1180" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="1181" />
+            </Component>
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="1183" />
+    </CallInfo>
+  </Access>
+  <Token Text=";" UId="1184" />
+  <NewLine Num="1" UId="1185" />
+  <Blank Num="16" UId="1186" />
+  <NewLine Num="1" UId="1187" />
+  <Blank Num="16" UId="1188" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1189">
+    <Text UId="1190">Store The Actual Value</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1191" />
+  <Blank Num="16" UId="1192" />
+  <Access Scope="LocalVariable" UId="1193">
+    <Symbol UId="1194">
+      <Component Name="Array_LoggingReals_PreviousValues" UId="1195">
+        <Token Text="[" UId="1196" />
+        <Access Scope="LocalVariable" UId="1197">
+          <Symbol UId="1198">
+            <Component Name="i" UId="1199" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1200" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1201" />
+  <Token Text=":=" UId="1202" />
+  <Blank Num="1" UId="1203" />
+  <Access Scope="LocalVariable" UId="1204">
+    <Symbol UId="1205">
+      <Component Name="Array_LoggingReals" UId="1206">
+        <Token Text="[" UId="1207" />
+        <Access Scope="LocalVariable" UId="1208">
+          <Symbol UId="1209">
+            <Component Name="i" UId="1210" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="1211" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1212" />
+  <NewLine Num="1" UId="1213" />
+  <Blank Num="16" UId="1214" />
+  <NewLine Num="1" UId="1215" />
+  <Blank Num="16" UId="1216" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="1217">
+    <Text UId="1218">Array Index Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="1219" />
+  <Blank Num="16" UId="1220" />
+  <Access Scope="LocalVariable" UId="1221">
+    <Symbol UId="1222">
+      <Component Name="R_TRIG_ArrayFull" UId="1223" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="1224">
+    <Instruction UId="1225">
+      <Token Text="(" UId="1226" />
+      <Parameter Name="CLK" UId="1227">
+        <Blank Num="1" UId="1228" />
+        <Token Text=":=" UId="1229" />
+        <Blank Num="1" UId="1230" />
+        <Access Scope="LocalVariable" UId="1231">
+          <Symbol UId="1232">
+            <Component Name="LastEmptyIndex" UId="1233" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1234" />
+        <Token Text="=" UId="1235" />
+        <Blank Num="1" UId="1236" />
+        <Access Scope="LocalVariable" UId="1237">
+          <Symbol UId="1238">
+            <Component Name="BufferSize" UId="1239" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="1240" />
+        <Token Text="-" UId="1241" />
+        <Blank Num="1" UId="1242" />
+        <Access Scope="LiteralConstant" UId="1243">
+          <Constant UId="1244">
+            <ConstantValue UId="1246">1</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="1247" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="1248" />
+  <NewLine Num="1" UId="1249" />
+  <Blank Num="16" UId="1250" />
+  <Token Text="IF" UId="1251" />
+  <Blank Num="1" UId="1252" />
+  <Access Scope="LocalVariable" UId="1253">
+    <Symbol UId="1254">
+      <Component Name="R_TRIG_ArrayFull" UId="1255" />
+      <Token Text="." UId="1256" />
+      <Component Name="Q" UId="1257" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1258" />
+  <Token Text="AND" UId="1259" />
+  <Blank Num="1" UId="1260" />
+  <Access Scope="LocalVariable" UId="1261">
+    <Symbol UId="1262">
+      <Component Name="BufferLog_SecondPart_Full" UId="1263" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1264" />
+  <Token Text="THEN" UId="1265" />
+  <NewLine Num="1" UId="1266" />
+  <Blank Num="20" UId="1267" />
+  <Access Scope="LocalVariable" UId="1268">
+    <Symbol UId="1269">
+      <Component Name="BufferLog_TimeStamp_FirstPart" UId="1270" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1271" />
+  <Token Text=":=" UId="1272" />
+  <Blank Num="1" UId="1273" />
+  <Access Scope="LocalVariable" UId="1274">
+    <Symbol UId="1275">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="1276" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1277" />
+  <NewLine Num="1" UId="1278" />
+  <Blank Num="20" UId="1279" />
+  <Access Scope="LocalVariable" UId="1280">
+    <Symbol UId="1281">
+      <Component Name="BufferLog_VariableName_FirstPart" UId="1282" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1283" />
+  <Token Text=":=" UId="1284" />
+  <Blank Num="1" UId="1285" />
+  <Access Scope="LocalVariable" UId="1286">
+    <Symbol UId="1287">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="1288" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1289" />
+  <NewLine Num="1" UId="1290" />
+  <Blank Num="20" UId="1291" />
+  <Access Scope="LocalVariable" UId="1292">
+    <Symbol UId="1293">
+      <Component Name="BufferLog_PreviousValue_FirstPart" UId="1294" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1295" />
+  <Token Text=":=" UId="1296" />
+  <Blank Num="1" UId="1297" />
+  <Access Scope="LocalVariable" UId="1298">
+    <Symbol UId="1299">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="1300" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1301" />
+  <NewLine Num="1" UId="1302" />
+  <Blank Num="20" UId="1303" />
+  <Access Scope="LocalVariable" UId="1304">
+    <Symbol UId="1305">
+      <Component Name="BufferLog_CurrentValue_FirstPart" UId="1306" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1307" />
+  <Token Text=":=" UId="1308" />
+  <Blank Num="1" UId="1309" />
+  <Access Scope="LocalVariable" UId="1310">
+    <Symbol UId="1311">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="1312" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1313" />
+  <NewLine Num="1" UId="1314" />
+  <Blank Num="20" UId="1315" />
+  <NewLine Num="1" UId="1316" />
+  <Blank Num="20" UId="1317" />
+  <Access Scope="LocalVariable" UId="1318">
+    <Symbol UId="1319">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="1320" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1321" />
+  <Token Text=":=" UId="1322" />
+  <Blank Num="1" UId="1323" />
+  <Access Scope="LocalVariable" UId="1324">
+    <Symbol UId="1325">
+      <Component Name="BufferLog_EmptyDTL" UId="1326" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1327" />
+  <NewLine Num="1" UId="1328" />
+  <Blank Num="20" UId="1329" />
+  <Access Scope="LocalVariable" UId="1330">
+    <Symbol UId="1331">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="1332" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1333" />
+  <Token Text=":=" UId="1334" />
+  <Blank Num="1" UId="1335" />
+  <Access Scope="LocalVariable" UId="1336">
+    <Symbol UId="1337">
+      <Component Name="BufferLog_EmptyString" UId="1338" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1339" />
+  <NewLine Num="1" UId="1340" />
+  <Blank Num="20" UId="1341" />
+  <Access Scope="LocalVariable" UId="1342">
+    <Symbol UId="1343">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="1344" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1345" />
+  <Token Text=":=" UId="1346" />
+  <Blank Num="1" UId="1347" />
+  <Access Scope="LocalVariable" UId="1348">
+    <Symbol UId="1349">
+      <Component Name="BufferLog_EmptyString" UId="1350" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1351" />
+  <NewLine Num="1" UId="1352" />
+  <Blank Num="20" UId="1353" />
+  <Access Scope="LocalVariable" UId="1354">
+    <Symbol UId="1355">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="1356" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1357" />
+  <Token Text=":=" UId="1358" />
+  <Blank Num="1" UId="1359" />
+  <Access Scope="LocalVariable" UId="1360">
+    <Symbol UId="1361">
+      <Component Name="BufferLog_EmptyString" UId="1362" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="1363" />
+  <NewLine Num="1" UId="1364" />
+  <Blank Num="20" UId="1365" />
+  <NewLine Num="1" UId="1366" />
+  <Blank Num="20" UId="1367" />
+  <Access Scope="LocalVariable" UId="1368">
+    <Symbol UId="1369">
+      <Component Name="BufferLog_SecondPart_Full" UId="1370" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1371" />
+  <Token Text=":=" UId="1372" />
+  <Blank Num="1" UId="1373" />
+  <Access Scope="LiteralConstant" UId="1374">
+    <Constant UId="1375">
+      <ConstantValue UId="1377">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1378" />
+  <NewLine Num="1" UId="1379" />
+  <Blank Num="20" UId="1380" />
+  <Access Scope="LocalVariable" UId="1381">
+    <Symbol UId="1382">
+      <Component Name="LastEmptyIndex" UId="1383" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1384" />
+  <Token Text=":=" UId="1385" />
+  <Blank Num="1" UId="1386" />
+  <Access Scope="LiteralConstant" UId="1387">
+    <Constant UId="1388">
+      <ConstantValue UId="1390">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1391" />
+  <NewLine Num="1" UId="1392" />
+  <Blank Num="16" UId="1393" />
+  <Token Text="ELSE" UId="1394" />
+  <NewLine Num="1" UId="1395" />
+  <Blank Num="20" UId="1396" />
+  <Access Scope="LocalVariable" UId="1397">
+    <Symbol UId="1398">
+      <Component Name="LastEmptyIndex" UId="1399" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="1400" />
+  <Token Text="+=" UId="1401" />
+  <Blank Num="1" UId="1402" />
+  <Access Scope="LiteralConstant" UId="1403">
+    <Constant UId="1404">
+      <ConstantValue UId="1406">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1407" />
+  <NewLine Num="1" UId="1408" />
+  <Blank Num="16" UId="1409" />
+  <Token Text="END_IF" UId="1410" />
+  <Token Text=";" UId="1411" />
+  <NewLine Num="1" UId="1412" />
+  <Blank Num="12" UId="1413" />
+  <Token Text="END_IF" UId="1414" />
+  <Token Text=";" UId="1415" />
+  <NewLine Num="1" UId="1416" />
+  <Blank Num="8" UId="1417" />
+  <Token Text="END_REGION" UId="1418" />
+  <NewLine Num="1" UId="1419" />
+  <Blank Num="4" UId="1420" />
+  <Token Text="END_FOR" UId="1421" />
+  <Token Text=";" UId="1422" />
+  <NewLine Num="1" UId="1423" />
+  <Token Text="END_IF" UId="1424" />
+  <Token Text=";" UId="1425" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="1A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="1B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="1D" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="1E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Logging Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="20" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="CASE" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="ResetLogBufferStateDiagram" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="OF" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalConstant" UId="30">
+    <Constant Name="WAIT_FOR_BUFFER_RESET" UId="31" />
+  </Access>
+  <Token Text=":" UId="34" />
+  <NewLine Num="1" UId="35" />
+  <Blank Num="8" UId="36" />
+  <Token Text="IF" UId="37" />
+  <Blank Num="1" UId="38" />
+  <Access Scope="LocalVariable" UId="39">
+    <Symbol UId="40">
+      <Component Name="R_TRIG_Reset" UId="41" />
+      <Token Text="." UId="42" />
+      <Component Name="Q" UId="43" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="44" />
+  <Token Text="THEN" UId="45" />
+  <NewLine Num="1" UId="46" />
+  <Blank Num="12" UId="47" />
+  <Access Scope="LocalVariable" UId="48">
+    <Symbol UId="49">
+      <Component Name="LogBufferResetDone" UId="50" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="51" />
+  <Token Text=":=" UId="52" />
+  <Blank Num="1" UId="53" />
+  <Access Scope="LiteralConstant" UId="54">
+    <Constant UId="55">
+      <ConstantValue UId="57">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="58" />
+  <NewLine Num="1" UId="59" />
+  <Blank Num="12" UId="60" />
+  <Access Scope="LocalVariable" UId="61">
+    <Symbol UId="62">
+      <Component Name="ResetLogBufferStateDiagram" UId="63" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="64" />
+  <Token Text=":=" UId="65" />
+  <Blank Num="1" UId="66" />
+  <Access Scope="LocalConstant" UId="67">
+    <Constant Name="RESETTING_IN_PROGRESS" UId="68" />
+  </Access>
+  <Token Text=";" UId="71" />
+  <NewLine Num="1" UId="72" />
+  <Blank Num="8" UId="73" />
+  <Token Text="END_IF" UId="74" />
+  <Token Text=";" UId="75" />
+  <NewLine Num="1" UId="76" />
+  <Blank Num="4" UId="77" />
+  <Access Scope="LocalConstant" UId="78">
+    <Constant Name="RESETTING_IN_PROGRESS" UId="79" />
+  </Access>
+  <Token Text=":" UId="82" />
+  <NewLine Num="1" UId="83" />
+  <Blank Num="8" UId="84" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="85">
+    <Text UId="86">Resetting the Buffer Log</Text>
+  </LineComment>
+  <NewLine Num="1" UId="87" />
+  <Blank Num="8" UId="88" />
+  <Access Scope="LocalVariable" UId="89">
+    <Symbol UId="90">
+      <Component Name="BufferLog_VariableName_SecondPart" UId="91" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="92" />
+  <Token Text=":=" UId="93" />
+  <Blank Num="1" UId="94" />
+  <Access Scope="LocalVariable" UId="95">
+    <Symbol UId="96">
+      <Component Name="BufferLog_EmptyString" UId="97" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="98" />
+  <NewLine Num="1" UId="99" />
+  <Blank Num="8" UId="100" />
+  <Access Scope="LocalVariable" UId="101">
+    <Symbol UId="102">
+      <Component Name="BufferLog_TimeStamp_SecondPart" UId="103" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="104" />
+  <Token Text=":=" UId="105" />
+  <Blank Num="1" UId="106" />
+  <Access Scope="LocalVariable" UId="107">
+    <Symbol UId="108">
+      <Component Name="BufferLog_EmptyDTL" UId="109" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="110" />
+  <NewLine Num="1" UId="111" />
+  <Blank Num="8" UId="112" />
+  <Access Scope="LocalVariable" UId="113">
+    <Symbol UId="114">
+      <Component Name="BufferLog_PreviousValue_SecondPart" UId="115" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="116" />
+  <Token Text=":=" UId="117" />
+  <Blank Num="1" UId="118" />
+  <Access Scope="LocalVariable" UId="119">
+    <Symbol UId="120">
+      <Component Name="BufferLog_EmptyString" UId="121" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="122" />
+  <NewLine Num="1" UId="123" />
+  <Blank Num="8" UId="124" />
+  <Access Scope="LocalVariable" UId="125">
+    <Symbol UId="126">
+      <Component Name="BufferLog_CurrentValue_SecondPart" UId="127" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="128" />
+  <Token Text=":=" UId="129" />
+  <Blank Num="1" UId="130" />
+  <Access Scope="LocalVariable" UId="131">
+    <Symbol UId="132">
+      <Component Name="BufferLog_EmptyString" UId="133" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="134" />
+  <NewLine Num="1" UId="135" />
+  <Blank Num="8" UId="136" />
+  <Access Scope="LocalVariable" UId="137">
+    <Symbol UId="138">
+      <Component Name="BufferLog_VariableName_FirstPart" UId="139" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="140" />
+  <Token Text=":=" UId="141" />
+  <Blank Num="1" UId="142" />
+  <Access Scope="LocalVariable" UId="143">
+    <Symbol UId="144">
+      <Component Name="BufferLog_EmptyString" UId="145" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="146" />
+  <NewLine Num="1" UId="147" />
+  <Blank Num="8" UId="148" />
+  <Access Scope="LocalVariable" UId="149">
+    <Symbol UId="150">
+      <Component Name="BufferLog_TimeStamp_FirstPart" UId="151" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="152" />
+  <Token Text=":=" UId="153" />
+  <Blank Num="1" UId="154" />
+  <Access Scope="LocalVariable" UId="155">
+    <Symbol UId="156">
+      <Component Name="BufferLog_EmptyDTL" UId="157" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="158" />
+  <NewLine Num="1" UId="159" />
+  <Blank Num="8" UId="160" />
+  <Access Scope="LocalVariable" UId="161">
+    <Symbol UId="162">
+      <Component Name="BufferLog_PreviousValue_FirstPart" UId="163" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="164" />
+  <Token Text=":=" UId="165" />
+  <Blank Num="1" UId="166" />
+  <Access Scope="LocalVariable" UId="167">
+    <Symbol UId="168">
+      <Component Name="BufferLog_EmptyString" UId="169" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="170" />
+  <NewLine Num="1" UId="171" />
+  <Blank Num="8" UId="172" />
+  <Access Scope="LocalVariable" UId="173">
+    <Symbol UId="174">
+      <Component Name="BufferLog_CurrentValue_FirstPart" UId="175" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="176" />
+  <Token Text=":=" UId="177" />
+  <Blank Num="1" UId="178" />
+  <Access Scope="LocalVariable" UId="179">
+    <Symbol UId="180">
+      <Component Name="BufferLog_EmptyString" UId="181" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="182" />
+  <NewLine Num="1" UId="183" />
+  <Blank Num="8" UId="184" />
+  <NewLine Num="1" UId="185" />
+  <Blank Num="8" UId="186" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="187">
+    <Text UId="188">Resetting the index</Text>
+  </LineComment>
+  <NewLine Num="1" UId="189" />
+  <Blank Num="8" UId="190" />
+  <Access Scope="LocalVariable" UId="191">
+    <Symbol UId="192">
+      <Component Name="LastEmptyIndex" UId="193" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="194" />
+  <Token Text=":=" UId="195" />
+  <Blank Num="1" UId="196" />
+  <Access Scope="LiteralConstant" UId="197">
+    <Constant UId="198">
+      <ConstantValue UId="200">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="201" />
+  <NewLine Num="1" UId="202" />
+  <Blank Num="8" UId="203" />
+  <NewLine Num="1" UId="204" />
+  <Blank Num="8" UId="205" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="206">
+    <Text UId="207">Condition To Go To Next Step        </Text>
+  </LineComment>
+  <NewLine Num="1" UId="208" />
+  <Blank Num="8" UId="209" />
+  <Access Scope="LocalVariable" UId="210">
+    <Symbol UId="211">
+      <Component Name="ResetLogBufferStateDiagram" UId="212" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="213" />
+  <Token Text=":=" UId="214" />
+  <Blank Num="1" UId="215" />
+  <Access Scope="LocalConstant" UId="216">
+    <Constant Name="BUFFER_RESET_DONE" UId="217" />
+  </Access>
+  <Token Text=";" UId="220" />
+  <NewLine Num="1" UId="221" />
+  <Blank Num="4" UId="222" />
+  <Access Scope="LocalConstant" UId="223">
+    <Constant Name="BUFFER_RESET_DONE" UId="224" />
+  </Access>
+  <Token Text=":" UId="227" />
+  <NewLine Num="1" UId="228" />
+  <Blank Num="8" UId="229" />
+  <Access Scope="LocalVariable" UId="230">
+    <Symbol UId="231">
+      <Component Name="Reset" UId="232" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="233" />
+  <Token Text=":=" UId="234" />
+  <Blank Num="1" UId="235" />
+  <Access Scope="LiteralConstant" UId="236">
+    <Constant UId="237">
+      <ConstantValue UId="239">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="240" />
+  <NewLine Num="1" UId="241" />
+  <Blank Num="8" UId="242" />
+  <Access Scope="LocalVariable" UId="243">
+    <Symbol UId="244">
+      <Component Name="ResetLogBufferStateDiagram" UId="245" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="246" />
+  <Token Text=":=" UId="247" />
+  <Blank Num="1" UId="248" />
+  <Access Scope="LocalConstant" UId="249">
+    <Constant Name="WAIT_FOR_BUFFER_RESET" UId="250" />
+  </Access>
+  <Token Text=";" UId="253" />
+  <NewLine Num="1" UId="254" />
+  <Token Text="END_CASE" UId="255" />
+  <Token Text=";" UId="256" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="21" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="22" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="23" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="24" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="25" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Reset Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="26" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="27" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="CASE" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="GenerateLogStateDiagram" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="OF" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalConstant" UId="30">
+    <Constant Name="WAIT_FOR_LOG_GENERATION_REQUEST" UId="31" />
+  </Access>
+  <Token Text=":" UId="34" />
+  <NewLine Num="1" UId="35" />
+  <Blank Num="8" UId="36" />
+  <Token Text="IF" UId="37" />
+  <Blank Num="1" UId="38" />
+  <Access Scope="LocalVariable" UId="39">
+    <Symbol UId="40">
+      <Component Name="R_TRIG_GenerateLogFile" UId="41" />
+      <Token Text="." UId="42" />
+      <Component Name="Q" UId="43" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="44" />
+  <Token Text="THEN" UId="45" />
+  <NewLine Num="1" UId="46" />
+  <Blank Num="12" UId="47" />
+  <Access Scope="LocalVariable" UId="48">
+    <Symbol UId="49">
+      <Component Name="LogGenerationDone" UId="50" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="51" />
+  <Token Text=":=" UId="52" />
+  <Blank Num="1" UId="53" />
+  <Access Scope="LiteralConstant" UId="54">
+    <Constant UId="55">
+      <ConstantValue UId="57">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="58" />
+  <NewLine Num="1" UId="59" />
+  <Blank Num="12" UId="60" />
+  <Access Scope="LocalVariable" UId="61">
+    <Symbol UId="62">
+      <Component Name="NumberOfRecordedElement" UId="63" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="64" />
+  <Token Text=":=" UId="65" />
+  <Blank Num="1" UId="66" />
+  <Access Scope="LiteralConstant" UId="67">
+    <Constant UId="68">
+      <ConstantValue UId="70">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="71" />
+  <NewLine Num="1" UId="72" />
+  <Blank Num="12" UId="73" />
+  <Access Scope="LocalVariable" UId="74">
+    <Symbol UId="75">
+      <Component Name="k1" UId="76" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="77" />
+  <Token Text=":=" UId="78" />
+  <Blank Num="1" UId="79" />
+  <Access Scope="LiteralConstant" UId="80">
+    <Constant UId="81">
+      <ConstantValue UId="83">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="84" />
+  <NewLine Num="1" UId="85" />
+  <Blank Num="12" UId="86" />
+  <Access Scope="LocalVariable" UId="87">
+    <Symbol UId="88">
+      <Component Name="k2" UId="89" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="90" />
+  <Token Text=":=" UId="91" />
+  <Blank Num="1" UId="92" />
+  <Access Scope="LiteralConstant" UId="93">
+    <Constant UId="94">
+      <ConstantValue UId="96">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="97" />
+  <NewLine Num="1" UId="98" />
+  <Blank Num="12" UId="99" />
+  <Access Scope="LocalVariable" UId="100">
+    <Symbol UId="101">
+      <Component Name="Enable" UId="102" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="103" />
+  <Token Text=":=" UId="104" />
+  <Blank Num="1" UId="105" />
+  <Access Scope="LiteralConstant" UId="106">
+    <Constant UId="107">
+      <ConstantValue UId="109">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="110" />
+  <NewLine Num="1" UId="111" />
+  <Blank Num="12" UId="112" />
+  <Access Scope="LocalVariable" UId="113">
+    <Symbol UId="114">
+      <Component Name="Reset" UId="115" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="116" />
+  <Token Text=":=" UId="117" />
+  <Blank Num="1" UId="118" />
+  <Access Scope="LiteralConstant" UId="119">
+    <Constant UId="120">
+      <ConstantValue UId="122">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="123" />
+  <NewLine Num="1" UId="124" />
+  <Blank Num="12" UId="125" />
+  <Token Text="IF" UId="126" />
+  <Blank Num="1" UId="127" />
+  <Access Scope="LocalVariable" UId="128">
+    <Symbol UId="129">
+      <Component Name="BufferLog_VariableName_FirstPart" UId="130">
+        <Token Text="[" UId="131" />
+        <Access Scope="LiteralConstant" UId="132">
+          <Constant UId="133">
+            <ConstantValue UId="135">0</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text="]" UId="136" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="137" />
+  <Token Text="=" UId="138" />
+  <Blank Num="1" UId="139" />
+  <Access Scope="LiteralConstant" UId="140">
+    <Constant UId="141">
+      <ConstantValue UId="143">''</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="144" />
+  <Token Text="THEN" UId="145" />
+  <NewLine Num="1" UId="146" />
+  <Blank Num="16" UId="147" />
+  <Access Scope="LocalVariable" UId="148">
+    <Symbol UId="149">
+      <Component Name="shift" UId="150" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="151" />
+  <Token Text=":=" UId="152" />
+  <Blank Num="1" UId="153" />
+  <Access Scope="LiteralConstant" UId="154">
+    <Constant UId="155">
+      <ConstantValue UId="157">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="158" />
+  <NewLine Num="1" UId="159" />
+  <Blank Num="16" UId="160" />
+  <Access Scope="LocalVariable" UId="161">
+    <Symbol UId="162">
+      <Component Name="GenerateLogStateDiagram" UId="163" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="164" />
+  <Token Text=":=" UId="165" />
+  <Blank Num="1" UId="166" />
+  <Access Scope="LocalConstant" UId="167">
+    <Constant Name="GENERATE_LOG_SECOND_PART" UId="168" />
+  </Access>
+  <Token Text=";" UId="171" />
+  <NewLine Num="1" UId="172" />
+  <Blank Num="12" UId="173" />
+  <Token Text="ELSE" UId="174" />
+  <NewLine Num="1" UId="175" />
+  <Blank Num="16" UId="176" />
+  <Access Scope="LocalVariable" UId="177">
+    <Symbol UId="178">
+      <Component Name="shift" UId="179" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="180" />
+  <Token Text=":=" UId="181" />
+  <Blank Num="1" UId="182" />
+  <Access Scope="LiteralConstant" UId="183">
+    <Constant UId="184">
+      <ConstantValue UId="186">1000</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="187" />
+  <NewLine Num="1" UId="188" />
+  <Blank Num="16" UId="189" />
+  <Access Scope="LocalVariable" UId="190">
+    <Symbol UId="191">
+      <Component Name="GenerateLogStateDiagram" UId="192" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="193" />
+  <Token Text=":=" UId="194" />
+  <Blank Num="1" UId="195" />
+  <Access Scope="LocalConstant" UId="196">
+    <Constant Name="GENERATE_LOG_FIRST_PART" UId="197" />
+  </Access>
+  <Token Text=";" UId="200" />
+  <NewLine Num="1" UId="201" />
+  <Blank Num="12" UId="202" />
+  <Token Text="END_IF" UId="203" />
+  <Token Text=";" UId="204" />
+  <NewLine Num="1" UId="205" />
+  <Blank Num="8" UId="206" />
+  <Token Text="END_IF" UId="207" />
+  <Token Text=";" UId="208" />
+  <NewLine Num="1" UId="209" />
+  <Blank Num="4" UId="210" />
+  <Access Scope="LocalConstant" UId="211">
+    <Constant Name="GENERATE_LOG_FIRST_PART" UId="212" />
+  </Access>
+  <Token Text=":" UId="215" />
+  <NewLine Num="1" UId="216" />
+  <Blank Num="8" UId="217" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="218">
+    <Text UId="219">Log Generation In Progress</Text>
+  </LineComment>
+  <NewLine Num="1" UId="220" />
+  <Blank Num="8" UId="221" />
+  <Token Text="WHILE" UId="222" />
+  <Blank Num="1" UId="223" />
+  <Access Scope="LocalVariable" UId="224">
+    <Symbol UId="225">
+      <Component Name="k1" UId="226" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="227" />
+  <Token Text="&lt;=" UId="228" />
+  <Blank Num="1" UId="229" />
+  <Access Scope="LocalVariable" UId="230">
+    <Symbol UId="231">
+      <Component Name="NumberOfRecordedElement" UId="232" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="233" />
+  <Token Text="+" UId="234" />
+  <Blank Num="1" UId="235" />
+  <Access Scope="LiteralConstant" UId="236">
+    <Constant UId="237">
+      <ConstantValue UId="239">49</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="240" />
+  <Token Text="DO" UId="241" />
+  <NewLine Num="1" UId="242" />
+  <Blank Num="12" UId="243" />
+  <Access Scope="LocalVariable" UId="244">
+    <Symbol UId="245">
+      <Component Name="LogFile" UId="246">
+        <Token Text="[" UId="247" />
+        <Access Scope="LocalVariable" UId="248">
+          <Symbol UId="249">
+            <Component Name="k1" UId="250" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="251" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="252" />
+  <Token Text=":=" UId="253" />
+  <Blank Num="1" UId="254" />
+  <Access Scope="Call" UId="255">
+    <Instruction Name="CONCAT" UId="256">
+      <Token Text="(" UId="257" />
+      <Parameter Name="IN1" UId="258">
+        <Blank Num="1" UId="259" />
+        <Token Text=":=" UId="260" />
+        <Blank Num="1" UId="261" />
+        <Access Scope="Call" UId="262">
+          <CallInfo UId="263" BlockType="FC">
+            <Instance Scope="GlobalVariable" UId="265">
+              <Component Name="FC10018_DateToString" UId="264" />
+            </Instance>
+            <Token Text="(" UId="266" />
+            <NamelessParameter UId="267">
+              <Access Scope="LocalVariable" UId="268">
+                <Symbol UId="269">
+                  <Component Name="BufferLog_TimeStamp_FirstPart" UId="270">
+                    <Token Text="[" UId="271" />
+                    <Access Scope="LocalVariable" UId="272">
+                      <Symbol UId="273">
+                        <Component Name="k2" UId="274" />
+                      </Symbol>
+                    </Access>
+                    <Token Text="]" UId="275" />
+                  </Component>
+                </Symbol>
+              </Access>
+            </NamelessParameter>
+            <Token Text=")" UId="277" />
+          </CallInfo>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="278" />
+      <NewLine Num="1" UId="279" />
+      <Blank Num="36" UId="280" />
+      <Parameter Name="IN2" UId="281">
+        <Blank Num="1" UId="282" />
+        <Token Text=":=" UId="283" />
+        <Blank Num="1" UId="284" />
+        <Access Scope="LiteralConstant" UId="285">
+          <Constant UId="286">
+            <ConstantValue UId="288">' Variable : '</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="289" />
+      <NewLine Num="1" UId="290" />
+      <Blank Num="36" UId="291" />
+      <Parameter Name="IN3" UId="292">
+        <Blank Num="1" UId="293" />
+        <Token Text=":=" UId="294" />
+        <Blank Num="1" UId="295" />
+        <Access Scope="LocalVariable" UId="296">
+          <Symbol UId="297">
+            <Component Name="BufferLog_VariableName_FirstPart" UId="298">
+              <Token Text="[" UId="299" />
+              <Access Scope="LocalVariable" UId="300">
+                <Symbol UId="301">
+                  <Component Name="k2" UId="302" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="303" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="304" />
+      <NewLine Num="1" UId="305" />
+      <Blank Num="36" UId="306" />
+      <Parameter Name="IN4" UId="307">
+        <Blank Num="1" UId="308" />
+        <Token Text=":=" UId="309" />
+        <Blank Num="1" UId="310" />
+        <Access Scope="LiteralConstant" UId="311">
+          <Constant UId="312">
+            <ConstantValue UId="314">' has changed from '</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="315" />
+      <NewLine Num="1" UId="316" />
+      <Blank Num="36" UId="317" />
+      <Parameter Name="IN5" UId="318">
+        <Blank Num="1" UId="319" />
+        <Token Text=":=" UId="320" />
+        <Blank Num="1" UId="321" />
+        <Access Scope="LocalVariable" UId="322">
+          <Symbol UId="323">
+            <Component Name="BufferLog_PreviousValue_FirstPart" UId="324">
+              <Token Text="[" UId="325" />
+              <Access Scope="LocalVariable" UId="326">
+                <Symbol UId="327">
+                  <Component Name="k2" UId="328" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="329" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="330" />
+      <NewLine Num="1" UId="331" />
+      <Blank Num="36" UId="332" />
+      <Parameter Name="IN6" UId="333">
+        <Blank Num="1" UId="334" />
+        <Token Text=":=" UId="335" />
+        <Blank Num="1" UId="336" />
+        <Access Scope="LiteralConstant" UId="337">
+          <Constant UId="338">
+            <ConstantValue UId="340">' to '</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="341" />
+      <NewLine Num="1" UId="342" />
+      <Blank Num="36" UId="343" />
+      <Parameter Name="IN7" UId="344">
+        <Blank Num="1" UId="345" />
+        <Token Text=":=" UId="346" />
+        <Blank Num="1" UId="347" />
+        <Access Scope="LocalVariable" UId="348">
+          <Symbol UId="349">
+            <Component Name="BufferLog_CurrentValue_FirstPart" UId="350">
+              <Token Text="[" UId="351" />
+              <Access Scope="LocalVariable" UId="352">
+                <Symbol UId="353">
+                  <Component Name="k2" UId="354" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="355" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="357" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="358" />
+  <NewLine Num="1" UId="359" />
+  <Blank Num="12" UId="360" />
+  <Access Scope="LocalVariable" UId="361">
+    <Symbol UId="362">
+      <Component Name="k1" UId="363" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="364" />
+  <Token Text="+=" UId="365" />
+  <Blank Num="1" UId="366" />
+  <Access Scope="LiteralConstant" UId="367">
+    <Constant UId="368">
+      <ConstantValue UId="370">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="371" />
+  <NewLine Num="1" UId="372" />
+  <Blank Num="12" UId="373" />
+  <Access Scope="LocalVariable" UId="374">
+    <Symbol UId="375">
+      <Component Name="k2" UId="376" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="377" />
+  <Token Text="+=" UId="378" />
+  <Blank Num="1" UId="379" />
+  <Access Scope="LiteralConstant" UId="380">
+    <Constant UId="381">
+      <ConstantValue UId="383">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="384" />
+  <NewLine Num="1" UId="385" />
+  <Blank Num="8" UId="386" />
+  <Token Text="END_WHILE" UId="387" />
+  <Token Text=";" UId="388" />
+  <NewLine Num="1" UId="389" />
+  <Blank Num="8" UId="390" />
+  <NewLine Num="1" UId="391" />
+  <Blank Num="8" UId="392" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="393">
+    <Text UId="394">Condition To Go To Next Step</Text>
+  </LineComment>
+  <NewLine Num="1" UId="395" />
+  <Blank Num="8" UId="396" />
+  <Token Text="IF" UId="397" />
+  <Blank Num="1" UId="398" />
+  <Access Scope="LocalVariable" UId="399">
+    <Symbol UId="400">
+      <Component Name="k1" UId="401" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="402" />
+  <Token Text="=" UId="403" />
+  <Blank Num="1" UId="404" />
+  <Access Scope="LiteralConstant" UId="405">
+    <Constant UId="406">
+      <ConstantValue UId="408">1000</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="409" />
+  <Token Text="THEN" UId="410" />
+  <NewLine Num="1" UId="411" />
+  <Blank Num="12" UId="412" />
+  <Access Scope="LocalVariable" UId="413">
+    <Symbol UId="414">
+      <Component Name="k1" UId="415" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="416" />
+  <Token Text=":=" UId="417" />
+  <Blank Num="1" UId="418" />
+  <Access Scope="LiteralConstant" UId="419">
+    <Constant UId="420">
+      <ConstantValue UId="422">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="423" />
+  <NewLine Num="1" UId="424" />
+  <Blank Num="12" UId="425" />
+  <Access Scope="LocalVariable" UId="426">
+    <Symbol UId="427">
+      <Component Name="k2" UId="428" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="429" />
+  <Token Text=":=" UId="430" />
+  <Blank Num="1" UId="431" />
+  <Access Scope="LiteralConstant" UId="432">
+    <Constant UId="433">
+      <ConstantValue UId="435">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="436" />
+  <NewLine Num="1" UId="437" />
+  <Blank Num="12" UId="438" />
+  <Access Scope="LocalVariable" UId="439">
+    <Symbol UId="440">
+      <Component Name="NumberOfRecordedElement" UId="441" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="442" />
+  <Token Text=":=" UId="443" />
+  <Blank Num="1" UId="444" />
+  <Access Scope="LiteralConstant" UId="445">
+    <Constant UId="446">
+      <ConstantValue UId="448">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="449" />
+  <NewLine Num="1" UId="450" />
+  <Blank Num="12" UId="451" />
+  <Access Scope="LocalVariable" UId="452">
+    <Symbol UId="453">
+      <Component Name="GenerateLogStateDiagram" UId="454" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="455" />
+  <Token Text=":=" UId="456" />
+  <Blank Num="1" UId="457" />
+  <Access Scope="LocalConstant" UId="458">
+    <Constant Name="GENERATE_LOG_SECOND_PART" UId="459" />
+  </Access>
+  <Token Text=";" UId="462" />
+  <NewLine Num="1" UId="463" />
+  <Blank Num="8" UId="464" />
+  <Token Text="ELSE" UId="465" />
+  <NewLine Num="1" UId="466" />
+  <Blank Num="12" UId="467" />
+  <Access Scope="LocalVariable" UId="468">
+    <Symbol UId="469">
+      <Component Name="NumberOfRecordedElement" UId="470" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="471" />
+  <Token Text="+=" UId="472" />
+  <Blank Num="1" UId="473" />
+  <Access Scope="LiteralConstant" UId="474">
+    <Constant UId="475">
+      <ConstantValue UId="477">50</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="478" />
+  <NewLine Num="1" UId="479" />
+  <Blank Num="12" UId="480" />
+  <Access Scope="LocalVariable" UId="481">
+    <Symbol UId="482">
+      <Component Name="GenerateLogStateDiagram" UId="483" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="484" />
+  <Token Text=":=" UId="485" />
+  <Blank Num="1" UId="486" />
+  <Access Scope="LocalConstant" UId="487">
+    <Constant Name="GENERATE_LOG_FIRST_PART" UId="488" />
+  </Access>
+  <Token Text=";" UId="491" />
+  <NewLine Num="1" UId="492" />
+  <Blank Num="8" UId="493" />
+  <Token Text="END_IF" UId="494" />
+  <Token Text=";" UId="495" />
+  <NewLine Num="1" UId="496" />
+  <Blank Num="4" UId="497" />
+  <Access Scope="LocalConstant" UId="498">
+    <Constant Name="GENERATE_LOG_SECOND_PART" UId="499" />
+  </Access>
+  <Token Text=":" UId="502" />
+  <NewLine Num="1" UId="503" />
+  <Blank Num="8" UId="504" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="505">
+    <Text UId="506">Log Generation In Progress</Text>
+  </LineComment>
+  <NewLine Num="1" UId="507" />
+  <Blank Num="8" UId="508" />
+  <Token Text="WHILE" UId="509" />
+  <Blank Num="1" UId="510" />
+  <Access Scope="LocalVariable" UId="511">
+    <Symbol UId="512">
+      <Component Name="k1" UId="513" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="514" />
+  <Token Text="&lt;=" UId="515" />
+  <Blank Num="1" UId="516" />
+  <Access Scope="LocalVariable" UId="517">
+    <Symbol UId="518">
+      <Component Name="NumberOfRecordedElement" UId="519" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="520" />
+  <Token Text="+" UId="521" />
+  <Blank Num="1" UId="522" />
+  <Access Scope="LiteralConstant" UId="523">
+    <Constant UId="524">
+      <ConstantValue UId="526">49</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="527" />
+  <Token Text="DO" UId="528" />
+  <NewLine Num="1" UId="529" />
+  <Blank Num="12" UId="530" />
+  <Access Scope="LocalVariable" UId="531">
+    <Symbol UId="532">
+      <Component Name="LogFile" UId="533">
+        <Token Text="[" UId="534" />
+        <Access Scope="LocalVariable" UId="535">
+          <Symbol UId="536">
+            <Component Name="k1" UId="537" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="538" />
+        <Token Text="+" UId="539" />
+        <Blank Num="1" UId="540" />
+        <Access Scope="LocalVariable" UId="541">
+          <Symbol UId="542">
+            <Component Name="shift" UId="543" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="544" />
+      </Component>
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="545" />
+  <Token Text=":=" UId="546" />
+  <Blank Num="1" UId="547" />
+  <Access Scope="Call" UId="548">
+    <Instruction Name="CONCAT" UId="549">
+      <Token Text="(" UId="550" />
+      <Parameter Name="IN1" UId="551">
+        <Blank Num="1" UId="552" />
+        <Token Text=":=" UId="553" />
+        <Blank Num="1" UId="554" />
+        <Access Scope="Call" UId="555">
+          <CallInfo UId="556" BlockType="FC">
+            <Instance Scope="GlobalVariable" UId="558">
+              <Component Name="FC10018_DateToString" UId="557" />
+            </Instance>
+            <Token Text="(" UId="559" />
+            <NamelessParameter UId="560">
+              <Access Scope="LocalVariable" UId="561">
+                <Symbol UId="562">
+                  <Component Name="BufferLog_TimeStamp_SecondPart" UId="563">
+                    <Token Text="[" UId="564" />
+                    <Access Scope="LocalVariable" UId="565">
+                      <Symbol UId="566">
+                        <Component Name="k2" UId="567" />
+                      </Symbol>
+                    </Access>
+                    <Token Text="]" UId="568" />
+                  </Component>
+                </Symbol>
+              </Access>
+            </NamelessParameter>
+            <Token Text=")" UId="570" />
+          </CallInfo>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="571" />
+      <NewLine Num="1" UId="572" />
+      <Blank Num="45" UId="573" />
+      <Parameter Name="IN2" UId="574">
+        <Blank Num="1" UId="575" />
+        <Token Text=":=" UId="576" />
+        <Blank Num="1" UId="577" />
+        <Access Scope="LiteralConstant" UId="578">
+          <Constant UId="579">
+            <ConstantValue UId="581">' Variable : '</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="582" />
+      <NewLine Num="1" UId="583" />
+      <Blank Num="45" UId="584" />
+      <Parameter Name="IN3" UId="585">
+        <Blank Num="1" UId="586" />
+        <Token Text=":=" UId="587" />
+        <Blank Num="1" UId="588" />
+        <Access Scope="LocalVariable" UId="589">
+          <Symbol UId="590">
+            <Component Name="BufferLog_VariableName_SecondPart" UId="591">
+              <Token Text="[" UId="592" />
+              <Access Scope="LocalVariable" UId="593">
+                <Symbol UId="594">
+                  <Component Name="k2" UId="595" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="596" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="597" />
+      <NewLine Num="1" UId="598" />
+      <Blank Num="45" UId="599" />
+      <Parameter Name="IN4" UId="600">
+        <Blank Num="1" UId="601" />
+        <Token Text=":=" UId="602" />
+        <Blank Num="1" UId="603" />
+        <Access Scope="LiteralConstant" UId="604">
+          <Constant UId="605">
+            <ConstantValue UId="607">' has changed from '</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="608" />
+      <NewLine Num="1" UId="609" />
+      <Blank Num="45" UId="610" />
+      <Parameter Name="IN5" UId="611">
+        <Blank Num="1" UId="612" />
+        <Token Text=":=" UId="613" />
+        <Blank Num="1" UId="614" />
+        <Access Scope="LocalVariable" UId="615">
+          <Symbol UId="616">
+            <Component Name="BufferLog_PreviousValue_SecondPart" UId="617">
+              <Token Text="[" UId="618" />
+              <Access Scope="LocalVariable" UId="619">
+                <Symbol UId="620">
+                  <Component Name="k2" UId="621" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="622" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="623" />
+      <NewLine Num="1" UId="624" />
+      <Blank Num="45" UId="625" />
+      <Parameter Name="IN6" UId="626">
+        <Blank Num="1" UId="627" />
+        <Token Text=":=" UId="628" />
+        <Blank Num="1" UId="629" />
+        <Access Scope="LiteralConstant" UId="630">
+          <Constant UId="631">
+            <ConstantValue UId="633">' to '</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="634" />
+      <NewLine Num="1" UId="635" />
+      <Blank Num="45" UId="636" />
+      <Parameter Name="IN7" UId="637">
+        <Blank Num="1" UId="638" />
+        <Token Text=":=" UId="639" />
+        <Blank Num="1" UId="640" />
+        <Access Scope="LocalVariable" UId="641">
+          <Symbol UId="642">
+            <Component Name="BufferLog_CurrentValue_SecondPart" UId="643">
+              <Token Text="[" UId="644" />
+              <Access Scope="LocalVariable" UId="645">
+                <Symbol UId="646">
+                  <Component Name="k2" UId="647" />
+                </Symbol>
+              </Access>
+              <Token Text="]" UId="648" />
+            </Component>
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="650" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="651" />
+  <NewLine Num="1" UId="652" />
+  <Blank Num="12" UId="653" />
+  <Access Scope="LocalVariable" UId="654">
+    <Symbol UId="655">
+      <Component Name="k1" UId="656" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="657" />
+  <Token Text="+=" UId="658" />
+  <Blank Num="1" UId="659" />
+  <Access Scope="LiteralConstant" UId="660">
+    <Constant UId="661">
+      <ConstantValue UId="663">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="664" />
+  <NewLine Num="1" UId="665" />
+  <Blank Num="12" UId="666" />
+  <Access Scope="LocalVariable" UId="667">
+    <Symbol UId="668">
+      <Component Name="k2" UId="669" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="670" />
+  <Token Text="+=" UId="671" />
+  <Blank Num="1" UId="672" />
+  <Access Scope="LiteralConstant" UId="673">
+    <Constant UId="674">
+      <ConstantValue UId="676">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="677" />
+  <NewLine Num="1" UId="678" />
+  <Blank Num="8" UId="679" />
+  <Token Text="END_WHILE" UId="680" />
+  <Token Text=";" UId="681" />
+  <NewLine Num="1" UId="682" />
+  <Blank Num="8" UId="683" />
+  <NewLine Num="1" UId="684" />
+  <Blank Num="8" UId="685" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="686">
+    <Text UId="687">Condition To Go To Next Step</Text>
+  </LineComment>
+  <NewLine Num="1" UId="688" />
+  <Blank Num="8" UId="689" />
+  <Token Text="IF" UId="690" />
+  <Blank Num="1" UId="691" />
+  <Access Scope="LocalVariable" UId="692">
+    <Symbol UId="693">
+      <Component Name="k1" UId="694" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="695" />
+  <Token Text="=" UId="696" />
+  <Blank Num="1" UId="697" />
+  <Access Scope="LiteralConstant" UId="698">
+    <Constant UId="699">
+      <ConstantValue UId="701">1000</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="702" />
+  <Token Text="THEN" UId="703" />
+  <NewLine Num="1" UId="704" />
+  <Blank Num="12" UId="705" />
+  <Access Scope="LocalVariable" UId="706">
+    <Symbol UId="707">
+      <Component Name="LogGenerationDone" UId="708" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="709" />
+  <Token Text=":=" UId="710" />
+  <Blank Num="1" UId="711" />
+  <Access Scope="LiteralConstant" UId="712">
+    <Constant UId="713">
+      <ConstantValue UId="715">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="716" />
+  <NewLine Num="1" UId="717" />
+  <Blank Num="12" UId="718" />
+  <Access Scope="LocalVariable" UId="719">
+    <Symbol UId="720">
+      <Component Name="GenerateLogStateDiagram" UId="721" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="722" />
+  <Token Text=":=" UId="723" />
+  <Blank Num="1" UId="724" />
+  <Access Scope="LocalConstant" UId="725">
+    <Constant Name="RESET_BUFFER" UId="726" />
+  </Access>
+  <Token Text=";" UId="729" />
+  <NewLine Num="1" UId="730" />
+  <Blank Num="8" UId="731" />
+  <Token Text="ELSE" UId="732" />
+  <NewLine Num="1" UId="733" />
+  <Blank Num="12" UId="734" />
+  <Access Scope="LocalVariable" UId="735">
+    <Symbol UId="736">
+      <Component Name="NumberOfRecordedElement" UId="737" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="738" />
+  <Token Text="+=" UId="739" />
+  <Blank Num="1" UId="740" />
+  <Access Scope="LiteralConstant" UId="741">
+    <Constant UId="742">
+      <ConstantValue UId="744">50</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="745" />
+  <NewLine Num="1" UId="746" />
+  <Blank Num="12" UId="747" />
+  <Access Scope="LocalVariable" UId="748">
+    <Symbol UId="749">
+      <Component Name="GenerateLogStateDiagram" UId="750" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="751" />
+  <Token Text=":=" UId="752" />
+  <Blank Num="1" UId="753" />
+  <Access Scope="LocalConstant" UId="754">
+    <Constant Name="GENERATE_LOG_SECOND_PART" UId="755" />
+  </Access>
+  <Token Text=";" UId="758" />
+  <NewLine Num="1" UId="759" />
+  <Blank Num="8" UId="760" />
+  <Token Text="END_IF" UId="761" />
+  <Token Text=";" UId="762" />
+  <NewLine Num="1" UId="763" />
+  <Blank Num="4" UId="764" />
+  <Access Scope="LocalConstant" UId="765">
+    <Constant Name="RESET_BUFFER" UId="766" />
+  </Access>
+  <Token Text=":" UId="769" />
+  <NewLine Num="1" UId="770" />
+  <Blank Num="8" UId="771" />
+  <Access Scope="LocalVariable" UId="772">
+    <Symbol UId="773">
+      <Component Name="Reset" UId="774" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="775" />
+  <Token Text=":=" UId="776" />
+  <Blank Num="1" UId="777" />
+  <Access Scope="LiteralConstant" UId="778">
+    <Constant UId="779">
+      <ConstantValue UId="781">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="782" />
+  <NewLine Num="1" UId="783" />
+  <Blank Num="8" UId="784" />
+  <Token Text="IF" UId="785" />
+  <Blank Num="1" UId="786" />
+  <Access Scope="LocalVariable" UId="787">
+    <Symbol UId="788">
+      <Component Name="ResetLogBufferStateDiagram" UId="789" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="790" />
+  <Token Text="=" UId="791" />
+  <Blank Num="1" UId="792" />
+  <Access Scope="LocalConstant" UId="793">
+    <Constant Name="BUFFER_RESET_DONE" UId="794" />
+  </Access>
+  <Blank Num="1" UId="797" />
+  <Token Text="THEN" UId="798" />
+  <NewLine Num="1" UId="799" />
+  <Blank Num="12" UId="800" />
+  <Access Scope="LocalVariable" UId="801">
+    <Symbol UId="802">
+      <Component Name="Reset" UId="803" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="804" />
+  <Token Text=":=" UId="805" />
+  <Blank Num="1" UId="806" />
+  <Access Scope="LiteralConstant" UId="807">
+    <Constant UId="808">
+      <ConstantValue UId="810">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="811" />
+  <NewLine Num="1" UId="812" />
+  <Blank Num="12" UId="813" />
+  <Access Scope="LocalVariable" UId="814">
+    <Symbol UId="815">
+      <Component Name="GenerateLogStateDiagram" UId="816" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="817" />
+  <Token Text=":=" UId="818" />
+  <Blank Num="1" UId="819" />
+  <Access Scope="LocalConstant" UId="820">
+    <Constant Name="ENABLE_LOG" UId="821" />
+  </Access>
+  <Token Text=";" UId="824" />
+  <NewLine Num="1" UId="825" />
+  <Blank Num="8" UId="826" />
+  <Token Text="END_IF" UId="827" />
+  <Token Text=";" UId="828" />
+  <NewLine Num="1" UId="829" />
+  <Blank Num="4" UId="830" />
+  <Access Scope="LocalConstant" UId="831">
+    <Constant Name="ENABLE_LOG" UId="832" />
+  </Access>
+  <Token Text=":" UId="835" />
+  <NewLine Num="1" UId="836" />
+  <Blank Num="8" UId="837" />
+  <Access Scope="LocalVariable" UId="838">
+    <Symbol UId="839">
+      <Component Name="Enable" UId="840" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="841" />
+  <Token Text=":=" UId="842" />
+  <Blank Num="1" UId="843" />
+  <Access Scope="LiteralConstant" UId="844">
+    <Constant UId="845">
+      <ConstantValue UId="847">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="848" />
+  <NewLine Num="1" UId="849" />
+  <Blank Num="8" UId="850" />
+  <Access Scope="LocalVariable" UId="851">
+    <Symbol UId="852">
+      <Component Name="Reset" UId="853" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="854" />
+  <Token Text=":=" UId="855" />
+  <Blank Num="1" UId="856" />
+  <Access Scope="LiteralConstant" UId="857">
+    <Constant UId="858">
+      <ConstantValue UId="860">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="861" />
+  <NewLine Num="1" UId="862" />
+  <Blank Num="8" UId="863" />
+  <Access Scope="LocalVariable" UId="864">
+    <Symbol UId="865">
+      <Component Name="GenerateLogStateDiagram" UId="866" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="867" />
+  <Token Text=":=" UId="868" />
+  <Blank Num="1" UId="869" />
+  <Access Scope="LocalConstant" UId="870">
+    <Constant Name="LOG_GENERATION_DONE" UId="871" />
+  </Access>
+  <Token Text=";" UId="874" />
+  <NewLine Num="1" UId="875" />
+  <Blank Num="4" UId="876" />
+  <Access Scope="LocalConstant" UId="877">
+    <Constant Name="LOG_GENERATION_DONE" UId="878" />
+  </Access>
+  <Token Text=":" UId="881" />
+  <NewLine Num="1" UId="882" />
+  <Blank Num="8" UId="883" />
+  <Access Scope="LocalVariable" UId="884">
+    <Symbol UId="885">
+      <Component Name="GenerateLogStateDiagram" UId="886" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="887" />
+  <Token Text=":=" UId="888" />
+  <Blank Num="1" UId="889" />
+  <Access Scope="LocalConstant" UId="890">
+    <Constant Name="WAIT_FOR_LOG_GENERATION_REQUEST" UId="891" />
+  </Access>
+  <Token Text=";" UId="894" />
+  <NewLine Num="1" UId="895" />
+  <Token Text="END_CASE" UId="896" />
+  <Token Text=";" UId="897" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="28" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="29" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="2B" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="2C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Generate Log File Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="2E" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="2F" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>FB10005_Logs</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="30" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

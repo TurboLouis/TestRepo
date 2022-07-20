@@ -1,0 +1,1049 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T06:59:43.6943955Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor>Jonathan</HeaderAuthor>
+      <HeaderFamily>1007x_DRYER_UV</HeaderFamily>
+      <HeaderName />
+      <HeaderVersion>1.1</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="UVReady" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="UVFeedbackPower" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="UVEnabled" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="AirExtractionActivation" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ForceAirAfterShutdownUV" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ShutterOpen" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ShutterClose" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ScalingShutterOpen" Datatype="&quot;stAirExtractorScalingParameters&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PowerXMin" Datatype="Real" /><Member Name="PowerXMax" Datatype="Real" /><Member Name="PowerAirYMin" Datatype="Real" /><Member Name="PowerAirYMax" Datatype="Real" /></Section></Sections></Member>
+    <Member Name="ScalingShutterClosed" Datatype="&quot;stAirExtractorScalingParameters&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PowerXMin" Datatype="Real" /><Member Name="PowerXMax" Datatype="Real" /><Member Name="PowerAirYMin" Datatype="Real" /><Member Name="PowerAirYMax" Datatype="Real" /></Section></Sections></Member>
+    <Member Name="PwmMinFrequenceValue" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PwmMaxFrequenceValue" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="AirExtractionEnable" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="AirExractionAnalogPowerValue" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ForcingAirInProgress" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PWM_Channel_SW_Enable" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PWM_ProgressAccel" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PWM_FrequencyValue" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="InOut" />
+  <Section Name="Static">
+    <Member Name="CoolingAfterClosing" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="RTrig_ShutterClose" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="RTrig_ForceAir" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TOF_ForceAirTimer" Datatype="TOF_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="MemUVEnabledOnce" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="LocalPercentageValue" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Temp" />
+  <Section Name="Constant" />
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>FB10075_AirExtractorManager</Name>
+      <Number>10075</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>Release note: 
+1.0 -  Alpajet version. Only analog output value
+1.1 -  Iris improvment. Add PWM freq control</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <LineComment Inserted="false" NoClosingBracket="false" UId="21">
+    <Text UId="22"> Rising edge shutter closed</Text>
+  </LineComment>
+  <NewLine Num="1" UId="23" />
+  <Access Scope="LocalVariable" UId="24">
+    <Symbol UId="25">
+      <Component Name="RTrig_ShutterClose" UId="26" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="27">
+    <Instruction UId="28">
+      <Token Text="(" UId="29" />
+      <Parameter Name="CLK" UId="30">
+        <Blank Num="1" UId="31" />
+        <Token Text=":=" UId="32" />
+        <Blank Num="1" UId="33" />
+        <Access Scope="LocalVariable" UId="34">
+          <Symbol UId="35">
+            <Component Name="ShutterClose" UId="36" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="37" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="38" />
+  <NewLine Num="1" UId="39" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="40">
+    <Text UId="41"> Force cooling until UV Ready</Text>
+  </LineComment>
+  <NewLine Num="1" UId="42" />
+  <Token Text="IF" UId="43" />
+  <Blank Num="1" UId="44" />
+  <Access Scope="LocalVariable" UId="45">
+    <Symbol UId="46">
+      <Component Name="RTrig_ShutterClose" UId="47" />
+      <Token Text="." UId="48" />
+      <Component Name="Q" UId="49" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="50" />
+  <Token Text="THEN" UId="51" />
+  <NewLine Num="1" UId="52" />
+  <Blank Num="4" UId="53" />
+  <Access Scope="LocalVariable" UId="54">
+    <Symbol UId="55">
+      <Component Name="CoolingAfterClosing" UId="56" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="57" />
+  <Token Text=":=" UId="58" />
+  <Blank Num="1" UId="59" />
+  <Access Scope="LiteralConstant" UId="60">
+    <Constant UId="61">
+      <ConstantValue UId="63">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="64" />
+  <NewLine Num="1" UId="65" />
+  <Token Text="END_IF" UId="66" />
+  <Token Text=";" UId="67" />
+  <NewLine Num="2" UId="68" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="69">
+    <Text UId="70"> Reset cooling if UV Ready</Text>
+  </LineComment>
+  <NewLine Num="1" UId="71" />
+  <Token Text="IF" UId="72" />
+  <Blank Num="1" UId="73" />
+  <Token Text="(" UId="74" />
+  <Access Scope="LocalVariable" UId="75">
+    <Symbol UId="76">
+      <Component Name="UVFeedbackPower" UId="77" />
+    </Symbol>
+  </Access>
+  <Token Text="/" UId="78" />
+  <Access Scope="LiteralConstant" UId="79">
+    <Constant UId="80">
+      <ConstantValue UId="82">276.48</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=")" UId="83" />
+  <Blank Num="1" UId="84" />
+  <Token Text="&lt;=" UId="85" />
+  <Blank Num="1" UId="86" />
+  <Access Scope="LocalVariable" UId="87">
+    <Symbol UId="88">
+      <Component Name="ScalingShutterClosed" UId="89" />
+      <Token Text="." UId="90" />
+      <Component Name="PowerXMin" UId="91" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="92" />
+  <Token Text="OR" UId="93" />
+  <Blank Num="1" UId="94" />
+  <Access Scope="LocalVariable" UId="95">
+    <Symbol UId="96">
+      <Component Name="ScalingShutterClosed" UId="97" />
+      <Token Text="." UId="98" />
+      <Component Name="PowerXMin" UId="99" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="100" />
+  <Token Text="=" UId="101" />
+  <Blank Num="1" UId="102" />
+  <Access Scope="LiteralConstant" UId="103">
+    <Constant UId="104">
+      <ConstantValue UId="106">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="107" />
+  <Token Text="THEN" UId="108" />
+  <NewLine Num="1" UId="109" />
+  <Blank Num="4" UId="110" />
+  <Access Scope="LocalVariable" UId="111">
+    <Symbol UId="112">
+      <Component Name="CoolingAfterClosing" UId="113" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="114" />
+  <Token Text=":=" UId="115" />
+  <Blank Num="1" UId="116" />
+  <Access Scope="LiteralConstant" UId="117">
+    <Constant UId="118">
+      <ConstantValue UId="120">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="121" />
+  <NewLine Num="1" UId="122" />
+  <Token Text="END_IF" UId="123" />
+  <Token Text=";" UId="124" />
+  <NewLine Num="2" UId="125" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="126">
+    <Text UId="127"> Memorisation if UV was enabled one time at least</Text>
+  </LineComment>
+  <NewLine Num="1" UId="128" />
+  <Token Text="IF" UId="129" />
+  <Blank Num="1" UId="130" />
+  <Access Scope="LocalVariable" UId="131">
+    <Symbol UId="132">
+      <Component Name="UVEnabled" UId="133" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="134" />
+  <Token Text="THEN" UId="135" />
+  <NewLine Num="1" UId="136" />
+  <Blank Num="4" UId="137" />
+  <Access Scope="LocalVariable" UId="138">
+    <Symbol UId="139">
+      <Component Name="MemUVEnabledOnce" UId="140" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="141" />
+  <Token Text=":=" UId="142" />
+  <Blank Num="1" UId="143" />
+  <Access Scope="LiteralConstant" UId="144">
+    <Constant UId="145">
+      <ConstantValue UId="147">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="148" />
+  <NewLine Num="1" UId="149" />
+  <Token Text="END_IF" UId="150" />
+  <Token Text=";" UId="151" />
+  <NewLine Num="2" UId="152" />
+  <Token Text="IF" UId="153" />
+  <Blank Num="1" UId="154" />
+  <Access Scope="LocalVariable" UId="155">
+    <Symbol UId="156">
+      <Component Name="TOF_ForceAirTimer" UId="157" />
+      <Token Text="." UId="158" />
+      <Component Name="Q" UId="159" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="160" />
+  <Token Text="THEN" UId="161" />
+  <NewLine Num="1" UId="162" />
+  <Blank Num="4" UId="163" />
+  <Access Scope="LocalVariable" UId="164">
+    <Symbol UId="165">
+      <Component Name="MemUVEnabledOnce" UId="166" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="167" />
+  <Token Text=":=" UId="168" />
+  <Blank Num="1" UId="169" />
+  <Access Scope="LiteralConstant" UId="170">
+    <Constant UId="171">
+      <ConstantValue UId="173">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="174" />
+  <NewLine Num="1" UId="175" />
+  <Blank Num="4" UId="176" />
+  <Access Scope="LocalVariable" UId="177">
+    <Symbol UId="178">
+      <Component Name="ForcingAirInProgress" UId="179" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="180" />
+  <Token Text=":=" UId="181" />
+  <Blank Num="1" UId="182" />
+  <Access Scope="LiteralConstant" UId="183">
+    <Constant UId="184">
+      <ConstantValue UId="186">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="187" />
+  <NewLine Num="1" UId="188" />
+  <Token Text="ELSE" UId="189" />
+  <NewLine Num="1" UId="190" />
+  <Blank Num="4" UId="191" />
+  <Access Scope="LocalVariable" UId="192">
+    <Symbol UId="193">
+      <Component Name="ForcingAirInProgress" UId="194" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="195" />
+  <Token Text=":=" UId="196" />
+  <Blank Num="1" UId="197" />
+  <Access Scope="LiteralConstant" UId="198">
+    <Constant UId="199">
+      <ConstantValue UId="201">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="202" />
+  <NewLine Num="1" UId="203" />
+  <Token Text="END_IF" UId="204" />
+  <Token Text=";" UId="205" />
+  <NewLine Num="2" UId="206" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="207">
+    <Text UId="208"> Rising edge on force Air</Text>
+  </LineComment>
+  <NewLine Num="1" UId="209" />
+  <Access Scope="LocalVariable" UId="210">
+    <Symbol UId="211">
+      <Component Name="RTrig_ForceAir" UId="212" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="213">
+    <Instruction UId="214">
+      <Token Text="(" UId="215" />
+      <Parameter Name="CLK" UId="216">
+        <Blank Num="1" UId="217" />
+        <Token Text=":=" UId="218" />
+        <Blank Num="1" UId="219" />
+        <Access Scope="LocalVariable" UId="220">
+          <Symbol UId="221">
+            <Component Name="ForceAirAfterShutdownUV" UId="222" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="223" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="224" />
+  <NewLine Num="1" UId="225" />
+  <Access Scope="LocalVariable" UId="226">
+    <Symbol UId="227">
+      <Component Name="TOF_ForceAirTimer" UId="228" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="229">
+    <Instruction UId="230">
+      <Token Text="(" UId="231" />
+      <Parameter Name="IN" UId="232">
+        <Blank Num="1" UId="233" />
+        <Token Text=":=" UId="234" />
+        <Blank Num="1" UId="235" />
+        <Access Scope="LocalVariable" UId="236">
+          <Symbol UId="237">
+            <Component Name="RTrig_ForceAir" UId="238" />
+            <Token Text="." UId="239" />
+            <Component Name="Q" UId="240" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="241" />
+        <Token Text="AND" UId="242" />
+        <Blank Num="1" UId="243" />
+        <Access Scope="LocalVariable" UId="244">
+          <Symbol UId="245">
+            <Component Name="MemUVEnabledOnce" UId="246" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="247" />
+      <NewLine Num="1" UId="248" />
+      <Blank Num="19" UId="249" />
+      <Parameter Name="PT" UId="250">
+        <Blank Num="1" UId="251" />
+        <Token Text=":=" UId="252" />
+        <Blank Num="1" UId="253" />
+        <Access Scope="TypedConstant" UId="254">
+          <Constant UId="255">
+            <ConstantValue UId="256">T#5m</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="257" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="258" />
+  <NewLine Num="2" UId="259" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="260">
+    <Text UId="261"> Air Extraction enable</Text>
+  </LineComment>
+  <NewLine Num="1" UId="262" />
+  <Token Text="IF" UId="263" />
+  <Blank Num="1" UId="264" />
+  <Token Text="(" UId="265" />
+  <Access Scope="LocalVariable" UId="266">
+    <Symbol UId="267">
+      <Component Name="AirExtractionActivation" UId="268" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="269" />
+  <Token Text="AND" UId="270" />
+  <Blank Num="1" UId="271" />
+  <Access Scope="LocalVariable" UId="272">
+    <Symbol UId="273">
+      <Component Name="UVReady" UId="274" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="275" />
+  <Blank Num="1" UId="276" />
+  <Token Text="OR" UId="277" />
+  <Blank Num="1" UId="278" />
+  <Access Scope="LocalVariable" UId="279">
+    <Symbol UId="280">
+      <Component Name="TOF_ForceAirTimer" UId="281" />
+      <Token Text="." UId="282" />
+      <Component Name="Q" UId="283" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="284" />
+  <Token Text="THEN" UId="285" />
+  <NewLine Num="1" UId="286" />
+  <Blank Num="4" UId="287" />
+  <Access Scope="LocalVariable" UId="288">
+    <Symbol UId="289">
+      <Component Name="AirExtractionEnable" UId="290" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="291" />
+  <Token Text=":=" UId="292" />
+  <Blank Num="1" UId="293" />
+  <Access Scope="LiteralConstant" UId="294">
+    <Constant UId="295">
+      <ConstantValue UId="297">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="298" />
+  <NewLine Num="1" UId="299" />
+  <Token Text="ELSE" UId="300" />
+  <NewLine Num="1" UId="301" />
+  <Blank Num="4" UId="302" />
+  <Access Scope="LocalVariable" UId="303">
+    <Symbol UId="304">
+      <Component Name="AirExtractionEnable" UId="305" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="306" />
+  <Token Text=":=" UId="307" />
+  <Blank Num="1" UId="308" />
+  <Access Scope="LiteralConstant" UId="309">
+    <Constant UId="310">
+      <ConstantValue UId="312">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="313" />
+  <NewLine Num="1" UId="314" />
+  <Token Text="END_IF" UId="315" />
+  <Token Text=";" UId="316" />
+  <NewLine Num="3" UId="317" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="318">
+    <Text UId="319"> Scaling </Text>
+  </LineComment>
+  <NewLine Num="1" UId="320" />
+  <Token Text="IF" UId="321" />
+  <Blank Num="1" UId="322" />
+  <Access Scope="LocalVariable" UId="323">
+    <Symbol UId="324">
+      <Component Name="CoolingAfterClosing" UId="325" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="326" />
+  <Token Text="OR" UId="327" />
+  <Blank Num="1" UId="328" />
+  <Access Scope="LocalVariable" UId="329">
+    <Symbol UId="330">
+      <Component Name="TOF_ForceAirTimer" UId="331" />
+      <Token Text="." UId="332" />
+      <Component Name="Q" UId="333" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="334" />
+  <Token Text="THEN" UId="335" />
+  <NewLine Num="1" UId="336" />
+  <Blank Num="4" UId="337" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="338">
+    <Text UId="339"> Force cooling after closing until UV Ready or After shutdown UV</Text>
+  </LineComment>
+  <NewLine Num="1" UId="340" />
+  <Blank Num="4" UId="341" />
+  <NewLine Num="1" UId="342" />
+  <Blank Num="4" UId="343" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="344">
+    <Text UId="345"> Analog output</Text>
+  </LineComment>
+  <NewLine Num="1" UId="346" />
+  <Blank Num="4" UId="347" />
+  <Access Scope="LocalVariable" UId="348">
+    <Symbol UId="349">
+      <Component Name="AirExractionAnalogPowerValue" UId="350" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="351" />
+  <Token Text=":=" UId="352" />
+  <Blank Num="1" UId="353" />
+  <Access Scope="LiteralConstant" UId="354">
+    <Constant UId="355">
+      <ConstantValue UId="357">27648</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="358" />
+  <NewLine Num="1" UId="359" />
+  <Blank Num="4" UId="360" />
+  <NewLine Num="1" UId="361" />
+  <Blank Num="4" UId="362" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="363">
+    <Text UId="364"> PWM Output</Text>
+  </LineComment>
+  <NewLine Num="1" UId="365" />
+  <Blank Num="4" UId="366" />
+  <Access Scope="LocalVariable" UId="367">
+    <Symbol UId="368">
+      <Component Name="PWM_Channel_SW_Enable" UId="369" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="370" />
+  <Token Text=":=" UId="371" />
+  <Blank Num="1" UId="372" />
+  <Access Scope="LiteralConstant" UId="373">
+    <Constant UId="374">
+      <ConstantValue UId="376">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="377" />
+  <NewLine Num="1" UId="378" />
+  <Blank Num="4" UId="379" />
+  <Access Scope="LocalVariable" UId="380">
+    <Symbol UId="381">
+      <Component Name="PWM_FrequencyValue" UId="382" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="383" />
+  <Token Text=":=" UId="384" />
+  <Blank Num="1" UId="385" />
+  <Access Scope="LocalVariable" UId="386">
+    <Symbol UId="387">
+      <Component Name="PwmMaxFrequenceValue" UId="388" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="389" />
+  <NewLine Num="1" UId="390" />
+  <Blank Num="4" UId="391" />
+  <NewLine Num="1" UId="392" />
+  <Token Text="ELSIF" UId="393" />
+  <Blank Num="1" UId="394" />
+  <Access Scope="LocalVariable" UId="395">
+    <Symbol UId="396">
+      <Component Name="ShutterClose" UId="397" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="398" />
+  <Token Text="AND" UId="399" />
+  <Blank Num="1" UId="400" />
+  <Access Scope="LocalVariable" UId="401">
+    <Symbol UId="402">
+      <Component Name="AirExtractionEnable" UId="403" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="404" />
+  <Token Text="THEN" UId="405" />
+  <NewLine Num="1" UId="406" />
+  <Blank Num="4" UId="407" />
+  <Access Scope="Call" UId="408">
+    <CallInfo UId="409" BlockType="FC">
+      <Instance Scope="GlobalVariable" UId="411">
+        <Component Name="FC10070_ScalingAirExtraction" UId="410" />
+      </Instance>
+      <Token Text="(" UId="412" />
+      <Parameter Name="SetPoint" UId="413">
+        <Blank Num="1" UId="414" />
+        <Token Text=":=" UId="415" />
+        <Blank Num="1" UId="416" />
+        <Token Text="(" UId="417" />
+        <Access Scope="LocalVariable" UId="418">
+          <Symbol UId="419">
+            <Component Name="UVFeedbackPower" UId="420" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="421" />
+        <Token Text="/" UId="422" />
+        <Blank Num="1" UId="423" />
+        <Access Scope="LiteralConstant" UId="424">
+          <Constant UId="425">
+            <ConstantValue UId="427">276.48</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text=")" UId="428" />
+      </Parameter>
+      <Token Text="," UId="429" />
+      <NewLine Num="1" UId="430" />
+      <Blank Num="34" UId="431" />
+      <Parameter Name="X_UVPower_Min" UId="432">
+        <Blank Num="1" UId="433" />
+        <Token Text=":=" UId="434" />
+        <Blank Num="1" UId="435" />
+        <Access Scope="LocalVariable" UId="436">
+          <Symbol UId="437">
+            <Component Name="ScalingShutterClosed" UId="438" />
+            <Token Text="." UId="439" />
+            <Component Name="PowerXMin" UId="440" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="441" />
+      <NewLine Num="1" UId="442" />
+      <Blank Num="34" UId="443" />
+      <Parameter Name="X_UVPower_Max" UId="444">
+        <Blank Num="1" UId="445" />
+        <Token Text=":=" UId="446" />
+        <Blank Num="1" UId="447" />
+        <Access Scope="LocalVariable" UId="448">
+          <Symbol UId="449">
+            <Component Name="ScalingShutterClosed" UId="450" />
+            <Token Text="." UId="451" />
+            <Component Name="PowerXMax" UId="452" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="453" />
+      <NewLine Num="1" UId="454" />
+      <Blank Num="34" UId="455" />
+      <Parameter Name="Y_AirPower_Min" UId="456">
+        <Blank Num="1" UId="457" />
+        <Token Text=":=" UId="458" />
+        <Blank Num="1" UId="459" />
+        <Access Scope="LocalVariable" UId="460">
+          <Symbol UId="461">
+            <Component Name="ScalingShutterClosed" UId="462" />
+            <Token Text="." UId="463" />
+            <Component Name="PowerAirYMin" UId="464" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="465" />
+      <NewLine Num="1" UId="466" />
+      <Blank Num="34" UId="467" />
+      <Parameter Name="Y_AirPower_Max" UId="468">
+        <Blank Num="1" UId="469" />
+        <Token Text=":=" UId="470" />
+        <Blank Num="1" UId="471" />
+        <Access Scope="LocalVariable" UId="472">
+          <Symbol UId="473">
+            <Component Name="ScalingShutterClosed" UId="474" />
+            <Token Text="." UId="475" />
+            <Component Name="PowerAirYMax" UId="476" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="477" />
+      <NewLine Num="1" UId="478" />
+      <Blank Num="34" UId="479" />
+      <Parameter Name="PWM_Minimum" UId="480">
+        <Token Text=":=" UId="481" />
+        <Access Scope="LiteralConstant" UId="482">
+          <Constant UId="483">
+            <ConstantValue UId="485">2000.0</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="486" />
+      <NewLine Num="1" UId="487" />
+      <Blank Num="34" UId="488" />
+      <Parameter Name="PWM_Maximum" UId="489">
+        <Token Text=":=" UId="490" />
+        <Access Scope="LiteralConstant" UId="491">
+          <Constant UId="492">
+            <ConstantValue UId="494">6000.0</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="495" />
+      <NewLine Num="1" UId="496" />
+      <Blank Num="34" UId="497" />
+      <Parameter Name="AnalogValue" UId="498">
+        <Blank Num="1" UId="499" />
+        <Token Text="=&gt;" UId="500" />
+        <Blank Num="1" UId="501" />
+        <Access Scope="LocalVariable" UId="502">
+          <Symbol UId="503">
+            <Component Name="AirExractionAnalogPowerValue" UId="504" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="505" />
+      <NewLine Num="1" UId="506" />
+      <Blank Num="34" UId="507" />
+      <Parameter Name="PwmFrequenceValue" UId="508">
+        <Blank Num="1" UId="509" />
+        <Token Text="=&gt;" UId="510" />
+        <Blank Num="1" UId="511" />
+        <Access Scope="LocalVariable" UId="512">
+          <Symbol UId="513">
+            <Component Name="PWM_FrequencyValue" UId="514" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="515" />
+    </CallInfo>
+  </Access>
+  <Token Text=";" UId="516" />
+  <NewLine Num="1" UId="517" />
+  <Blank Num="4" UId="518" />
+  <Access Scope="LocalVariable" UId="519">
+    <Symbol UId="520">
+      <Component Name="PWM_Channel_SW_Enable" UId="521" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="522" />
+  <Token Text=":=" UId="523" />
+  <Blank Num="1" UId="524" />
+  <Access Scope="LiteralConstant" UId="525">
+    <Constant UId="526">
+      <ConstantValue UId="528">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="529" />
+  <NewLine Num="1" UId="530" />
+  <Blank Num="4" UId="531" />
+  <NewLine Num="1" UId="532" />
+  <Token Text="ELSIF" UId="533" />
+  <Blank Num="1" UId="534" />
+  <Access Scope="LocalVariable" UId="535">
+    <Symbol UId="536">
+      <Component Name="ShutterOpen" UId="537" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="538" />
+  <Token Text="AND" UId="539" />
+  <Blank Num="1" UId="540" />
+  <Access Scope="LocalVariable" UId="541">
+    <Symbol UId="542">
+      <Component Name="AirExtractionEnable" UId="543" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="544" />
+  <Token Text="THEN" UId="545" />
+  <NewLine Num="1" UId="546" />
+  <Blank Num="4" UId="547" />
+  <Access Scope="Call" UId="548">
+    <CallInfo UId="549" BlockType="FC">
+      <Instance Scope="GlobalVariable" UId="551">
+        <Component Name="FC10070_ScalingAirExtraction" UId="550" />
+      </Instance>
+      <Token Text="(" UId="552" />
+      <Parameter Name="SetPoint" UId="553">
+        <Blank Num="1" UId="554" />
+        <Token Text=":=" UId="555" />
+        <Blank Num="1" UId="556" />
+        <Token Text="(" UId="557" />
+        <Access Scope="LocalVariable" UId="558">
+          <Symbol UId="559">
+            <Component Name="UVFeedbackPower" UId="560" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="561" />
+        <Token Text="/" UId="562" />
+        <Blank Num="1" UId="563" />
+        <Access Scope="LiteralConstant" UId="564">
+          <Constant UId="565">
+            <ConstantValue UId="567">276.48</ConstantValue>
+          </Constant>
+        </Access>
+        <Token Text=")" UId="568" />
+      </Parameter>
+      <Token Text="," UId="569" />
+      <NewLine Num="1" UId="570" />
+      <Blank Num="34" UId="571" />
+      <Parameter Name="X_UVPower_Min" UId="572">
+        <Blank Num="1" UId="573" />
+        <Token Text=":=" UId="574" />
+        <Blank Num="1" UId="575" />
+        <Access Scope="LocalVariable" UId="576">
+          <Symbol UId="577">
+            <Component Name="ScalingShutterOpen" UId="578" />
+            <Token Text="." UId="579" />
+            <Component Name="PowerXMin" UId="580" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="581" />
+      <NewLine Num="1" UId="582" />
+      <Blank Num="34" UId="583" />
+      <Parameter Name="X_UVPower_Max" UId="584">
+        <Blank Num="1" UId="585" />
+        <Token Text=":=" UId="586" />
+        <Blank Num="1" UId="587" />
+        <Access Scope="LocalVariable" UId="588">
+          <Symbol UId="589">
+            <Component Name="ScalingShutterOpen" UId="590" />
+            <Token Text="." UId="591" />
+            <Component Name="PowerXMax" UId="592" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="593" />
+      <NewLine Num="1" UId="594" />
+      <Blank Num="34" UId="595" />
+      <Parameter Name="Y_AirPower_Min" UId="596">
+        <Blank Num="1" UId="597" />
+        <Token Text=":=" UId="598" />
+        <Blank Num="1" UId="599" />
+        <Access Scope="LocalVariable" UId="600">
+          <Symbol UId="601">
+            <Component Name="ScalingShutterOpen" UId="602" />
+            <Token Text="." UId="603" />
+            <Component Name="PowerAirYMin" UId="604" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="605" />
+      <NewLine Num="1" UId="606" />
+      <Blank Num="34" UId="607" />
+      <Parameter Name="Y_AirPower_Max" UId="608">
+        <Blank Num="1" UId="609" />
+        <Token Text=":=" UId="610" />
+        <Blank Num="1" UId="611" />
+        <Access Scope="LocalVariable" UId="612">
+          <Symbol UId="613">
+            <Component Name="ScalingShutterOpen" UId="614" />
+            <Token Text="." UId="615" />
+            <Component Name="PowerAirYMax" UId="616" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="617" />
+      <NewLine Num="1" UId="618" />
+      <Blank Num="34" UId="619" />
+      <Parameter Name="PWM_Minimum" UId="620">
+        <Token Text=":=" UId="621" />
+        <Access Scope="LiteralConstant" UId="622">
+          <Constant UId="623">
+            <ConstantValue UId="625">2000.0</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="626" />
+      <NewLine Num="1" UId="627" />
+      <Blank Num="34" UId="628" />
+      <Parameter Name="PWM_Maximum" UId="629">
+        <Token Text=":=" UId="630" />
+        <Access Scope="LiteralConstant" UId="631">
+          <Constant UId="632">
+            <ConstantValue UId="634">6000.0</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="635" />
+      <NewLine Num="1" UId="636" />
+      <Blank Num="34" UId="637" />
+      <Parameter Name="AnalogValue" UId="638">
+        <Blank Num="1" UId="639" />
+        <Token Text="=&gt;" UId="640" />
+        <Blank Num="1" UId="641" />
+        <Access Scope="LocalVariable" UId="642">
+          <Symbol UId="643">
+            <Component Name="AirExractionAnalogPowerValue" UId="644" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="645" />
+      <NewLine Num="1" UId="646" />
+      <Blank Num="34" UId="647" />
+      <Parameter Name="PwmFrequenceValue" UId="648">
+        <Blank Num="1" UId="649" />
+        <Token Text="=&gt;" UId="650" />
+        <Blank Num="1" UId="651" />
+        <Access Scope="LocalVariable" UId="652">
+          <Symbol UId="653">
+            <Component Name="PWM_FrequencyValue" UId="654" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="655" />
+    </CallInfo>
+  </Access>
+  <Token Text=";" UId="656" />
+  <NewLine Num="1" UId="657" />
+  <Blank Num="4" UId="658" />
+  <Access Scope="LocalVariable" UId="659">
+    <Symbol UId="660">
+      <Component Name="PWM_Channel_SW_Enable" UId="661" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="662" />
+  <Token Text=":=" UId="663" />
+  <Blank Num="1" UId="664" />
+  <Access Scope="LiteralConstant" UId="665">
+    <Constant UId="666">
+      <ConstantValue UId="668">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="669" />
+  <NewLine Num="1" UId="670" />
+  <Token Text="ELSE" UId="671" />
+  <NewLine Num="1" UId="672" />
+  <Blank Num="4" UId="673" />
+  <Access Scope="LocalVariable" UId="674">
+    <Symbol UId="675">
+      <Component Name="AirExractionAnalogPowerValue" UId="676" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="677" />
+  <Token Text=":=" UId="678" />
+  <Blank Num="1" UId="679" />
+  <Access Scope="LiteralConstant" UId="680">
+    <Constant UId="681">
+      <ConstantValue UId="683">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="684" />
+  <NewLine Num="1" UId="685" />
+  <Blank Num="4" UId="686" />
+  <NewLine Num="1" UId="687" />
+  <Blank Num="4" UId="688" />
+  <Access Scope="LocalVariable" UId="689">
+    <Symbol UId="690">
+      <Component Name="PWM_Channel_SW_Enable" UId="691" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="692" />
+  <Token Text=":=" UId="693" />
+  <Blank Num="1" UId="694" />
+  <Access Scope="LiteralConstant" UId="695">
+    <Constant UId="696">
+      <ConstantValue UId="698">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="699" />
+  <NewLine Num="1" UId="700" />
+  <Blank Num="4" UId="701" />
+  <Access Scope="LocalVariable" UId="702">
+    <Symbol UId="703">
+      <Component Name="PWM_FrequencyValue" UId="704" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="705" />
+  <Token Text=":=" UId="706" />
+  <Blank Num="1" UId="707" />
+  <Access Scope="LiteralConstant" UId="708">
+    <Constant UId="709">
+      <ConstantValue UId="711">0.0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="712" />
+  <NewLine Num="1" UId="713" />
+  <Blank Num="4" UId="714" />
+  <NewLine Num="1" UId="715" />
+  <Token Text="END_IF" UId="716" />
+  <Token Text=";" UId="717" />
+  <NewLine Num="2" UId="718" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Scale Dryer Uv Power Calculation</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="B" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="C" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text>FB10075_AirExtractorManager</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="D" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

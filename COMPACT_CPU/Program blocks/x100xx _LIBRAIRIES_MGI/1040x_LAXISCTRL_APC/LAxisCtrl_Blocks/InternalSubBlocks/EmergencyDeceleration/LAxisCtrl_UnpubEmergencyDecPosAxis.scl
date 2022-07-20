@@ -1,0 +1,15 @@
+﻿FUNCTION "LAxisCtrl_UnpubEmergencyDecPosAxis" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis {InstructionName := 'TO_PositioningAxis'; LibVersion := '5.0'} : TO_PositioningAxis;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	#LAxisCtrl_UnpubEmergencyDecPosAxis := #axis.DynamicDefaults.EmergencyDeceleration;
+END_FUNCTION
+

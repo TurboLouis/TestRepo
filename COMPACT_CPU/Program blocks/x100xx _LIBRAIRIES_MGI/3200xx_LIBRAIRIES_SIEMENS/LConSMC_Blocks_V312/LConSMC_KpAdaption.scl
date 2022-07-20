@@ -1,0 +1,134 @@
+﻿FUNCTION_BLOCK "LConSMC_KpAdaption"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool;
+      adaptionMode : Bool;
+      externalMode : Bool;
+      diameter : LReal;
+      HWAddress : HW_SUBMODULE;
+      offset : DInt := 6;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool;
+      kpAdaptionValue : Real;
+      error : Bool;
+      errorID : DWord;
+   END_VAR
+
+   VAR_IN_OUT 
+      winderDiag : "LConSMC_typeWinderDiag";
+      winderConfig : "LConSMC_typeWinderConfig";
+   END_VAR
+
+   VAR 
+      statError : Bool;
+      statEnableOld : Bool;
+      statBusy : Bool;
+      statExternalMode : Bool;
+      statKpAdaptionNormalized : Word;
+      statErrorID : DWord;
+      statReturn : Int;
+      statICount : UInt;
+      statQCount : UInt;
+      statAddIn : UDInt;
+      statAddOut : UDInt;
+      statAdaptionValuePercent : Real;
+   END_VAR
+
+   VAR CONSTANT 
+      INT_SCALE : Real := 16384.0;
+      FB_ID : DWord := 16#3109_0000;
+   END_VAR
+
+
+BEGIN
+	//----------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Erlangen, Germany
+	//----------------------------------------------------------------------------------------------------------------------
+	//functionality : Adapt speed controller Kp value
+	//assignment    : No restrictions     
+	//======================================================================================================================
+	//change log table:
+	//version       date            expert in charge        changes applied
+	//01.00.00      23.10.2019      APC Erlangen            Creation
+	//01.00.01      27.01.2021      APC Erlangen            Removed warning "Parameter may not be initialized"
+	//======================================================================================================================
+	//
+	REGION Initialization
+	    IF #enable AND NOT #statEnableOld THEN
+	        #statExternalMode := #externalMode;
+	        IF NOT #statExternalMode THEN
+	            #statReturn := RD_ADDR(LADDR := #HWAddress, PIADDR => #statAddIn, PICount => #statICount, PQADDR => #statAddOut, PQCount => #statQCount);
+	            IF #statReturn <> 0
+	                OR #statQCount < 2
+	            THEN
+	                #statError := TRUE;
+	                #statErrorID := #FB_ID OR "LCON_ERROR_TELEGRAM_EXTENSION";
+	            ELSE
+	                #statError := FALSE;
+	                #statErrorID := 16#0000_0000;
+	            END_IF;
+	        ELSE
+	            #statError := FALSE;
+	            #statErrorID := 16#0000_0000;
+	        END_IF;
+	    END_IF;
+	END_REGION ;
+	REGION Cyclic part
+	    IF #enable
+	        OR (NOT #enable AND #statEnableOld)
+	        AND NOT #statError
+	    THEN
+	        #statBusy := #enable;
+	        IF #statBusy THEN
+	            IF #adaptionMode THEN // Use diameter ratio
+	                IF #winderConfig.diamConfig.maxDia = 0.0
+	                    OR #winderConfig.diamConfig.maxDia <= #winderConfig.diamConfig.minDia
+	                    OR #diameter <= 0.0
+	                THEN
+	                    #statError := TRUE;
+	                    #statErrorID := #FB_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	                    #statBusy := FALSE;
+	                    #statAdaptionValuePercent := 100.0;
+	                ELSE
+	                    #statAdaptionValuePercent := LREAL_TO_REAL(#diameter / #winderConfig.diamConfig.maxDia * 100.0);
+	                END_IF;
+	            ELSE  // Use inertia ration
+	                IF #winderDiag.torquePreControlDiag.maxInertia <= 0.0
+	                    OR #winderDiag.torquePreControlDiag.totalInertia <= 0.0
+	                THEN
+	                    #statError := TRUE;
+	                    #statErrorID := #FB_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	                    #statBusy := FALSE;
+	                    #statAdaptionValuePercent := 100.0;
+	                ELSE
+	                    #statAdaptionValuePercent := LREAL_TO_REAL(#winderDiag.torquePreControlDiag.totalInertia / #winderDiag.torquePreControlDiag.maxInertia * 100.0);
+	                END_IF;
+	            END_IF;
+	        ELSE
+	            #statAdaptionValuePercent := 100.0;
+	        END_IF;
+	        // Write adaption value to telegram
+	        IF NOT #statExternalMode THEN
+	            #statKpAdaptionNormalized := INT_TO_WORD(REAL_TO_INT((#statAdaptionValuePercent / 100.0) * #INT_SCALE));
+	            POKE(area := 16#82,
+	                 dbNumber := 0,
+	                 byteOffset := UDINT_TO_DINT(#statAddOut) + ABS(#offset),
+	                 value := #statKpAdaptionNormalized);
+	        END_IF;
+	    ELSIF NOT #enable THEN
+	        #statError := FALSE;
+	        #errorID := 16#0000_0000;
+	    END_IF;
+	END_REGION
+	
+	#statEnableOld := #enable;
+	#error := #statError;
+	#errorID := #statErrorID;
+	#busy := #statBusy;
+	#kpAdaptionValue := #statAdaptionValuePercent;
+	
+END_FUNCTION_BLOCK
+

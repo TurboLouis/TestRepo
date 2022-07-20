@@ -1,0 +1,224 @@
+﻿FUNCTION_BLOCK "LAcycCom_AckDriveFaults"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AcycCom
+VERSION : 1.5
+   VAR_INPUT 
+      execute : Bool;
+      driveObjectId { S7_HiddenAssignment := 'HideIfNoParamAssigned'} : Int := -1;
+      hardwareId : HW_IO;
+   END_VAR
+
+   VAR_OUTPUT 
+      done { ExternalWritable := 'False'} : Bool;
+      busy { ExternalWritable := 'False'} : Bool;
+      error { ExternalWritable := 'False'} : Bool;
+      status { ExternalWritable := 'False'} : Word := #STATUS_NO_CALL;
+      diagnostics { ExternalWritable := 'False'} : "LAcycCom_typeDriveDiagnostics";
+   END_VAR
+
+   VAR_IN_OUT 
+      requestBuffer : "LAcycCom_typeRequestBuffer";
+   END_VAR
+
+   VAR 
+      statExecuteOld { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statBusy { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statDone { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statError { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := FALSE;
+      statFBState { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : SInt := #FB_IDLE;
+      statDriveObjectId { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;
+      statHardwareId { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : HW_IO;
+      statWarningRetriggering { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      statDataset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Array[0..0] of "LAcycCom_typeDriveDatasetReal";
+      instWriteDriveParams { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : "LAcycCom_WriteDriveParams";
+   END_VAR
+
+   VAR_TEMP 
+      tempVoidDiagnostics : "LAcycCom_typeDriveDiagnostics";
+   END_VAR
+
+   VAR CONSTANT 
+      FB_IDLE : SInt := 0;
+      FB_BUSY : SInt := 1;
+      MAX_DRIVE_OBJECT_NO : Int := 254;
+      STATUS_EXECUTION_FINISHED : Word := 16#0000;
+      STATUS_NO_CALL : Word := 16#7000;
+      STATUS_BUSY : Word := 16#7001;
+      WARN_EXECUTE_SET_DURING_PROCESSING : Word := 16#7101;
+      ERR_AMBIGUOUS_FB_CALL : Word := 16#8006;
+      ERR_INVALID_DRIVE_OBJECT_ID : Word := 16#8208;
+      ERR_UNDEFINED_STATE : Word := 16#8611;
+      ERR_WRITE_DRIVE_PARAMS : Word := 16#8625;
+      FAULTS_ACKNOWLEDGE : UInt := 3981;
+   END_VAR
+
+
+BEGIN
+	//==========================================================================================
+	// SIEMENS AG
+	// (c)Copyright 2020 All Rights Reserved
+	//------------------------------------------------------------------------------------------
+	// Library: LAcycCom
+	// Tested with: S7-1513-1 PN
+	// Engineering: TIA Portal V15
+	// Restrictions: ---
+	// Requirements: S7-1200 / S7-1500
+	//               FB LAcycCom_ResourceManager is required
+	// Functionality: Set parameter p3981 to fault acknowledgement
+	//------------------------------------------------------------------------------------------
+	// Change log table:
+	// Version    Date          Expert in charge    Changes applied
+	// 01.03.01   22.06.2016    AL                  release
+	// 01.03.02   22.11.2017    AL                  added errorValue to "LAcycCom_typeDriveDiagnostics"
+	// 01.05.00   31.10.2018    AL                  input 'driveObjectId' data type changed from USInt to Int
+	// 01.05.01   11.10.2019    AL                  bugfix lockBuffer
+	// 01.05.02   19.05.2020    CR                  new errorId when input 'driveObjectId' is out of range
+	// 
+	//------------------------------------------------------------------------------------------
+	// Function block: LAcycCom_AckDriveFaults
+	//===========================================================================================
+	
+	// Check if FB is triggered
+	IF (#execute = TRUE) AND (#statExecuteOld = FALSE) AND (#statBusy = TRUE) THEN
+	  // Input execute is set during processing
+	  #status := #WARN_EXECUTE_SET_DURING_PROCESSING;
+	  #statWarningRetriggering := TRUE;
+	  #statExecuteOld := #execute;
+	  
+	ELSIF (#execute = TRUE) AND (#statExecuteOld = FALSE) THEN
+	  // First call
+	  // Functionality is busy
+	  #statBusy := TRUE;
+	  
+	  // Reset other outputs
+	  #statError := FALSE;
+	  #statDone := FALSE;
+	  #status := #STATUS_BUSY;
+	  
+	  #busy := #statBusy;
+	  #error := #statError;
+	  #done := #statDone;
+	  #statExecuteOld := #execute;
+	  // Initialize
+	  #statFBState := #FB_BUSY;
+	  #statDriveObjectId := #driveObjectId;
+	  #statHardwareId := #hardwareId;
+	  #instWriteDriveParams(execute := FALSE,
+	                        requestBuffer := #requestBuffer,
+	                        dataset := #statDataset);
+	  #diagnostics := #tempVoidDiagnostics;
+	  #diagnostics.firstParameterError := -1; // V1.3.2
+	  #diagnostics.errorValue := 16#FF; // V1.3.2
+	  #statWarningRetriggering := FALSE;
+	  // V1.3.2 Initialize dataset
+	  #statDataset[0].parameterNumber := #FAULTS_ACKNOWLEDGE;
+	  #statDataset[0].index := 0;
+	  #statDataset[0].value := 1.0;
+	  #statDataset[0].errorValue := 16#FF;
+	  
+	  IF (#statDriveObjectId > #MAX_DRIVE_OBJECT_NO)
+	    OR (#statDriveObjectId = 0)
+	  THEN // V1.5.2
+	    // Wrong drive object ID at input
+	    #statError := TRUE;
+	    #status := #ERR_INVALID_DRIVE_OBJECT_ID;
+	    RETURN;
+	  END_IF;
+	  
+	  RETURN;
+	  
+	  // Check if FB is disabled (falling edge) after job is done or FB is in error state
+	ELSIF (#execute = FALSE AND #statBusy = FALSE) AND
+	  (#statError = TRUE OR #statDone = TRUE)
+	THEN
+	  // Error outputs are reset with falling edge of enable input
+	  #statError := FALSE;
+	  
+	  // Enable and busy are reset with falling edge of enable input
+	  #statDone := FALSE;
+	  #statBusy := FALSE;
+	  
+	  // Write outputs
+	  #status := #STATUS_NO_CALL;
+	  #busy := #statBusy;
+	  #done := #statDone;
+	  #error := #statError;
+	  #statFBState := #FB_IDLE;
+	  
+	  #statExecuteOld := #execute;
+	  RETURN;
+	  
+	  // FB is currently executed and not finished
+	ELSIF #statBusy = TRUE THEN
+	  #statExecuteOld := #execute;
+	  
+	  // FB is disabled
+	ELSE
+	  #statExecuteOld := #execute;
+	  RETURN;
+	END_IF;
+	//----------------------------------------------------------------------------------------------
+	IF (#statBusy = TRUE) AND (#statError = FALSE) THEN
+	  CASE #statFBState OF
+	    #FB_BUSY:
+	      // Call WriteDriveParams
+	      #instWriteDriveParams(execute := TRUE,
+	                            parameterCount := 1,
+	                            driveObjectId := #statDriveObjectId,
+	                            hardwareId := #statHardwareId,
+	                            requestBuffer := #requestBuffer,
+	                            dataset := #statDataset);
+	      
+	      IF NOT #instWriteDriveParams.busy THEN
+	        #diagnostics := #instWriteDriveParams.diagnostics;
+	        
+	        IF #instWriteDriveParams.done = TRUE THEN
+	          #statDone := TRUE;
+	        ELSIF #instWriteDriveParams.error = TRUE THEN
+	          #status := #ERR_WRITE_DRIVE_PARAMS;
+	          #diagnostics.status := #ERR_WRITE_DRIVE_PARAMS;
+	          #statError := TRUE;
+	        END_IF;
+	      END_IF;
+	      
+	      
+	    ELSE
+	      #statError := TRUE;
+	      #status := #ERR_UNDEFINED_STATE;
+	      #diagnostics.status := #ERR_UNDEFINED_STATE;
+	  END_CASE;
+	END_IF;
+	
+	//----------------------------------------------------------------------------------------------
+	// Write outputs and error handling
+	//----------------------------------------------------------------------------------------------
+	// Error occurred in request
+	IF #statError = TRUE THEN
+	  #statDone := FALSE;
+	  #statBusy := FALSE;
+	  #diagnostics.stateNumber := #statFBState;
+	  
+	  // Request finished
+	ELSIF #statDone = TRUE THEN
+	  #statError := FALSE;
+	  #statBusy := FALSE;
+	  #statFBState := #FB_IDLE;
+	  IF #statWarningRetriggering = FALSE THEN
+	    #status := #STATUS_EXECUTION_FINISHED;
+	  ELSE
+	    // If input execute is set during processing
+	    #status := #ERR_AMBIGUOUS_FB_CALL;
+	    #diagnostics.status := #ERR_AMBIGUOUS_FB_CALL;
+	    #statError := TRUE;
+	    #statDone := FALSE;
+	  END_IF;
+	END_IF;
+	
+	// Write static values to outputs
+	#error := #statError;
+	#busy := #statBusy;
+	#done := #statDone;
+	//----------------------------------------------------------------------------------------------
+END_FUNCTION_BLOCK
+

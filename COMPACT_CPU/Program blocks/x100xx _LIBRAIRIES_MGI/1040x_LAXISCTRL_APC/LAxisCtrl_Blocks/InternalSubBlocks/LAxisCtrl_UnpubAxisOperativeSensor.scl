@@ -1,0 +1,24 @@
+﻿FUNCTION "LAxisCtrl_UnpubAxisOperativeSensor" : UDInt
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis : DB_ANY;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	CASE TypeOfDB(#axis) OF
+	  TO_PositioningAxis:
+	    #LAxisCtrl_UnpubAxisOperativeSensor := "LAxisCtrl_UnpubOperativeSensorPosAxis"(axis := #axis);
+	    
+	  TO_SynchronousAxis:
+	    #LAxisCtrl_UnpubAxisOperativeSensor := "LAxisCtrl_UnpubOperativeSensorSyncAxis"(axis := #axis);
+	    
+	  ELSE
+	    #LAxisCtrl_UnpubAxisOperativeSensor := 1;
+	END_CASE;
+END_FUNCTION
+

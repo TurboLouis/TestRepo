@@ -1,0 +1,369 @@
+﻿FUNCTION_BLOCK "LAcycCom_HandleResource_Variant"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AcycCom
+VERSION : 1.1
+   VAR_INPUT 
+      requestResource : Bool;
+      hardwareId : HW_IO;
+      maxAssignedTime : Time := T#1M;
+   END_VAR
+
+   VAR_OUTPUT 
+      error { ExternalWritable := 'False'} : Bool;
+      status { ExternalWritable := 'False'} : Word := #STATUS_WAIT_CALL;
+      waitingForResource { ExternalWritable := 'False'} : Bool;
+      resourceAssigned { ExternalWritable := 'False'} : Bool;
+      resourceReleased { ExternalWritable := 'False'} : Bool;
+      usedHardwareId { ExternalWritable := 'False'} : HW_IO;
+   END_VAR
+
+   VAR_IN_OUT 
+      requestBufferHeader : "LAcycCom_typeRequestBufferHeader";
+      requestBufferElements : Variant;
+   END_VAR
+
+   VAR 
+      statFirstCycle { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := TRUE;
+      statBufferIndex { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int := -1;
+      statCountOfElements { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int := 0;
+   END_VAR
+
+   VAR_TEMP 
+      tempLoopIndex : Int;
+      tempLastQueueElement : Int;
+      tempBlkVariant : Int;
+      tempCurReqState : Byte;
+      tempRequestBufferElement : "LAcycCom_typeRequestBufferElement";
+   END_VAR
+
+   VAR CONSTANT 
+      ALL_ELEMENTS_OCCUPIED : Int := -1;
+      STATUS_RESOURCE_RELEASED : Word := 16#0000;
+      STATUS_WAIT_CALL : Word := 16#7000;
+      STATUS_WAIT_ASSIGN : Word := 16#7002;
+      STATUS_RESOURCE_ASSIGNED : Word := 16#7003;
+      ERR_RESOURCE_REJECTED_WHILE_WAITING : Word := 16#8400;
+      ERR_RESOURCE_RELEASED_WHILE_WAITING : Word := 16#8401;
+      ERR_ALLOCATION : Word := 16#8600;
+      ERR_INVALID_BUF_IDX : Word := 16#8601;
+      ERR_MOVE_BLK_VARIANT : Word := 16#8602;
+      RESOURCES_ARRAY_UPPER_LIM : Int := 19;
+   END_VAR
+
+
+BEGIN
+	//============================================================================================
+	// SIEMENS AG
+	// (c)Copyright 2016 All Rights Reserved
+	//--------------------------------------------------------------------------------------------
+	// Library: LAcycCom
+	// Tested with: S7-1513-1 PN
+	// Engineering: TIA Portal V15
+	// Restrictions: ---
+	// Requirements: S7-1200 / S7-1500
+	// Functionality: Allocate and release an element in the request buffer. (with Variant In-Out)
+	//--------------------------------------------------------------------------------------------
+	// Change log table:
+	// Version    Date          Expert in charge    Changes applied
+	// 01.00.00   27.01.2016    RC                  release 
+	// 01.01.01   25.02.2016    AW                  maxAssignedTime can be adjusted differently for every single request
+	//                                              bugfix lockbuffer (multitasking)
+	// 01.01.02   11.10.2019    AL                  bugfix multitasking
+	// 
+	//--------------------------------------------------------------------------------------------
+	// Function block: LAcycCom_HandleResource_Variant
+	//============================================================================================
+	
+	IF #requestBufferHeader.lockBuffer = TRUE THEN
+	  RETURN;
+	END_IF;
+	
+	#statCountOfElements := UDINT_TO_INT(CountOfElements(#requestBufferElements));
+	
+	//=============================================================================
+	// Request resource
+	//=============================================================================
+	IF (#requestResource = TRUE) AND (#statBufferIndex < 0) THEN
+	  #error := FALSE;
+	  #statFirstCycle := TRUE;
+	  
+	  // Allocation of a request element
+	  IF (#requestBufferHeader.lockBuffer = FALSE) AND (#requestBufferHeader.nextFreeElement >= 0) AND (#requestBufferHeader.nextFreeElement <= #statCountOfElements - 1) THEN
+	    #requestBufferHeader.lockBuffer := TRUE;
+	    #statBufferIndex := #requestBufferHeader.nextFreeElement;
+	    
+	    #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #requestBufferElements, COUNT := 1, SRC_INDEX := #statBufferIndex, DEST_INDEX := 0, DEST => #tempRequestBufferElement);
+	    // Error occurred during MOVE_BLK_VARIANT command
+	    IF (#tempBlkVariant <> 0) THEN
+	      #error := TRUE;
+	      #waitingForResource := FALSE;
+	      #resourceAssigned := FALSE;
+	      #status := #ERR_MOVE_BLK_VARIANT;
+	    END_IF;
+	    
+	    #tempRequestBufferElement.state := 16#00;
+	    #tempRequestBufferElement.state.%X0 := TRUE;
+	    #tempRequestBufferElement.hardwareId := #hardwareId;
+	    #tempRequestBufferElement.queueElementNext := -1;
+	    
+	    #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #tempRequestBufferElement, COUNT := 1, SRC_INDEX := 0, DEST_INDEX := #statBufferIndex, DEST => #requestBufferElements);
+	    
+	    // Error occurred during MOVE_BLK_VARIANT command
+	    IF (#tempBlkVariant <> 0) THEN
+	      #error := TRUE;
+	      #waitingForResource := FALSE;
+	      #resourceAssigned := FALSE;
+	      #status := #ERR_MOVE_BLK_VARIANT;
+	    END_IF;
+	    
+	    #usedHardwareId := #hardwareId;
+	    
+	    // Build up queue
+	    IF (#requestBufferHeader.firstQueueElement >= 0) THEN
+	      // Find last queue element 
+	      #tempLoopIndex := #requestBufferHeader.firstQueueElement;
+	      WHILE (#tempLoopIndex >= 0) DO
+	        #tempLastQueueElement := #tempLoopIndex;
+	        
+	        #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #requestBufferElements, COUNT := 1, SRC_INDEX := #tempLoopIndex, DEST_INDEX := 0, DEST => #tempRequestBufferElement);
+	        // Error occurred during MOVE_BLK_VARIANT command
+	        IF (#tempBlkVariant <> 0) THEN
+	          #error := TRUE;
+	          #waitingForResource := FALSE;
+	          #resourceAssigned := FALSE;
+	          #status := #ERR_MOVE_BLK_VARIANT;
+	          EXIT;
+	        END_IF;
+	        
+	        #tempLoopIndex := #tempRequestBufferElement.queueElementNext;
+	      END_WHILE;
+	      
+	      // insert into list after last element
+	      #tempRequestBufferElement.queueElementNext := #statBufferIndex;
+	      
+	      #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #tempRequestBufferElement, COUNT := 1, SRC_INDEX := 0, DEST_INDEX := #tempLastQueueElement, DEST => #requestBufferElements);
+	      
+	      // Error occurred during MOVE_BLK_VARIANT command
+	      IF (#tempBlkVariant <> 0) THEN
+	        #error := TRUE;
+	        #waitingForResource := FALSE;
+	        #resourceAssigned := FALSE;
+	        #status := #ERR_MOVE_BLK_VARIANT;
+	      END_IF;
+	      
+	      #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #requestBufferElements, COUNT := 1, SRC_INDEX := #statBufferIndex, DEST_INDEX := 0, DEST => #tempRequestBufferElement);
+	      // Error occurred during MOVE_BLK_VARIANT command
+	      IF (#tempBlkVariant <> 0) THEN
+	        #error := TRUE;
+	        #waitingForResource := FALSE;
+	        #resourceAssigned := FALSE;
+	        #status := #ERR_MOVE_BLK_VARIANT;
+	      END_IF;
+	      
+	      #tempRequestBufferElement.queueElementPrevious := #tempLastQueueElement;
+	      
+	      #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #tempRequestBufferElement, COUNT := 1, SRC_INDEX := 0, DEST_INDEX := #statBufferIndex, DEST => #requestBufferElements);
+	      
+	      // Error occurred during MOVE_BLK_VARIANT command
+	      IF (#tempBlkVariant <> 0) THEN
+	        #error := TRUE;
+	        #waitingForResource := FALSE;
+	        #resourceAssigned := FALSE;
+	        #status := #ERR_MOVE_BLK_VARIANT;
+	      END_IF;
+	      
+	    ELSE
+	      // Element is first element in queue
+	      #requestBufferHeader.firstQueueElement := #statBufferIndex;
+	      
+	      #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #requestBufferElements, COUNT := 1, SRC_INDEX := #statBufferIndex, DEST_INDEX := 0, DEST => #tempRequestBufferElement);
+	      // Error occurred during MOVE_BLK_VARIANT command
+	      IF (#tempBlkVariant <> 0) THEN
+	        #error := TRUE;
+	        #waitingForResource := FALSE;
+	        #resourceAssigned := FALSE;
+	        #status := #ERR_MOVE_BLK_VARIANT;
+	      END_IF;
+	      
+	      #tempRequestBufferElement.queueElementPrevious := -1;
+	      
+	      #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #tempRequestBufferElement, COUNT := 1, SRC_INDEX := 0, DEST_INDEX := #statBufferIndex, DEST => #requestBufferElements);
+	      
+	      // Error occurred during MOVE_BLK_VARIANT command
+	      IF (#tempBlkVariant <> 0) THEN
+	        #error := TRUE;
+	        #waitingForResource := FALSE;
+	        #resourceAssigned := FALSE;
+	        #status := #ERR_MOVE_BLK_VARIANT;
+	      END_IF;
+	    END_IF;
+	    
+	    #status := #STATUS_WAIT_ASSIGN;
+	    
+	    // Searching for the next free buffer element
+	    FOR #tempLoopIndex := 0 TO #statCountOfElements - 1 DO
+	      #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #requestBufferElements, COUNT := 1, SRC_INDEX := #tempLoopIndex, DEST_INDEX := 0, DEST => #tempRequestBufferElement);
+	      // Error occurred during MOVE_BLK_VARIANT command
+	      IF (#tempBlkVariant <> 0) THEN
+	        #error := TRUE;
+	        #waitingForResource := FALSE;
+	        #resourceAssigned := FALSE;
+	        #status := #ERR_MOVE_BLK_VARIANT;
+	        EXIT;
+	      END_IF;
+	      
+	      IF (#tempRequestBufferElement.state.%X0 = FALSE) THEN
+	        #requestBufferHeader.nextFreeElement := #tempLoopIndex;
+	        EXIT;
+	      END_IF;
+	      
+	      // All buffer elements are occupied
+	      IF #tempLoopIndex = (#statCountOfElements - 1) THEN
+	        #requestBufferHeader.nextFreeElement := #ALL_ELEMENTS_OCCUPIED;
+	      END_IF;
+	    END_FOR;
+	    
+	    #waitingForResource := TRUE;
+	    #resourceAssigned := FALSE;
+	    #requestBufferHeader.lockBuffer := FALSE;
+	    
+	    // Waiting until lockbit is reset and a buffer element is available
+	  ELSE
+	    #status := #ERR_ALLOCATION;
+	    #error := TRUE;
+	  END_IF;
+	  
+	  //=============================================================================
+	  // Check resource
+	  //=============================================================================
+	ELSIF (#requestResource = TRUE) THEN
+	  // Check buffer index for correctness
+	  IF (#statBufferIndex < 0) OR (#statBufferIndex > (#statCountOfElements - 1)) THEN
+	    #status := #ERR_INVALID_BUF_IDX;
+	    #error := TRUE;
+	    #waitingForResource := FALSE;
+	    #resourceAssigned := FALSE;
+	    
+	  ELSE
+	    
+	    #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #requestBufferElements, COUNT := 1, SRC_INDEX := #statBufferIndex, DEST_INDEX := 0, DEST => #tempRequestBufferElement);
+	    // Error occurred during MOVE_BLK_VARIANT command
+	    IF (#tempBlkVariant <> 0) THEN
+	      #error := TRUE;
+	      #waitingForResource := FALSE;
+	      #resourceAssigned := FALSE;
+	      #status := #ERR_MOVE_BLK_VARIANT;
+	    END_IF;
+	    
+	    #tempCurReqState := #tempRequestBufferElement.state;
+	    #usedHardwareId := #tempRequestBufferElement.hardwareId;
+	    
+	    IF (#tempCurReqState.%X0 = FALSE) OR
+	      (#tempCurReqState.%X3 = TRUE)
+	    THEN
+	      // Request was rejected by buffer manager
+	      #resourceAssigned := FALSE;
+	      #waitingForResource := FALSE;
+	      #error := TRUE;
+	      #status := #ERR_RESOURCE_REJECTED_WHILE_WAITING;
+	      
+	    ELSIF (#tempCurReqState.%X2 = TRUE) THEN
+	      // Request already released
+	      #waitingForResource := FALSE;
+	      #resourceAssigned := FALSE;
+	      #error := TRUE;
+	      #status := #ERR_RESOURCE_RELEASED_WHILE_WAITING;
+	      
+	    ELSIF (#tempCurReqState.%X1 = TRUE) THEN
+	      // Element is enabled
+	      IF (#statFirstCycle = TRUE) THEN
+	        IF (#requestBufferHeader.lockBuffer = FALSE) THEN // V1.1.2
+	          #requestBufferHeader.lockBuffer := TRUE;
+	          
+	          FOR #tempLoopIndex := 0 TO #RESOURCES_ARRAY_UPPER_LIM DO
+	            IF (#requestBufferHeader.activeRequests[#tempLoopIndex].bufferIndex = #statBufferIndex) THEN
+	              // Choose global maxAssignedTime
+	              IF (#requestBufferHeader.activeRequests[#tempLoopIndex].maxAssignedTime >= #maxAssignedTime) THEN
+	                ; // do nothing
+	                
+	                // Choose maxAssignedTime  
+	              ELSE
+	                #requestBufferHeader.activeRequests[#tempLoopIndex].maxAssignedTime := #maxAssignedTime;
+	              END_IF;
+	              #statFirstCycle := FALSE;
+	              EXIT;
+	            END_IF;
+	          END_FOR;
+	          
+	          #requestBufferHeader.lockBuffer := FALSE;
+	          #waitingForResource := FALSE;
+	          #resourceAssigned := TRUE;
+	          #status := #STATUS_RESOURCE_ASSIGNED;
+	        END_IF;
+	      END_IF;
+	      
+	    ELSE
+	      // Element not enabled yet
+	      #waitingForResource := TRUE;
+	      #resourceAssigned := FALSE;
+	      #status := #STATUS_WAIT_ASSIGN;
+	    END_IF;
+	  END_IF;
+	  
+	  //=============================================================================
+	  // Resource can be released
+	  //=============================================================================
+	ELSIF (#requestResource = FALSE) AND (#statBufferIndex >= 0) THEN
+	  // Check buffer index for correctness
+	  IF (#statBufferIndex < 0) OR (#statBufferIndex > (#statCountOfElements - 1)) THEN
+	    #status := #ERR_INVALID_BUF_IDX;
+	  ELSE
+	    #statFirstCycle := TRUE; // V1.1.2
+	    IF #requestBufferHeader.lockBuffer = FALSE THEN // V1.1.2
+	      #requestBufferHeader.lockBuffer := TRUE;
+	      
+	      #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #requestBufferElements, COUNT := 1, SRC_INDEX := #statBufferIndex, DEST_INDEX := 0, DEST => #tempRequestBufferElement);
+	      // Error occurred during MOVE_BLK_VARIANT command
+	      IF (#tempBlkVariant <> 0) THEN
+	        #error := TRUE;
+	        #waitingForResource := FALSE;
+	        #resourceAssigned := FALSE;
+	        #status := #ERR_MOVE_BLK_VARIANT;
+	      END_IF;
+	      
+	      
+	      IF (#tempRequestBufferElement.state.%X0 = TRUE) THEN
+	        #tempRequestBufferElement.state.%X2 := TRUE;
+	        
+	        #tempBlkVariant := MOVE_BLK_VARIANT(SRC := #tempRequestBufferElement, COUNT := 1, SRC_INDEX := 0, DEST_INDEX := #statBufferIndex, DEST => #requestBufferElements);
+	        
+	        // Error occurred during MOVE_BLK_VARIANT command
+	        IF (#tempBlkVariant <> 0) THEN
+	          #error := TRUE;
+	          #waitingForResource := FALSE;
+	          #resourceAssigned := FALSE;
+	          #status := #ERR_MOVE_BLK_VARIANT;
+	        END_IF;
+	      END_IF;
+	      
+	      #statBufferIndex := -1;
+	      #usedHardwareId := 16#0000;
+	      #resourceReleased := TRUE;
+	      #waitingForResource := FALSE;
+	      #resourceAssigned := FALSE;
+	      #status := #STATUS_RESOURCE_RELEASED;
+	      #statFirstCycle := FALSE;
+	      
+	      #requestBufferHeader.lockBuffer := FALSE;
+	    END_IF;
+	  END_IF;
+	  
+	  
+	ELSE
+	  #resourceReleased := FALSE; // No resource requested yet
+	  #error := FALSE;
+	  #status := #STATUS_WAIT_CALL;
+	END_IF;
+END_FUNCTION_BLOCK
+

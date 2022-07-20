@@ -1,0 +1,78 @@
+﻿FUNCTION_BLOCK "FB10073_LampUVErrorManager"
+TITLE = FB10073_LampUVErrorManager
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : Jonathan
+FAMILY : '1007x_DRYER_UV'
+VERSION : 1.0
+//Release note : 
+//1.0 - Feature developped
+   VAR_INPUT 
+      ReadySignal : Bool;
+      WarningSignal : Bool;
+      ErrorSignal : Bool;
+      ErrorCodeAnalog : Int;
+   END_VAR
+
+   VAR_OUTPUT 
+      ErrorCode : Int;
+   END_VAR
+
+   VAR 
+      VoltageErrorCode : Real;
+   END_VAR
+
+
+BEGIN
+	//Convert analog signal to 0-10V by 0.5V step
+	"FC10071_ScalingLamUVErrorCode"(AnalogValue:=#ErrorCodeAnalog,
+	                               VoltageValue=>#VoltageErrorCode);
+	
+	// Test following signals
+	IF #ErrorSignal THEN
+	    IF #WarningSignal THEN
+	        // Error signal And Warning signal
+	        IF #VoltageErrorCode = 0.5 THEN
+	            #ErrorCode := 40;
+	        ELSIF #VoltageErrorCode = 1.0 THEN
+	            #ErrorCode := 41;
+	        ELSIF #VoltageErrorCode = 1.5 THEN
+	            #ErrorCode := 42;
+	        ELSE
+	            #ErrorCode := 0;
+	        END_IF;
+	    ELSE
+	        // Error signal only
+	        IF #VoltageErrorCode = 2.5 THEN
+	            #ErrorCode := 64;
+	        ELSIF #VoltageErrorCode = 3.5 THEN
+	            #ErrorCode := 66;
+	        ELSIF #VoltageErrorCode = 5.5 THEN
+	            #ErrorCode := 70;
+	        ELSIF #VoltageErrorCode = 6.5 THEN
+	            #ErrorCode := 72;
+	        ELSE
+	            #ErrorCode := 0;
+	        END_IF;
+	    END_IF;
+	ELSIF #WarningSignal THEN
+	    // Warning signal witout Error signal
+	    IF #VoltageErrorCode = 0.5 THEN
+	        #ErrorCode := 20;
+	    ELSIF #VoltageErrorCode = 1.0 THEN
+	        #ErrorCode := 21;
+	    ELSIF #VoltageErrorCode = 1.5 THEN
+	        #ErrorCode := 22;
+	    ELSE
+	        #ErrorCode := 0;
+	    END_IF;
+	ELSIF #ReadySignal THEN
+	    // Only ready signal
+	    #ErrorCode := 0;
+	ELSE
+	    // No error
+	    #ErrorCode := 0;
+	    
+	END_IF;
+	
+END_FUNCTION_BLOCK
+

@@ -1,0 +1,185 @@
+﻿FUNCTION_BLOCK "LConSMC_TableChar"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool;
+      x : LReal;
+      sizeOfArray : Int := #MAX_SIZE_OF_ARRAY;
+      xn : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+      yn : "LConSMC_typeBreakPointTable" := ([20(0.0)]);
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool;
+      error : Bool;
+      errorID : DWord := 16#0000_0000;
+      y : LReal := 0.0;
+   END_VAR
+
+   VAR 
+      statEnableOld : Bool := FALSE;
+      statLimitedSize : Int;
+      statXval : Array[0..20] of LReal;
+      statYval : Array[0..20] of LReal;
+      statArrayCounter : Int := 0;
+      statMaxValueReached : Bool := FALSE;
+      statReal1 : LReal;
+      statReal2 : LReal;
+      statReal3 : LReal;
+      statReal4 : LReal;
+      statFound : Bool;
+      statSegmentIndex : Int;
+      statInt1 : Int;
+      statEqualValues : Bool := FALSE;
+      statError : Bool := FALSE;
+      statBusy : Bool := FALSE;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#0106_0000;
+      NO_ERROR : DWord := 16#0000_0000;
+      MAX_SIZE_OF_ARRAY : Int := 20;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : TableChar
+	//functionality : Breakpoint table
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge            changes applied
+	//V1.0      19.07.2012    APC GMC group               Creation
+	//V1.1      17.11.2016    APC ERL                     adapted to styleguide; warning "variable might not be initialized" removed
+	//V1.2      29.03.2018    APC ERL                     Bugfix for x values smaller than first x coordinate *c_00004*
+	//========================================================================================================================
+	
+	IF (#enable) AND NOT (#statEnableOld) THEN
+	    #statBusy := True;
+	    #statEnableOld := True;
+	    #y := 0.0;
+	    #statError := FALSE;
+	    #errorID := #NO_ERROR;
+	    #statEqualValues := False;
+	ELSIF NOT (#enable) AND (#statEnableOld) THEN
+	    #statEnableOld := False;
+	    #statBusy := False;
+	    #y := 0.0;
+	    #statError := FALSE;
+	    #errorID := #NO_ERROR;
+	END_IF;
+	
+	IF #statBusy AND NOT (#statError) THEN
+	    
+	    #statLimitedSize := LIMIT(MN := 1,
+	                              IN := #sizeOfArray,
+	                              MX := #MAX_SIZE_OF_ARRAY);
+	    #statArrayCounter := 0;
+	    #statMaxValueReached := False;
+	    
+	    REPEAT
+	        IF (#statArrayCounter <= (#statLimitedSize - 1)) THEN
+	            #statXval[#statArrayCounter] := #xn.values[#statArrayCounter];
+	            #statYval[#statArrayCounter] := #yn.values[#statArrayCounter];
+	            #statArrayCounter := #statArrayCounter + 1;
+	        ELSIF (#statArrayCounter > (#statLimitedSize - 1)) THEN
+	            #statArrayCounter := 0;
+	            #statMaxValueReached := True;
+	        END_IF;
+	    UNTIL
+	        #statMaxValueReached
+	    END_REPEAT;
+	    
+	    #statReal1 := #statXval[#statArrayCounter];
+	    #statReal2 := #statXval[#statArrayCounter + (#statLimitedSize - 1)];
+	    
+	    IF (#statReal1 = #statReal2) THEN                                               // First and Last values equal
+	        #errorID := #UNIT_ID OR "LCON_ERROR_TABLE_ENTRIES_NOT_MONOTONIC";                                        // Table-entries not monotonic 
+	        #statError := True;
+	        #y := 0.0;
+	        RETURN;
+	    END_IF;
+	    
+	    IF (#x < #statReal1) THEN
+	        #statFound := True;
+	        #statSegmentIndex := 0;
+	    ELSIF (#x > #statReal2) THEN
+	        #statFound := True;
+	        #statSegmentIndex := (#statLimitedSize);
+	    ELSE
+	        #statFound := False;
+	        #statSegmentIndex := (#statLimitedSize - 1) / 2;
+	        
+	        REPEAT
+	            #statInt1 := #statSegmentIndex;
+	            #statReal1 := #statXval[#statInt1 - 1];
+	            #statReal2 := #statXval[#statInt1];
+	            
+	            IF (#statReal1 = #statReal2) THEN
+	                #errorID := #UNIT_ID OR "LCON_ERROR_TABLE_ENTRIES_NOT_MONOTONIC";                                     // table-entries not monotonic 
+	                #statError := FALSE;
+	                #statEqualValues := True;
+	                #statFound := True;
+	            ELSE
+	                #statEqualValues := False;
+	                
+	                
+	                IF (#x < #statReal1) THEN                                                      //x in lower part
+	                    #statSegmentIndex := #statSegmentIndex - 1;
+	                    #statSegmentIndex := LIMIT(MN := 0, IN := #statSegmentIndex, MX := (#statLimitedSize - 1));
+	                    
+	                ELSIF (#x > #statReal2) THEN                                                    //x in upper part
+	                    #statSegmentIndex := #statSegmentIndex + 1;
+	                    #statSegmentIndex := LIMIT(MN := 0, IN := #statSegmentIndex, MX := (#statLimitedSize - 1));
+	                ELSE
+	                    #statFound := True;
+	                END_IF;
+	            END_IF;
+	        UNTIL #statSegmentIndex = 0 OR #statFound OR (#statSegmentIndex > (#statLimitedSize - 1))
+	        END_REPEAT;
+	    END_IF;
+	    
+	    IF NOT (#statFound) THEN
+	        #statError := False;
+	        #errorID := "LCON_WARNING_NO_VALUE_FOUND";
+	        #y := 0.0;
+	    ELSE
+	        #statInt1 := #statSegmentIndex;
+	        #statReal3 := #statYval[MAX(IN1 := 0, IN2 := #statInt1 - 1)];                //start #y *c_00004*
+	        #statReal4 := #statYval[#statInt1];                                      //end y
+	        
+	        IF #statEqualValues = True THEN
+	            #y := #statReal3;
+	            //END LIMIT VALUES         
+	        ELSIF (#statSegmentIndex <= 0) THEN
+	            #y := #statYval[0];
+	        ELSIF (#statSegmentIndex >= (#statLimitedSize)) THEN
+	            #y := #statYval[#statLimitedSize - 1];
+	        ELSE
+	            #y := (#x - #statReal1) * ((#statReal4 - #statReal3) / (#statReal2 - #statReal1)) + #statReal3;
+	            #statError := FALSE;
+	            #errorID := #UNIT_ID OR #NO_ERROR;
+	        END_IF;
+	        IF #sizeOfArray < 2 THEN
+	            #statError := TRUE;                                                 //No. of points less than 2
+	            #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	            RETURN;
+	        END_IF;
+	        IF #sizeOfArray > #MAX_SIZE_OF_ARRAY THEN
+	            #statError := True;                                                    // Statement section IF
+	            #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	            RETURN;
+	        END_IF;
+	    END_IF;
+	END_IF;
+	
+	// set outputs
+	#busy := #statBusy;
+	#error := #statError;
+	
+END_FUNCTION_BLOCK
+

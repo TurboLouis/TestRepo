@@ -1,0 +1,49 @@
+﻿FUNCTION "LConSMC_ScalingDWDRL" : Real
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      x : DWord;
+      maxValue : Real;
+      base : Real;
+   END_VAR
+
+   VAR_TEMP 
+      tmpTemp : Real;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#0006_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : ScalingDWDRL
+	//functionality : Converts and scales DWD to REAL
+	//assignment    : Any
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge              changes applied
+	//V1.0      26.07.2012    APC GMC group                 Creation
+	//V1.1      16.08.2013    APC ERLF                      Bugfix
+	//                                                      - replace function dword_to_real by convertion 
+	//                                                      dword_to_dint and dint_to_real
+	//V1.2      17.11.2016    APC ERL                       adapted to styleguide
+	//=========================================================================================================================
+	
+	#tmpTemp := DINT_TO_REAL(DWORD_TO_DINT(#x));                                   // Convert DWORD Value to REAL
+	
+	IF (#base = 0.0) THEN
+	  #LConSMC_ScalingDWDRL := 0.0;
+	  
+	ELSE                                                                      //for Non-Zero Base value
+	  #LConSMC_ScalingDWDRL := LIMIT(MN := -2.0 * #maxValue,
+	                                 IN := #tmpTemp / #base * #maxValue,
+	                                 MX := 2.0 * #maxValue);                             // Limit input value [ -2*max - 2*max] 
+	END_IF;
+	
+END_FUNCTION
+

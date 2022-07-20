@@ -1,0 +1,102 @@
+﻿FUNCTION_BLOCK "LConSMC_LevelControl"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      run : Bool := FALSE;
+      x : LReal := 0.0;
+      alarmHigh : LReal := 100.0;
+      warningHigh : LReal := 80.0;
+      warningLow : LReal := -80.0;
+      alarmLow : LReal := -100.0;
+      hyst : LReal := 0.0;
+      delayTime : Time := T#3S;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool := FALSE;
+      alarmUpperLimit : Bool;
+      alarmLowerLimit : Bool;
+      warningUpperLimit : Bool := FALSE;
+      warningLowerLimit : Bool := FALSE;
+   END_VAR
+
+   VAR 
+      statAlarmUpperLimitSafe : Bool := FALSE;
+      statWarningUpperLimitSafe : Bool := FALSE;
+      statWarningLowerLimitSafe : Bool := FALSE;
+      statAlarmLowerLimitSafe : Bool := FALSE;
+      instTONalUp {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      instTONwaUp {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      instTONwaLo {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      instTONalLo {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      statAlarmUpperLimit : Bool := FALSE;
+      statAlarmLowerLimit : Bool := FALSE;
+      statWarningUpperLimit : Bool := FALSE;
+      statWarningLowerLimit : Bool := FALSE;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#0104_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : LevelControl
+	//functionality : Limit value evaluation with warning level and alarm level
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge            changes applied
+	//V1.0      23.07.2012    APC G group                 Creation
+	//V1.1      17.11.2016    APC ERL                     adapted to styleguide; warning "variable might not be initialized" removed
+	//========================================================================================================================
+	
+	#busy := #run;
+	
+	// UPPER LIMIT ALARM EVALUATION
+	#statAlarmUpperLimitSafe := (#run) AND
+	((#x > #alarmHigh) OR
+	((#statAlarmUpperLimit) AND (#x > #alarmHigh - ABS(#hyst))));
+	#instTONalUp(IN := #statAlarmUpperLimitSafe,
+	             PT := #delayTime);
+	#statAlarmUpperLimit := #instTONalUp.Q;
+	
+	// UPPER LIMIT WARNING EVALUATION
+	#statWarningUpperLimitSafe := (#run) AND
+	((#x > #warningHigh) OR
+	((#statWarningUpperLimit) AND (#x > #warningHigh - ABS(#hyst))));
+	#instTONwaUp(IN := #statWarningUpperLimitSafe,
+	             PT := #delayTime);
+	#statWarningUpperLimit := #instTONwaUp.Q;
+	
+	
+	// LOWER LIMIT WARNING EVALUATION
+	#statWarningLowerLimitSafe := (#run) AND
+	((#x < #warningLow) OR
+	((#statWarningLowerLimit) AND (#x < #warningLow + ABS(#hyst))));
+	
+	#instTONwaLo(IN := #statWarningLowerLimitSafe,
+	             PT := #delayTime);
+	#statWarningLowerLimit := #instTONwaLo.Q;
+	
+	// LOWER LIMIT ALARM  EVALUATION
+	#statAlarmLowerLimitSafe := (#run) AND
+	((#x < #alarmLow) OR
+	((#statAlarmLowerLimit) AND (#x < #alarmLow + ABS(#hyst))));
+	
+	#instTONalLo(IN := #statAlarmLowerLimitSafe,
+	             PT := #delayTime);
+	#statAlarmLowerLimit := #instTONalLo.Q;
+	
+	// set outputs
+	#alarmUpperLimit := #statAlarmUpperLimit;
+	#alarmLowerLimit := #statAlarmLowerLimit;
+	#warningUpperLimit := #statWarningUpperLimit;
+	#warningLowerLimit := #statWarningLowerLimit;
+	
+END_FUNCTION_BLOCK
+

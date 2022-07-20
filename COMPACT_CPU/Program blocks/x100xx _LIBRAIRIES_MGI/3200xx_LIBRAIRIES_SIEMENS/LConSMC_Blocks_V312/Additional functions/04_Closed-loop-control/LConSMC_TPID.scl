@@ -1,0 +1,253 @@
+﻿FUNCTION_BLOCK "LConSMC_TPID"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool := FALSE;
+      openLoopCtrl : Bool := FALSE;
+      setpointValue : LReal := 0.0;
+      actualValue : LReal := 0.0;
+      preControl : LReal := 0.0;
+      adaptionValue : LReal := 0.0;
+      holdIntChannel : Bool := FALSE;
+      setIntChannel : Bool := FALSE;
+      x1 : LReal := 0.0;
+      Kp1 : LReal := 1.0;
+      x2 : LReal;
+      Kp2 : LReal := 1.0;
+      limRampTime : LReal := 1000.0;
+      setNominalValue : LReal := 100.0;
+      setRampTime : LReal := 1000.0;
+      integTime : LReal := 2000.0;
+      derivTime : LReal := 0.0;
+      filterTime : LReal := 10.0;
+      intSetValue : LReal := 0.0;
+      controlMode : Bool := FALSE;
+      deadBand : LReal := 0.0;
+      outValueFactor : LReal := 1.0;
+      upperLimit : LReal := 20.0;
+      lowerLimit : LReal := -20.0;
+      tCycle : Real;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool := FALSE;
+      error : Bool := FALSE;
+      errorId : DWord := 16#0000_0000;
+      upperLimReached : Bool := FALSE;
+      lowerLimReached : Bool := FALSE;
+      RFGLimReached : Bool := FALSE;
+      RFGSetpointReached : Bool := FALSE;
+      RFGSetpointValue : LReal := 0.0;
+      outValue : LReal;
+      effectiveKp : LReal;
+   END_VAR
+
+   VAR 
+      statEnableOld : Bool;
+      instRFGLim : "LConSMC_RFG";
+      instRFGSet : "LConSMC_RFG";
+      instPidController : "LConSMC_PID";
+      statEffSetPoint : LReal;
+      statEffLimit : LReal;
+      statLimRFGSetVal : LReal;
+      statOutValue : LReal := 0.0;
+      statEffectiveKp : LReal := 0.0;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#1108_0000;
+      NO_ERROR : DWord := 16#0000_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : TPID
+	//functionality : Technology controller
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge            changes applied
+	//V1.0      24.07.2012    APC GMC group               Creation
+	//V1.1      17.11.2016    APC ERL                     adapted to styleguide; warning "variable might not be initialized" removed
+	//========================================================================================================================
+	
+	#busy := (#enable) OR (#instPidController.outValue <> 0.0)
+	OR (#instRFGSet.y <> 0.0 AND #openLoopCtrl);
+	
+	IF #enable AND NOT #statEnableOld THEN                                     //Enable at rising edge
+	    #error := FALSE;
+	    #errorId := #NO_ERROR;
+	    #upperLimReached := FALSE;
+	    #lowerLimReached := FALSE;
+	    #RFGLimReached := FALSE;
+	    #RFGSetpointReached := FALSE;
+	END_IF;
+	IF (#busy) THEN
+	    
+	    // ERROR HANDLING
+	    IF (#setNominalValue <= 0.0)
+	    THEN
+	        #error := TRUE;
+	        #errorId := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	        RETURN;
+	    ELSE
+	        #error := FALSE;
+	        #errorId := #NO_ERROR;
+	    END_IF;
+	    
+	    // MAP ERROR FROM FBPIDController
+	    #error := #instPidController.error;
+	    IF (#instPidController.errorID <> #NO_ERROR) THEN
+	        #errorId := #UNIT_ID OR DWORD_TO_WORD(#instPidController.errorID);
+	    END_IF;
+	    IF (#error) THEN
+	        RETURN;
+	    END_IF;
+	    
+	    
+	    IF (#x1 = #x2) THEN                                                       // No Adaption, Kp1 active
+	        #statEffectiveKp := #Kp1;
+	    ELSE
+	        #statEffectiveKp := "LConSMC_Linear"(x := #adaptionValue,
+	                                             x1 := #x1,
+	                                             y1 := #Kp1,
+	                                             x2 := #x2,
+	                                             y2 := #Kp2);
+	    END_IF;
+	    IF #enable THEN
+	        #statEffSetPoint := #setpointValue;                                      // Follow setpoint if enabled
+	        #statEffLimit := 1.0;
+	    ELSE
+	        #statEffSetPoint := #actualValue;                                        // Switch to actual
+	        #statEffLimit := 0.0;
+	    END_IF;
+	    
+	    // RFG SETPOINT
+	    #instRFGSet(x := #statEffSetPoint,
+	                nominalValue := #setNominalValue,
+	                upperLimit := +3.402822E+38,
+	                lowerLimit := -3.402822E+38,
+	                setValue := #actualValue,                                     //TO PROVIDE JERK-FREE START OF CONTROLLER
+	                rampupTime := #setRampTime,
+	                rampdownTime := #setRampTime,
+	                set := #enable AND NOT #statEnableOld,                            //TO PROVIDE JERK-FREE START OF CONTROLLER
+	                followup := TRUE,                                             // FOLLOW SETPOINT MODE
+	                increase := FALSE,
+	                decrease := FALSE,
+	                tCycle := #tCycle);
+	    
+	    #RFGSetpointValue := #instRFGSet.y;
+	    #RFGSetpointReached := #instRFGSet.SetpointReached;
+	    
+	    IF NOT (#openLoopCtrl) THEN
+	        IF NOT #enable AND #statEnableOld THEN
+	            IF #statOutValue < 0.0 THEN
+	                #statLimRFGSetVal := ABS(#statOutValue / #lowerLimit);
+	            ELSIF #statOutValue > 0.0 THEN
+	                #statLimRFGSetVal := ABS(#statOutValue / #upperLimit);
+	            ELSE
+	                #statLimRFGSetVal := 0.0;
+	            END_IF;
+	        ELSE
+	            #statLimRFGSetVal := 0.0;
+	        END_IF;
+	        
+	        // RFG LIMIT
+	        #instRFGLim(x := #statEffLimit,
+	                    nominalValue := 1.0,
+	                    upperLimit := 1.0,
+	                    lowerLimit := 0.0,
+	                    setValue := #statLimRFGSetVal,
+	                    rampupTime := #limRampTime,
+	                    rampdownTime := #limRampTime,
+	                    set := #enable XOR #statEnableOld,
+	                    followup := TRUE,
+	                    increase := FALSE,
+	                    decrease := FALSE,
+	                    tCycle := #tCycle);
+	        
+	        
+	        
+	        //PID
+	        
+	        #instPidController(enable := #busy,
+	                           reset := #enable AND NOT #statEnableOld,
+	                           setpointValue := #instRFGSet.y,
+	                           actualValue := #actualValue,
+	                           preControl := #preControl,
+	                           propGain := #statEffectiveKp,
+	                           integTime := #integTime,
+	                           derivTime := #derivTime,
+	                           filterTime := #filterTime,
+	                           upperLimit := #instRFGLim.y * #upperLimit,
+	                           lowerLimit := #instRFGLim.y * #lowerLimit,
+	                           intSetValue := #intSetValue,
+	                           holdIntChannel := #holdIntChannel,
+	                           setIntChannel := #setIntChannel,
+	                           controlMode := #controlMode,
+	                           deadBand := #deadBand,
+	                           actualValueFactor := 1.0,
+	                           actualValueOffset := 0.0,
+	                           outValueFactor := #outValueFactor,
+	                           outValueOffset := 0.0,
+	                           tCycle := #tCycle);
+	        
+	        #upperLimReached := #instPidController.upperLimitReached;
+	        #lowerLimReached := #instPidController.lowerLimitReached;
+	        #RFGLimReached := #instRFGLim.SetpointReached;
+	        #statOutValue := #instPidController.outValue;
+	    ELSE // in open loop mode only setpoint RFG is used
+	        #upperLimReached := FALSE;
+	        #lowerLimReached := FALSE;
+	        #RFGLimReached := FALSE;
+	        #statOutValue := 0.0;
+	    END_IF;
+	ELSE   //busy IS FALSE
+	    #error := FALSE;
+	    #errorId := #NO_ERROR;
+	    #upperLimReached := FALSE;
+	    #lowerLimReached := FALSE;
+	    #RFGLimReached := FALSE;
+	    #RFGSetpointReached := FALSE;
+	    #RFGSetpointValue := 0.0;
+	    #statOutValue := 0.0;
+	    
+	    #instPidController(enable := TRUE,
+	                       reset := TRUE,
+	                       setpointValue := #instRFGSet.y,
+	                       actualValue := #actualValue,
+	                       preControl := #preControl,
+	                       propGain := #statEffectiveKp,
+	                       integTime := #integTime,
+	                       derivTime := #derivTime,
+	                       filterTime := #filterTime,
+	                       upperLimit := #instRFGLim.y * #upperLimit,
+	                       lowerLimit := #instRFGLim.y * #lowerLimit,
+	                       intSetValue := #intSetValue,
+	                       holdIntChannel := #holdIntChannel,
+	                       setIntChannel := #setIntChannel,
+	                       controlMode := #controlMode,
+	                       deadBand := #deadBand,
+	                       actualValueFactor := 1.0,
+	                       actualValueOffset := 0.0,
+	                       outValueFactor := #outValueFactor,
+	                       outValueOffset := 0.0,
+	                       tCycle := #tCycle);
+	    
+	END_IF;
+	
+	// set outputs
+	#outValue := #statOutValue;
+	#effectiveKp := #statEffectiveKp;
+	
+	
+	#statEnableOld := #enable;
+	
+	
+	
+END_FUNCTION_BLOCK
+

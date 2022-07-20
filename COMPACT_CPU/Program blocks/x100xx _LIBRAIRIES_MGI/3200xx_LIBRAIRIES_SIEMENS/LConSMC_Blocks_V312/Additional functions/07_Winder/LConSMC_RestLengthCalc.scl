@@ -1,0 +1,38 @@
+﻿FUNCTION "LConSMC_RestLengthCalc" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      webThickness : LReal;
+      actualDiameter : LReal;
+      targetDiameter : LReal;
+      offset : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#4001_0000;
+      Pi : LReal := 3.141592;
+      MIN_THICKNESS : LReal := 1.0E-06;
+      MAX_THICKNESS : LReal := 1000000000.0;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : RestLengthCalc
+	//functionality : Rest length calculation
+	//assignment    : Any
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge              changes applied
+	//V1.0      10.07.2012    APC GMC group                 Creation
+	//=========================================================================================================================
+	
+	#LConSMC_RestLengthCalc := ABS(#Pi * (#targetDiameter * #targetDiameter - #actualDiameter * #actualDiameter)) /
+	(4.0 * LIMIT(MN := #MIN_THICKNESS, IN := ABS(#webThickness), MX := #MAX_THICKNESS))
+	+ #offset;
+	
+END_FUNCTION
+

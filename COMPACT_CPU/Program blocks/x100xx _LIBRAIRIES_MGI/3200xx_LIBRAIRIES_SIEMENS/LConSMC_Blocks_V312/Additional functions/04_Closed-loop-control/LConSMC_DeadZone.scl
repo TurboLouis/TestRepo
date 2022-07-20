@@ -1,0 +1,41 @@
+﻿FUNCTION "LConSMC_DeadZone" : Real
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      x : Real;
+      zoneborder : Real;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#0003_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : DeadZone
+	//functionality : 
+	//assignment    : Any
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date            expert in charge              changes applied
+	//V1.0      27.07.2012      APC GMC group                 Creation
+	//=========================================================================================================================
+	
+	
+	#LConSMC_DeadZone := 0.0;
+	IF (#x > (ABS(#zoneborder) * -1)) THEN                                        // Check lower border   
+	    IF (#x < ABS(#zoneborder)) THEN                                           // Check higher border
+	        #LConSMC_DeadZone := 0.0;                                                      //For x inside deadzone
+	    ELSE
+	        #LConSMC_DeadZone := #x;
+	    END_IF;
+	ELSE
+	    #LConSMC_DeadZone := #x;
+	END_IF;
+	
+END_FUNCTION
+

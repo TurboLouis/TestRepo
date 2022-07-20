@@ -1,0 +1,24 @@
+﻿FUNCTION "LAxisCtrl_UnpubAxisDynamicDefaultJerk" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis : DB_ANY;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	CASE TypeOfDB(#axis) OF
+	  TO_PositioningAxis:
+	    #LAxisCtrl_UnpubAxisDynamicDefaultJerk := "LAxisCtrl_UnpubDynamicDefaultJerkPosAxis"(#axis);
+	    
+	  TO_SynchronousAxis:
+	    #LAxisCtrl_UnpubAxisDynamicDefaultJerk := "LAxisCtrl_UnpubDynamicDefaultJerkSyncAxis"(#axis);
+	    
+	  ELSE
+	    #LAxisCtrl_UnpubAxisDynamicDefaultJerk := 0.0; // No Jerk
+	END_CASE;
+END_FUNCTION
+

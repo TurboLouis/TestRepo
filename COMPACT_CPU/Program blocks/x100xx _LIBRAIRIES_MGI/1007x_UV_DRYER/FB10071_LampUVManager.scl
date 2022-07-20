@@ -1,0 +1,166 @@
+﻿FUNCTION_BLOCK "FB10071_LampUVManager"
+TITLE = FB10071_LampUVManager
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : Jonathan
+FAMILY : '1007x_DRYER_UV'
+VERSION : 1.0
+//Release note : 
+//1.0 - Feature developped
+   VAR_INPUT 
+      SafetyConditionsOK : Bool;
+      PowerOnModule : Bool;
+      StandbyLampUV : Bool;
+      RequestLampUVActivation : Bool;
+      PowerValueSetpoint : Real;
+      LampUVReady : Bool;
+      LampUVWarning : Bool;
+      LampUVError : Bool;
+      LampUVFeedbackTensionOrErrorCodeAnalog : Int;
+      Reset : Bool;
+      ShutterClosed : Bool;
+      ShutterOpened : Bool;
+      ShutterInitialised : Bool;
+   END_VAR
+
+   VAR_OUTPUT 
+      ActivePowerRelayLampUV : Bool;
+      AnalogPowerValue : Int;
+      EnableLampUV : Bool;
+      LampUVErrorCode : Int;
+      LampUVFeedbackTensionVolts : Real;
+      LampUVFeedbackTensionPrctg : Real;
+   END_VAR
+
+   VAR_IN_OUT 
+      RequestOpenShutter : Bool;
+      RequestCloseShutter : Bool;
+      RequestInitialiseShutter : Bool;
+   END_VAR
+
+   VAR 
+      CurrentState : Int;
+      LocalPowerUVValue : Real;
+      FB1073_LampUVErrorManager_Instance : "FB10073_LampUVErrorManager";
+   END_VAR
+
+
+BEGIN
+	// Error code manager
+	#FB1073_LampUVErrorManager_Instance(ReadySignal:=#LampUVReady,
+	                                    WarningSignal:=#LampUVWarning,
+	                                    ErrorSignal:=#LampUVError,
+	                                    ErrorCodeAnalog:=#LampUVFeedbackTensionOrErrorCodeAnalog,
+	                                    ErrorCode=>#LampUVErrorCode);
+	
+	
+	// Reset Current State to 0
+	IF #Reset THEN
+	    #CurrentState := 0;
+	    #RequestInitialiseShutter := FALSE;
+	    #RequestOpenShutter := FALSE;
+	    #RequestCloseShutter := FALSE;
+	    #EnableLampUV := FALSE; 
+	END_IF;
+	
+	// Power Relay activation
+	IF #SafetyConditionsOK AND #PowerOnModule THEN
+	    #ActivePowerRelayLampUV := TRUE;
+	ELSE
+	    #ActivePowerRelayLampUV := FALSE;
+	    // Reset power
+	    #EnableLampUV := FALSE;
+	    #LocalPowerUVValue := 0.0;
+	END_IF;
+	
+	// Start Lamp and shutter conditions
+	IF #CurrentState = 0 AND #PowerOnModule AND #RequestLampUVActivation AND #SafetyConditionsOK AND NOT #LampUVError THEN
+	    #CurrentState := 1;
+	ELSIF (NOT #SafetyConditionsOK OR #LampUVError) THEN
+	    #CurrentState := 20;
+	    #LocalPowerUVValue := 0.0;
+	END_IF;
+	
+	
+	CASE #CurrentState OF
+	        
+	    1 :
+	        REGION 1 - Initialise shutter     
+	            
+	            // Reset power
+	            //#EnableLampUV := FALSE;
+	            #LocalPowerUVValue := 0.0;
+	            
+	            IF NOT #ShutterInitialised THEN
+	                #RequestInitialiseShutter := TRUE;
+	            ELSE
+	                #RequestInitialiseShutter := FALSE;
+	                #CurrentState := 10;
+	            END_IF;
+	        END_REGION
+	        
+	    10 :
+	        REGION 10 - Open Shutter
+	            IF NOT #ShutterOpened THEN
+	                #RequestOpenShutter := TRUE;
+	            ELSE
+	                #RequestOpenShutter := FALSE;
+	                #CurrentState := 11;
+	            END_IF;
+	        END_REGION
+	        
+	    11 : 
+	        REGION 11 - Force Setpoint value
+	            IF #RequestLampUVActivation THEN
+	                #EnableLampUV := TRUE;
+	                #LocalPowerUVValue := #PowerValueSetpoint;
+	            ELSE
+	                #CurrentState := 20;
+	            END_IF;
+	        END_REGION
+	        
+	    20 :
+	        REGION 20 - Close Shutter 
+	            IF NOT #ShutterClosed THEN
+	                // Reset power
+	                IF NOT #StandbyLampUV THEN
+	                    #EnableLampUV := FALSE;
+	                END_IF;
+	                
+	                #LocalPowerUVValue := 0.0;
+	                #RequestCloseShutter := TRUE;
+	            ELSE
+	                #RequestCloseShutter := FALSE;
+	                #CurrentState := 0;
+	            END_IF;
+	        END_REGION
+	        
+	        
+	    ELSE
+	        // Reset power
+	        // If not in standby
+	        IF NOT #StandbyLampUV THEN
+	            #EnableLampUV := FALSE;
+	        ELSE
+	            #EnableLampUV := TRUE;
+	        END_IF;
+	        #LocalPowerUVValue := 0.0;
+	        
+	END_CASE;
+	
+	// Scaling UV Analog output value
+	"FC10010_ScalingPercentageToAnalog"(SetPoint:=#LocalPowerUVValue,
+	                                   AnalogValue=>#AnalogPowerValue);
+	
+	// Force 0 value if shutter closed
+	IF #ShutterClosed OR NOT #RequestLampUVActivation THEN
+	    // Reset power
+	    #LocalPowerUVValue := 0.0;
+	END_IF;
+	
+	// Feedback scaling
+	#LampUVFeedbackTensionPrctg := INT_TO_REAL(#LampUVFeedbackTensionOrErrorCodeAnalog) / 276.48;
+	#LampUVFeedbackTensionVolts := #LampUVFeedbackTensionPrctg * 10.0;
+	
+	
+END_FUNCTION_BLOCK
+

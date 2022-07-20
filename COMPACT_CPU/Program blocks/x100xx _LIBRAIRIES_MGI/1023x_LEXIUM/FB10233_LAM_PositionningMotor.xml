@@ -1,0 +1,3072 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T07:01:26.0319135Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor />
+      <HeaderFamily />
+      <HeaderName />
+      <HeaderVersion>0.1</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="DriveInLexium" Datatype="&quot;TLexium_MDrv_Drv2Plc&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="A" Datatype="DWord" /><Member Name="D" Datatype="DWord" /><Member Name="TS" Datatype="DWord" /><Member Name="VI" Datatype="DWord" /><Member Name="VM" Datatype="DWord" /><Member Name="C1" Datatype="DInt" /><Member Name="C2" Datatype="DInt" /><Member Name="LL" Datatype="DInt" /><Member Name="V" Datatype="DInt" /><Member Name="PC" Datatype="DInt" /><Member Name="MS" Datatype="DInt" /><Member Name="P" Datatype="DInt" /><Member Name="AO" Datatype="DInt" /><Member Name="AF" Datatype="UInt" /><Member Name="ER" Datatype="UInt" /><Member Name="RD" Datatype="UInt" /><Member Name="AS" Datatype="SInt" /><Member Name="HC" Datatype="SInt" /><Member Name="IN" Datatype="SInt" /><Member Name="RC" Datatype="SInt" /><Member Name="TQ" Datatype="SInt" /><Member Name="OF" Datatype="SInt" /><Member Name="TE" Datatype="SInt" /><Member Name="DE" Datatype="SInt" /><Member Name="EE" Datatype="SInt" /><Member Name="TD" Datatype="SInt" /><Member Name="MV" Datatype="SInt" /><Member Name="MP" Datatype="SInt" /><Member Name="VC" Datatype="SInt" /><Member Name="ST" Datatype="SInt" /><Member Name="LR" Datatype="SInt" /><Member Name="IT_01" Datatype="Byte" /><Member Name="IT_02" Datatype="Byte" /><Member Name="IT_03" Datatype="Byte" /><Member Name="IT_04" Datatype="Byte" /><Member Name="IT_05" Datatype="Byte" /><Member Name="IT_06" Datatype="Byte" /><Member Name="IT_07" Datatype="Byte" /><Member Name="IT_08" Datatype="Byte" /><Member Name="IT_09" Datatype="Byte" /><Member Name="IT_10" Datatype="Byte" /><Member Name="IT_11" Datatype="Byte" /><Member Name="IT_12" Datatype="Byte" /><Member Name="IT_13" Datatype="Byte" /><Member Name="IT_14" Datatype="Byte" /><Member Name="IT_15" Datatype="Byte" /><Member Name="IT_16" Datatype="Byte" /><Member Name="MU_01" Datatype="Byte" /><Member Name="MU_02" Datatype="Byte" /><Member Name="MU_03" Datatype="Byte" /><Member Name="MU_04" Datatype="Byte" /><Member Name="MU_05" Datatype="Byte" /><Member Name="MU_06" Datatype="Byte" /><Member Name="MU_07" Datatype="Byte" /><Member Name="MU_08" Datatype="Byte" /><Member Name="MU_09" Datatype="Byte" /><Member Name="MU_10" Datatype="Byte" /><Member Name="MU_11" Datatype="Byte" /><Member Name="MU_12" Datatype="Byte" /><Member Name="MU_13" Datatype="Byte" /><Member Name="MU_14" Datatype="Byte" /><Member Name="MU_15" Datatype="Byte" /><Member Name="MU_16" Datatype="Byte" /><Member Name="SN_01" Datatype="Byte" /><Member Name="SN_2" Datatype="Byte" /><Member Name="SN_3" Datatype="Byte" /><Member Name="SN_4" Datatype="Byte" /><Member Name="SN_5" Datatype="Byte" /><Member Name="SN_6" Datatype="Byte" /><Member Name="SN_7" Datatype="Byte" /><Member Name="SN_8" Datatype="Byte" /><Member Name="SN_9" Datatype="Byte" /><Member Name="SN_10" Datatype="Byte" /><Member Name="SN_11" Datatype="Byte" /><Member Name="SN_12" Datatype="Byte" /><Member Name="SN_13" Datatype="Byte" /><Member Name="SN_14" Datatype="Byte" /><Member Name="SN_15" Datatype="Byte" /><Member Name="SN_16" Datatype="Byte" /><Member Name="SN_17" Datatype="Byte" /><Member Name="SN_18" Datatype="Byte" /><Member Name="SN_19" Datatype="Byte" /><Member Name="SN_20" Datatype="Byte" /><Member Name="SN_21" Datatype="Byte" /><Member Name="SN_22" Datatype="Byte" /><Member Name="SN_23" Datatype="Byte" /></Section></Sections></Member>
+    <Member Name="HomingSensor" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="MmByMotorTurn" Datatype="LReal" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="HoldCurrent" Datatype="SInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RunCurrent" Datatype="SInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="HomingSpeedMmBySec" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="SpeedMmBySec" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="AccelerationMmBySec2" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="DecelerationMmBySec2" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="JogSpeedMmBySec" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="OriginPosition" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="StandByPosition" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="WorkingPosition" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="ActualPosition" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="HomingInProgress" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="HomingDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="InOriginPosition" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="IsInStandByPosition" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="InWorkingPosition" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="MotorInError" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ErrorCode" Datatype="Array[0..9] of UInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="InOut">
+    <Member Name="DriveOutLexium" Datatype="&quot;TLexium_MDrv_Plc2Drv&quot;" Accessibility="Public">
+      <Sections>
+        <Section Name="None">
+          <Member Name="A" Datatype="DWord" />
+          <Member Name="D" Datatype="DWord" />
+          <Member Name="TS" Datatype="DWord" />
+          <Member Name="VI" Datatype="DWord" />
+          <Member Name="VM" Datatype="DWord" />
+          <Member Name="C1" Datatype="DInt" />
+          <Member Name="C2" Datatype="DInt" />
+          <Member Name="HT" Datatype="DInt" />
+          <Member Name="MA" Datatype="DInt" />
+          <Member Name="MR" Datatype="DInt" />
+          <Member Name="SL" Datatype="DInt" />
+          <Member Name="P" Datatype="DInt" />
+          <Member Name="MT" Datatype="DInt" />
+          <Member Name="MS" Datatype="UInt" />
+          <Member Name="ER" Datatype="UInt" />
+          <Member Name="RD" Datatype="UInt" />
+          <Member Name="AS" Datatype="SInt" />
+          <Member Name="HC" Datatype="SInt" />
+          <Member Name="OT" Datatype="SInt" />
+          <Member Name="RC" Datatype="SInt" />
+          <Member Name="TQ" Datatype="SInt" />
+          <Member Name="HM" Datatype="SInt" />
+          <Member Name="HI" Datatype="SInt" />
+          <Member Name="DE" Datatype="SInt" />
+          <Member Name="EE" Datatype="SInt" />
+          <Member Name="TD" Datatype="SInt" />
+          <Member Name="Escape" Datatype="SInt" />
+          <Member Name="CF" Datatype="SInt" />
+          <Member Name="Toggle_Reg9" Datatype="SInt" />
+          <Member Name="Toggle_Reg10" Datatype="SInt" />
+          <Member Name="Toggle_Reg11" Datatype="SInt" />
+          <Member Name="OS_01" Datatype="Byte" />
+          <Member Name="OS_02" Datatype="Byte" />
+          <Member Name="OS_03" Datatype="Byte" />
+          <Member Name="OS_04" Datatype="Byte" />
+          <Member Name="OS_05" Datatype="Byte" />
+          <Member Name="OS_06" Datatype="Byte" />
+          <Member Name="OS_07" Datatype="Byte" />
+          <Member Name="OS_08" Datatype="Byte" />
+          <Member Name="OS_09" Datatype="Byte" />
+          <Member Name="OS_10" Datatype="Byte" />
+          <Member Name="OS_11" Datatype="Byte" />
+          <Member Name="OS_12" Datatype="Byte" />
+          <Member Name="OS_13" Datatype="Byte" />
+          <Member Name="OS_14" Datatype="Byte" />
+          <Member Name="OS_15" Datatype="Byte" />
+          <Member Name="OS_16" Datatype="Byte" />
+          <Member Name="MU_01" Datatype="Byte" />
+          <Member Name="MU_02" Datatype="Byte" />
+          <Member Name="MU_03" Datatype="Byte" />
+          <Member Name="MU_04" Datatype="Byte" />
+          <Member Name="MU_05" Datatype="Byte" />
+          <Member Name="MU_06" Datatype="Byte" />
+          <Member Name="MU_07" Datatype="Byte" />
+          <Member Name="MU_08" Datatype="Byte" />
+          <Member Name="MU_09" Datatype="Byte" />
+          <Member Name="MU_10" Datatype="Byte" />
+          <Member Name="MU_11" Datatype="Byte" />
+          <Member Name="MU_12" Datatype="Byte" />
+          <Member Name="MU_13" Datatype="Byte" />
+          <Member Name="MU_14" Datatype="Byte" />
+          <Member Name="MU_15" Datatype="Byte" />
+          <Member Name="MU_16" Datatype="Byte" />
+          <Member Name="Toggle_reg_1" Datatype="Bool" />
+          <Member Name="Toggle_reg_2" Datatype="Bool" />
+          <Member Name="Toggle_reg_3" Datatype="Bool" />
+          <Member Name="Toggle_reg_4" Datatype="Bool" />
+          <Member Name="Toggle_reg_5" Datatype="Bool" />
+          <Member Name="Toggle_reg_6" Datatype="Bool" />
+          <Member Name="Toggle_reg_7" Datatype="Bool" />
+          <Member Name="Toggle_reg_8" Datatype="Bool" />
+          <Member Name="Toggle_reg_9" Datatype="Bool" />
+          <Member Name="Toggle_reg_10" Datatype="Bool" />
+          <Member Name="Toggle_reg_11" Datatype="Bool" />
+          <Member Name="Toggle_reg_12" Datatype="Bool" />
+          <Member Name="Toggle_reg_13" Datatype="Bool" />
+          <Member Name="Toggle_reg_14" Datatype="Bool" />
+          <Member Name="Toggle_reg_15" Datatype="Bool" />
+          <Member Name="Toggle_reg_16" Datatype="Bool" />
+          <Member Name="Toggle_reg_17" Datatype="Bool" />
+          <Member Name="Toggle_reg_18" Datatype="Bool" />
+          <Member Name="Toggle_reg_19" Datatype="Bool" />
+          <Member Name="Toggle_reg_20" Datatype="Bool" />
+          <Member Name="Toggle_reg_21" Datatype="Bool" />
+          <Member Name="Toggle_reg_22" Datatype="Bool" />
+          <Member Name="Toggle_reg_23" Datatype="Bool" />
+          <Member Name="Toggle_reg_24" Datatype="Bool" />
+          <Member Name="Toggle_reg_25" Datatype="Bool" />
+          <Member Name="Toggle_reg_26" Datatype="Bool" />
+          <Member Name="Toggle_reg_27" Datatype="Bool" />
+          <Member Name="Toggle_reg_28" Datatype="Bool" />
+          <Member Name="Toggle_reg_32" Datatype="Bool" />
+          <Member Name="Toggle_reg_33" Datatype="Bool" />
+          <Member Name="Toggle_reg_38" Datatype="Bool" />
+          <Member Name="Toggle_reg_unused" Datatype="Bool" />
+          <Member Name="IS_01" Datatype="Byte" />
+          <Member Name="IS_02" Datatype="Byte" />
+          <Member Name="IS_03" Datatype="Byte" />
+          <Member Name="IS_04" Datatype="Byte" />
+          <Member Name="IS_05" Datatype="Byte" />
+          <Member Name="IS_06" Datatype="Byte" />
+          <Member Name="IS_07" Datatype="Byte" />
+          <Member Name="IS_08" Datatype="Byte" />
+          <Member Name="IS_09" Datatype="Byte" />
+          <Member Name="IS_10" Datatype="Byte" />
+          <Member Name="IS_11" Datatype="Byte" />
+          <Member Name="IS_12" Datatype="Byte" />
+          <Member Name="IS_13" Datatype="Byte" />
+          <Member Name="IS_14" Datatype="Byte" />
+          <Member Name="IS_15" Datatype="Byte" />
+          <Member Name="IS_16" Datatype="Byte" />
+          <Member Name="IS_17" Datatype="Byte" />
+          <Member Name="IS_18" Datatype="Byte" />
+          <Member Name="IS_19" Datatype="Byte" />
+        </Section>
+      </Sections>
+    </Member>
+    <Member Name="RequestAcknowledge" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RequestHoming" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RequestGoToOriginPosition" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RequestGoToStandByPosition" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RequestGoToWorkingPosition" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RequestStop" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Static">
+    <Member Name="Motor_Struct" Datatype="Struct" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Member Name="In" Datatype="Struct"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Member Name="EnableMotor" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="MmByTurn" Datatype="LReal"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="HomingVelocity_mm.s-1" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Velocity_mm.s-1" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Acceleration_mm.s-2" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Deceleration_mm.s-2" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="JogVelocity_mm.s-1" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="RequestHoming" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="RequestGoToPosition_1" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Position_1" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="RequestGoToPosition_2" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Position_2" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="RequestGoToPosition_3" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Position_3" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="RequestGoToPosition_4" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Position_4" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="RequestGoToPosition_5" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Position_5" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="RequestJogPositive" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="RequestJogNegative" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Ack" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="RequestStop" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member></Member><Member Name="Out" Datatype="Struct"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Member Name="ActualPosition_mm" Datatype="Real"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="MotorEnabled" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="HomingInProgress" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="HomingDone" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="IsInPosition_1" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="IsInPosition_2" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="IsInPosition_3" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="IsInPosition_4" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="IsInPosition_5" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="InError" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="ErrorCode" Datatype="Array[0..9] of UInt"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member></Member></Member>
+    <Member Name="SendRequestAfterEnableOk" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="SendNewRequestOk" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="MotorMovementManagementStateDiagram" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="R_TRIG_HomingSensor" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_RequestHoming" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_RequestGoToOriginPosition" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_RequestGoToRecoveryPosition" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_RequestGoToWorkingPosition" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_HomingDone" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TON_Motor_SendRequestAfterEnabled" Datatype="TON_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TON_Motor_SendNewRequest" Datatype="TON_TIME" Version="1.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="FB10234_LexiumMotor_Instance" Datatype="&quot;FB10234_LexiumMotor&quot;" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="Drive_In" Datatype="&quot;TLexium_MDrv_Drv2Plc&quot;"><Sections><Section Name="None"><Member Name="A" Datatype="DWord" /><Member Name="D" Datatype="DWord" /><Member Name="TS" Datatype="DWord" /><Member Name="VI" Datatype="DWord" /><Member Name="VM" Datatype="DWord" /><Member Name="C1" Datatype="DInt" /><Member Name="C2" Datatype="DInt" /><Member Name="LL" Datatype="DInt" /><Member Name="V" Datatype="DInt" /><Member Name="PC" Datatype="DInt" /><Member Name="MS" Datatype="DInt" /><Member Name="P" Datatype="DInt" /><Member Name="AO" Datatype="DInt" /><Member Name="AF" Datatype="UInt" /><Member Name="ER" Datatype="UInt" /><Member Name="RD" Datatype="UInt" /><Member Name="AS" Datatype="SInt" /><Member Name="HC" Datatype="SInt" /><Member Name="IN" Datatype="SInt" /><Member Name="RC" Datatype="SInt" /><Member Name="TQ" Datatype="SInt" /><Member Name="OF" Datatype="SInt" /><Member Name="TE" Datatype="SInt" /><Member Name="DE" Datatype="SInt" /><Member Name="EE" Datatype="SInt" /><Member Name="TD" Datatype="SInt" /><Member Name="MV" Datatype="SInt" /><Member Name="MP" Datatype="SInt" /><Member Name="VC" Datatype="SInt" /><Member Name="ST" Datatype="SInt" /><Member Name="LR" Datatype="SInt" /><Member Name="IT_01" Datatype="Byte" /><Member Name="IT_02" Datatype="Byte" /><Member Name="IT_03" Datatype="Byte" /><Member Name="IT_04" Datatype="Byte" /><Member Name="IT_05" Datatype="Byte" /><Member Name="IT_06" Datatype="Byte" /><Member Name="IT_07" Datatype="Byte" /><Member Name="IT_08" Datatype="Byte" /><Member Name="IT_09" Datatype="Byte" /><Member Name="IT_10" Datatype="Byte" /><Member Name="IT_11" Datatype="Byte" /><Member Name="IT_12" Datatype="Byte" /><Member Name="IT_13" Datatype="Byte" /><Member Name="IT_14" Datatype="Byte" /><Member Name="IT_15" Datatype="Byte" /><Member Name="IT_16" Datatype="Byte" /><Member Name="MU_01" Datatype="Byte" /><Member Name="MU_02" Datatype="Byte" /><Member Name="MU_03" Datatype="Byte" /><Member Name="MU_04" Datatype="Byte" /><Member Name="MU_05" Datatype="Byte" /><Member Name="MU_06" Datatype="Byte" /><Member Name="MU_07" Datatype="Byte" /><Member Name="MU_08" Datatype="Byte" /><Member Name="MU_09" Datatype="Byte" /><Member Name="MU_10" Datatype="Byte" /><Member Name="MU_11" Datatype="Byte" /><Member Name="MU_12" Datatype="Byte" /><Member Name="MU_13" Datatype="Byte" /><Member Name="MU_14" Datatype="Byte" /><Member Name="MU_15" Datatype="Byte" /><Member Name="MU_16" Datatype="Byte" /><Member Name="SN_01" Datatype="Byte" /><Member Name="SN_2" Datatype="Byte" /><Member Name="SN_3" Datatype="Byte" /><Member Name="SN_4" Datatype="Byte" /><Member Name="SN_5" Datatype="Byte" /><Member Name="SN_6" Datatype="Byte" /><Member Name="SN_7" Datatype="Byte" /><Member Name="SN_8" Datatype="Byte" /><Member Name="SN_9" Datatype="Byte" /><Member Name="SN_10" Datatype="Byte" /><Member Name="SN_11" Datatype="Byte" /><Member Name="SN_12" Datatype="Byte" /><Member Name="SN_13" Datatype="Byte" /><Member Name="SN_14" Datatype="Byte" /><Member Name="SN_15" Datatype="Byte" /><Member Name="SN_16" Datatype="Byte" /><Member Name="SN_17" Datatype="Byte" /><Member Name="SN_18" Datatype="Byte" /><Member Name="SN_19" Datatype="Byte" /><Member Name="SN_20" Datatype="Byte" /><Member Name="SN_21" Datatype="Byte" /><Member Name="SN_22" Datatype="Byte" /><Member Name="SN_23" Datatype="Byte" /></Section></Sections></Member><Member Name="RequestAcknowledge" Datatype="Bool" /><Member Name="RequestHoming" Datatype="Bool" /><Member Name="ScaleInverted" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_1" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_2" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_3" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_4" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_5" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_6" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_7" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_8" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_9" Datatype="Bool" /><Member Name="RequestGoToAbsolutePosition_10" Datatype="Bool" /><Member Name="RequestGoToRelativePosition" Datatype="Bool" /><Member Name="RequestJogBackward" Datatype="Bool" /><Member Name="RequestJogForward" Datatype="Bool" /><Member Name="RequestStop" Datatype="Bool" /><Member Name="AbsolutePosition_1" Datatype="Real" /><Member Name="AbsolutePosition_2" Datatype="Real" /><Member Name="AbsolutePosition_3" Datatype="Real" /><Member Name="AbsolutePosition_4" Datatype="Real" /><Member Name="AbsolutePosition_5" Datatype="Real" /><Member Name="AbsolutePosition_6" Datatype="Real" /><Member Name="AbsolutePosition_7" Datatype="Real" /><Member Name="AbsolutePosition_8" Datatype="Real" /><Member Name="AbsolutePosition_9" Datatype="Real" /><Member Name="AbsolutePosition_10" Datatype="Real" /><Member Name="HoldCurrent" Datatype="SInt" /><Member Name="RunCurrent" Datatype="SInt" /><Member Name="StepResolution" Datatype="UInt" /><Member Name="StepsByMotorTurn" Datatype="DInt" /><Member Name="MmByMotorTurn" Datatype="LReal" /><Member Name="InitialVelocity_mm.s-1" Datatype="Real" /><Member Name="HomingVelocity_mm.s-1" Datatype="DInt" /><Member Name="Velocity_mm.s-1" Datatype="Real" /><Member Name="JogVelocity_mm.s-1" Datatype="Real" /><Member Name="Acceleration_mm.s-2" Datatype="Real" /><Member Name="Deceleration_mm.s-2" Datatype="Real" /></Section><Section Name="Output"><Member Name="ActualPosition_mm" Datatype="Real" /><Member Name="MotorInMovement" Datatype="Bool" /><Member Name="HomingInProgress" Datatype="Bool" /><Member Name="HomingDone" Datatype="Bool" /><Member Name="IsInAbsolutePosition_1" Datatype="Bool" /><Member Name="IsInAbsolutePosition_2" Datatype="Bool" /><Member Name="IsInAbsolutePosition_3" Datatype="Bool" /><Member Name="IsInAbsolutePosition_4" Datatype="Bool" /><Member Name="IsInAbsolutePosition_5" Datatype="Bool" /><Member Name="IsInAbsolutePosition_6" Datatype="Bool" /><Member Name="IsInAbsolutePosition_7" Datatype="Bool" /><Member Name="IsInAbsolutePosition_8" Datatype="Bool" /><Member Name="IsInAbsolutePosition_9" Datatype="Bool" /><Member Name="IsInAbsolutePosition_10" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_1" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_2" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_3" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_4" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_5" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_6" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_7" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_8" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_9" Datatype="Bool" /><Member Name="IsInAbsoluteMicrostepPosition_10" Datatype="Bool" /><Member Name="Busy" Datatype="Bool" /><Member Name="StatusCode" Datatype="UInt" /><Member Name="Error" Datatype="Bool" /><Member Name="ErrorCode" Datatype="Array[0..9] of UInt" /></Section><Section Name="InOut"><Member Name="Drive_Out" Datatype="&quot;TLexium_MDrv_Plc2Drv&quot;"><Sections><Section Name="None" /></Sections></Member></Section><Section Name="Static"><Member Name="SendJog" Datatype="Bool" /><Member Name="Static_InError" Datatype="Bool" /><Member Name="HomingErrorDetected" Datatype="Bool" /><Member Name="AcknowledgeHomingError" Datatype="Bool" /><Member Name="AcknowledgeStopError" Datatype="Bool" /><Member Name="SendHomingType" Datatype="Bool" /><Member Name="SendHomingPosition" Datatype="Bool" /><Member Name="SendAbsolutePosition" Datatype="Bool" /><Member Name="LockedRotorFaultDetected" Datatype="Bool" /><Member Name="i" Datatype="USInt" /><Member Name="NumberOfErrorDetected" Datatype="USInt" /><Member Name="MotorMovementStateDiagram" Datatype="Int" /><Member Name="Static_ErrorCode" Datatype="UInt" /><Member Name="MaxVelocity" Datatype="DWord" /><Member Name="AbsoluteMicrostepPosition_1" Datatype="LInt" /><Member Name="AbsoluteMicrostepPosition_2" Datatype="LInt" /><Member Name="AbsoluteMicrostepPosition_3" Datatype="LInt" /><Member Name="AbsoluteMicrostepPosition_4" Datatype="LInt" /><Member Name="AbsoluteMicrostepPosition_5" Datatype="LInt" /><Member Name="AbsoluteMicrostepPosition_6" Datatype="LInt" /><Member Name="AbsoluteMicrostepPosition_7" Datatype="LInt" /><Member Name="AbsoluteMicrostepPosition_8" Datatype="LInt" /><Member Name="AbsoluteMicrostepPosition_9" Datatype="LInt" /><Member Name="AbsoluteMicrostepPosition_10" Datatype="LInt" /><Member Name="R_TRIG_MotorAcknowledge" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ChangeMicrostepResolution" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ChangeInitialVelocity" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ChangeVelocity" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ChangeJogVelocity" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ChangeAcceleration" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ChangeDeceleration" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ChangeRunCurrent" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ChangeHoldCurrent" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestHoming" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_1" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_2" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_3" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_4" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_5" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_6" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_7" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_8" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_9" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestGoToPosition_10" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestJogForward" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestJogBackward" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_RequestStop" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_MotorStopped" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_MotorMovementDone" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ScaleInverted" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_ErrorCodeChanged" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="R_TRIG_HomingErrorDetected" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="F_TRIG_RequestJogForward" Datatype="F_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="F_TRIG_RequestJogBackward" Datatype="F_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_MotorHM" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_MotorEnabled" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_MotorNotEnabled" Datatype="TOF_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_MotorNotMoving" Datatype="TOF_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_MotorHomingMovementDone" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_MotorStopped" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_IsInAbsolutePosition" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_RetractSensorTimeout" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="FB10003_Pulse_SendHoldCurrent" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendRunCurrent" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendDeceleration" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendAcceleration" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendMicrostepResolution" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendInitialVelocity" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendVelocity" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendHoming" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendHomingPosition" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendAbsolutePosition" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendJog" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendMode" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendAcknowledge" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="FB10003_Pulse_SendScaleDirection" Datatype="&quot;FB10003_Pulse&quot;"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member></Section></Sections></Member>
+  </Section>
+  <Section Name="Temp" />
+  <Section Name="Constant">
+    <Member Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" Datatype="Int" Accessibility="Public">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="MOTOR_HOMING" Datatype="Int" Accessibility="Public">
+      <StartValue>10</StartValue>
+    </Member>
+    <Member Name="MOTOR_GO_TO_ORIGIN_POSITION" Datatype="Int" Accessibility="Public">
+      <StartValue>20</StartValue>
+    </Member>
+    <Member Name="MOTOR_GO_TO_RECOVERY_POSITION" Datatype="Int" Accessibility="Public">
+      <StartValue>30</StartValue>
+    </Member>
+    <Member Name="MOTOR_GO_TO_WORKING_POSITION" Datatype="Int" Accessibility="Public">
+      <StartValue>40</StartValue>
+    </Member>
+    <Member Name="MOTOR_MOVEMENT_REQUEST_DONE" Datatype="Int" Accessibility="Public">
+      <StartValue>50</StartValue>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>FB10233_LAM_PositionningMotor</Name>
+      <Number>10233</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="GlobalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="FirstScan" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="THEN" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalVariable" UId="30">
+    <Symbol UId="31">
+      <Component Name="Motor_Struct" UId="32" />
+      <Token Text="." UId="33" />
+      <Component Name="In" UId="34" />
+      <Token Text="." UId="35" />
+      <Component Name="EnableMotor" UId="36" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="37" />
+  <Token Text=":=" UId="38" />
+  <Blank Num="1" UId="39" />
+  <Access Scope="LiteralConstant" UId="40">
+    <Constant UId="41">
+      <ConstantValue UId="43">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="44" />
+  <NewLine Num="1" UId="45" />
+  <Blank Num="4" UId="46" />
+  <Access Scope="LocalVariable" UId="47">
+    <Symbol UId="48">
+      <Component Name="Motor_Struct" UId="49" />
+      <Token Text="." UId="50" />
+      <Component Name="In" UId="51" />
+      <Token Text="." UId="52" />
+      <Component Name="RequestHoming" UId="53" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="54" />
+  <Token Text=":=" UId="55" />
+  <Blank Num="1" UId="56" />
+  <Access Scope="LiteralConstant" UId="57">
+    <Constant UId="58">
+      <ConstantValue UId="60">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="61" />
+  <NewLine Num="1" UId="62" />
+  <Blank Num="4" UId="63" />
+  <Access Scope="LocalVariable" UId="64">
+    <Symbol UId="65">
+      <Component Name="Motor_Struct" UId="66" />
+      <Token Text="." UId="67" />
+      <Component Name="In" UId="68" />
+      <Token Text="." UId="69" />
+      <Component Name="RequestGoToPosition_1" UId="70" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="71" />
+  <Token Text=":=" UId="72" />
+  <Blank Num="1" UId="73" />
+  <Access Scope="LiteralConstant" UId="74">
+    <Constant UId="75">
+      <ConstantValue UId="77">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="78" />
+  <NewLine Num="1" UId="79" />
+  <Blank Num="4" UId="80" />
+  <Access Scope="LocalVariable" UId="81">
+    <Symbol UId="82">
+      <Component Name="Motor_Struct" UId="83" />
+      <Token Text="." UId="84" />
+      <Component Name="In" UId="85" />
+      <Token Text="." UId="86" />
+      <Component Name="RequestGoToPosition_2" UId="87" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="88" />
+  <Token Text=":=" UId="89" />
+  <Blank Num="1" UId="90" />
+  <Access Scope="LiteralConstant" UId="91">
+    <Constant UId="92">
+      <ConstantValue UId="94">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="95" />
+  <NewLine Num="1" UId="96" />
+  <Blank Num="4" UId="97" />
+  <Access Scope="LocalVariable" UId="98">
+    <Symbol UId="99">
+      <Component Name="HomingDone" UId="100" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="101" />
+  <Token Text=":=" UId="102" />
+  <Blank Num="1" UId="103" />
+  <Access Scope="LiteralConstant" UId="104">
+    <Constant UId="105">
+      <ConstantValue UId="107">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="108" />
+  <NewLine Num="1" UId="109" />
+  <Blank Num="4" UId="110" />
+  <Access Scope="LocalVariable" UId="111">
+    <Symbol UId="112">
+      <Component Name="InOriginPosition" UId="113" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="114" />
+  <Token Text=":=" UId="115" />
+  <Blank Num="1" UId="116" />
+  <Access Scope="LiteralConstant" UId="117">
+    <Constant UId="118">
+      <ConstantValue UId="120">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="121" />
+  <NewLine Num="1" UId="122" />
+  <Blank Num="4" UId="123" />
+  <Access Scope="LocalVariable" UId="124">
+    <Symbol UId="125">
+      <Component Name="InWorkingPosition" UId="126" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="127" />
+  <Token Text=":=" UId="128" />
+  <Blank Num="1" UId="129" />
+  <Access Scope="LiteralConstant" UId="130">
+    <Constant UId="131">
+      <ConstantValue UId="133">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="134" />
+  <NewLine Num="1" UId="135" />
+  <Blank Num="4" UId="136" />
+  <Access Scope="LocalVariable" UId="137">
+    <Symbol UId="138">
+      <Component Name="SendRequestAfterEnableOk" UId="139" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="140" />
+  <Token Text=":=" UId="141" />
+  <Blank Num="1" UId="142" />
+  <Access Scope="LiteralConstant" UId="143">
+    <Constant UId="144">
+      <ConstantValue UId="146">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="147" />
+  <NewLine Num="1" UId="148" />
+  <Blank Num="4" UId="149" />
+  <Access Scope="LocalVariable" UId="150">
+    <Symbol UId="151">
+      <Component Name="SendNewRequestOk" UId="152" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="153" />
+  <Token Text=":=" UId="154" />
+  <Blank Num="1" UId="155" />
+  <Access Scope="LiteralConstant" UId="156">
+    <Constant UId="157">
+      <ConstantValue UId="159">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="160" />
+  <NewLine Num="1" UId="161" />
+  <Blank Num="4" UId="162" />
+  <Access Scope="LocalVariable" UId="163">
+    <Symbol UId="164">
+      <Component Name="MotorMovementManagementStateDiagram" UId="165" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="166" />
+  <Token Text=":=" UId="167" />
+  <Blank Num="1" UId="168" />
+  <Access Scope="LocalConstant" UId="169">
+    <Constant Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" UId="170" />
+  </Access>
+  <Token Text=";" UId="173" />
+  <NewLine Num="1" UId="174" />
+  <Token Text="END_IF" UId="175" />
+  <Token Text=";" UId="176" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>First Scan</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="REGION" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Text UId="23">EDGE SIGNALS</Text>
+  <NewLine Num="1" UId="24" />
+  <Blank Num="4" UId="25" />
+  <Access Scope="LocalVariable" UId="26">
+    <Symbol UId="27">
+      <Component Name="R_TRIG_HomingSensor" UId="28" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="29">
+    <Instruction UId="30">
+      <Token Text="(" UId="31" />
+      <Parameter Name="CLK" UId="32">
+        <Blank Num="1" UId="33" />
+        <Token Text=":=" UId="34" />
+        <Blank Num="1" UId="35" />
+        <Access Scope="LocalVariable" UId="36">
+          <Symbol UId="37">
+            <Component Name="HomingSensor" UId="38" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="39" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="40" />
+  <NewLine Num="1" UId="41" />
+  <Blank Num="4" UId="42" />
+  <Access Scope="LocalVariable" UId="43">
+    <Symbol UId="44">
+      <Component Name="R_TRIG_RequestHoming" UId="45" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="46">
+    <Instruction UId="47">
+      <Token Text="(" UId="48" />
+      <Parameter Name="CLK" UId="49">
+        <Blank Num="1" UId="50" />
+        <Token Text=":=" UId="51" />
+        <Blank Num="1" UId="52" />
+        <Access Scope="LocalVariable" UId="53">
+          <Symbol UId="54">
+            <Component Name="RequestHoming" UId="55" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="56" />
+        <Token Text="AND" UId="57" />
+        <Blank Num="1" UId="58" />
+        <Access Scope="LocalVariable" UId="59">
+          <Symbol UId="60">
+            <Component Name="MotorMovementManagementStateDiagram" UId="61" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="62" />
+        <Token Text="=" UId="63" />
+        <Blank Num="1" UId="64" />
+        <Access Scope="LocalConstant" UId="65">
+          <Constant Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" UId="66" />
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="69" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="70" />
+  <NewLine Num="1" UId="71" />
+  <Blank Num="4" UId="72" />
+  <Access Scope="LocalVariable" UId="73">
+    <Symbol UId="74">
+      <Component Name="R_TRIG_RequestGoToOriginPosition" UId="75" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="76">
+    <Instruction UId="77">
+      <Token Text="(" UId="78" />
+      <Parameter Name="CLK" UId="79">
+        <Blank Num="1" UId="80" />
+        <Token Text=":=" UId="81" />
+        <Blank Num="1" UId="82" />
+        <Access Scope="LocalVariable" UId="83">
+          <Symbol UId="84">
+            <Component Name="RequestGoToOriginPosition" UId="85" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="86" />
+        <Token Text="AND" UId="87" />
+        <Blank Num="1" UId="88" />
+        <Access Scope="LocalVariable" UId="89">
+          <Symbol UId="90">
+            <Component Name="MotorMovementManagementStateDiagram" UId="91" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="92" />
+        <Token Text="=" UId="93" />
+        <Blank Num="1" UId="94" />
+        <Access Scope="LocalConstant" UId="95">
+          <Constant Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" UId="96" />
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="99" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="100" />
+  <NewLine Num="1" UId="101" />
+  <Blank Num="4" UId="102" />
+  <Access Scope="LocalVariable" UId="103">
+    <Symbol UId="104">
+      <Component Name="R_TRIG_RequestGoToRecoveryPosition" UId="105" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="106">
+    <Instruction UId="107">
+      <Token Text="(" UId="108" />
+      <Parameter Name="CLK" UId="109">
+        <Blank Num="1" UId="110" />
+        <Token Text=":=" UId="111" />
+        <Blank Num="1" UId="112" />
+        <Access Scope="LocalVariable" UId="113">
+          <Symbol UId="114">
+            <Component Name="RequestGoToStandByPosition" UId="115" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="116" />
+        <Token Text="AND" UId="117" />
+        <Blank Num="1" UId="118" />
+        <Access Scope="LocalVariable" UId="119">
+          <Symbol UId="120">
+            <Component Name="MotorMovementManagementStateDiagram" UId="121" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="122" />
+        <Token Text="=" UId="123" />
+        <Blank Num="1" UId="124" />
+        <Access Scope="LocalConstant" UId="125">
+          <Constant Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" UId="126" />
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="129" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="130" />
+  <NewLine Num="1" UId="131" />
+  <Blank Num="4" UId="132" />
+  <Access Scope="LocalVariable" UId="133">
+    <Symbol UId="134">
+      <Component Name="R_TRIG_RequestGoToWorkingPosition" UId="135" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="136">
+    <Instruction UId="137">
+      <Token Text="(" UId="138" />
+      <Parameter Name="CLK" UId="139">
+        <Blank Num="1" UId="140" />
+        <Token Text=":=" UId="141" />
+        <Blank Num="1" UId="142" />
+        <Access Scope="LocalVariable" UId="143">
+          <Symbol UId="144">
+            <Component Name="RequestGoToWorkingPosition" UId="145" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="146" />
+        <Token Text="AND" UId="147" />
+        <Blank Num="1" UId="148" />
+        <Access Scope="LocalVariable" UId="149">
+          <Symbol UId="150">
+            <Component Name="MotorMovementManagementStateDiagram" UId="151" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="152" />
+        <Token Text="=" UId="153" />
+        <Blank Num="1" UId="154" />
+        <Access Scope="LocalConstant" UId="155">
+          <Constant Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" UId="156" />
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="159" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="160" />
+  <NewLine Num="1" UId="161" />
+  <Blank Num="4" UId="162" />
+  <Access Scope="LocalVariable" UId="163">
+    <Symbol UId="164">
+      <Component Name="R_TRIG_HomingDone" UId="165" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="166">
+    <Instruction UId="167">
+      <Token Text="(" UId="168" />
+      <Parameter Name="CLK" UId="169">
+        <Blank Num="1" UId="170" />
+        <Token Text=":=" UId="171" />
+        <Blank Num="1" UId="172" />
+        <Access Scope="LocalVariable" UId="173">
+          <Symbol UId="174">
+            <Component Name="Motor_Struct" UId="175" />
+            <Token Text="." UId="176" />
+            <Component Name="Out" UId="177" />
+            <Token Text="." UId="178" />
+            <Component Name="HomingDone" UId="179" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="180" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="181" />
+  <NewLine Num="1" UId="182" />
+  <Token Text="END_REGION" UId="183" />
+  <NewLine Num="2" UId="184" />
+  <Token Text="REGION" UId="185" />
+  <Blank Num="1" UId="186" />
+  <Text UId="187">TIMERS</Text>
+  <NewLine Num="1" UId="188" />
+  <Blank Num="4" UId="189" />
+  <Access Scope="LocalVariable" UId="190">
+    <Symbol UId="191">
+      <Component Name="TON_Motor_SendRequestAfterEnabled" UId="192" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="193">
+    <Instruction UId="194">
+      <Token Text="(" UId="195" />
+      <Parameter Name="IN" UId="196">
+        <Blank Num="1" UId="197" />
+        <Token Text=":=" UId="198" />
+        <Blank Num="1" UId="199" />
+        <Access Scope="LocalVariable" UId="200">
+          <Symbol UId="201">
+            <Component Name="Motor_Struct" UId="202" />
+            <Token Text="." UId="203" />
+            <Component Name="Out" UId="204" />
+            <Token Text="." UId="205" />
+            <Component Name="MotorEnabled" UId="206" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="207" />
+      <NewLine Num="1" UId="208" />
+      <Blank Num="39" UId="209" />
+      <Parameter Name="PT" UId="210">
+        <Blank Num="1" UId="211" />
+        <Token Text=":=" UId="212" />
+        <Blank Num="1" UId="213" />
+        <Access Scope="TypedConstant" UId="214">
+          <Constant UId="215">
+            <ConstantValue UId="216">T#1s</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="217" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="218" />
+  <NewLine Num="1" UId="219" />
+  <Blank Num="4" UId="220" />
+  <Access Scope="LocalVariable" UId="221">
+    <Symbol UId="222">
+      <Component Name="TON_Motor_SendNewRequest" UId="223" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="224">
+    <Instruction UId="225">
+      <Token Text="(" UId="226" />
+      <Parameter Name="IN" UId="227">
+        <Blank Num="1" UId="228" />
+        <Token Text=":=" UId="229" />
+        <Blank Num="1" UId="230" />
+        <Access Scope="LocalVariable" UId="231">
+          <Symbol UId="232">
+            <Component Name="MotorMovementManagementStateDiagram" UId="233" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="234" />
+        <Token Text="=" UId="235" />
+        <Blank Num="1" UId="236" />
+        <Access Scope="LocalConstant" UId="237">
+          <Constant Name="MOTOR_HOMING" UId="238" />
+        </Access>
+        <Blank Num="1" UId="241" />
+        <Token Text="OR" UId="242" />
+        <NewLine Num="1" UId="243" />
+        <Blank Num="30" UId="244" />
+        <Access Scope="LocalVariable" UId="245">
+          <Symbol UId="246">
+            <Component Name="MotorMovementManagementStateDiagram" UId="247" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="248" />
+        <Token Text="=" UId="249" />
+        <Blank Num="1" UId="250" />
+        <Access Scope="LocalConstant" UId="251">
+          <Constant Name="MOTOR_GO_TO_ORIGIN_POSITION" UId="252" />
+        </Access>
+        <Blank Num="1" UId="255" />
+        <Token Text="OR" UId="256" />
+        <NewLine Num="1" UId="257" />
+        <Blank Num="30" UId="258" />
+        <Access Scope="LocalVariable" UId="259">
+          <Symbol UId="260">
+            <Component Name="MotorMovementManagementStateDiagram" UId="261" />
+          </Symbol>
+        </Access>
+        <Blank Num="1" UId="262" />
+        <Token Text="=" UId="263" />
+        <Blank Num="1" UId="264" />
+        <Access Scope="LocalConstant" UId="265">
+          <Constant Name="MOTOR_GO_TO_WORKING_POSITION" UId="266" />
+        </Access>
+      </Parameter>
+      <Token Text="," UId="269" />
+      <NewLine Num="1" UId="270" />
+      <Blank Num="30" UId="271" />
+      <Parameter Name="PT" UId="272">
+        <Blank Num="1" UId="273" />
+        <Token Text=":=" UId="274" />
+        <Blank Num="1" UId="275" />
+        <Access Scope="TypedConstant" UId="276">
+          <Constant UId="277">
+            <ConstantValue UId="278">T#2s</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="279" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="280" />
+  <NewLine Num="1" UId="281" />
+  <Blank Num="4" UId="282" />
+  <NewLine Num="1" UId="283" />
+  <Token Text="END_REGION" UId="284" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="F" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="10" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Edge Signals &amp; Timers</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="11" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="12" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <LineComment Inserted="false" NoClosingBracket="false" UId="21">
+    <Text UId="22">Motor Parameters Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="23" />
+  <Access Scope="LocalVariable" UId="24">
+    <Symbol UId="25">
+      <Component Name="Motor_Struct" UId="26" />
+      <Token Text="." UId="27" />
+      <Component Name="In" UId="28" />
+      <Token Text="." UId="29" />
+      <Component Name="MmByTurn" UId="30" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="31" />
+  <Token Text=":=" UId="32" />
+  <Blank Num="1" UId="33" />
+  <Access Scope="LocalVariable" UId="34">
+    <Symbol UId="35">
+      <Component Name="MmByMotorTurn" UId="36" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="37" />
+  <NewLine Num="1" UId="38" />
+  <Access Scope="LocalVariable" UId="39">
+    <Symbol UId="40">
+      <Component Name="Motor_Struct" UId="41" />
+      <Token Text="." UId="42" />
+      <Component Name="In" UId="43" />
+      <Token Text="." UId="44" />
+      <Component Name="HomingVelocity_mm.s-1" UId="45" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="46" />
+  <Token Text=":=" UId="47" />
+  <Blank Num="1" UId="48" />
+  <Access Scope="LocalVariable" UId="49">
+    <Symbol UId="50">
+      <Component Name="HomingSpeedMmBySec" UId="51" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="52" />
+  <NewLine Num="1" UId="53" />
+  <Access Scope="LocalVariable" UId="54">
+    <Symbol UId="55">
+      <Component Name="Motor_Struct" UId="56" />
+      <Token Text="." UId="57" />
+      <Component Name="In" UId="58" />
+      <Token Text="." UId="59" />
+      <Component Name="Velocity_mm.s-1" UId="60" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="61" />
+  <Token Text=":=" UId="62" />
+  <Blank Num="1" UId="63" />
+  <Access Scope="LocalVariable" UId="64">
+    <Symbol UId="65">
+      <Component Name="SpeedMmBySec" UId="66" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="67" />
+  <NewLine Num="1" UId="68" />
+  <Access Scope="LocalVariable" UId="69">
+    <Symbol UId="70">
+      <Component Name="Motor_Struct" UId="71" />
+      <Token Text="." UId="72" />
+      <Component Name="In" UId="73" />
+      <Token Text="." UId="74" />
+      <Component Name="Acceleration_mm.s-2" UId="75" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="76" />
+  <Token Text=":=" UId="77" />
+  <Blank Num="1" UId="78" />
+  <Access Scope="LocalVariable" UId="79">
+    <Symbol UId="80">
+      <Component Name="AccelerationMmBySec2" UId="81" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="82" />
+  <NewLine Num="1" UId="83" />
+  <Access Scope="LocalVariable" UId="84">
+    <Symbol UId="85">
+      <Component Name="Motor_Struct" UId="86" />
+      <Token Text="." UId="87" />
+      <Component Name="In" UId="88" />
+      <Token Text="." UId="89" />
+      <Component Name="Deceleration_mm.s-2" UId="90" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="91" />
+  <Token Text=":=" UId="92" />
+  <Blank Num="1" UId="93" />
+  <Access Scope="LocalVariable" UId="94">
+    <Symbol UId="95">
+      <Component Name="DecelerationMmBySec2" UId="96" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="97" />
+  <NewLine Num="1" UId="98" />
+  <Access Scope="LocalVariable" UId="99">
+    <Symbol UId="100">
+      <Component Name="Motor_Struct" UId="101" />
+      <Token Text="." UId="102" />
+      <Component Name="In" UId="103" />
+      <Token Text="." UId="104" />
+      <Component Name="JogVelocity_mm.s-1" UId="105" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="106" />
+  <Token Text=":=" UId="107" />
+  <Blank Num="1" UId="108" />
+  <Access Scope="LocalVariable" UId="109">
+    <Symbol UId="110">
+      <Component Name="JogSpeedMmBySec" UId="111" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="112" />
+  <NewLine Num="2" UId="113" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="114">
+    <Text UId="115">Motors Positions Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="116" />
+  <Access Scope="LocalVariable" UId="117">
+    <Symbol UId="118">
+      <Component Name="Motor_Struct" UId="119" />
+      <Token Text="." UId="120" />
+      <Component Name="In" UId="121" />
+      <Token Text="." UId="122" />
+      <Component Name="Position_1" UId="123" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="124" />
+  <Token Text=":=" UId="125" />
+  <Blank Num="1" UId="126" />
+  <Access Scope="LocalVariable" UId="127">
+    <Symbol UId="128">
+      <Component Name="OriginPosition" UId="129" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="130" />
+  <NewLine Num="1" UId="131" />
+  <Access Scope="LocalVariable" UId="132">
+    <Symbol UId="133">
+      <Component Name="Motor_Struct" UId="134" />
+      <Token Text="." UId="135" />
+      <Component Name="In" UId="136" />
+      <Token Text="." UId="137" />
+      <Component Name="Position_2" UId="138" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="139" />
+  <Token Text=":=" UId="140" />
+  <Blank Num="1" UId="141" />
+  <Access Scope="LocalVariable" UId="142">
+    <Symbol UId="143">
+      <Component Name="WorkingPosition" UId="144" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="145" />
+  <NewLine Num="1" UId="146" />
+  <Access Scope="LocalVariable" UId="147">
+    <Symbol UId="148">
+      <Component Name="Motor_Struct" UId="149" />
+      <Token Text="." UId="150" />
+      <Component Name="In" UId="151" />
+      <Token Text="." UId="152" />
+      <Component Name="Position_3" UId="153" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="154" />
+  <Token Text=":=" UId="155" />
+  <Blank Num="1" UId="156" />
+  <Access Scope="LocalVariable" UId="157">
+    <Symbol UId="158">
+      <Component Name="StandByPosition" UId="159" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="160" />
+  <NewLine Num="2" UId="161" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="162">
+    <Text UId="163">Motor Acknowledge Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="164" />
+  <Access Scope="LocalVariable" UId="165">
+    <Symbol UId="166">
+      <Component Name="Motor_Struct" UId="167" />
+      <Token Text="." UId="168" />
+      <Component Name="In" UId="169" />
+      <Token Text="." UId="170" />
+      <Component Name="Ack" UId="171" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="172" />
+  <Token Text=":=" UId="173" />
+  <Blank Num="1" UId="174" />
+  <Access Scope="LocalVariable" UId="175">
+    <Symbol UId="176">
+      <Component Name="RequestAcknowledge" UId="177" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="178" />
+  <NewLine Num="2" UId="179" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="180">
+    <Text UId="181">Motor Request Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="182" />
+  <Token Text="IF" UId="183" />
+  <Blank Num="1" UId="184" />
+  <Access Scope="LocalVariable" UId="185">
+    <Symbol UId="186">
+      <Component Name="TON_Motor_SendRequestAfterEnabled" UId="187" />
+      <Token Text="." UId="188" />
+      <Component Name="Q" UId="189" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="190" />
+  <Token Text="THEN" UId="191" />
+  <NewLine Num="1" UId="192" />
+  <Blank Num="4" UId="193" />
+  <Access Scope="LocalVariable" UId="194">
+    <Symbol UId="195">
+      <Component Name="SendRequestAfterEnableOk" UId="196" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="197" />
+  <Token Text=":=" UId="198" />
+  <Blank Num="1" UId="199" />
+  <Access Scope="LiteralConstant" UId="200">
+    <Constant UId="201">
+      <ConstantValue UId="203">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="204" />
+  <NewLine Num="1" UId="205" />
+  <Token Text="END_IF" UId="206" />
+  <Token Text=";" UId="207" />
+  <NewLine Num="1" UId="208" />
+  <Token Text="IF" UId="209" />
+  <Blank Num="1" UId="210" />
+  <Access Scope="LocalVariable" UId="211">
+    <Symbol UId="212">
+      <Component Name="TON_Motor_SendNewRequest" UId="213" />
+      <Token Text="." UId="214" />
+      <Component Name="Q" UId="215" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="216" />
+  <Token Text="THEN" UId="217" />
+  <NewLine Num="1" UId="218" />
+  <Blank Num="4" UId="219" />
+  <Access Scope="LocalVariable" UId="220">
+    <Symbol UId="221">
+      <Component Name="SendNewRequestOk" UId="222" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="223" />
+  <Token Text=":=" UId="224" />
+  <Blank Num="1" UId="225" />
+  <Access Scope="LiteralConstant" UId="226">
+    <Constant UId="227">
+      <ConstantValue UId="229">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="230" />
+  <NewLine Num="1" UId="231" />
+  <Token Text="END_IF" UId="232" />
+  <Token Text=";" UId="233" />
+  <NewLine Num="1" UId="234" />
+  <Access Scope="LocalVariable" UId="235">
+    <Symbol UId="236">
+      <Component Name="Motor_Struct" UId="237" />
+      <Token Text="." UId="238" />
+      <Component Name="In" UId="239" />
+      <Token Text="." UId="240" />
+      <Component Name="RequestStop" UId="241" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="242" />
+  <Token Text=":=" UId="243" />
+  <Blank Num="1" UId="244" />
+  <Access Scope="LocalVariable" UId="245">
+    <Symbol UId="246">
+      <Component Name="RequestStop" UId="247" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="248" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="13" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="14" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="15" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="16" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="17" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Cleaning Tray Commands Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="18" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="LocalVariable" UId="21">
+      <Symbol>
+        <Component Name="DriveInLexium" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="22">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="Ack" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="23">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="RequestHoming" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="24">
+      <Constant>
+        <ConstantType>Bool</ConstantType>
+        <ConstantValue>FALSE</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LocalVariable" UId="25">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="RequestGoToPosition_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="26">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="RequestGoToPosition_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="27">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="RequestGoToPosition_3" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="28">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="RequestGoToPosition_4" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="29">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="RequestGoToPosition_5" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="30">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="RequestJogNegative" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="31">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="RequestJogPositive" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="32">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="RequestStop" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="33">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="Position_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="34">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="Position_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="35">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="Position_3" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="36">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="Position_4" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="37">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="Position_5" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="38">
+      <Symbol>
+        <Component Name="HoldCurrent" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="39">
+      <Symbol>
+        <Component Name="RunCurrent" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="40">
+      <Constant>
+        <ConstantType>UInt</ConstantType>
+        <ConstantValue>25</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="41">
+      <Constant>
+        <ConstantType>DInt</ConstantType>
+        <ConstantValue>200</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LocalVariable" UId="42">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="MmByTurn" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="43">
+      <Constant>
+        <ConstantType>Real</ConstantType>
+        <ConstantValue>0.7</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LocalVariable" UId="44">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="Velocity_mm.s-1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="45">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="JogVelocity_mm.s-1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="46">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="Acceleration_mm.s-2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="47">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="In" />
+        <Component Name="Deceleration_mm.s-2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="48">
+      <Symbol>
+        <Component Name="DriveOutLexium" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="49">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="Out" />
+        <Component Name="ActualPosition_mm" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="50">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="Out" />
+        <Component Name="HomingInProgress" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="51">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="Out" />
+        <Component Name="HomingDone" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="52">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="Out" />
+        <Component Name="IsInPosition_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="53">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="Out" />
+        <Component Name="IsInPosition_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="54">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="Out" />
+        <Component Name="IsInPosition_3" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="55">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="Out" />
+        <Component Name="IsInPosition_4" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="56">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="Out" />
+        <Component Name="IsInPosition_5" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="57">
+      <Symbol>
+        <Component Name="Motor_Struct" />
+        <Component Name="Out" />
+        <Component Name="ErrorCode" />
+      </Symbol>
+    </Access>
+    <Call UId="58">
+      <CallInfo Name="FB10234_LexiumMotor" BlockType="FB">
+        <Instance Scope="LocalVariable" UId="59">
+          <Component Name="FB10234_LexiumMotor_Instance" />
+        </Instance>
+        <Parameter Name="Drive_In" Section="Input" Type="&quot;TLexium_MDrv_Drv2Plc&quot;" />
+        <Parameter Name="RequestAcknowledge" Section="Input" Type="Bool" />
+        <Parameter Name="RequestHoming" Section="Input" Type="Bool" />
+        <Parameter Name="ScaleInverted" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_1" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_2" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_3" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_4" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_5" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_6" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_7" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_8" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_9" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToAbsolutePosition_10" Section="Input" Type="Bool" />
+        <Parameter Name="RequestGoToRelativePosition" Section="Input" Type="Bool" />
+        <Parameter Name="RequestJogBackward" Section="Input" Type="Bool" />
+        <Parameter Name="RequestJogForward" Section="Input" Type="Bool" />
+        <Parameter Name="RequestStop" Section="Input" Type="Bool" />
+        <Parameter Name="AbsolutePosition_1" Section="Input" Type="Real" />
+        <Parameter Name="AbsolutePosition_2" Section="Input" Type="Real" />
+        <Parameter Name="AbsolutePosition_3" Section="Input" Type="Real" />
+        <Parameter Name="AbsolutePosition_4" Section="Input" Type="Real" />
+        <Parameter Name="AbsolutePosition_5" Section="Input" Type="Real" />
+        <Parameter Name="AbsolutePosition_6" Section="Input" Type="Real" />
+        <Parameter Name="AbsolutePosition_7" Section="Input" Type="Real" />
+        <Parameter Name="AbsolutePosition_8" Section="Input" Type="Real" />
+        <Parameter Name="AbsolutePosition_9" Section="Input" Type="Real" />
+        <Parameter Name="AbsolutePosition_10" Section="Input" Type="Real" />
+        <Parameter Name="HoldCurrent" Section="Input" Type="SInt" />
+        <Parameter Name="RunCurrent" Section="Input" Type="SInt" />
+        <Parameter Name="StepResolution" Section="Input" Type="UInt" />
+        <Parameter Name="StepsByMotorTurn" Section="Input" Type="DInt" />
+        <Parameter Name="MmByMotorTurn" Section="Input" Type="LReal" />
+        <Parameter Name="InitialVelocity_mm.s-1" Section="Input" Type="Real" />
+        <Parameter Name="HomingVelocity_mm.s-1" Section="Input" Type="DInt" />
+        <Parameter Name="Velocity_mm.s-1" Section="Input" Type="Real" />
+        <Parameter Name="JogVelocity_mm.s-1" Section="Input" Type="Real" />
+        <Parameter Name="Acceleration_mm.s-2" Section="Input" Type="Real" />
+        <Parameter Name="Deceleration_mm.s-2" Section="Input" Type="Real" />
+        <Parameter Name="ActualPosition_mm" Section="Output" Type="Real" />
+        <Parameter Name="MotorInMovement" Section="Output" Type="Bool" />
+        <Parameter Name="HomingInProgress" Section="Output" Type="Bool" />
+        <Parameter Name="HomingDone" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_1" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_2" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_3" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_4" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_5" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_6" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_7" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_8" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_9" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsolutePosition_10" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_1" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_2" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_3" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_4" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_5" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_6" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_7" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_8" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_9" Section="Output" Type="Bool" />
+        <Parameter Name="IsInAbsoluteMicrostepPosition_10" Section="Output" Type="Bool" />
+        <Parameter Name="Busy" Section="Output" Type="Bool" />
+        <Parameter Name="StatusCode" Section="Output" Type="UInt" />
+        <Parameter Name="Error" Section="Output" Type="Bool" />
+        <Parameter Name="ErrorCode" Section="Output" Type="Array[0..9] of UInt" />
+        <Parameter Name="Drive_Out" Section="InOut" Type="&quot;TLexium_MDrv_Plc2Drv&quot;" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="91">
+      <Powerrail />
+      <NameCon UId="58" Name="en" />
+    </Wire>
+    <Wire UId="92">
+      <IdentCon UId="21" />
+      <NameCon UId="58" Name="Drive_In" />
+    </Wire>
+    <Wire UId="93">
+      <IdentCon UId="22" />
+      <NameCon UId="58" Name="RequestAcknowledge" />
+    </Wire>
+    <Wire UId="94">
+      <IdentCon UId="23" />
+      <NameCon UId="58" Name="RequestHoming" />
+    </Wire>
+    <Wire UId="95">
+      <IdentCon UId="24" />
+      <NameCon UId="58" Name="ScaleInverted" />
+    </Wire>
+    <Wire UId="96">
+      <IdentCon UId="25" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_1" />
+    </Wire>
+    <Wire UId="97">
+      <IdentCon UId="26" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_2" />
+    </Wire>
+    <Wire UId="98">
+      <IdentCon UId="27" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_3" />
+    </Wire>
+    <Wire UId="99">
+      <IdentCon UId="28" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_4" />
+    </Wire>
+    <Wire UId="100">
+      <IdentCon UId="29" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_5" />
+    </Wire>
+    <Wire UId="101">
+      <OpenCon UId="60" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_6" />
+    </Wire>
+    <Wire UId="102">
+      <OpenCon UId="61" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_7" />
+    </Wire>
+    <Wire UId="103">
+      <OpenCon UId="62" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_8" />
+    </Wire>
+    <Wire UId="104">
+      <OpenCon UId="63" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_9" />
+    </Wire>
+    <Wire UId="105">
+      <OpenCon UId="64" />
+      <NameCon UId="58" Name="RequestGoToAbsolutePosition_10" />
+    </Wire>
+    <Wire UId="106">
+      <OpenCon UId="65" />
+      <NameCon UId="58" Name="RequestGoToRelativePosition" />
+    </Wire>
+    <Wire UId="107">
+      <IdentCon UId="30" />
+      <NameCon UId="58" Name="RequestJogBackward" />
+    </Wire>
+    <Wire UId="108">
+      <IdentCon UId="31" />
+      <NameCon UId="58" Name="RequestJogForward" />
+    </Wire>
+    <Wire UId="109">
+      <IdentCon UId="32" />
+      <NameCon UId="58" Name="RequestStop" />
+    </Wire>
+    <Wire UId="110">
+      <IdentCon UId="33" />
+      <NameCon UId="58" Name="AbsolutePosition_1" />
+    </Wire>
+    <Wire UId="111">
+      <IdentCon UId="34" />
+      <NameCon UId="58" Name="AbsolutePosition_2" />
+    </Wire>
+    <Wire UId="112">
+      <IdentCon UId="35" />
+      <NameCon UId="58" Name="AbsolutePosition_3" />
+    </Wire>
+    <Wire UId="113">
+      <IdentCon UId="36" />
+      <NameCon UId="58" Name="AbsolutePosition_4" />
+    </Wire>
+    <Wire UId="114">
+      <IdentCon UId="37" />
+      <NameCon UId="58" Name="AbsolutePosition_5" />
+    </Wire>
+    <Wire UId="115">
+      <OpenCon UId="66" />
+      <NameCon UId="58" Name="AbsolutePosition_6" />
+    </Wire>
+    <Wire UId="116">
+      <OpenCon UId="67" />
+      <NameCon UId="58" Name="AbsolutePosition_7" />
+    </Wire>
+    <Wire UId="117">
+      <OpenCon UId="68" />
+      <NameCon UId="58" Name="AbsolutePosition_8" />
+    </Wire>
+    <Wire UId="118">
+      <OpenCon UId="69" />
+      <NameCon UId="58" Name="AbsolutePosition_9" />
+    </Wire>
+    <Wire UId="119">
+      <OpenCon UId="70" />
+      <NameCon UId="58" Name="AbsolutePosition_10" />
+    </Wire>
+    <Wire UId="120">
+      <IdentCon UId="38" />
+      <NameCon UId="58" Name="HoldCurrent" />
+    </Wire>
+    <Wire UId="121">
+      <IdentCon UId="39" />
+      <NameCon UId="58" Name="RunCurrent" />
+    </Wire>
+    <Wire UId="122">
+      <IdentCon UId="40" />
+      <NameCon UId="58" Name="StepResolution" />
+    </Wire>
+    <Wire UId="123">
+      <IdentCon UId="41" />
+      <NameCon UId="58" Name="StepsByMotorTurn" />
+    </Wire>
+    <Wire UId="124">
+      <IdentCon UId="42" />
+      <NameCon UId="58" Name="MmByMotorTurn" />
+    </Wire>
+    <Wire UId="125">
+      <IdentCon UId="43" />
+      <NameCon UId="58" Name="InitialVelocity_mm.s-1" />
+    </Wire>
+    <Wire UId="126">
+      <OpenCon UId="71" />
+      <NameCon UId="58" Name="HomingVelocity_mm.s-1" />
+    </Wire>
+    <Wire UId="127">
+      <IdentCon UId="44" />
+      <NameCon UId="58" Name="Velocity_mm.s-1" />
+    </Wire>
+    <Wire UId="128">
+      <IdentCon UId="45" />
+      <NameCon UId="58" Name="JogVelocity_mm.s-1" />
+    </Wire>
+    <Wire UId="129">
+      <IdentCon UId="46" />
+      <NameCon UId="58" Name="Acceleration_mm.s-2" />
+    </Wire>
+    <Wire UId="130">
+      <IdentCon UId="47" />
+      <NameCon UId="58" Name="Deceleration_mm.s-2" />
+    </Wire>
+    <Wire UId="131">
+      <IdentCon UId="48" />
+      <NameCon UId="58" Name="Drive_Out" />
+    </Wire>
+    <Wire UId="132">
+      <NameCon UId="58" Name="ActualPosition_mm" />
+      <IdentCon UId="49" />
+    </Wire>
+    <Wire UId="133">
+      <NameCon UId="58" Name="MotorInMovement" />
+      <OpenCon UId="72" />
+    </Wire>
+    <Wire UId="134">
+      <NameCon UId="58" Name="HomingInProgress" />
+      <IdentCon UId="50" />
+    </Wire>
+    <Wire UId="135">
+      <NameCon UId="58" Name="HomingDone" />
+      <IdentCon UId="51" />
+    </Wire>
+    <Wire UId="136">
+      <NameCon UId="58" Name="IsInAbsolutePosition_1" />
+      <OpenCon UId="73" />
+    </Wire>
+    <Wire UId="137">
+      <NameCon UId="58" Name="IsInAbsolutePosition_2" />
+      <OpenCon UId="74" />
+    </Wire>
+    <Wire UId="138">
+      <NameCon UId="58" Name="IsInAbsolutePosition_3" />
+      <OpenCon UId="75" />
+    </Wire>
+    <Wire UId="139">
+      <NameCon UId="58" Name="IsInAbsolutePosition_4" />
+      <OpenCon UId="76" />
+    </Wire>
+    <Wire UId="140">
+      <NameCon UId="58" Name="IsInAbsolutePosition_5" />
+      <OpenCon UId="77" />
+    </Wire>
+    <Wire UId="141">
+      <NameCon UId="58" Name="IsInAbsolutePosition_6" />
+      <OpenCon UId="78" />
+    </Wire>
+    <Wire UId="142">
+      <NameCon UId="58" Name="IsInAbsolutePosition_7" />
+      <OpenCon UId="79" />
+    </Wire>
+    <Wire UId="143">
+      <NameCon UId="58" Name="IsInAbsolutePosition_8" />
+      <OpenCon UId="80" />
+    </Wire>
+    <Wire UId="144">
+      <NameCon UId="58" Name="IsInAbsolutePosition_9" />
+      <OpenCon UId="81" />
+    </Wire>
+    <Wire UId="145">
+      <NameCon UId="58" Name="IsInAbsolutePosition_10" />
+      <OpenCon UId="82" />
+    </Wire>
+    <Wire UId="146">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_1" />
+      <IdentCon UId="52" />
+    </Wire>
+    <Wire UId="147">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_2" />
+      <IdentCon UId="53" />
+    </Wire>
+    <Wire UId="148">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_3" />
+      <IdentCon UId="54" />
+    </Wire>
+    <Wire UId="149">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_4" />
+      <IdentCon UId="55" />
+    </Wire>
+    <Wire UId="150">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_5" />
+      <IdentCon UId="56" />
+    </Wire>
+    <Wire UId="151">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_6" />
+      <OpenCon UId="83" />
+    </Wire>
+    <Wire UId="152">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_7" />
+      <OpenCon UId="84" />
+    </Wire>
+    <Wire UId="153">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_8" />
+      <OpenCon UId="85" />
+    </Wire>
+    <Wire UId="154">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_9" />
+      <OpenCon UId="86" />
+    </Wire>
+    <Wire UId="155">
+      <NameCon UId="58" Name="IsInAbsoluteMicrostepPosition_10" />
+      <OpenCon UId="87" />
+    </Wire>
+    <Wire UId="156">
+      <NameCon UId="58" Name="Busy" />
+      <OpenCon UId="88" />
+    </Wire>
+    <Wire UId="157">
+      <NameCon UId="58" Name="StatusCode" />
+      <OpenCon UId="89" />
+    </Wire>
+    <Wire UId="158">
+      <NameCon UId="58" Name="Error" />
+      <OpenCon UId="90" />
+    </Wire>
+    <Wire UId="159">
+      <NameCon UId="58" Name="ErrorCode" />
+      <IdentCon UId="57" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="1A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="1B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="1D" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="1E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Motor Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="20" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="Motor_Struct" UId="25" />
+      <Token Text="." UId="26" />
+      <Component Name="In" UId="27" />
+      <Token Text="." UId="28" />
+      <Component Name="RequestStop" UId="29" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="30" />
+  <Token Text="THEN" UId="31" />
+  <NewLine Num="1" UId="32" />
+  <Blank Num="4" UId="33" />
+  <Access Scope="LocalVariable" UId="34">
+    <Symbol UId="35">
+      <Component Name="MotorMovementManagementStateDiagram" UId="36" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="37" />
+  <Token Text=":=" UId="38" />
+  <Blank Num="1" UId="39" />
+  <Access Scope="LocalConstant" UId="40">
+    <Constant Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" UId="41" />
+  </Access>
+  <Token Text=";" UId="44" />
+  <NewLine Num="1" UId="45" />
+  <Blank Num="4" UId="46" />
+  <Access Scope="LocalVariable" UId="47">
+    <Symbol UId="48">
+      <Component Name="Motor_Struct" UId="49" />
+      <Token Text="." UId="50" />
+      <Component Name="In" UId="51" />
+      <Token Text="." UId="52" />
+      <Component Name="RequestHoming" UId="53" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="54" />
+  <Token Text=":=" UId="55" />
+  <Blank Num="1" UId="56" />
+  <Access Scope="LiteralConstant" UId="57">
+    <Constant UId="58">
+      <ConstantValue UId="60">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="61" />
+  <NewLine Num="1" UId="62" />
+  <Blank Num="4" UId="63" />
+  <Access Scope="LocalVariable" UId="64">
+    <Symbol UId="65">
+      <Component Name="Motor_Struct" UId="66" />
+      <Token Text="." UId="67" />
+      <Component Name="In" UId="68" />
+      <Token Text="." UId="69" />
+      <Component Name="RequestJogPositive" UId="70" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="71" />
+  <Token Text=":=" UId="72" />
+  <Blank Num="1" UId="73" />
+  <Access Scope="LiteralConstant" UId="74">
+    <Constant UId="75">
+      <ConstantValue UId="77">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="78" />
+  <NewLine Num="1" UId="79" />
+  <Blank Num="4" UId="80" />
+  <Access Scope="LocalVariable" UId="81">
+    <Symbol UId="82">
+      <Component Name="Motor_Struct" UId="83" />
+      <Token Text="." UId="84" />
+      <Component Name="In" UId="85" />
+      <Token Text="." UId="86" />
+      <Component Name="RequestJogNegative" UId="87" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="88" />
+  <Token Text=":=" UId="89" />
+  <Blank Num="1" UId="90" />
+  <Access Scope="LiteralConstant" UId="91">
+    <Constant UId="92">
+      <ConstantValue UId="94">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="95" />
+  <NewLine Num="1" UId="96" />
+  <Blank Num="4" UId="97" />
+  <Access Scope="LocalVariable" UId="98">
+    <Symbol UId="99">
+      <Component Name="Motor_Struct" UId="100" />
+      <Token Text="." UId="101" />
+      <Component Name="In" UId="102" />
+      <Token Text="." UId="103" />
+      <Component Name="RequestGoToPosition_1" UId="104" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="105" />
+  <Token Text=":=" UId="106" />
+  <Blank Num="1" UId="107" />
+  <Access Scope="LiteralConstant" UId="108">
+    <Constant UId="109">
+      <ConstantValue UId="111">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="112" />
+  <NewLine Num="1" UId="113" />
+  <Blank Num="4" UId="114" />
+  <Access Scope="LocalVariable" UId="115">
+    <Symbol UId="116">
+      <Component Name="Motor_Struct" UId="117" />
+      <Token Text="." UId="118" />
+      <Component Name="In" UId="119" />
+      <Token Text="." UId="120" />
+      <Component Name="RequestGoToPosition_2" UId="121" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="122" />
+  <Token Text=":=" UId="123" />
+  <Blank Num="1" UId="124" />
+  <Access Scope="LiteralConstant" UId="125">
+    <Constant UId="126">
+      <ConstantValue UId="128">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="129" />
+  <NewLine Num="1" UId="130" />
+  <Blank Num="4" UId="131" />
+  <Access Scope="LocalVariable" UId="132">
+    <Symbol UId="133">
+      <Component Name="Motor_Struct" UId="134" />
+      <Token Text="." UId="135" />
+      <Component Name="In" UId="136" />
+      <Token Text="." UId="137" />
+      <Component Name="RequestGoToPosition_3" UId="138" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="139" />
+  <Token Text=":=" UId="140" />
+  <Blank Num="1" UId="141" />
+  <Access Scope="LiteralConstant" UId="142">
+    <Constant UId="143">
+      <ConstantValue UId="145">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="146" />
+  <NewLine Num="1" UId="147" />
+  <Blank Num="4" UId="148" />
+  <Access Scope="LocalVariable" UId="149">
+    <Symbol UId="150">
+      <Component Name="Motor_Struct" UId="151" />
+      <Token Text="." UId="152" />
+      <Component Name="In" UId="153" />
+      <Token Text="." UId="154" />
+      <Component Name="RequestGoToPosition_4" UId="155" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="156" />
+  <Token Text=":=" UId="157" />
+  <Blank Num="1" UId="158" />
+  <Access Scope="LiteralConstant" UId="159">
+    <Constant UId="160">
+      <ConstantValue UId="162">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="163" />
+  <NewLine Num="1" UId="164" />
+  <Blank Num="4" UId="165" />
+  <Access Scope="LocalVariable" UId="166">
+    <Symbol UId="167">
+      <Component Name="Motor_Struct" UId="168" />
+      <Token Text="." UId="169" />
+      <Component Name="In" UId="170" />
+      <Token Text="." UId="171" />
+      <Component Name="RequestGoToPosition_5" UId="172" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="173" />
+  <Token Text=":=" UId="174" />
+  <Blank Num="1" UId="175" />
+  <Access Scope="LiteralConstant" UId="176">
+    <Constant UId="177">
+      <ConstantValue UId="179">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="180" />
+  <NewLine Num="1" UId="181" />
+  <Token Text="END_IF" UId="182" />
+  <Token Text=";" UId="183" />
+  <NewLine Num="2" UId="184" />
+  <Token Text="CASE" UId="185" />
+  <Blank Num="1" UId="186" />
+  <Access Scope="LocalVariable" UId="187">
+    <Symbol UId="188">
+      <Component Name="MotorMovementManagementStateDiagram" UId="189" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="190" />
+  <Token Text="OF" UId="191" />
+  <NewLine Num="1" UId="192" />
+  <Blank Num="4" UId="193" />
+  <Access Scope="LocalConstant" UId="194">
+    <Constant Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" UId="195" />
+  </Access>
+  <Token Text=":" UId="198" />
+  <NewLine Num="1" UId="199" />
+  <Blank Num="8" UId="200" />
+  <Token Text="IF" UId="201" />
+  <Blank Num="1" UId="202" />
+  <Access Scope="LocalVariable" UId="203">
+    <Symbol UId="204">
+      <Component Name="R_TRIG_RequestHoming" UId="205" />
+      <Token Text="." UId="206" />
+      <Component Name="Q" UId="207" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="208" />
+  <Token Text="THEN" UId="209" />
+  <NewLine Num="1" UId="210" />
+  <Blank Num="12" UId="211" />
+  <Access Scope="LocalVariable" UId="212">
+    <Symbol UId="213">
+      <Component Name="HomingDone" UId="214" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="215" />
+  <Token Text=":=" UId="216" />
+  <Blank Num="1" UId="217" />
+  <Access Scope="LiteralConstant" UId="218">
+    <Constant UId="219">
+      <ConstantValue UId="221">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="222" />
+  <NewLine Num="1" UId="223" />
+  <Blank Num="12" UId="224" />
+  <Access Scope="LocalVariable" UId="225">
+    <Symbol UId="226">
+      <Component Name="MotorMovementManagementStateDiagram" UId="227" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="228" />
+  <Token Text=":=" UId="229" />
+  <Blank Num="1" UId="230" />
+  <Access Scope="LocalConstant" UId="231">
+    <Constant Name="MOTOR_HOMING" UId="232" />
+  </Access>
+  <Token Text=";" UId="235" />
+  <NewLine Num="1" UId="236" />
+  <Blank Num="8" UId="237" />
+  <Token Text="ELSIF" UId="238" />
+  <Blank Num="1" UId="239" />
+  <Access Scope="LocalVariable" UId="240">
+    <Symbol UId="241">
+      <Component Name="R_TRIG_RequestGoToOriginPosition" UId="242" />
+      <Token Text="." UId="243" />
+      <Component Name="Q" UId="244" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="245" />
+  <Token Text="THEN" UId="246" />
+  <NewLine Num="1" UId="247" />
+  <Blank Num="12" UId="248" />
+  <Access Scope="LocalVariable" UId="249">
+    <Symbol UId="250">
+      <Component Name="MotorMovementManagementStateDiagram" UId="251" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="252" />
+  <Token Text=":=" UId="253" />
+  <Blank Num="1" UId="254" />
+  <Access Scope="LocalConstant" UId="255">
+    <Constant Name="MOTOR_GO_TO_ORIGIN_POSITION" UId="256" />
+  </Access>
+  <Token Text=";" UId="259" />
+  <NewLine Num="1" UId="260" />
+  <Blank Num="8" UId="261" />
+  <Token Text="ELSIF" UId="262" />
+  <Blank Num="1" UId="263" />
+  <Access Scope="LocalVariable" UId="264">
+    <Symbol UId="265">
+      <Component Name="R_TRIG_RequestGoToRecoveryPosition" UId="266" />
+      <Token Text="." UId="267" />
+      <Component Name="Q" UId="268" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="269" />
+  <Token Text="THEN" UId="270" />
+  <NewLine Num="1" UId="271" />
+  <Blank Num="12" UId="272" />
+  <Access Scope="LocalVariable" UId="273">
+    <Symbol UId="274">
+      <Component Name="MotorMovementManagementStateDiagram" UId="275" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="276" />
+  <Token Text=":=" UId="277" />
+  <Blank Num="1" UId="278" />
+  <Access Scope="LocalConstant" UId="279">
+    <Constant Name="MOTOR_GO_TO_RECOVERY_POSITION" UId="280" />
+  </Access>
+  <Token Text=";" UId="283" />
+  <NewLine Num="1" UId="284" />
+  <Blank Num="8" UId="285" />
+  <Token Text="ELSIF" UId="286" />
+  <Blank Num="1" UId="287" />
+  <Access Scope="LocalVariable" UId="288">
+    <Symbol UId="289">
+      <Component Name="R_TRIG_RequestGoToWorkingPosition" UId="290" />
+      <Token Text="." UId="291" />
+      <Component Name="Q" UId="292" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="293" />
+  <Token Text="THEN" UId="294" />
+  <NewLine Num="1" UId="295" />
+  <Blank Num="12" UId="296" />
+  <Access Scope="LocalVariable" UId="297">
+    <Symbol UId="298">
+      <Component Name="MotorMovementManagementStateDiagram" UId="299" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="300" />
+  <Token Text=":=" UId="301" />
+  <Blank Num="1" UId="302" />
+  <Access Scope="LocalConstant" UId="303">
+    <Constant Name="MOTOR_GO_TO_WORKING_POSITION" UId="304" />
+  </Access>
+  <Token Text=";" UId="307" />
+  <NewLine Num="1" UId="308" />
+  <Blank Num="8" UId="309" />
+  <Token Text="END_IF" UId="310" />
+  <Token Text=";" UId="311" />
+  <NewLine Num="1" UId="312" />
+  <Blank Num="4" UId="313" />
+  <Access Scope="LocalConstant" UId="314">
+    <Constant Name="MOTOR_HOMING" UId="315" />
+  </Access>
+  <Token Text=":" UId="318" />
+  <NewLine Num="1" UId="319" />
+  <Blank Num="8" UId="320" />
+  <Access Scope="LocalVariable" UId="321">
+    <Symbol UId="322">
+      <Component Name="Motor_Struct" UId="323" />
+      <Token Text="." UId="324" />
+      <Component Name="In" UId="325" />
+      <Token Text="." UId="326" />
+      <Component Name="RequestHoming" UId="327" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="328" />
+  <Token Text=":=" UId="329" />
+  <Blank Num="1" UId="330" />
+  <Access Scope="LiteralConstant" UId="331">
+    <Constant UId="332">
+      <ConstantValue UId="334">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="335" />
+  <NewLine Num="1" UId="336" />
+  <Blank Num="8" UId="337" />
+  <Token Text="IF" UId="338" />
+  <Blank Num="1" UId="339" />
+  <Access Scope="LocalVariable" UId="340">
+    <Symbol UId="341">
+      <Component Name="R_TRIG_HomingDone" UId="342" />
+      <Token Text="." UId="343" />
+      <Component Name="Q" UId="344" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="345" />
+  <Token Text="THEN" UId="346" />
+  <NewLine Num="1" UId="347" />
+  <Blank Num="12" UId="348" />
+  <Access Scope="LocalVariable" UId="349">
+    <Symbol UId="350">
+      <Component Name="Motor_Struct" UId="351" />
+      <Token Text="." UId="352" />
+      <Component Name="In" UId="353" />
+      <Token Text="." UId="354" />
+      <Component Name="RequestHoming" UId="355" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="356" />
+  <Token Text=":=" UId="357" />
+  <Blank Num="1" UId="358" />
+  <Access Scope="LiteralConstant" UId="359">
+    <Constant UId="360">
+      <ConstantValue UId="362">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="363" />
+  <NewLine Num="1" UId="364" />
+  <Blank Num="12" UId="365" />
+  <Access Scope="LocalVariable" UId="366">
+    <Symbol UId="367">
+      <Component Name="SendNewRequestOk" UId="368" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="369" />
+  <Token Text=":=" UId="370" />
+  <Blank Num="1" UId="371" />
+  <Access Scope="LiteralConstant" UId="372">
+    <Constant UId="373">
+      <ConstantValue UId="375">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="376" />
+  <NewLine Num="1" UId="377" />
+  <Blank Num="12" UId="378" />
+  <Access Scope="Call" UId="379">
+    <Instruction Name="RESET_TIMER" UId="380">
+      <Token Text="(" UId="381" />
+      <NamelessParameter UId="382">
+        <Access Scope="LocalVariable" UId="383">
+          <Symbol UId="384">
+            <Component Name="TON_Motor_SendNewRequest" UId="385" />
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="386" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="387" />
+  <NewLine Num="1" UId="388" />
+  <Blank Num="12" UId="389" />
+  <Access Scope="LocalVariable" UId="390">
+    <Symbol UId="391">
+      <Component Name="MotorMovementManagementStateDiagram" UId="392" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="393" />
+  <Token Text=":=" UId="394" />
+  <Blank Num="1" UId="395" />
+  <Access Scope="LocalConstant" UId="396">
+    <Constant Name="MOTOR_MOVEMENT_REQUEST_DONE" UId="397" />
+  </Access>
+  <Token Text=";" UId="400" />
+  <NewLine Num="1" UId="401" />
+  <Blank Num="8" UId="402" />
+  <Token Text="END_IF" UId="403" />
+  <Token Text=";" UId="404" />
+  <NewLine Num="1" UId="405" />
+  <Blank Num="4" UId="406" />
+  <Access Scope="LocalConstant" UId="407">
+    <Constant Name="MOTOR_GO_TO_ORIGIN_POSITION" UId="408" />
+  </Access>
+  <Token Text=":" UId="411" />
+  <NewLine Num="1" UId="412" />
+  <Blank Num="8" UId="413" />
+  <Access Scope="LocalVariable" UId="414">
+    <Symbol UId="415">
+      <Component Name="Motor_Struct" UId="416" />
+      <Token Text="." UId="417" />
+      <Component Name="In" UId="418" />
+      <Token Text="." UId="419" />
+      <Component Name="RequestGoToPosition_1" UId="420" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="421" />
+  <Token Text=":=" UId="422" />
+  <Blank Num="1" UId="423" />
+  <Access Scope="LiteralConstant" UId="424">
+    <Constant UId="425">
+      <ConstantValue UId="427">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="428" />
+  <NewLine Num="1" UId="429" />
+  <Blank Num="8" UId="430" />
+  <Token Text="IF" UId="431" />
+  <Blank Num="1" UId="432" />
+  <Access Scope="LocalVariable" UId="433">
+    <Symbol UId="434">
+      <Component Name="Motor_Struct" UId="435" />
+      <Token Text="." UId="436" />
+      <Component Name="Out" UId="437" />
+      <Token Text="." UId="438" />
+      <Component Name="IsInPosition_1" UId="439" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="440" />
+  <Token Text="THEN" UId="441" />
+  <NewLine Num="1" UId="442" />
+  <Blank Num="12" UId="443" />
+  <Access Scope="LocalVariable" UId="444">
+    <Symbol UId="445">
+      <Component Name="Motor_Struct" UId="446" />
+      <Token Text="." UId="447" />
+      <Component Name="In" UId="448" />
+      <Token Text="." UId="449" />
+      <Component Name="RequestGoToPosition_1" UId="450" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="451" />
+  <Token Text=":=" UId="452" />
+  <Blank Num="1" UId="453" />
+  <Access Scope="LiteralConstant" UId="454">
+    <Constant UId="455">
+      <ConstantValue UId="457">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="458" />
+  <NewLine Num="1" UId="459" />
+  <Blank Num="12" UId="460" />
+  <Access Scope="Call" UId="461">
+    <Instruction Name="RESET_TIMER" UId="462">
+      <Token Text="(" UId="463" />
+      <NamelessParameter UId="464">
+        <Access Scope="LocalVariable" UId="465">
+          <Symbol UId="466">
+            <Component Name="TON_Motor_SendNewRequest" UId="467" />
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="468" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="469" />
+  <NewLine Num="1" UId="470" />
+  <Blank Num="12" UId="471" />
+  <Access Scope="LocalVariable" UId="472">
+    <Symbol UId="473">
+      <Component Name="MotorMovementManagementStateDiagram" UId="474" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="475" />
+  <Token Text=":=" UId="476" />
+  <Blank Num="1" UId="477" />
+  <Access Scope="LocalConstant" UId="478">
+    <Constant Name="MOTOR_MOVEMENT_REQUEST_DONE" UId="479" />
+  </Access>
+  <Token Text=";" UId="482" />
+  <NewLine Num="1" UId="483" />
+  <Blank Num="8" UId="484" />
+  <Token Text="END_IF" UId="485" />
+  <Token Text=";" UId="486" />
+  <NewLine Num="1" UId="487" />
+  <Blank Num="4" UId="488" />
+  <Access Scope="LocalConstant" UId="489">
+    <Constant Name="MOTOR_GO_TO_RECOVERY_POSITION" UId="490" />
+  </Access>
+  <Token Text=":" UId="493" />
+  <NewLine Num="1" UId="494" />
+  <Blank Num="8" UId="495" />
+  <Access Scope="LocalVariable" UId="496">
+    <Symbol UId="497">
+      <Component Name="Motor_Struct" UId="498" />
+      <Token Text="." UId="499" />
+      <Component Name="In" UId="500" />
+      <Token Text="." UId="501" />
+      <Component Name="RequestGoToPosition_3" UId="502" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="503" />
+  <Token Text=":=" UId="504" />
+  <Blank Num="1" UId="505" />
+  <Access Scope="LiteralConstant" UId="506">
+    <Constant UId="507">
+      <ConstantValue UId="509">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="510" />
+  <NewLine Num="1" UId="511" />
+  <Blank Num="8" UId="512" />
+  <Token Text="IF" UId="513" />
+  <Blank Num="1" UId="514" />
+  <Access Scope="LocalVariable" UId="515">
+    <Symbol UId="516">
+      <Component Name="Motor_Struct" UId="517" />
+      <Token Text="." UId="518" />
+      <Component Name="Out" UId="519" />
+      <Token Text="." UId="520" />
+      <Component Name="IsInPosition_3" UId="521" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="522" />
+  <Token Text="THEN" UId="523" />
+  <NewLine Num="1" UId="524" />
+  <Blank Num="12" UId="525" />
+  <Access Scope="LocalVariable" UId="526">
+    <Symbol UId="527">
+      <Component Name="Motor_Struct" UId="528" />
+      <Token Text="." UId="529" />
+      <Component Name="In" UId="530" />
+      <Token Text="." UId="531" />
+      <Component Name="RequestGoToPosition_3" UId="532" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="533" />
+  <Token Text=":=" UId="534" />
+  <Blank Num="1" UId="535" />
+  <Access Scope="LiteralConstant" UId="536">
+    <Constant UId="537">
+      <ConstantValue UId="539">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="540" />
+  <NewLine Num="1" UId="541" />
+  <Blank Num="12" UId="542" />
+  <Access Scope="Call" UId="543">
+    <Instruction Name="RESET_TIMER" UId="544">
+      <Token Text="(" UId="545" />
+      <NamelessParameter UId="546">
+        <Access Scope="LocalVariable" UId="547">
+          <Symbol UId="548">
+            <Component Name="TON_Motor_SendNewRequest" UId="549" />
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="550" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="551" />
+  <NewLine Num="1" UId="552" />
+  <Blank Num="12" UId="553" />
+  <Access Scope="LocalVariable" UId="554">
+    <Symbol UId="555">
+      <Component Name="MotorMovementManagementStateDiagram" UId="556" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="557" />
+  <Token Text=":=" UId="558" />
+  <Blank Num="1" UId="559" />
+  <Access Scope="LocalConstant" UId="560">
+    <Constant Name="MOTOR_MOVEMENT_REQUEST_DONE" UId="561" />
+  </Access>
+  <Token Text=";" UId="564" />
+  <NewLine Num="1" UId="565" />
+  <Blank Num="8" UId="566" />
+  <Token Text="END_IF" UId="567" />
+  <Token Text=";" UId="568" />
+  <NewLine Num="1" UId="569" />
+  <Blank Num="4" UId="570" />
+  <Access Scope="LocalConstant" UId="571">
+    <Constant Name="MOTOR_GO_TO_WORKING_POSITION" UId="572" />
+  </Access>
+  <Token Text=":" UId="575" />
+  <NewLine Num="1" UId="576" />
+  <Blank Num="8" UId="577" />
+  <Access Scope="LocalVariable" UId="578">
+    <Symbol UId="579">
+      <Component Name="Motor_Struct" UId="580" />
+      <Token Text="." UId="581" />
+      <Component Name="In" UId="582" />
+      <Token Text="." UId="583" />
+      <Component Name="RequestGoToPosition_2" UId="584" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="585" />
+  <Token Text=":=" UId="586" />
+  <Blank Num="1" UId="587" />
+  <Access Scope="LiteralConstant" UId="588">
+    <Constant UId="589">
+      <ConstantValue UId="591">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="592" />
+  <NewLine Num="1" UId="593" />
+  <Blank Num="8" UId="594" />
+  <Token Text="IF" UId="595" />
+  <Blank Num="1" UId="596" />
+  <Access Scope="LocalVariable" UId="597">
+    <Symbol UId="598">
+      <Component Name="Motor_Struct" UId="599" />
+      <Token Text="." UId="600" />
+      <Component Name="Out" UId="601" />
+      <Token Text="." UId="602" />
+      <Component Name="IsInPosition_2" UId="603" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="604" />
+  <Token Text="THEN" UId="605" />
+  <NewLine Num="1" UId="606" />
+  <Blank Num="12" UId="607" />
+  <Access Scope="LocalVariable" UId="608">
+    <Symbol UId="609">
+      <Component Name="Motor_Struct" UId="610" />
+      <Token Text="." UId="611" />
+      <Component Name="In" UId="612" />
+      <Token Text="." UId="613" />
+      <Component Name="RequestGoToPosition_2" UId="614" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="615" />
+  <Token Text=":=" UId="616" />
+  <Blank Num="1" UId="617" />
+  <Access Scope="LiteralConstant" UId="618">
+    <Constant UId="619">
+      <ConstantValue UId="621">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="622" />
+  <NewLine Num="1" UId="623" />
+  <Blank Num="12" UId="624" />
+  <Access Scope="Call" UId="625">
+    <Instruction Name="RESET_TIMER" UId="626">
+      <Token Text="(" UId="627" />
+      <NamelessParameter UId="628">
+        <Access Scope="LocalVariable" UId="629">
+          <Symbol UId="630">
+            <Component Name="TON_Motor_SendNewRequest" UId="631" />
+          </Symbol>
+        </Access>
+      </NamelessParameter>
+      <Token Text=")" UId="632" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="633" />
+  <NewLine Num="1" UId="634" />
+  <Blank Num="12" UId="635" />
+  <Access Scope="LocalVariable" UId="636">
+    <Symbol UId="637">
+      <Component Name="MotorMovementManagementStateDiagram" UId="638" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="639" />
+  <Token Text=":=" UId="640" />
+  <Blank Num="1" UId="641" />
+  <Access Scope="LocalConstant" UId="642">
+    <Constant Name="MOTOR_MOVEMENT_REQUEST_DONE" UId="643" />
+  </Access>
+  <Token Text=";" UId="646" />
+  <NewLine Num="1" UId="647" />
+  <Blank Num="8" UId="648" />
+  <Token Text="END_IF" UId="649" />
+  <Token Text=";" UId="650" />
+  <NewLine Num="1" UId="651" />
+  <Blank Num="8" UId="652" />
+  <NewLine Num="1" UId="653" />
+  <Blank Num="4" UId="654" />
+  <Access Scope="LocalConstant" UId="655">
+    <Constant Name="MOTOR_MOVEMENT_REQUEST_DONE" UId="656" />
+  </Access>
+  <Token Text=":" UId="659" />
+  <NewLine Num="1" UId="660" />
+  <Blank Num="8" UId="661" />
+  <Access Scope="LocalVariable" UId="662">
+    <Symbol UId="663">
+      <Component Name="MotorMovementManagementStateDiagram" UId="664" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="665" />
+  <Token Text=":=" UId="666" />
+  <Blank Num="1" UId="667" />
+  <Access Scope="LocalConstant" UId="668">
+    <Constant Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" UId="669" />
+  </Access>
+  <Token Text=";" UId="672" />
+  <NewLine Num="1" UId="673" />
+  <Token Text="END_CASE" UId="674" />
+  <Token Text=";" UId="675" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="21" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="22" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="23" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="24" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="25" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Motor Movement Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="26" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="27" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="Motor_Struct" UId="25" />
+      <Token Text="." UId="26" />
+      <Component Name="Out" UId="27" />
+      <Token Text="." UId="28" />
+      <Component Name="InError" UId="29" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="30" />
+  <Token Text="THEN" UId="31" />
+  <NewLine Num="1" UId="32" />
+  <Blank Num="4" UId="33" />
+  <Access Scope="LocalVariable" UId="34">
+    <Symbol UId="35">
+      <Component Name="MotorMovementManagementStateDiagram" UId="36" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="37" />
+  <Token Text=":=" UId="38" />
+  <Blank Num="1" UId="39" />
+  <Access Scope="LocalConstant" UId="40">
+    <Constant Name="WAIT_FOR_MOTOR_MOVEMENT_REQUESTS" UId="41" />
+  </Access>
+  <Token Text=";" UId="44" />
+  <NewLine Num="1" UId="45" />
+  <Blank Num="4" UId="46" />
+  <Access Scope="LocalVariable" UId="47">
+    <Symbol UId="48">
+      <Component Name="Motor_Struct" UId="49" />
+      <Token Text="." UId="50" />
+      <Component Name="In" UId="51" />
+      <Token Text="." UId="52" />
+      <Component Name="Ack" UId="53" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="54" />
+  <Token Text=":=" UId="55" />
+  <Blank Num="1" UId="56" />
+  <Access Scope="LocalVariable" UId="57">
+    <Symbol UId="58">
+      <Component Name="RequestAcknowledge" UId="59" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="60" />
+  <NewLine Num="1" UId="61" />
+  <Blank Num="4" UId="62" />
+  <Access Scope="LocalVariable" UId="63">
+    <Symbol UId="64">
+      <Component Name="Motor_Struct" UId="65" />
+      <Token Text="." UId="66" />
+      <Component Name="In" UId="67" />
+      <Token Text="." UId="68" />
+      <Component Name="EnableMotor" UId="69" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="70" />
+  <Token Text=":=" UId="71" />
+  <Blank Num="1" UId="72" />
+  <Access Scope="LiteralConstant" UId="73">
+    <Constant UId="74">
+      <ConstantValue UId="76">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="77" />
+  <NewLine Num="1" UId="78" />
+  <Blank Num="4" UId="79" />
+  <Access Scope="LocalVariable" UId="80">
+    <Symbol UId="81">
+      <Component Name="Motor_Struct" UId="82" />
+      <Token Text="." UId="83" />
+      <Component Name="In" UId="84" />
+      <Token Text="." UId="85" />
+      <Component Name="RequestHoming" UId="86" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="87" />
+  <Token Text=":=" UId="88" />
+  <Blank Num="1" UId="89" />
+  <Access Scope="LiteralConstant" UId="90">
+    <Constant UId="91">
+      <ConstantValue UId="93">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="94" />
+  <NewLine Num="1" UId="95" />
+  <Blank Num="4" UId="96" />
+  <Access Scope="LocalVariable" UId="97">
+    <Symbol UId="98">
+      <Component Name="Motor_Struct" UId="99" />
+      <Token Text="." UId="100" />
+      <Component Name="In" UId="101" />
+      <Token Text="." UId="102" />
+      <Component Name="RequestGoToPosition_1" UId="103" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="104" />
+  <Token Text=":=" UId="105" />
+  <Blank Num="1" UId="106" />
+  <Access Scope="LiteralConstant" UId="107">
+    <Constant UId="108">
+      <ConstantValue UId="110">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="111" />
+  <NewLine Num="1" UId="112" />
+  <Blank Num="4" UId="113" />
+  <Access Scope="LocalVariable" UId="114">
+    <Symbol UId="115">
+      <Component Name="Motor_Struct" UId="116" />
+      <Token Text="." UId="117" />
+      <Component Name="In" UId="118" />
+      <Token Text="." UId="119" />
+      <Component Name="RequestGoToPosition_2" UId="120" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="121" />
+  <Token Text=":=" UId="122" />
+  <Blank Num="1" UId="123" />
+  <Access Scope="LiteralConstant" UId="124">
+    <Constant UId="125">
+      <ConstantValue UId="127">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="128" />
+  <NewLine Num="1" UId="129" />
+  <Blank Num="4" UId="130" />
+  <Access Scope="LocalVariable" UId="131">
+    <Symbol UId="132">
+      <Component Name="SendRequestAfterEnableOk" UId="133" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="134" />
+  <Token Text=":=" UId="135" />
+  <Blank Num="1" UId="136" />
+  <Access Scope="LiteralConstant" UId="137">
+    <Constant UId="138">
+      <ConstantValue UId="140">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="141" />
+  <NewLine Num="1" UId="142" />
+  <Blank Num="4" UId="143" />
+  <Access Scope="LocalVariable" UId="144">
+    <Symbol UId="145">
+      <Component Name="SendNewRequestOk" UId="146" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="147" />
+  <Token Text=":=" UId="148" />
+  <Blank Num="1" UId="149" />
+  <Access Scope="LiteralConstant" UId="150">
+    <Constant UId="151">
+      <ConstantValue UId="153">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="154" />
+  <NewLine Num="1" UId="155" />
+  <Blank Num="4" UId="156" />
+  <Access Scope="LocalVariable" UId="157">
+    <Symbol UId="158">
+      <Component Name="HomingDone" UId="159" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="160" />
+  <Token Text=":=" UId="161" />
+  <Blank Num="1" UId="162" />
+  <Access Scope="LiteralConstant" UId="163">
+    <Constant UId="164">
+      <ConstantValue UId="166">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="167" />
+  <NewLine Num="1" UId="168" />
+  <Token Text="END_IF" UId="169" />
+  <Token Text=";" UId="170" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="28" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="29" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="2B" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="2C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Motor Error Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="2E" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <LineComment Inserted="false" NoClosingBracket="false" UId="21">
+    <Text UId="22">Motor Position States Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="23" />
+  <Access Scope="LocalVariable" UId="24">
+    <Symbol UId="25">
+      <Component Name="ActualPosition" UId="26" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="27" />
+  <Token Text=":=" UId="28" />
+  <Blank Num="1" UId="29" />
+  <Access Scope="LocalVariable" UId="30">
+    <Symbol UId="31">
+      <Component Name="Motor_Struct" UId="32" />
+      <Token Text="." UId="33" />
+      <Component Name="Out" UId="34" />
+      <Token Text="." UId="35" />
+      <Component Name="ActualPosition_mm" UId="36" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="37" />
+  <NewLine Num="1" UId="38" />
+  <Access Scope="LocalVariable" UId="39">
+    <Symbol UId="40">
+      <Component Name="InOriginPosition" UId="41" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="42" />
+  <Token Text=":=" UId="43" />
+  <Blank Num="1" UId="44" />
+  <Access Scope="LocalVariable" UId="45">
+    <Symbol UId="46">
+      <Component Name="Motor_Struct" UId="47" />
+      <Token Text="." UId="48" />
+      <Component Name="Out" UId="49" />
+      <Token Text="." UId="50" />
+      <Component Name="IsInPosition_1" UId="51" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="52" />
+  <NewLine Num="1" UId="53" />
+  <Access Scope="LocalVariable" UId="54">
+    <Symbol UId="55">
+      <Component Name="InWorkingPosition" UId="56" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="57" />
+  <Token Text=":=" UId="58" />
+  <Blank Num="1" UId="59" />
+  <Access Scope="LocalVariable" UId="60">
+    <Symbol UId="61">
+      <Component Name="Motor_Struct" UId="62" />
+      <Token Text="." UId="63" />
+      <Component Name="Out" UId="64" />
+      <Token Text="." UId="65" />
+      <Component Name="IsInPosition_2" UId="66" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="67" />
+  <NewLine Num="1" UId="68" />
+  <Access Scope="LocalVariable" UId="69">
+    <Symbol UId="70">
+      <Component Name="IsInStandByPosition" UId="71" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="72" />
+  <Token Text=":=" UId="73" />
+  <Blank Num="1" UId="74" />
+  <Access Scope="LocalVariable" UId="75">
+    <Symbol UId="76">
+      <Component Name="Motor_Struct" UId="77" />
+      <Token Text="." UId="78" />
+      <Component Name="Out" UId="79" />
+      <Token Text="." UId="80" />
+      <Component Name="IsInPosition_3" UId="81" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="82" />
+  <NewLine Num="2" UId="83" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="84">
+    <Text UId="85">Motor Error States Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="86" />
+  <Access Scope="LocalVariable" UId="87">
+    <Symbol UId="88">
+      <Component Name="HomingInProgress" UId="89" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="90" />
+  <Token Text=":=" UId="91" />
+  <Blank Num="1" UId="92" />
+  <Access Scope="LocalVariable" UId="93">
+    <Symbol UId="94">
+      <Component Name="Motor_Struct" UId="95" />
+      <Token Text="." UId="96" />
+      <Component Name="Out" UId="97" />
+      <Token Text="." UId="98" />
+      <Component Name="HomingInProgress" UId="99" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="100" />
+  <NewLine Num="1" UId="101" />
+  <Access Scope="LocalVariable" UId="102">
+    <Symbol UId="103">
+      <Component Name="HomingDone" UId="104" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="105" />
+  <Token Text=":=" UId="106" />
+  <Blank Num="1" UId="107" />
+  <Access Scope="LocalVariable" UId="108">
+    <Symbol UId="109">
+      <Component Name="Motor_Struct" UId="110" />
+      <Token Text="." UId="111" />
+      <Component Name="Out" UId="112" />
+      <Token Text="." UId="113" />
+      <Component Name="HomingDone" UId="114" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="115" />
+  <NewLine Num="1" UId="116" />
+  <Access Scope="LocalVariable" UId="117">
+    <Symbol UId="118">
+      <Component Name="MotorInError" UId="119" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="120" />
+  <Token Text=":=" UId="121" />
+  <Blank Num="1" UId="122" />
+  <Access Scope="LocalVariable" UId="123">
+    <Symbol UId="124">
+      <Component Name="Motor_Struct" UId="125" />
+      <Token Text="." UId="126" />
+      <Component Name="Out" UId="127" />
+      <Token Text="." UId="128" />
+      <Component Name="InError" UId="129" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="130" />
+  <NewLine Num="1" UId="131" />
+  <Access Scope="LocalVariable" UId="132">
+    <Symbol UId="133">
+      <Component Name="ErrorCode" UId="134" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="135" />
+  <Token Text=":=" UId="136" />
+  <Blank Num="1" UId="137" />
+  <Access Scope="LocalVariable" UId="138">
+    <Symbol UId="139">
+      <Component Name="Motor_Struct" UId="140" />
+      <Token Text="." UId="141" />
+      <Component Name="Out" UId="142" />
+      <Token Text="." UId="143" />
+      <Component Name="ErrorCode" UId="144" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="145" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="2F" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="30" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="31" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="32" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="33" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Trays States Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="34" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="35" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="36" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="37" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

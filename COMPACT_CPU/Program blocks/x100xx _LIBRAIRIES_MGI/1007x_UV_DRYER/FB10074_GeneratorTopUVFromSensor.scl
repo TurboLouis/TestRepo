@@ -1,0 +1,165 @@
+﻿FUNCTION_BLOCK "FB10074_GeneratorTopUVFromSensor"
+TITLE = FB10074_GeneratorTopUVFromSensor
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : Jonathan
+FAMILY : '1007x_DRYER_UV'
+VERSION : 1.0
+//Release note : 
+//1.0 - Feature developped
+   VAR_INPUT 
+      SensorChuckEntrance : Bool;   // mm
+      SensorChuckOutput : Bool;   // mm
+      DistanceFromSensorEntranceToUV : Real;   // mm
+      DistanceFromUVToSensorOutput : Real;   // mm
+      ChuckLength : Real;   // mm
+      ChuckSpeed : Real;   // mm/s
+      TimeToOpenShutter : Real;
+      TimeToCloseShutter : Real;
+   END_VAR
+
+   VAR_OUTPUT 
+      RequestStartLampUV : Bool;
+   END_VAR
+
+   VAR 
+      MemChuckIn : Bool;
+      MemNewChuckInDuringUvOn : Bool;
+      MemTwoChuckFollowing : Bool;
+      SafetyStopUV : Bool;
+      TON_SafetyStopUV {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      TON_SafetyOnSensorEntrance {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      TON_SafetyOnSensorOutput {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      TON_StartUV {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      TON_MaintainUV {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      TON_MaintainUVLastChuck {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      TON_Reset {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      TimeComputedToStartUV_sec : Real;
+      TimeComputedToMaintainUV_sec : Real;
+      TimeComputedToMaintainUVLastChuck_sec : Real;
+      TimeComputedToStartUV_ms : Time;
+      TimeComputedToMaintainUV_ms : Time;
+      TimeComputedToMaintainUVLastChuck_ms : Time;
+      TimeComputedToSafetyOnSensorEntrance_ms : Time;
+      RTrig_SensorEntrance {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      FTrig_SensorEntrance {InstructionName := 'F_TRIG'; LibVersion := '1.0'} : F_TRIG;
+      RTrig_SensorOutput {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      FTrig_SensorOutput {InstructionName := 'F_TRIG'; LibVersion := '1.0'} : F_TRIG;
+      StartUVComputed : Bool;
+      RTrig_SensorEntranceDuringUVStarted {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+   END_VAR
+
+
+BEGIN
+	
+	// Edges detection
+	#RTrig_SensorEntrance(CLK := #SensorChuckEntrance);
+	#FTrig_SensorEntrance(CLK := #SensorChuckEntrance);
+	
+	#RTrig_SensorOutput(CLK := #SensorChuckOutput);
+	#FTrig_SensorOutput(CLK := #SensorChuckOutput);
+	
+	
+	//#RTrig_SensorEntranceDuringUVStarted(CLK := #StartUVComputed);
+	
+	// Compute times
+	IF #ChuckSpeed > 0 THEN
+	    #TimeComputedToStartUV_sec := (#DistanceFromSensorEntranceToUV / #ChuckSpeed) - #TimeToOpenShutter;
+	    #TimeComputedToMaintainUV_sec := (#ChuckLength / #ChuckSpeed) - #TimeToCloseShutter;
+	    #TimeComputedToMaintainUVLastChuck_sec := (#DistanceFromSensorEntranceToUV / #ChuckSpeed);
+	    
+	    IF #TimeComputedToStartUV_sec < 0 THEN
+	        #TimeComputedToStartUV_sec := 0.0;
+	    END_IF;
+	    
+	    IF #TimeComputedToMaintainUV_sec < 0 THEN
+	        #TimeComputedToMaintainUV_sec := 0.0;
+	    END_IF;
+	    
+	    #TimeComputedToStartUV_ms := INT_TO_TIME(IN := REAL_TO_INT(IN:=TRUNC_REAL(#TimeComputedToStartUV_sec * 1000)));
+	    #TimeComputedToMaintainUV_ms := INT_TO_TIME(IN := REAL_TO_INT(IN := TRUNC_REAL(#TimeComputedToMaintainUV_sec * 1000)));
+	    #TimeComputedToMaintainUVLastChuck_ms := INT_TO_TIME(IN := REAL_TO_INT(IN := TRUNC_REAL(#TimeComputedToMaintainUVLastChuck_sec * 1000)));
+	    #TimeComputedToSafetyOnSensorEntrance_ms := INT_TO_TIME(IN := REAL_TO_INT(IN := (((#ChuckLength + #DistanceFromSensorEntranceToUV) / #ChuckSpeed) * 1000)) + 4000);
+	END_IF;
+	
+	
+	// Memorisation Chuck coming in
+	IF #RTrig_SensorEntrance.Q THEN
+	    #MemChuckIn := TRUE;
+	END_IF;
+	
+	// New chuck arriving during UV turned on
+	// Need to maintain the power and not cloe the shutter between both
+	IF #StartUVComputed AND #RTrig_SensorEntrance.Q THEN
+	    #MemNewChuckInDuringUvOn := TRUE;
+	    #MemTwoChuckFollowing := TRUE;
+	END_IF;
+	
+	// Reset new chuck arriving
+	IF NOT #SensorChuckEntrance THEN
+	    #MemNewChuckInDuringUvOn := false;
+	END_IF;
+	
+	
+	// Time to start UV
+	#TON_StartUV(IN := #MemChuckIn AND NOT #MemNewChuckInDuringUvOn,
+	             PT := #TimeComputedToStartUV_ms);
+	
+	// Start UV
+	IF #TON_StartUV.Q THEN
+	    #StartUVComputed := TRUE;
+	END_IF;
+	
+	// Time to maintain UV
+	#TON_MaintainUV(IN := #StartUVComputed AND NOT #MemNewChuckInDuringUvOn,
+	                PT := #TimeComputedToMaintainUV_ms);
+	
+	#TON_MaintainUVLastChuck(IN := #MemTwoChuckFollowing AND NOT #MemNewChuckInDuringUvOn,
+	                         PT := #TimeComputedToMaintainUVLastChuck_ms);
+	
+	
+	// Reset Start UV
+	IF #TON_MaintainUV.Q OR #TON_MaintainUVLastChuck.Q OR #SafetyStopUV THEN
+	    #StartUVComputed := FALSE;
+	    #MemTwoChuckFollowing := FALSE;
+	END_IF;
+	
+	// Reset chuck in
+	IF ((#StartUVComputed OR #FTrig_SensorOutput.Q) AND #MemChuckIn) OR #SafetyStopUV THEN
+	    #MemChuckIn := FALSE;
+	    #SafetyStopUV := FALSE;
+	END_IF;
+	
+	IF #TON_SafetyOnSensorEntrance.Q OR #TON_SafetyOnSensorOutput.Q THEN
+	    #SafetyStopUV := TRUE;
+	    ;
+	END_IF;
+	
+	// Safety to have a maximum time on UV
+	#TON_SafetyStopUV(IN := #StartUVComputed AND NOT #SafetyStopUV,
+	                  PT := T#4.5s);
+	
+	// Safety if chuck stay stop on sensor entrance
+	#TON_SafetyOnSensorEntrance(IN := #SensorChuckEntrance AND NOT #SafetyStopUV,
+	                            PT := #TimeComputedToSafetyOnSensorEntrance_ms);
+	
+	// Safety if chuck stay stop on sensor output
+	#TON_SafetyOnSensorOutput(IN := #SensorChuckOutput AND NOT #SafetyStopUV,
+	                            PT := T#2.5s);
+	  
+	// Reset 
+	#TON_Reset(IN := NOT #SensorChuckEntrance,
+	             PT:=T#10s);
+	  
+	IF #TON_Reset.Q THEN
+	    #MemChuckIn := FALSE;
+	    #MemNewChuckInDuringUvOn := FALSE;
+	    #MemTwoChuckFollowing := FALSE;
+	    #StartUVComputed := FALSE;
+	END_IF;
+	  
+	
+	// Activate output signal
+	#RequestStartLampUV := #StartUVComputed;
+	
+END_FUNCTION_BLOCK
+

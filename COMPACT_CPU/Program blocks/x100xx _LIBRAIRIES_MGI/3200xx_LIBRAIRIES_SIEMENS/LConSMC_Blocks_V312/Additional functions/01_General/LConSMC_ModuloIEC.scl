@@ -1,0 +1,48 @@
+﻿FUNCTION "LConSMC_ModuloIEC" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      value : LReal;
+      moduloValue : LReal;
+   END_VAR
+
+   VAR_TEMP 
+      tempActValue : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      "UNIT ID" : DWord := 16#000C_0000;
+   END_VAR
+
+
+BEGIN
+	//Functionality description: 
+	//modulo division with LREAL values
+	// ----------------------------------------------------------------------------------------------------------------
+	//  Input_Output Parameter description:
+	//  value : original value for modulo division
+	//  moduloValue : modulo value for division
+	//  Modulo  : return value with remainder of division
+	//  => Modulo = value MOD moduloValue
+	//  function defined in IEC 61131-3:  positive value => positive result
+	//                                    negative value => negative result
+	// ----------------------------------------------------------------------------------------------------------------
+	//  Task assignment: This program must be called once
+	// ----------------------------------------------------------------------------------------------------------------
+	//  change log table:
+	//  version   date        expert in charge        changes applied          
+	//  01.00.00  20.08.2017  APC Erlangen            Creation of the original
+	// ================================================================================================================  
+	
+	
+	#tempActValue := #value;  //copy to local var
+	
+	IF #moduloValue = 0.0 THEN
+	    //invalid parameter
+	    #LConSMC_ModuloIEC := 0;
+	ELSE
+	    //modulo division like IEC 61131-3
+	    #LConSMC_ModuloIEC := ((#value / #moduloValue) - DINT_TO_LREAL(TRUNC(#value / #moduloValue))) * #moduloValue;
+	END_IF;
+END_FUNCTION
+

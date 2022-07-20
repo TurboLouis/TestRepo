@@ -1,0 +1,56 @@
+﻿FUNCTION_BLOCK "LCamHdl_GetCamStatusWord"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : CamHdl
+VERSION : 1.0
+   VAR_INPUT 
+      cam {InstructionName := 'TO_Cam'; LibVersion := '5.0'} : TO_Cam;
+   END_VAR
+
+   VAR_OUTPUT 
+      control { ExternalWritable := 'False'} : Bool;
+      error { ExternalWritable := 'False'} : Bool;
+      restartActive { ExternalWritable := 'False'} : Bool;
+      onlineStartValuesChanged { ExternalWritable := 'False'} : Bool;
+      camDataChanged { ExternalWritable := 'False'} : Bool;
+      interpolated { ExternalWritable := 'False'} : Bool;
+      inInterpolation { ExternalWritable := 'False'} : Bool;
+   END_VAR
+
+   VAR_TEMP 
+      tempCamStatus : DWord;
+   END_VAR
+
+
+BEGIN
+	//==========================================================================================
+	// SIEMENS AG
+	// (c)Copyright 2016 All Rights Reserved
+	//------------------------------------------------------------------------------------------
+	// Library: LCamHdl 
+	// Tested with: S7-1515T-1 PN
+	// Engineering: TIA Portal V14
+	// Restrictions: ---
+	// Requirements: S7-1500T
+	// Functionality: Read actual cam status
+	// Support: tech.team.motioncontrol@siemens.com                                              
+	// Note: Parameter comments are only available in language 'English (United States)'          
+	//------------------------------------------------------------------------------------------
+	// Change log table:
+	// Version    Date          Expert in charge    Changes applied
+	// 01.00.00   14.01.2016    RC                  First Released Version
+	// 01.00.01   31.03.2017    KP                  Added support information
+	//------------------------------------------------------------------------------------------
+	// Function: LCamHdl_GetCamStatusWord
+	//===========================================================================================
+	
+	#tempCamStatus := #cam.StatusWord;
+	#control := #tempCamStatus.%X0;
+	#error := #tempCamStatus.%X1;
+	#restartActive := #tempCamStatus.%X2;
+	#onlineStartValuesChanged := #tempCamStatus.%X3;
+	#camDataChanged := #tempCamStatus.%X4;
+	#interpolated := #tempCamStatus.%X5;
+	#inInterpolation := #tempCamStatus.%X6;
+END_FUNCTION_BLOCK
+

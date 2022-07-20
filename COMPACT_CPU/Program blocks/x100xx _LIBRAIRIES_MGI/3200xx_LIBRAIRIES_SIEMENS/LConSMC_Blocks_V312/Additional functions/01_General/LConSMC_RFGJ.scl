@@ -1,0 +1,347 @@
+﻿FUNCTION_BLOCK "LConSMC_RFGJ"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      run : Bool := FALSE;
+      enable : Bool := FALSE;
+      mode : Bool := TRUE;
+      enableRounding : Bool := TRUE;
+      hold : Bool := FALSE;
+      zeroRounding : Bool := FALSE;
+      x : LReal := 0.0;
+      nominalValue : LReal := 1000.0;
+      rampupTime : LReal := 1.0;
+      rampdownTime : LReal := 1.0;
+      rampTimeMode : Int := #DIFF_TO_ZERO;
+      fastRampdownTime : LReal := 0.1;
+      roundingTime : LReal := 0.5;
+      tCycle : Real := 0.0;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool := FALSE;
+      error : Bool := FALSE;
+      errorID : DWord := 16#0000_0000;
+      setpointReached : Bool := FALSE;
+      setpointZero : Bool := FALSE;
+      accelerating : Bool := FALSE;
+      decelerating : Bool := FALSE;
+      y : LReal;
+      ya : LReal;
+   END_VAR
+
+   VAR 
+      statMaxValue : LReal := 0.0;
+      statAcc : LReal := 0.0;
+      statDec : LReal := 0.0;
+      statAccStep : LReal := 0.0;
+      statDecStep : LReal := 0.0;
+      statInternalSetpoint : LReal := 0.0;
+      statRoundingTime : LReal := 0.0;
+      statXOld : LReal := 0.0;
+      statEnRounding : Bool;
+      statSmoothingActive : Bool;
+      statHoldOld : Bool;
+      statFirstRun : Bool := TRUE;
+      statTCycle : LReal := 0.0;
+      statY : LReal := 0.0;
+      statYa : LReal := 0.0;
+      statChangeAccDecc : Bool := FALSE;
+      statZeroRoundingInternal : Bool := FALSE;
+   END_VAR
+
+   VAR_TEMP 
+      tmpTempReal : LReal;
+      tmpTempBool : Bool;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#1107_0000;
+      MAX_RAMP_TIME_S : Real := 1000.0;
+      NO_ERROR : DWord := 16#0000_0000;
+      DIFF_TO_ZERO : Int := 0;
+      DIFF_OF_CHANGE : Int := 1;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : RFGJ
+	//functionality : Ramp function generator with jerk limiting
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge              changes applied
+	//V1.0      18.07.2012    APC GMC group                 Creation
+	//V1.1      17.11.2016    APC ERL                       adapted to styleguide; warning "variable might not be initialized" removed
+	//V1.2      17.05.2017    APC ERL                       Additional input "rampTimeMode" to define the use of rampup and
+	//                                                      rampdown time
+	//========================================================================================================================
+	
+	#error := FALSE;
+	#errorID := #NO_ERROR;
+	
+	IF (NOT #run) THEN
+	    #busy := FALSE;
+	    #setpointReached := FALSE;
+	    #setpointZero := FALSE;
+	    #accelerating := FALSE;
+	    #decelerating := FALSE;
+	    #statY := 0.0;
+	    #statYa := 0.0;
+	    RETURN;
+	END_IF;
+	
+	IF (#statFirstRun) THEN                                                               // only at the first Run   
+	    #statFirstRun := FALSE;
+	    #statTCycle := #tCycle / 1000;                                                  // conversion from msec to sec
+	END_IF;
+	
+	IF (#statTCycle = 0.0) THEN                                                       //Error for TCycle=0.0
+	    #statY := 0.0;
+	    #statYa := 0.0;
+	    #setpointReached := FALSE;
+	    #accelerating := FALSE;
+	    #decelerating := FALSE;
+	    #error := TRUE;
+	    #errorID := #UNIT_ID OR "LCON_ERROR_CYCLE_TIME_ZERO";                                      // FB NOT running IN cyclic task (81)
+	    RETURN;
+	END_IF;
+	
+	#statMaxValue := ABS(#nominalValue);                                            //MAX SETPOINT REACH VALUE
+	
+	IF #nominalValue = 0.0                                                          //INVALID CONFIGURATION
+	    OR #rampTimeMode > 1
+	    OR #rampTimeMode < 0
+	THEN
+	    #statY := 0.0;
+	    #statYa := 0.0;
+	    #setpointReached := FALSE;
+	    #accelerating := FALSE;
+	    #decelerating := FALSE;
+	    #error := TRUE;
+	    #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	    RETURN;
+	END_IF;
+	
+	// CORRECTING THE ROUNDING TIME WITH SAMPLING TIME
+	#statRoundingTime := DINT_TO_REAL(TRUNC(#roundingTime / #statTCycle) + 1) * #statTCycle;
+	
+	IF #rampTimeMode = #DIFF_TO_ZERO
+	    AND #rampupTime <> #rampdownTime
+	THEN
+	    #statZeroRoundingInternal := TRUE;
+	ELSE
+	    #statZeroRoundingInternal := #zeroRounding;
+	END_IF;
+	// HOLD COMMAND
+	IF (#hold AND NOT #statHoldOld) THEN                                                    //HOLD COMMAND ACTIVATED AT RISING EDGE
+	    #tmpTempBool := #statEnRounding AND (NOT (#statSmoothingActive) OR #statInternalSetpoint <> #x);
+	    
+	    
+	    //VALUE OF INTERNALSETPOINT FOR VARIOUS CONDITIONS 
+	    IF (#statYa < 0.0) AND #tmpTempBool THEN                                             //  DECELERATING
+	        #statInternalSetpoint := #statY - ABS((#statRoundingTime * (#statYa / #statDec) * #statYa / 2));
+	        
+	    ELSIF (#statYa > 0.0) AND #tmpTempBool THEN                                           // ACCELERATING
+	        #statInternalSetpoint := #statY + ABS((#statRoundingTime * (#statYa / #statAcc) * #statYa / 2));
+	        
+	    ELSIF #statYa <> 0.0 AND #statSmoothingActive AND #statInternalSetpoint = #x THEN           // NO EFECT OF HOLD COMMAND WHILE APPROACHING SETPOINT
+	        #statInternalSetpoint := LIMIT(MN := - #statMaxValue,
+	                                       IN := #x,
+	                                       MX := #statMaxValue);
+	    ELSE
+	        #statInternalSetpoint := #statY;                                                    //FOR Ya=0
+	    END_IF;
+	    
+	    
+	    // SMOOTH DIRECTION REVERSEL
+	ELSIF NOT (#hold) AND (NOT (#statSmoothingActive) OR (#x <> #statXOld)) THEN
+	    
+	    IF #statY * #x >= 0.0 OR NOT (#statZeroRoundingInternal) THEN                               // SETPOINT AND ACTUAL VALUE HAVE SAME SIGN or ROUNDING AT ZERO CROSSING IS OFF
+	        #statInternalSetpoint := LIMIT(MN := - #statMaxValue,
+	                                       IN := #x,
+	                                       MX := #statMaxValue);
+	    ELSE
+	        #statInternalSetpoint := 0.0;                                               //SETPOINT AND ACTUAL VALUE HAVE OPPOSITE SIGN or ROUNDING AT ZERO CROSSING IS ON
+	    END_IF;
+	END_IF;
+	#statXOld := #x;
+	
+	
+	// EMERGENCY-STOP
+	IF (NOT #mode) THEN                                                         //EMERGENCY RAMP DOWN
+	    #statInternalSetpoint := 0.0;
+	    
+	    #statAcc := ABS(#nominalValue / LIMIT(MN := #statTCycle, IN := #fastRampdownTime, MX := #MAX_RAMP_TIME_S));
+	    #statDec := - #statAcc;
+	ELSE                                                                        //NORMAL RAMP UP/DOWN
+	    #statAcc := ABS(#nominalValue / LIMIT(MN := #statTCycle, IN := #rampupTime, MX := #MAX_RAMP_TIME_S));
+	    #statDec := - ABS(#nominalValue / LIMIT(MN := #statTCycle, IN := #rampdownTime, MX := #MAX_RAMP_TIME_S));
+	END_IF;
+	
+	
+	IF #statRoundingTime <= 0.0 OR NOT (#enableRounding) OR NOT (#mode) THEN           // DISABLE SMOOTHING(ROUNDING)
+	    #statAccStep := #statAcc / #statTCycle;                                                    //RATE OF CHANGE OF ACCELERATION WHEN SMOOTHING DISBLED
+	    #statDecStep := #statDec / #statTCycle;                                                    //RATE OF CHANGE OF DECELERATION WHEN SMOOTHING DISBLED[NEGATIVE]
+	    #statEnRounding := FALSE;
+	ELSE                                                                           //ENABLE SMOOTHING
+	    #statAccStep := #statAcc / #statRoundingTime;                                          //RATE OF CHANGE OF ACCELERATION WHEN SMOOTHING ENABLED
+	    #statDecStep := #statDec / #statRoundingTime;                                          //RATE OF CHANGE OF DECELERATION WHEN SMOOTHING ENABLED[NEGATIVE]
+	    #statEnRounding := TRUE;
+	END_IF;
+	
+	CASE #rampTimeMode OF
+	    #DIFF_TO_ZERO:
+	        IF #statInternalSetpoint > 0.0 AND #statY <= #statInternalSetpoint THEN   // Setpoint and actual value are positive and increase of speed is neccessary
+	            IF #statY <= 0.0 THEN
+	                #statChangeAccDecc := TRUE;
+	            ELSE
+	                #statChangeAccDecc := FALSE;
+	            END_IF;
+	        ELSIF #statInternalSetpoint > 0.0 AND #statY >= #statInternalSetpoint THEN   // Setpoint and actual value are positive and decrease of speed is neccessary
+	            #statChangeAccDecc := FALSE;
+	        ELSIF #statInternalSetpoint = 0.0 AND #statY <= #statInternalSetpoint THEN   // Setpoint and actual value are positive and increase of speed is neccessary
+	            #statChangeAccDecc := TRUE;
+	        ELSIF #statInternalSetpoint = 0.0 AND #statY >= #statInternalSetpoint THEN   // Setpoint and actual value are positive and decrease of speed is neccessary
+	            #statChangeAccDecc := FALSE;
+	        ELSIF #statInternalSetpoint < 0.0 AND #statY >= #statInternalSetpoint THEN   // Setpoint and actual value are negative and increase (negative) of speed is neccessary
+	            IF #statY >= 0.0 THEN
+	                #statChangeAccDecc := FALSE;
+	            ELSE
+	                #statChangeAccDecc := TRUE;
+	            END_IF;
+	        ELSIF #statInternalSetpoint < 0.0 AND #statY <= #statInternalSetpoint THEN   // Setpoint and actual value are negative and decrease (negative) of speed is neccessary
+	            #statChangeAccDecc := TRUE;
+	        END_IF;
+	    #DIFF_OF_CHANGE:
+	        #statChangeAccDecc := FALSE;
+	    ELSE
+	        ;
+	END_CASE;
+	IF #statChangeAccDecc THEN
+	    // Change values for acceleration and decceleration
+	    #tmpTempReal := #statAcc;
+	    #statAcc := ABS(#statDec);
+	    #statDec := - #tmpTempReal;
+	    
+	    #tmpTempReal := #statAccStep;
+	    #statAccStep := ABS(#statDecStep);
+	    #statDecStep := - #tmpTempReal;
+	END_IF;
+	// BLOCK DISABLED
+	IF (NOT #enable) THEN
+	    #statInternalSetpoint := 0.0;
+	END_IF;
+	
+	// SMOOTHING WHEN NEARING SETPOINT
+	#tmpTempReal := (#statRoundingTime * #statYa * #statYa / 2.0);
+	
+	//STATUS OF SMOOTHING ACTIVE
+	#statSmoothingActive := (#statEnRounding) AND
+	((#statYa < 0.0 AND (ABS(#statInternalSetpoint - #statY) <= ABS(#tmpTempReal / #statDec))) OR                     //FOR DECELERATION THRESHOLD FOR INDICATING NEAR SETPOINT
+	(#statYa > 0.0 AND (ABS(#statInternalSetpoint - #statY) <= ABS(#tmpTempReal / #statAcc))));                       //FOR ACCELERATION THRESHOLD FOR INDICATING NEAR SETPOINT
+	
+	//SMOOTHING ACTIVATED ONLY WHEN DIFFERENCE BETWEN Y AND INTERNAL SETPOINT IS LESS THAN (MYTEMPREAL/DEC)i.e. WHEN NEARING SETPOINT WITH ROUNDING ENABLED
+	
+	
+	
+	
+	//SETPOINT GREATER THAN ACTUAL OUTPUT
+	IF #statInternalSetpoint > #statY THEN                                             // INCREASE IN SPEED REQUIRED
+	    IF #statYa > 0.0 THEN                                                        // PRESENTLY ACCELERATING
+	        
+	        IF NOT (#statSmoothingActive) THEN                                          //SMOOTHING DISABLED
+	            
+	            IF #statYa < #statAcc THEN                                                   //PRESENT ACCELERATION IS LESS THAN ACCELERATION POSSIBLE WITH INTERNAL SETPOINT
+	                #statYa := #statYa + #statAccStep * #statTCycle;                                     //INCREASE Ya BY ACCSTEP EVERY TCycle
+	                IF #statYa > #statAcc THEN
+	                    #statYa := #statAcc;                                    //CORRECT OVERSHOOT[IF Ya TRIES TO BECOME GREATER THAN #ACC]
+	                END_IF;
+	                
+	            ELSIF #statYa > #statAcc THEN                                               //PRESENT ACCELERATION IS GREATER THAN ACCELERATION POSSIBLE WITH INTERNAL SETPOINT
+	                #statYa := #statYa - #statAccStep * #statTCycle;                                    //DECREASE Ya BY ACCSTEP EVERY TCycle
+	                IF #statYa < #statAcc THEN
+	                    #statYa := #statAcc;                                   //CORRECT UNDERSHOOT[IF Ya TRIES TO BECOME LESS THAN #ACC]
+	                END_IF;
+	            END_IF;
+	            
+	        ELSE                                                                  //IF SMOOTHING ACTIVE NEARING SETPOINT DECREASE ACCELERATION
+	            #statYa := #statYa - #statAccStep * #statTCycle;
+	        END_IF;
+	        
+	    ELSIF #statYa = 0.0 THEN                                                    //PRESENTLY NO CHANGE IN SPEED
+	        #statYa := #statYa + #statAccStep * #statTCycle;                                        //START ACCELERATING
+	        
+	    ELSIF #statYa < 0.0 THEN                                                    //PRESENTLY DECELERATING
+	        #statYa := #statYa - #statDecStep * #statTCycle;                                        //DECREASE DECELERATION[REVERSE DECLERATION]
+	    END_IF;
+	    
+	    
+	    
+	    //SETPOINT EQUAL TO ACTUAL OUTPUT 
+	ELSIF #statInternalSetpoint = #statY THEN                                          // SETPOINT ALREADY REACHED
+	    IF #statYa > 0.0 THEN                                                        // STILL ACCELERATING
+	        #statYa := #statYa - #statAccStep * #statTCycle;                                         // DECREASE ACCELERATION
+	    ELSIF #statYa < 0.0 THEN                                                     // STILL DECELERATING
+	        #statYa := #statYa - #statDecStep * #statTCycle;                                         // INCREASE ACCELERATION
+	    ELSE
+	        #statSmoothingActive := FALSE;
+	    END_IF;
+	    
+	    
+	    
+	    //SETPOINT LESS THAN ACTUAL OUTPUT
+	ELSIF #statInternalSetpoint < #statY THEN                                          // SETPOINT LESS THAN ACTUAL OUTPUT
+	    IF #statYa > 0.0 THEN                                                        // PRESENTLY ACCELERATING
+	        #statYa := #statYa - #statAccStep * #statTCycle;                                         //START DECREASING ACCELERATION 
+	        
+	    ELSIF #statYa = 0.0 THEN                                                     // PRESENTLY NO CHANGE IN SPEED
+	        #statYa := #statYa + #statDecStep * #statTCycle;                                         // START ACCELERATING 
+	        
+	    ELSIF #statYa < 0.0 THEN                                                     // PRESENTLY DECELERATING
+	        IF NOT (#statSmoothingActive) THEN                                          // SMOOTHING DEACTIVATED 
+	            
+	            IF #statYa > #statDec THEN                                                   // PRESENT DECELERATION IS MORE POSITIVE[LESSER NEGATIVE] THAN DECELERATION POSSIBLE WITH INTERNAL SETPOINT
+	                #statYa := #statYa + #statDecStep * #statTCycle;                                     // INCREASE DECELERATION [INCREASE IN NEGATIVE DIRECTION]
+	                
+	                IF #statYa < #statDec THEN                                                 // CORRECT OVERSHOOT[IF Ya TRIES TO BECOME LESS[MORE NEGATIVE] THAN #DEC]
+	                    #statYa := #statDec;                                                     //SET Ya=DEC
+	                END_IF;
+	                
+	            ELSIF #statYa < #statDec THEN                                                // PRESENT DECELERATION IS LESS[MORE NEGATIVE] THAN DECELERATION POSSIBLE WITH INTERNAL SETPOINT
+	                #statYa := #statYa - #statDecStep * #statTCycle;                                     // DECREASE DECELERATION [DECREASE IN POSITIVE DIRECTION]
+	                IF #statYa > #statDec THEN
+	                    #statYa := #statDec;
+	                END_IF;                            // CORRECT UNDERSHOOT [IF Ya TRIES TO BECOME MORE[LESS NEGATIVE] THAN #DEC]
+	            END_IF;
+	            
+	        ELSE                                                                   // IF SMOOTHING ACTIVE NEARING SETPOINT DECREASE DECELERATION
+	            #statYa := #statYa - #statDecStep * #statTCycle;
+	        END_IF;
+	    END_IF;
+	END_IF;
+	
+	IF ABS(#statInternalSetpoint - #statY) < ABS(#statYa * #statTCycle) THEN                           // OVERSHOOT COMPENSATION
+	    #statYa := (#statInternalSetpoint - #statY) / #statTCycle;
+	    #statY := #statInternalSetpoint;
+	    #statSmoothingActive := FALSE;
+	ELSE
+	    #statY := #statY + #statYa * #statTCycle;                                                     // CALCULATE OUTPUT
+	END_IF;
+	
+	//SETTING THE STATUS OF OUTPUTS
+	#setpointZero := #x = 0.0;
+	#setpointReached := #statY = #x;
+	#accelerating := #statYa > 0.0;
+	#decelerating := #statYa < 0.0;
+	#busy := #run;
+	#statHoldOld := #hold;
+	#y := #statY;
+	#ya := #statYa;
+	
+END_FUNCTION_BLOCK
+

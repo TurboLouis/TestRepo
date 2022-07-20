@@ -1,0 +1,242 @@
+﻿FUNCTION_BLOCK "LAcycCom_HandleResource"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AcycCom
+VERSION : 1.1
+   VAR_INPUT 
+      requestResource : Bool;
+      hardwareId : HW_IO;
+      maxAssignedTime : Time := T#1M;
+   END_VAR
+
+   VAR_OUTPUT 
+      error { ExternalWritable := 'False'} : Bool;
+      status { ExternalWritable := 'False'} : Word := #STATUS_WAIT_CALL;
+      waitingForResource { ExternalWritable := 'False'} : Bool;
+      resourceAssigned { ExternalWritable := 'False'} : Bool;
+      resourceReleased { ExternalWritable := 'False'} : Bool;
+      usedHardwareId { ExternalWritable := 'False'} : HW_IO;
+   END_VAR
+
+   VAR_IN_OUT 
+      requestBuffer : "LAcycCom_typeRequestBuffer";
+   END_VAR
+
+   VAR 
+      statFirstCycle { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := TRUE;
+      statBufferIndex { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int := -1;
+   END_VAR
+
+   VAR_TEMP 
+      tempLoopIndex : Int;
+      tempLastQueueElement : Int;
+      tempCurReqState : Byte;
+   END_VAR
+
+   VAR CONSTANT 
+      ALL_ELEMENTS_OCCUPIED : Int := -1;
+      STATUS_RESOURCE_RELEASED : Word := 16#0000;
+      STATUS_WAIT_CALL : Word := 16#7000;
+      STATUS_WAIT_ASSIGN : Word := 16#7002;
+      STATUS_RESOURCE_ASSIGNED : Word := 16#7003;
+      ERR_RESOURCE_REJECTED_WHILE_WAITING : Word := 16#8400;
+      ERR_RESOURCE_RELEASED_WHILE_WAITING : Word := 16#8401;
+      ERR_ALLOCATION : Word := 16#8600;
+      ERR_INVALID_BUF_IDX : Word := 16#8601;
+      RESOURCES_ARRAY_UPPER_LIM : Int := 19;
+   END_VAR
+
+
+BEGIN
+	//=================================================================================================================
+	// SIEMENS AG
+	// (c)Copyright 2016 All Rights Reserved
+	//-----------------------------------------------------------------------------------------------------------------
+	// Library: LAcycCom
+	// Tested with: S7-1513-1 PN
+	// Engineering: TIA Portal V15
+	// Restrictions: ---
+	// Requirements: S7-1200 / S7-1500
+	// Functionality: Allocate and release an element in the request buffer.
+	//-----------------------------------------------------------------------------------------------------------------
+	// Change log table:
+	// Version    Date          Expert in charge    Changes applied
+	// 01.00.00   02.09.2015    RC                  release 
+	// 01.01.01   25.02.2016    AW                  maxAssignedTime can be adjusted differently for every single request
+	//                                              bugfix lockbuffer (multitasking)
+	// 01.01.02   11.10.2019    AL                  bugfix multitasking
+	// 
+	//-----------------------------------------------------------------------------------------------------------------
+	// Function block: LAcycCom_HandleResource
+	//=================================================================================================================
+	
+	IF #requestBuffer.header.lockBuffer = TRUE THEN
+	  RETURN;
+	END_IF;
+	
+	//=================================================================================================================
+	// Request resource
+	//=============================================================================
+	IF (#requestResource = TRUE) AND (#statBufferIndex < 0) THEN
+	  #error := FALSE;
+	  #statFirstCycle := TRUE;
+	  
+	  // Allocation of a buffer element
+	  IF (#requestBuffer.header.lockBuffer = FALSE) AND (#requestBuffer.header.nextFreeElement >= 0) AND (#requestBuffer.header.nextFreeElement <= "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM") THEN
+	    #requestBuffer.header.lockBuffer := TRUE;
+	    #statBufferIndex := #requestBuffer.header.nextFreeElement;
+	    #requestBuffer.elements[#statBufferIndex].state := 16#00;
+	    #requestBuffer.elements[#statBufferIndex].state.%X0 := TRUE;
+	    #requestBuffer.elements[#statBufferIndex].hardwareId := #hardwareId;
+	    #requestBuffer.elements[#statBufferIndex].queueElementNext := -1;
+	    #usedHardwareId := #hardwareId;
+	    
+	    // Build up queue
+	    IF (#requestBuffer.header.firstQueueElement >= 0) THEN
+	      // Find last queue element 
+	      #tempLoopIndex := #requestBuffer.header.firstQueueElement;
+	      WHILE (#tempLoopIndex >= 0) DO
+	        #tempLastQueueElement := #tempLoopIndex;
+	        #tempLoopIndex := #requestBuffer.elements[#tempLoopIndex].queueElementNext;
+	      END_WHILE;
+	      
+	      // insert into list after last element
+	      #requestBuffer.elements[#tempLastQueueElement].queueElementNext := #statBufferIndex;
+	      #requestBuffer.elements[#statBufferIndex].queueElementPrevious := #tempLastQueueElement;
+	    ELSE
+	      // Element is first element in queue
+	      #requestBuffer.header.firstQueueElement := #statBufferIndex;
+	      #requestBuffer.elements[#statBufferIndex].queueElementPrevious := -1;
+	    END_IF;
+	    
+	    #status := #STATUS_WAIT_ASSIGN;
+	    
+	    // Searching for the next free buffer element
+	    FOR #tempLoopIndex := 0 TO "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM" DO
+	      IF (#requestBuffer.elements[#tempLoopIndex].state.%X0 = FALSE) THEN
+	        #requestBuffer.header.nextFreeElement := #tempLoopIndex;
+	        EXIT;
+	      END_IF;
+	      
+	      // All buffer elements are occupied
+	      IF #tempLoopIndex = "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM" THEN
+	        #requestBuffer.header.nextFreeElement := #ALL_ELEMENTS_OCCUPIED;
+	      END_IF;
+	    END_FOR;
+	    
+	    #waitingForResource := TRUE;
+	    #resourceAssigned := FALSE;
+	    #requestBuffer.header.lockBuffer := FALSE;
+	    
+	    // Waiting until lockbit is reset and a buffer element is available
+	  ELSE
+	    #status := #ERR_ALLOCATION;
+	    #error := TRUE;
+	  END_IF;
+	  
+	  //=============================================================================
+	  // Check resource
+	  //=============================================================================
+	ELSIF (#requestResource = TRUE) THEN
+	  // Check buffer index for correctness
+	  IF (#statBufferIndex < 0) OR (#statBufferIndex > "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM") THEN
+	    #status := #ERR_INVALID_BUF_IDX;
+	    #error := TRUE;
+	    #waitingForResource := FALSE;
+	    #resourceAssigned := FALSE;
+	    RETURN; // V1.1.2
+	    
+	  ELSE
+	    #tempCurReqState := #requestBuffer.elements[#statBufferIndex].state;
+	    #usedHardwareId := #requestBuffer.elements[#statBufferIndex].hardwareId;
+	    
+	    IF (#tempCurReqState.%X0 = FALSE) OR
+	      (#tempCurReqState.%X3 = TRUE)
+	    THEN
+	      // Request was rejected by buffer manager
+	      #resourceAssigned := FALSE;
+	      #waitingForResource := FALSE;
+	      #error := TRUE;
+	      #status := #ERR_RESOURCE_REJECTED_WHILE_WAITING;
+	      RETURN; // V1.1.2
+	      
+	    ELSIF (#tempCurReqState.%X2 = TRUE) THEN
+	      // Request already released
+	      #waitingForResource := FALSE;
+	      #resourceAssigned := FALSE;
+	      #error := TRUE;
+	      #status := #ERR_RESOURCE_RELEASED_WHILE_WAITING;
+	      RETURN; // V1.1.2
+	      
+	    ELSIF (#tempCurReqState.%X1 = TRUE) THEN
+	      // Element is enabled
+	      IF (#statFirstCycle = TRUE) THEN
+	        IF (#requestBuffer.header.lockBuffer = FALSE) THEN // V1.1.2
+	          #requestBuffer.header.lockBuffer := TRUE;
+	          FOR #tempLoopIndex := 0 TO #RESOURCES_ARRAY_UPPER_LIM DO
+	            IF (#requestBuffer.header.activeRequests[#tempLoopIndex].bufferIndex = #statBufferIndex) THEN
+	              // Choose global maxAssignedTime
+	              IF (#requestBuffer.header.activeRequests[#tempLoopIndex].maxAssignedTime >= #maxAssignedTime) THEN
+	                ; // do nothing
+	                
+	                // Choose maxAssignedTime  
+	              ELSE
+	                #requestBuffer.header.activeRequests[#tempLoopIndex].maxAssignedTime := #maxAssignedTime;
+	              END_IF;
+	              #statFirstCycle := FALSE;
+	              EXIT;
+	            END_IF;
+	          END_FOR;
+	          
+	          #requestBuffer.header.lockBuffer := FALSE;
+	          #waitingForResource := FALSE;
+	          #resourceAssigned := TRUE;
+	          #status := #STATUS_RESOURCE_ASSIGNED;
+	        END_IF;
+	      END_IF;
+	
+	    ELSE
+	      // Element not enabled yet
+	      #waitingForResource := TRUE;
+	      #resourceAssigned := FALSE;
+	      #status := #STATUS_WAIT_ASSIGN;
+	    END_IF;
+	  END_IF;
+	  
+	  //=============================================================================
+	  // Resource can be released
+	  //=============================================================================
+	ELSIF (#requestResource = FALSE) AND (#statBufferIndex >= 0) THEN
+	  // Check buffer index for correctness
+	  IF (#statBufferIndex < 0) OR (#statBufferIndex > "LACYCCOM_BUFFER_ELEMENTS_UPPER_LIM") THEN
+	    #status := #ERR_INVALID_BUF_IDX;
+	  ELSE
+	    #statFirstCycle := TRUE; // V1.1.2
+	    IF #requestBuffer.header.lockBuffer = FALSE THEN // V1.1.2
+	      #requestBuffer.header.lockBuffer := TRUE;
+	      
+	      IF (#requestBuffer.elements[#statBufferIndex].state.%X0 = TRUE) THEN
+	        #requestBuffer.elements[#statBufferIndex].state.%X2 := TRUE;
+	      END_IF;
+	      
+	      #statBufferIndex := -1;
+	      #usedHardwareId := 16#0000;
+	      #resourceReleased := TRUE;
+	      #waitingForResource := FALSE;
+	      #resourceAssigned := FALSE;
+	      #status := #STATUS_RESOURCE_RELEASED;
+	      #statFirstCycle := FALSE;
+	      
+	      #requestBuffer.header.lockBuffer := FALSE;
+	    END_IF;
+	    
+	  END_IF;
+	
+	  
+	ELSE
+	  #resourceReleased := FALSE; // No resource requested yet
+	  #error := FALSE;
+	  #status := #STATUS_WAIT_CALL;
+	END_IF;
+END_FUNCTION_BLOCK
+

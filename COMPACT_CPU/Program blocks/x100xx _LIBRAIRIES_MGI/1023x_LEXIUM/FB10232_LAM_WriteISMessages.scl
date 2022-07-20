@@ -1,0 +1,194 @@
+﻿FUNCTION_BLOCK "FB10232_LAM_WriteISMessages"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      Text1 : String;
+      Text2 : String;
+      Text3 : String;
+      Text4 : String;
+      Text5 : String;
+      RequestSendText : Bool;
+   END_VAR
+
+   VAR_OUTPUT 
+      TextSendDone : Bool;
+      ToggleRegister18 : Bool;
+      Char_IS1 : Char;
+      Char_IS2 : Char := ' ';
+      Char_IS3 : Char := ' ';
+      Char_IS4 : Char := ' ';
+      Char_IS5 : Char := ' ';
+      Char_IS6 : Char := ' ';
+      Char_IS7 : Char := ' ';
+      Char_IS8 : Char := ' ';
+      Char_IS9 : Char := ' ';
+      Char_IS10 : Char := ' ';
+      Char_IS11 : Char := ' ';
+      Char_IS12 : Char := ' ';
+      Char_IS13 : Char := ' ';
+      Char_IS14 : Char := ' ';
+      Char_IS15 : Char := ' ';
+      Char_IS16 : Char := ' ';
+      Char_IS17 : Char := ' ';
+      Char_IS18 : Char := ' ';
+      Char_IS19 : Char := ' ';
+   END_VAR
+
+   VAR 
+      TextEmpty : String;
+      Step : Int;
+      i : UInt;
+      temp_uint : UInt;
+      InputsSetup : Array[0..18] of Char;
+      TOF_Tgle18 {InstructionName := 'TOF_TIME'; LibVersion := '1.0'; S7_SetPoint := 'False'} : TOF_TIME;
+      TopTgle18 { S7_SetPoint := 'True'} : Bool;
+      TextNumberInProgress : Int;
+      WaitRequest : Bool;
+      TON_Wait {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+   END_VAR
+
+
+BEGIN
+	
+	
+	IF #RequestSendText AND #Step = 0 THEN
+	    #Step := 1;
+	    #TextSendDone := FALSE;
+	    #TopTgle18 := FALSE;
+	    #WaitRequest := FALSE;
+	END_IF;
+	
+	
+	
+	CASE #Step OF
+	    1 :  // Convert Text 1
+	        #TextNumberInProgress := 1;
+	        Strg_TO_Chars(Strg := #Text1,
+	                      pChars := 0,
+	                      Cnt => #temp_uint,
+	                      Chars := #InputsSetup);
+	        FOR #i := #temp_uint TO 18 DO
+	            // Statement section FOR
+	            #InputsSetup[#i] := b#0;
+	        END_FOR;
+	        #Step := 11;
+	        
+	    2 :  // Convert Text 2
+	        #TextNumberInProgress := 2;
+	        Strg_TO_Chars(Strg := #Text2,
+	                      pChars := 0,
+	                      Cnt => #temp_uint,
+	                      Chars := #InputsSetup);
+	        FOR #i := #temp_uint TO 18 DO
+	            // Statement section FOR
+	            #InputsSetup[#i] := b#0;
+	        END_FOR;
+	        #Step := 11;
+	        
+	    3 :  // Convert Text 3
+	        #TextNumberInProgress := 3;
+	        Strg_TO_Chars(Strg := #Text3,
+	                      pChars := 0,
+	                      Cnt => #temp_uint,
+	                      Chars := #InputsSetup);
+	        FOR #i := #temp_uint TO 18 DO
+	            // Statement section FOR
+	            #InputsSetup[#i] := b#0;
+	        END_FOR;
+	        #Step := 11;
+	        
+	    4 :  // Convert Text 4
+	        #TextNumberInProgress := 4;
+	        Strg_TO_Chars(Strg := #Text4,
+	                      pChars := 0,
+	                      Cnt => #temp_uint,
+	                      Chars := #InputsSetup);
+	        FOR #i := #temp_uint TO 18 DO
+	            // Statement section FOR
+	            #InputsSetup[#i] := b#0;
+	        END_FOR;
+	        #Step := 11;
+	        
+	    5 :  // Convert Text 5
+	        #TextNumberInProgress := 5;
+	        Strg_TO_Chars(Strg := #Text5,
+	                      pChars := 0,
+	                      Cnt => #temp_uint,
+	                      Chars := #InputsSetup);
+	        FOR #i := #temp_uint TO 18 DO
+	            // Statement section FOR
+	            #InputsSetup[#i] := b#0;
+	        END_FOR;
+	        #Step := 11;
+	        
+	        
+	        
+	    11:
+	        #Char_IS1 := #InputsSetup[0];//I
+	        #Char_IS2 := #InputsSetup[1];//S
+	        #Char_IS3 := #InputsSetup[2];//=
+	        #Char_IS4 := #InputsSetup[3];//3
+	        #Char_IS5 := #InputsSetup[4];//,
+	        #Char_IS6 := #InputsSetup[5];//1
+	        #Char_IS7 := #InputsSetup[6];//,
+	        #Char_IS8 := #InputsSetup[7];//0
+	        #Char_IS9 := #InputsSetup[8];
+	        #Char_IS10 := #InputsSetup[9];
+	        #Char_IS11 := #InputsSetup[10];
+	        #Char_IS12 := #InputsSetup[11];
+	        #Char_IS13 := #InputsSetup[12];
+	        #Char_IS14 := #InputsSetup[13];
+	        #Char_IS15 := #InputsSetup[14];
+	        #Char_IS16 := #InputsSetup[15];
+	        #Char_IS17 := #InputsSetup[16];
+	        #Char_IS18 := #InputsSetup[17];
+	        #Char_IS19 := #InputsSetup[18];
+	        #Step := 12;
+	        
+	    12 :
+	        #TopTgle18 := true;
+	        IF #TOF_Tgle18.Q = TRUE THEN
+	            #Step := 13;
+	        END_IF;
+	    13:
+	        #TopTgle18 := FALSE;
+	        IF #TOF_Tgle18.Q = FALSE THEN
+	            #Step := 14;
+	            #WaitRequest := TRUE;
+	        END_IF;
+	    14:
+	        IF #TON_Wait.Q THEN
+	            #WaitRequest := FALSE;
+	            #Step := 15;
+	        END_IF;
+	        
+	    15:
+	        
+	        IF #TextNumberInProgress < 4 THEN
+	            #TextNumberInProgress := #TextNumberInProgress + 1;
+	            #Step := #TextNumberInProgress;
+	        ELSE
+	            #Step := 19;
+	        END_IF;
+	        
+	    19:
+	        #TextSendDone := TRUE;
+	        IF NOT #RequestSendText THEN
+	            #Step := 0;
+	        END_IF;
+	        
+	END_CASE;
+	
+	
+	#TOF_Tgle18(IN:= #TopTgle18, PT := T#50ms);
+	#ToggleRegister18 := #TOF_Tgle18.Q;
+	
+	#TON_Wait(IN:=#WaitRequest, PT:=T#5000ms);
+	
+	
+	
+	
+	
+	
+END_FUNCTION_BLOCK
+

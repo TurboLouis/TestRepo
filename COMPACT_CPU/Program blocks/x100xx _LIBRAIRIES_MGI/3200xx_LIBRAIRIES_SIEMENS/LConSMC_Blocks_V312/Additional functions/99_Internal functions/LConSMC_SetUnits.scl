@@ -1,0 +1,56 @@
+﻿FUNCTION "LConSMC_SetUnits" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      velocityUnit : UDInt;
+   END_VAR
+
+   VAR_OUTPUT 
+      winderAxisVeloIntoRPM : Real;
+      error : Bool;
+   END_VAR
+
+   VAR CONSTANT 
+      PI : Real := 3.141593;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : LConAMC_SetUnits
+	//functionality : Set calculation variables for unit data of axis
+	//assignment    : Any
+	//library       : LConXXX
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date        expert in charge      Changes applied
+	//V1.0      19.03.2019  APC Erlangen          First version
+	//========================================================================================================================
+	//
+	#error := FALSE;
+	#winderAxisVeloIntoRPM := 1.0;
+	CASE #velocityUnit OF
+	    1082: // [1/s] -> [1/min]
+	        #winderAxisVeloIntoRPM := real#60.0;
+	    1083: // [1/min] -> [1/min]
+	        #winderAxisVeloIntoRPM := real#1.0;
+	    1521: // [°/s] -> [1/min]
+	        #winderAxisVeloIntoRPM := real#60.0 / 360.0;
+	    1522: // [°/min] -> [1/min]
+	        #winderAxisVeloIntoRPM := Real#1.0 / 360.0;
+	    1528: // [1/h] -> [1/min]
+	        #winderAxisVeloIntoRPM := real#1.0 / 60.0;
+	    1086: // [rad/s] -> [1/min]
+	        #winderAxisVeloIntoRPM := 60.0 / (2.0 * #PI);
+	    1523: // [rad/min] -> [1/min]
+	        #winderAxisVeloIntoRPM := 1.0 / (2.0 * #PI);
+	    ELSE
+	        #error := TRUE;
+	END_CASE;
+	
+	
+	
+END_FUNCTION
+

@@ -1,0 +1,259 @@
+﻿FUNCTION_BLOCK "FB10402_MC_TorqueLimiting_APCFR"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      axis {InstructionName := 'TO_SpeedAxis'; LibVersion := '5.0'} : TO_SpeedAxis;
+      enable : Bool;
+      reset : Bool;
+      torqueUnit : Bool;   // False = Purcent ; True = NM
+      torqueLimitValue : LReal := -1.0;
+   END_VAR
+
+   VAR_OUTPUT 
+      done : Bool;
+      busy : Bool;
+      error : Bool;
+      status : DWord;
+      statusText : String;
+      torqueLimitingActive : Bool;
+      inLimitation : Bool;
+   END_VAR
+
+   VAR 
+      statFirstCycle { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool := TRUE;
+      statAct_Step { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;
+      statTorqueValueOK { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      statTimerOn_Off { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      statMyAxis { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Struct
+         out { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Struct
+            boSystemFault { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+            boConfigFault { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+            boDriveFault { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+            boError { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+            boEnabled { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+            boTorqueLimitingCommandActive { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+         END_STRUCT;
+      END_STRUCT;
+      statTorqueValue { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : LReal;
+      statTimerTimeOut {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      statEdgeExecute {InstructionName := 'R_TRIG'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : R_TRIG;
+      inst_MC_TORQUELIMITING_Instance {InstructionName := 'MC_TORQUELIMITING'; LibVersion := '5.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : MC_TORQUELIMITING;
+   END_VAR
+
+   VAR CONSTANT 
+      ERR_TORQUELIMITING_AXIS_NOT_VALID : DWord := 16#0000_9001;
+      ERR_TORQUELIMITING_AXIS_ERROR : DWord := 16#0000_9002;
+      ERR_TORQUELIMITING_TORQUE_VALUE : DWord := 16#0000_9003;
+      ERR_TORQUELIMITING_MC_TORQUE_LIMITING_ACTIVE : DWord := 16#0000_9004;
+      ERR_TORQUELIMITING_TORQUE_NOT_LIMITING : DWord := 16#0000_9005;
+      ERR_TORQUELIMITING_AXIS_VIRTUAL : DWord := 16#0000_9006;
+      ERR_TORQUELIMITING_AXIS_SIMULATED : DWord := 16#0000_9007;
+   END_VAR
+
+
+BEGIN
+	//============================================================================================================
+	// SIEMENS APC FR
+	//------------------------------------------------------------------------------------------------------------
+	// Library: LAPCFR
+	// Tested with: S7-1515TF Firmware V2.5
+	// Engineering: TIA Portal V15
+	// Restrictions: APC example program unrestricted
+	// Requirements: S7-1500(T)
+	// Functionality:  Enable or disable torque limitation in Nm or %
+	//------------------------------------------------------------------------------------------------------------
+	// Change log table:
+	// Version  Date        Expert in charge    Changes applied
+	// 01.00.00 08.06.2018  SDA                 First released version
+	//
+	//============================================================================================================
+	// Function block: MC_TorqueLimitingAxis_APCFR
+	//============================================================================================================
+	
+	REGION Init
+	    (*___________________ Init functions at StartUp ____________________________________*)
+	    IF #statFirstCycle = TRUE THEN
+	        #statFirstCycle := FALSE;
+	        #statAct_Step := 100;
+	        #done := TRUE;
+	        #busy := FALSE;
+	        #error := FALSE;
+	        #status := 0;
+	        #statusText := 'NO ERROR';
+	        #torqueLimitingActive := FALSE;
+	        #inst_MC_TORQUELIMITING_Instance.Enable := FALSE;
+	        #statTimerOn_Off := FALSE;
+	    END_IF;
+	END_REGION
+	
+	REGION Axis_State
+	    (*___________________ Init Status Axis ____________________________________*)
+	    #statMyAxis.out.boSystemFault := #axis.ErrorWord.%X0;
+	    #statMyAxis.out.boConfigFault := #axis.ErrorWord.%X1;
+	    #statMyAxis.out.boDriveFault := #axis.ErrorWord.%X4;
+	    #statMyAxis.out.boEnabled := #axis.StatusWord.%X0;
+	    #statMyAxis.out.boError := #axis.StatusWord.%X1;
+	    #statMyAxis.out.boTorqueLimitingCommandActive := #axis.StatusWord.%X26;
+	END_REGION
+	
+	REGION Function_Torque_Limit
+	    (*______________________ Limiting Torque Activation Function ______________________*)
+	    
+	    #statEdgeExecute(CLK := #enable);
+	    
+	    IF #statEdgeExecute.Q THEN
+	        #statAct_Step := 0;
+	    ELSIF (NOT #enable) AND (NOT #busy) AND (NOT #error) THEN
+	        #statAct_Step := 100;
+	        #done := TRUE;
+	        #busy := FALSE;
+	        #error := FALSE;
+	        #torqueLimitingActive := FALSE;
+	        #inst_MC_TORQUELIMITING_Instance.Enable := FALSE;
+	    END_IF;
+	    
+	    CASE #statAct_Step OF
+	        0://Start graph
+	            IF true THEN
+	                #done := FALSE;
+	                #busy := TRUE;
+	                #error := FALSE;
+	                
+	                // Test TorqueLimitValue OK
+	                IF (NOT #torqueUnit) THEN
+	                    IF (#torqueLimitValue > 0) AND (#torqueLimitValue <= 100.0) THEN
+	                        #statTorqueValueOK := TRUE;
+	                    ELSE
+	                        #statTorqueValueOK := FALSE;
+	                    END_IF;
+	                ELSE
+	                    IF (#torqueLimitValue > 0) AND (#torqueLimitValue <= #axis.Actor.DriveParameter.ReferenceTorque) THEN
+	                        #statTorqueValueOK := TRUE;
+	                    ELSE
+	                        #statTorqueValueOK := FALSE;
+	                    END_IF;
+	                END_IF;
+	                
+	                // Test Axis not virtual or not in simultation
+	                IF (#axis.VirtualAxis.Mode = 1) THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_TORQUELIMITING_AXIS_VIRTUAL;
+	                    #statusText := 'ERR_TORQUELIMITING_AXIS_VIRTUAL : Step0';
+	                ELSIF (#axis.Simulation.Mode = 1) THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_TORQUELIMITING_AXIS_SIMULATED;
+	                    #statusText := 'ERR_TORQUELIMITING_AXIS_SIMULATED : Step0';
+	                ELSE
+	                    #statAct_Step := 1;
+	                END_IF;
+	            END_IF;
+	            
+	        1://Test conditions
+	            IF TRUE THEN
+	                // Conditions OK
+	                IF (NOT #statMyAxis.out.boSystemFault) AND (NOT #statMyAxis.out.boConfigFault) AND (NOT #statMyAxis.out.boDriveFault)
+	                    AND NOT #statMyAxis.out.boError
+	                    AND #statTorqueValueOK
+	                    AND NOT #statMyAxis.out.boTorqueLimitingCommandActive THEN
+	                    #statAct_Step := 2;
+	                    // Axis not valid
+	                ELSIF #statMyAxis.out.boSystemFault OR #statMyAxis.out.boConfigFault OR #statMyAxis.out.boDriveFault THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_TORQUELIMITING_AXIS_NOT_VALID;
+	                    #statusText := 'ERR_TORQUELIMITING_AXIS_NOT_VALID : Step1';
+	                    // Error Axis    
+	                ELSIF #statMyAxis.out.boError THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_TORQUELIMITING_AXIS_ERROR;
+	                    #statusText := 'ERR_TORQUELIMITING_AXIS_ERROR : Step1';
+	                    // Torque limiting Command already active    
+	                ELSIF #statMyAxis.out.boTorqueLimitingCommandActive THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_TORQUELIMITING_MC_TORQUE_LIMITING_ACTIVE;
+	                    #statusText := 'ERR_TORQUELIMITING_MC_TORQUE_LIMITING_ACTIVE : Step1';
+	                    // Torque value not ok
+	                ELSIF NOT #statTorqueValueOK THEN
+	                    #statAct_Step := 20;
+	                    #status := #ERR_TORQUELIMITING_TORQUE_VALUE;
+	                    #statusText := 'ERR_TORQUELIMITING_TORQUE_VALUE : Step1';
+	                END_IF;
+	            END_IF;
+	            
+	        2://Torque limiting
+	            IF TRUE THEN
+	                #statTimerOn_Off := TRUE;
+	                
+	                // Set Torque value
+	                IF (NOT #torqueUnit) THEN
+	                    #statTorqueValue := ((#torqueLimitValue * #axis.Actor.DriveParameter.ReferenceTorque) / 100.0);
+	                ELSE
+	                    #statTorqueValue := #torqueLimitValue;
+	                END_IF;
+	                
+	                // Activation Torque Limiting
+	                IF #statTorqueValue < #axis.Actor.DriveParameter.ReferenceTorque THEN
+	                    #inst_MC_TORQUELIMITING_Instance.Enable := TRUE;
+	                ELSE
+	                    #inst_MC_TORQUELIMITING_Instance.Enable := FALSE;
+	                END_IF;
+	                
+	                IF #inst_MC_TORQUELIMITING_Instance.Busy AND NOT #inst_MC_TORQUELIMITING_Instance.Error THEN
+	                    #statAct_Step := 3;
+	                    #torqueLimitingActive := TRUE;
+	                ELSIF #statTimerTimeOut.Q OR #inst_MC_TORQUELIMITING_Instance.Error THEN
+	                    #statAct_Step := 20;
+	                    #torqueLimitingActive := false;
+	                    #status := #ERR_TORQUELIMITING_TORQUE_NOT_LIMITING;
+	                    #statusText := 'ERR_TORQUELIMITING_TORQUE_NOT_LIMITING : Step2';
+	                END_IF;
+	            END_IF;
+	            
+	        3://Function OK
+	            IF TRUE THEN
+	                #statTimerOn_Off := FALSE;
+	                #done := TRUE;
+	                #busy := FALSE;
+	                // Wait not enable input to desactivate Torque Limiting
+	                IF NOT #enable THEN
+	                    #statAct_Step := 100;
+	                    #torqueLimitingActive := FALSE;
+	                    #inst_MC_TORQUELIMITING_Instance.Enable := FALSE;
+	                END_IF;
+	            END_IF;
+	            
+	        20://Function error
+	            IF TRUE THEN
+	                #busy := FALSE;
+	                #error := TRUE;
+	                
+	                IF NOT #enable AND #reset THEN
+	                    #busy := FALSE;
+	                    #statAct_Step := 100;
+	                    #status := 0;
+	                    #statusText := 'NO ERROR';
+	                    #statTimerOn_Off := FALSE;
+	                    #torqueLimitingActive := FALSE;
+	                    #inst_MC_TORQUELIMITING_Instance.Enable := FALSE;
+	                END_IF;
+	            END_IF;
+	            
+	    END_CASE;
+	    
+	    // Graph Step TimeOut
+	    #statTimerTimeOut(IN := #statTimerOn_Off,
+	                      PT := T#10s);
+	    
+	    // Function MC_TORQUELIMITING
+	    #inst_MC_TORQUELIMITING_Instance(Axis := #axis,
+	                                     Limit := #statTorqueValue,
+	                                     Mode := 0,
+	                                     InLimitation => #inLimitation);
+	    
+	END_REGION
+	
+	
+	
+	
+	
+END_FUNCTION_BLOCK
+

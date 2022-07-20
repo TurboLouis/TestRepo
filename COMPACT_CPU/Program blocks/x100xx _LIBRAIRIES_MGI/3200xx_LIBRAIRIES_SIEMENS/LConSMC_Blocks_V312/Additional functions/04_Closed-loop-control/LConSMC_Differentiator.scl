@@ -1,0 +1,76 @@
+﻿FUNCTION_BLOCK "LConSMC_Differentiator"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      x : LReal := 0.0;
+      diffTime : LReal := 0.0;
+      tCycle : Real;
+   END_VAR
+
+   VAR_OUTPUT 
+      error : Bool;
+      errorID : DWord := 16#0000_0000;
+      y : LReal := 0.0;
+   END_VAR
+
+   VAR 
+      statTmax : LReal;
+      statXkm1 : LReal;
+      statXFactor : LReal;
+      statFirstRun : Bool := TRUE;
+      statError : Bool := FALSE;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#1103_0000;
+      MAX_DIFF_TIME : Real := 1000.0;
+      NO_ERROR : DWord := 16#0000_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : Differentiator
+	//functionality : Numerical differentiator
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge            changes applied
+	//V1.0      18.07.2012    APC GMC group               Creation
+	//V1.1      17.11.2016    APC ERL                     adapted to styleguide; warning "variable might not be initialized" removed
+	//========================================================================================================================
+	
+	IF (#statFirstRun) THEN                                                          // only at the first Run
+	    #statFirstRun := FALSE;
+	    #statXkm1 := 0.0;
+	END_IF;
+	
+	#statError := #statError OR (#tCycle = 0.0);                                           // Cycle time identified as zero
+	
+	IF (#statError) THEN
+	    #errorID := #UNIT_ID OR "LCON_ERROR_CYCLE_TIME_ZERO";                                       // FB NOT running IN cyclic task (81)
+	ELSE
+	    #errorID := #NO_ERROR;
+	END_IF;
+	
+	IF (NOT #statError) THEN
+	    #statTmax := LIMIT(MN := #tCycle,
+	                       IN := #diffTime,
+	                       MX := #MAX_DIFF_TIME);                                      //Limits for Tmax
+	    
+	    #statXFactor := #statTmax / #tCycle;
+	    
+	    #y := #statXFactor * (#x - #statXkm1);
+	    #statXkm1 := #x;
+	ELSE
+	    #y := 0.0;
+	END_IF;
+	
+	#error := #statError;
+	
+	
+END_FUNCTION_BLOCK
+

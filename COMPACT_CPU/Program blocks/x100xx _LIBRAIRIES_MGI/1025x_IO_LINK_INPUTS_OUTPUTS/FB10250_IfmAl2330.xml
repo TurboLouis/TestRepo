@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T07:01:28.5313178Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor />
+      <HeaderFamily />
+      <HeaderName />
+      <HeaderVersion>0.1</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="PLC_In_Word_0" Datatype="Word" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PLC_In_Word_2" Datatype="Word" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PLC_In_Word_4" Datatype="Word" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PLC_In_Word_6" Datatype="Word" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.0_DO1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.0_DO2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.1_DO1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.1_DO2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.2_DO1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.2_DO2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.3_DO1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.3_DO2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.4_DO1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.4_DO2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.5_DO1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Active_X1.5_DO2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="PLC_Out_Word_0" Datatype="Word" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PLC_Out_Word_2" Datatype="Word" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Id" Datatype="UInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="DeviceStatus" Datatype="UInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="InOut" />
+  <Section Name="Static">
+    <Member Name="DeviceStatusTemp" Datatype="Byte" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Temp" />
+  <Section Name="Constant" />
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>FB10250_IfmAl2330</Name>
+      <Number>10250</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <LineComment Inserted="false" NoClosingBracket="false" UId="21">
+    <Text UId="22">PLC In Word 0 Management</Text>
+  </LineComment>
+  <NewLine Num="2" UId="23" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="24">
+    <Text UId="25">PLC In Word 2 Management</Text>
+  </LineComment>
+  <NewLine Num="2" UId="26" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="27">
+    <Text UId="28">PLC In Word 4 Management</Text>
+  </LineComment>
+  <NewLine Num="2" UId="29" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="30">
+    <Text UId="31">PLC In Word 6 Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="32" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Inputs Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <LineComment Inserted="false" NoClosingBracket="false" UId="21">
+    <Text UId="22">PLC Out Word 0 Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="23" />
+  <Access Scope="LocalVariable" UId="24">
+    <Symbol UId="25">
+      <Component Name="PLC_Out_Word_0" UId="26" />
+      <Token Text="." UId="27" />
+      <Token Text="%X0" UId="28" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="29" />
+  <Token Text=":=" UId="30" />
+  <Blank Num="1" UId="31" />
+  <Access Scope="LocalVariable" UId="32">
+    <Symbol UId="33">
+      <Component Name="Active_X1.1_DO1" UId="34" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="35" />
+  <NewLine Num="1" UId="36" />
+  <Access Scope="LocalVariable" UId="37">
+    <Symbol UId="38">
+      <Component Name="PLC_Out_Word_0" UId="39" />
+      <Token Text="." UId="40" />
+      <Token Text="%X1" UId="41" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="42" />
+  <Token Text=":=" UId="43" />
+  <Blank Num="1" UId="44" />
+  <Access Scope="LocalVariable" UId="45">
+    <Symbol UId="46">
+      <Component Name="Active_X1.3_DO1" UId="47" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="48" />
+  <NewLine Num="1" UId="49" />
+  <Access Scope="LocalVariable" UId="50">
+    <Symbol UId="51">
+      <Component Name="PLC_Out_Word_0" UId="52" />
+      <Token Text="." UId="53" />
+      <Token Text="%X2" UId="54" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="55" />
+  <Token Text=":=" UId="56" />
+  <Blank Num="1" UId="57" />
+  <Access Scope="LocalVariable" UId="58">
+    <Symbol UId="59">
+      <Component Name="Active_X1.5_DO1" UId="60" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="61" />
+  <NewLine Num="1" UId="62" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="63">
+    <Text UId="64">#PLC_Out_Word_0.%X3 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="65" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="66">
+    <Text UId="67">#PLC_Out_Word_0.%X4 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="68" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="69">
+    <Text UId="70">#PLC_Out_Word_0.%X5 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="71" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="72">
+    <Text UId="73">#PLC_Out_Word_0.%X6 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="74" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="75">
+    <Text UId="76">#PLC_Out_Word_0.%X7 := </Text>
+  </LineComment>
+  <NewLine Num="1" UId="77" />
+  <Access Scope="LocalVariable" UId="78">
+    <Symbol UId="79">
+      <Component Name="PLC_Out_Word_0" UId="80" />
+      <Token Text="." UId="81" />
+      <Token Text="%X8" UId="82" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="83" />
+  <Token Text=":=" UId="84" />
+  <Blank Num="1" UId="85" />
+  <Access Scope="LocalVariable" UId="86">
+    <Symbol UId="87">
+      <Component Name="Active_X1.0_DO1" UId="88" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="89" />
+  <NewLine Num="1" UId="90" />
+  <Access Scope="LocalVariable" UId="91">
+    <Symbol UId="92">
+      <Component Name="PLC_Out_Word_0" UId="93" />
+      <Token Text="." UId="94" />
+      <Token Text="%X9" UId="95" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="96" />
+  <Token Text=":=" UId="97" />
+  <Blank Num="1" UId="98" />
+  <Access Scope="LocalVariable" UId="99">
+    <Symbol UId="100">
+      <Component Name="Active_X1.2_DO1" UId="101" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="102" />
+  <NewLine Num="1" UId="103" />
+  <Access Scope="LocalVariable" UId="104">
+    <Symbol UId="105">
+      <Component Name="PLC_Out_Word_0" UId="106" />
+      <Token Text="." UId="107" />
+      <Token Text="%X10" UId="108" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="109" />
+  <Token Text=":=" UId="110" />
+  <Blank Num="1" UId="111" />
+  <Access Scope="LocalVariable" UId="112">
+    <Symbol UId="113">
+      <Component Name="Active_X1.4_DO1" UId="114" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="115" />
+  <NewLine Num="1" UId="116" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="117">
+    <Text UId="118">#PLC_Out_Word_0.%X11 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="119" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="120">
+    <Text UId="121">#PLC_Out_Word_0.%X12 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="122" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="123">
+    <Text UId="124">#PLC_Out_Word_0.%X13 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="125" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="126">
+    <Text UId="127">#PLC_Out_Word_0.%X14 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="128" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="129">
+    <Text UId="130">#PLC_Out_Word_0.%X15 :=</Text>
+  </LineComment>
+  <NewLine Num="2" UId="131" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="132">
+    <Text UId="133">PLC Out Word 2 Management</Text>
+  </LineComment>
+  <NewLine Num="1" UId="134" />
+  <Access Scope="LocalVariable" UId="135">
+    <Symbol UId="136">
+      <Component Name="PLC_Out_Word_2" UId="137" />
+      <Token Text="." UId="138" />
+      <Token Text="%X0" UId="139" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="140" />
+  <Token Text=":=" UId="141" />
+  <Blank Num="1" UId="142" />
+  <Access Scope="LocalVariable" UId="143">
+    <Symbol UId="144">
+      <Component Name="Active_X1.1_DO2" UId="145" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="146" />
+  <NewLine Num="1" UId="147" />
+  <Access Scope="LocalVariable" UId="148">
+    <Symbol UId="149">
+      <Component Name="PLC_Out_Word_2" UId="150" />
+      <Token Text="." UId="151" />
+      <Token Text="%X1" UId="152" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="153" />
+  <Token Text=":=" UId="154" />
+  <Blank Num="1" UId="155" />
+  <Access Scope="LocalVariable" UId="156">
+    <Symbol UId="157">
+      <Component Name="Active_X1.3_DO2" UId="158" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="159" />
+  <NewLine Num="1" UId="160" />
+  <Access Scope="LocalVariable" UId="161">
+    <Symbol UId="162">
+      <Component Name="PLC_Out_Word_2" UId="163" />
+      <Token Text="." UId="164" />
+      <Token Text="%X2" UId="165" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="166" />
+  <Token Text=":=" UId="167" />
+  <Blank Num="1" UId="168" />
+  <Access Scope="LocalVariable" UId="169">
+    <Symbol UId="170">
+      <Component Name="Active_X1.5_DO2" UId="171" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="172" />
+  <NewLine Num="1" UId="173" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="174">
+    <Text UId="175">#PLC_Out_Word_2.%X3 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="176" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="177">
+    <Text UId="178">#PLC_Out_Word_2.%X4 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="179" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="180">
+    <Text UId="181">#PLC_Out_Word_2.%X5 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="182" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="183">
+    <Text UId="184">#PLC_Out_Word_2.%X6 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="185" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="186">
+    <Text UId="187">#PLC_Out_Word_2.%X7 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="188" />
+  <Access Scope="LocalVariable" UId="189">
+    <Symbol UId="190">
+      <Component Name="PLC_Out_Word_2" UId="191" />
+      <Token Text="." UId="192" />
+      <Token Text="%X8" UId="193" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="194" />
+  <Token Text=":=" UId="195" />
+  <Blank Num="1" UId="196" />
+  <Access Scope="LocalVariable" UId="197">
+    <Symbol UId="198">
+      <Component Name="Active_X1.0_DO2" UId="199" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="200" />
+  <NewLine Num="1" UId="201" />
+  <Access Scope="LocalVariable" UId="202">
+    <Symbol UId="203">
+      <Component Name="PLC_Out_Word_2" UId="204" />
+      <Token Text="." UId="205" />
+      <Token Text="%X9" UId="206" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="207" />
+  <Token Text=":=" UId="208" />
+  <Blank Num="1" UId="209" />
+  <Access Scope="LocalVariable" UId="210">
+    <Symbol UId="211">
+      <Component Name="Active_X1.2_DO2" UId="212" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="213" />
+  <NewLine Num="1" UId="214" />
+  <Access Scope="LocalVariable" UId="215">
+    <Symbol UId="216">
+      <Component Name="PLC_Out_Word_2" UId="217" />
+      <Token Text="." UId="218" />
+      <Token Text="%X10" UId="219" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="220" />
+  <Token Text=":=" UId="221" />
+  <Blank Num="1" UId="222" />
+  <Access Scope="LocalVariable" UId="223">
+    <Symbol UId="224">
+      <Component Name="Active_X1.4_DO2" UId="225" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="226" />
+  <NewLine Num="1" UId="227" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="228">
+    <Text UId="229">#PLC_Out_Word_2.%X11 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="230" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="231">
+    <Text UId="232">#PLC_Out_Word_2.%X12 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="233" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="234">
+    <Text UId="235">#PLC_Out_Word_2.%X13 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="236" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="237">
+    <Text UId="238">#PLC_Out_Word_2.%X14 :=</Text>
+  </LineComment>
+  <NewLine Num="1" UId="239" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="240">
+    <Text UId="241">#PLC_Out_Word_2.%X15 :=</Text>
+  </LineComment>
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="F" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="10" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Outputs Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="11" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="12" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="13" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="14" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

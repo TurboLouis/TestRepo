@@ -1,0 +1,223 @@
+﻿FUNCTION_BLOCK "LConSMC_CalcTargetDiamStopCondition"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool;
+      windingMode : Int;
+      actualDiameter : LReal;
+      targetDiameter : LReal;
+      offset : LReal;
+      minDiameter : LReal;
+      maxDiameter : LReal;
+      maxVelocity : LReal;
+      webThickness : LReal;
+      actualVelocity : LReal;
+      actualAcceleration : LReal;
+      rampUpTime : LReal;
+      rampDownTime : LReal;
+      roundingTime : LReal;
+      tCycle : Real;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool;
+      error : Bool;
+      errorID : DWord;
+      stop : Bool;
+      stopDistance : LReal;
+      stopTime : LReal;
+      restLengthToTarget : LReal;
+   END_VAR
+
+   VAR 
+      statTargetDiamInt : LReal;
+      statMinDiameterInternal : LReal;
+      statMaxDiameterInternal : LReal;
+      statRampUpTimeInternal : LReal;
+      statRampDownTimeInternal : LReal;
+      statRoundingTimeInternal : LReal;
+      statWebThicknessInternal : LReal;
+      statEnableOld : Bool;
+      statErrorStopDistance : Bool;
+      statErrorIDStopDistance : DWord;
+      statRestLength : LReal;
+      statTolerance : LReal := 1.0;
+      statError : Bool;
+      statRestLengthToTarget : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#4004_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : CalcTargetDiamStopCondition
+	//functionality : Calculates stop condition for target diameter
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge            changes applied
+	//V1.0      28.05.2013    APC                         Creation
+	//V1.1      17.11.2016    APC ERL                     adapted to styleguide; warning "variable might not be initialized" removed
+	//V1.2      02.08.2021    APC ERL                     Bugfix: Busy is set TRUE with a rising edge of the input enable (*c_00041*)
+	//========================================================================================================================
+	
+	IF (#enable AND NOT #statEnableOld) THEN //first cycle
+	    //save input parameters
+	    #statMinDiameterInternal := #minDiameter;
+	    #statMaxDiameterInternal := #maxDiameter;
+	    #statRampUpTimeInternal := #rampUpTime;
+	    #statRampDownTimeInternal := #rampDownTime;
+	    #statRoundingTimeInternal := #roundingTime;
+	    #statWebThicknessInternal := #webThickness;
+	    #statTargetDiamInt := LIMIT(MN := #statMinDiameterInternal, //limitation of targetDiameter to min and max value
+	                                IN := #targetDiameter,
+	                                MX := #statMaxDiameterInternal);
+	    #busy := TRUE;    //(*c_00041*)
+	    //check values
+	    IF (#statMinDiameterInternal >= #statMaxDiameterInternal) THEN //wrong parameters min diameter larger than max diameter
+	        #statError := true;
+	        #stop := true;
+	        #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	        #busy := false;
+	        #stopDistance := 0.0;
+	        #stopTime := 0.0;
+	        #statRestLengthToTarget := 0.0;
+	        #statTargetDiamInt := 0.0;
+	    ELSIF (#statRampUpTimeInternal <= 0.0 OR #statRampDownTimeInternal <= 0.0 OR #statRoundingTimeInternal <= 0.0) THEN //wrong dynamics parameters
+	        #statError := true;
+	        #stop := true;
+	        #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	        #busy := false;
+	        #stopDistance := 0.0;
+	        #stopTime := 0.0;
+	        #statRestLengthToTarget := 0.0;
+	        #statTargetDiamInt := 0.0;
+	    ELSIF #tCycle = 0.0 THEN // invalid cycle time
+	        #statError := true;
+	        #stop := true;
+	        #errorID := #UNIT_ID OR "LCON_ERROR_CYCLE_TIME_ZERO";
+	        #busy := false;
+	        #stopDistance := 0.0;
+	        #stopTime := 0.0;
+	        #statRestLengthToTarget := 0.0;
+	        #statTargetDiamInt := 0.0;
+	    END_IF;
+	END_IF;
+	
+	#statEnableOld := #enable;
+	
+	IF (#enable AND NOT #statError) THEN
+	    
+	    //check parameters cyclic
+	    IF (#windingMode < 0 OR #windingMode > 1) THEN // wrong winding mode
+	        #statError := true;
+	        #stop := true;
+	        #errorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	        #busy := false;
+	        #stopDistance := 0.0;
+	        #stopTime := 0.0;
+	        #statRestLengthToTarget := 0.0;
+	        #statTargetDiamInt := 0.0;
+	        RETURN;
+	    ELSIF (#targetDiameter > #statMaxDiameterInternal) THEN //warning: target diameter limited to max diameter
+	        #statError := false;
+	        #errorID := #UNIT_ID OR "LCON_WARNING_OUTPUT_IS_LIMITED";
+	    ELSIF (#targetDiameter < #statMinDiameterInternal) THEN //warning: target diameter limited to min diameter
+	        #statError := false;
+	        #errorID := #UNIT_ID OR "LCON_WARNING_OUTPUT_IS_LIMITED";
+	    ELSE
+	        #statError := false;
+	        #errorID := 16#0000_0000;
+	    END_IF;
+	    
+	    //save new target diameter
+	    #statTargetDiamInt := LIMIT(MN := #statMinDiameterInternal, //limitation of targetDiameter to min and max value
+	                                IN := #targetDiameter,
+	                                MX := #statMaxDiameterInternal);
+	    
+	    // calculation of rest length (absolute value)
+	    #statRestLength := "LConSMC_RestLengthCalc"(
+	                                                webThickness := #statWebThicknessInternal // IN: REAL
+	                                                , actualDiameter := #actualDiameter          // IN: REAL
+	                                                , targetDiameter := #statTargetDiamInt        // IN: REAL
+	                                                , offset := #offset                  // IN: REAL
+	    );                                                // REAL               
+	    IF ((#actualDiameter > #statTargetDiamInt)
+	        AND #windingMode = 0)//rewinding and actual diameter is already larger than target diameter --> stop
+	        OR ((#actualDiameter < #statTargetDiamInt)
+	        AND #windingMode = 1)//unwinding and actual diameter is already smaller than target diameter --> stop
+	    THEN
+	        #stop := true;
+	        #statRestLengthToTarget := - #statRestLength;
+	    ELSIF ((#actualDiameter < #statTargetDiamInt / (1.0 + #statTolerance / 100.0))
+	        AND #windingMode = 0)//rewinding and actual diameter is smaller than target diameter --> run
+	        OR ((#actualDiameter > #statTargetDiamInt * (1.0 + #statTolerance / 100.0))
+	        AND #windingMode = 1)//unwinding and actual diameter is larger than target diameter --> run
+	    THEN
+	        #stop := false;
+	        #statRestLengthToTarget := #statRestLength;
+	    ELSE
+	        #statRestLengthToTarget := #statRestLength;
+	    END_IF;
+	    
+	    "LConSMC_CalcStopDistance"(velocity := #actualVelocity          // IN: LREAL
+	                               ,
+	                               acceleration := #actualAcceleration      // IN: LREAL
+	                               ,
+	                               maxVelocity := #maxVelocity             // IN: LREAL
+	                               ,
+	                               rampUpTime := #statRampUpTimeInternal   // IN: LREAL
+	                               ,
+	                               rampDownTime := #statRampDownTimeInternal // IN: LREAL
+	                               ,
+	                               roundingTime := #statRoundingTimeInternal // IN: LREAL
+	                               ,
+	                               error => #statErrorStopDistance     // OUT: BOOL
+	                               ,
+	                               errorID => #statErrorIDStopDistance  // OUT: DWORD
+	                               ,
+	                               StopDistance => #stopDistance            // OUT: LREAL
+	                               ,
+	                               StopTime => #stopTime                // OUT: LREAL
+	    );
+	    
+	    IF (#statErrorStopDistance = true) THEN
+	        #busy := false;
+	        #stopDistance := 0.0;
+	        #stopTime := 0.0;
+	        #statRestLengthToTarget := 0.0;
+	        #statTargetDiamInt := 0.0;
+	        #statError := true;
+	        #stop := true;
+	        #errorID := #statErrorIDStopDistance;
+	    END_IF;
+	    
+	    IF (#statRestLengthToTarget <= (#stopDistance)) THEN
+	        #stop := true;
+	    END_IF;
+	ELSIF #enable AND #statError = true THEN
+	    ;
+	ELSE
+	    #busy := false;
+	    #statError := false;
+	    #errorID := 16#0000_0000;
+	    #stop := false;
+	    #stopDistance := 0.0;
+	    #stopTime := 0.0;
+	    #statRestLengthToTarget := 0.0;
+	    #statTargetDiamInt := 0.0;
+	END_IF;
+	
+	
+	// set outputs
+	#error := #statError;
+	#restLengthToTarget := #statRestLengthToTarget;
+	
+END_FUNCTION_BLOCK
+

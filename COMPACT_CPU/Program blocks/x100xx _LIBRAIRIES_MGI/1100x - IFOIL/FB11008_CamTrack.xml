@@ -1,0 +1,887 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T07:02:32.1719581Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor />
+      <HeaderFamily />
+      <HeaderName />
+      <HeaderVersion>0.1</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="Enable" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="Cam" Datatype="Array[1..32] of TO_CamTrack_Struct_CamData" Version="5.0" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="OnPosition" Datatype="LReal" /><Member Name="OffPosition" Datatype="LReal" /><Member Name="Duration" Datatype="LReal" /><Member Name="Existent" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="TimeAdjustmentDown" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="TimeAdjustmentUp" Datatype="Real" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="Error" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="Synchronous" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Command" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="InOut">
+    <Member Name="CamTrack" Datatype="TO_CamTrack" Version="5.0" Accessibility="Public">
+      <Sections>
+        <Section Name="Base">
+          <Sections Datatype="TO_Object" Version="5.0">
+            <Section Name="Input" />
+            <Section Name="Output" />
+            <Section Name="InOut" />
+            <Section Name="Static" />
+          </Sections>
+        </Section>
+        <Section Name="Input" />
+        <Section Name="Output" />
+        <Section Name="InOut" />
+        <Section Name="Static">
+          <Member Name="Parameter" Datatype="TO_CamTrack_Struct_Parameter" Version="5.0">
+            <Sections>
+              <Section Name="None">
+                <Member Name="CamTrackType" Datatype="DInt" />
+                <Member Name="PositionType" Datatype="DInt" />
+                <Member Name="ReferencePosition" Datatype="LReal" />
+                <Member Name="CamTrackLength" Datatype="LReal" />
+                <Member Name="CamMasking" Datatype="DWord" />
+                <Member Name="OnCompensation" Datatype="LReal" />
+                <Member Name="OffCompensation" Datatype="LReal" />
+                <Member Name="Hysteresis" Datatype="LReal" />
+                <Member Name="Cam" Datatype="Array[1..32] of TO_CamTrack_Struct_CamData" Version="5.0">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="OnPosition" Datatype="LReal" />
+                      <Member Name="OffPosition" Datatype="LReal" />
+                      <Member Name="Duration" Datatype="LReal" />
+                      <Member Name="Existent" Datatype="Bool" />
+                    </Section>
+                  </Sections>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="Interface" Datatype="TO_CamTrack_Struct_Interface" Version="5.0">
+            <Sections>
+              <Section Name="None">
+                <Member Name="EnableOutput" Datatype="Bool" />
+                <Member Name="Address" Datatype="VREF" Version="1.0">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="RID" Datatype="DWord" />
+                      <Member Name="AREA" Datatype="Byte" />
+                      <Member Name="DB_NUMBER" Datatype="UInt" />
+                      <Member Name="OFFSET" Datatype="UDInt" />
+                    </Section>
+                  </Sections>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="Status" Datatype="DInt" />
+          <Member Name="TrackOutput" Datatype="Bool" />
+          <Member Name="SingleCamState" Datatype="DWord" />
+          <Member Name="TrackPosition" Datatype="LReal" />
+          <Member Name="MatchPosition" Datatype="LReal" />
+          <Member Name="Units" Datatype="TO_CamTrack_Struct_Units" Version="5.0">
+            <Sections>
+              <Section Name="None">
+                <Member Name="LengthUnit" Datatype="UDInt" />
+                <Member Name="TimeUnit" Datatype="UDInt" />
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="StatusWord" Datatype="DWord" />
+          <Member Name="ErrorWord" Datatype="DWord" />
+          <Member Name="ErrorDetail" Datatype="TO_Struct_ErrorDetail" Version="5.0">
+            <Sections>
+              <Section Name="None">
+                <Member Name="Number" Datatype="UDInt" />
+                <Member Name="Reaction" Datatype="DInt" />
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="WarningWord" Datatype="DWord" />
+        </Section>
+      </Sections>
+    </Member>
+  </Section>
+  <Section Name="Static">
+    <Member Name="instMC_CAMTRACK" Datatype="MC_CAMTRACK" Version="5.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CamTrack" Datatype="TO_CamTrack" Version="5.0"><Sections><Section Name="Base"><Sections Datatype="TO_Object" Version="5.0"><Section Name="Input" /><Section Name="Output" /><Section Name="InOut" /><Section Name="Static" /></Sections></Section><Section Name="Input" /><Section Name="Output" /><Section Name="InOut" /><Section Name="Static"><Member Name="Parameter" Datatype="TO_CamTrack_Struct_Parameter" Version="5.0"><Sections><Section Name="None"><Member Name="CamTrackType" Datatype="DInt" /><Member Name="PositionType" Datatype="DInt" /><Member Name="ReferencePosition" Datatype="LReal" /><Member Name="CamTrackLength" Datatype="LReal" /><Member Name="CamMasking" Datatype="DWord" /><Member Name="OnCompensation" Datatype="LReal" /><Member Name="OffCompensation" Datatype="LReal" /><Member Name="Hysteresis" Datatype="LReal" /><Member Name="Cam" Datatype="Array[1..32] of TO_CamTrack_Struct_CamData" Version="5.0"><Sections><Section Name="None"><Member Name="OnPosition" Datatype="LReal" /><Member Name="OffPosition" Datatype="LReal" /><Member Name="Duration" Datatype="LReal" /><Member Name="Existent" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member><Member Name="Interface" Datatype="TO_CamTrack_Struct_Interface" Version="5.0"><Sections><Section Name="None"><Member Name="EnableOutput" Datatype="Bool" /><Member Name="Address" Datatype="VREF" Version="1.0"><Sections><Section Name="None"><Member Name="RID" Datatype="DWord" /><Member Name="AREA" Datatype="Byte" /><Member Name="DB_NUMBER" Datatype="UInt" /><Member Name="OFFSET" Datatype="UDInt" /></Section></Sections></Member></Section></Sections></Member><Member Name="Status" Datatype="DInt" /><Member Name="TrackOutput" Datatype="Bool" /><Member Name="SingleCamState" Datatype="DWord" /><Member Name="TrackPosition" Datatype="LReal" /><Member Name="MatchPosition" Datatype="LReal" /><Member Name="Units" Datatype="TO_CamTrack_Struct_Units" Version="5.0"><Sections><Section Name="None"><Member Name="LengthUnit" Datatype="UDInt" /><Member Name="TimeUnit" Datatype="UDInt" /></Section></Sections></Member><Member Name="StatusWord" Datatype="DWord" /><Member Name="ErrorWord" Datatype="DWord" /><Member Name="ErrorDetail" Datatype="TO_Struct_ErrorDetail" Version="5.0"><Sections><Section Name="None"><Member Name="Number" Datatype="UDInt" /><Member Name="Reaction" Datatype="DInt" /></Section></Sections></Member><Member Name="WarningWord" Datatype="DWord" /></Section></Sections></Member><Member Name="Enable" Datatype="Bool" /><Member Name="Mode" Datatype="DInt" /><Member Name="InvertOutput" Datatype="Bool" /></Section><Section Name="Output"><Member Name="TrackOutput" Datatype="Bool" /><Member Name="Busy" Datatype="Bool" /><Member Name="Error" Datatype="Bool" /><Member Name="ErrorId" Datatype="Word" /></Section><Section Name="InOut" /><Section Name="Static" /></Sections></Member>
+    <Member Name="R_TRIG_Enable" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="statNbPoint" Datatype="UInt" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Temp" />
+  <Section Name="Constant" />
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>FB11008_CamTrack</Name>
+      <Number>11008</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <LineComment Inserted="false" NoClosingBracket="false" UId="21">
+    <Text UId="22">==========================================================================================</Text>
+  </LineComment>
+  <NewLine Num="1" UId="23" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="24">
+    <Text UId="25"> SIEMENS SAS      RC-FR DI FA APC</Text>
+  </LineComment>
+  <NewLine Num="1" UId="26" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="27">
+    <Text UId="28">------------------------------------------------------------------------------------------</Text>
+  </LineComment>
+  <NewLine Num="1" UId="29" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="30">
+    <Text UId="31"> Restrictions:    TIA V16 and more</Text>
+  </LineComment>
+  <NewLine Num="1" UId="32" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="33">
+    <Text UId="34"> Requirements:    S7-1500T + MGI library</Text>
+  </LineComment>
+  <NewLine Num="1" UId="35" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="36">
+    <Text UId="37"> Functionality:   This function block manage a cam track</Text>
+  </LineComment>
+  <NewLine Num="1" UId="38" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="39">
+    <Text UId="40">------------------------------------------------------------------------------------------</Text>
+  </LineComment>
+  <NewLine Num="1" UId="41" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="42">
+    <Text UId="43"> Change log table:</Text>
+  </LineComment>
+  <NewLine Num="1" UId="44" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="45">
+    <Text UId="46"> Version      Date        Expert in charge    Changes applied</Text>
+  </LineComment>
+  <NewLine Num="1" UId="47" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="48">
+    <Text UId="49"> 01.00.01     09.06.2020  RTO                 First released version</Text>
+  </LineComment>
+  <NewLine Num="1" UId="50" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="51">
+    <Text UId="52">==========================================================================================</Text>
+  </LineComment>
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Comments</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="GlobalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="FirstScan" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="THEN" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Token Text=";" UId="30" />
+  <NewLine Num="1" UId="31" />
+  <Token Text="END_IF" UId="32" />
+  <Token Text=";" UId="33" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="F" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="10" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>First Scan</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="11" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="12" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="REGION" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Text UId="23">EDGE SIGNALS</Text>
+  <NewLine Num="1" UId="24" />
+  <Blank Num="4" UId="25" />
+  <Access Scope="LocalVariable" UId="26">
+    <Symbol UId="27">
+      <Component Name="R_TRIG_Enable" UId="28" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="29">
+    <Instruction UId="30">
+      <Token Text="(" UId="31" />
+      <Parameter Name="CLK" UId="32">
+        <Blank Num="1" UId="33" />
+        <Token Text=":=" UId="34" />
+        <Blank Num="1" UId="35" />
+        <Access Scope="LocalVariable" UId="36">
+          <Symbol UId="37">
+            <Component Name="Enable" UId="38" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="39" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="40" />
+  <NewLine Num="1" UId="41" />
+  <Token Text="END_REGION" UId="42" />
+  <NewLine Num="2" UId="43" />
+  <Token Text="REGION" UId="44" />
+  <Blank Num="1" UId="45" />
+  <Text UId="46">TIMERS</Text>
+  <NewLine Num="1" UId="47" />
+  <Token Text="END_REGION" UId="48" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="13" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="14" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="15" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="16" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="17" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Edge Signals &amp; Timers</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="18" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Access Scope="LocalVariable" UId="21">
+    <Symbol UId="22">
+      <Component Name="CamTrack" UId="23" />
+      <Token Text="." UId="24" />
+      <Component Name="Parameter" UId="25" />
+      <Token Text="." UId="26" />
+      <Component Name="OnCompensation" UId="27" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="28" />
+  <Token Text=":=" UId="29" />
+  <Blank Num="1" UId="30" />
+  <Access Scope="LocalVariable" UId="31">
+    <Symbol UId="32">
+      <Component Name="TimeAdjustmentDown" UId="33" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="34" />
+  <NewLine Num="1" UId="35" />
+  <Access Scope="LocalVariable" UId="36">
+    <Symbol UId="37">
+      <Component Name="CamTrack" UId="38" />
+      <Token Text="." UId="39" />
+      <Component Name="Parameter" UId="40" />
+      <Token Text="." UId="41" />
+      <Component Name="OffCompensation" UId="42" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="43" />
+  <Token Text=":=" UId="44" />
+  <Blank Num="1" UId="45" />
+  <Access Scope="LocalVariable" UId="46">
+    <Symbol UId="47">
+      <Component Name="TimeAdjustmentUp" UId="48" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="49" />
+  <NewLine Num="2" UId="50" />
+  <Token Text="IF" UId="51" />
+  <Blank Num="1" UId="52" />
+  <Access Scope="LocalVariable" UId="53">
+    <Symbol UId="54">
+      <Component Name="R_TRIG_Enable" UId="55" />
+      <Token Text="." UId="56" />
+      <Component Name="Q" UId="57" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="58" />
+  <Token Text="THEN" UId="59" />
+  <NewLine Num="1" UId="60" />
+  <Blank Num="4" UId="61" />
+  <Token Text="FOR" UId="62" />
+  <Blank Num="1" UId="63" />
+  <Access Scope="LocalVariable" UId="64">
+    <Symbol UId="65">
+      <Component Name="statNbPoint" UId="66" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="67" />
+  <Token Text=":=" UId="68" />
+  <Blank Num="1" UId="69" />
+  <Access Scope="LiteralConstant" UId="70">
+    <Constant UId="71">
+      <ConstantValue UId="73">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="74" />
+  <Token Text="TO" UId="75" />
+  <Blank Num="1" UId="76" />
+  <Access Scope="LiteralConstant" UId="77">
+    <Constant UId="78">
+      <ConstantValue UId="80">32</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank Num="1" UId="81" />
+  <Token Text="DO" UId="82" />
+  <NewLine Num="1" UId="83" />
+  <Blank Num="8" UId="84" />
+  <Access Scope="LocalVariable" UId="85">
+    <Symbol UId="86">
+      <Component Name="CamTrack" UId="87" />
+      <Token Text="." UId="88" />
+      <Component Name="Parameter" UId="89" />
+      <Token Text="." UId="90" />
+      <Component Name="Cam" UId="91">
+        <Token Text="[" UId="92" />
+        <Access Scope="LocalVariable" UId="93">
+          <Symbol UId="94">
+            <Component Name="statNbPoint" UId="95" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="96" />
+      </Component>
+      <Token Text="." UId="97" />
+      <Component Name="Existent" UId="98" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="99" />
+  <Token Text=":=" UId="100" />
+  <Blank Num="1" UId="101" />
+  <Access Scope="LocalVariable" UId="102">
+    <Symbol UId="103">
+      <Component Name="Cam" UId="104">
+        <Token Text="[" UId="105" />
+        <Access Scope="LocalVariable" UId="106">
+          <Symbol UId="107">
+            <Component Name="statNbPoint" UId="108" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="109" />
+      </Component>
+      <Token Text="." UId="110" />
+      <Component Name="Existent" UId="111" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="112" />
+  <NewLine Num="1" UId="113" />
+  <Blank Num="8" UId="114" />
+  <Access Scope="LocalVariable" UId="115">
+    <Symbol UId="116">
+      <Component Name="CamTrack" UId="117" />
+      <Token Text="." UId="118" />
+      <Component Name="Parameter" UId="119" />
+      <Token Text="." UId="120" />
+      <Component Name="Cam" UId="121">
+        <Token Text="[" UId="122" />
+        <Access Scope="LocalVariable" UId="123">
+          <Symbol UId="124">
+            <Component Name="statNbPoint" UId="125" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="126" />
+      </Component>
+      <Token Text="." UId="127" />
+      <Component Name="Duration" UId="128" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="129" />
+  <Token Text=":=" UId="130" />
+  <Blank Num="1" UId="131" />
+  <Access Scope="LocalVariable" UId="132">
+    <Symbol UId="133">
+      <Component Name="Cam" UId="134">
+        <Token Text="[" UId="135" />
+        <Access Scope="LocalVariable" UId="136">
+          <Symbol UId="137">
+            <Component Name="statNbPoint" UId="138" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="139" />
+      </Component>
+      <Token Text="." UId="140" />
+      <Component Name="Duration" UId="141" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="142" />
+  <NewLine Num="1" UId="143" />
+  <Blank Num="8" UId="144" />
+  <Access Scope="LocalVariable" UId="145">
+    <Symbol UId="146">
+      <Component Name="CamTrack" UId="147" />
+      <Token Text="." UId="148" />
+      <Component Name="Parameter" UId="149" />
+      <Token Text="." UId="150" />
+      <Component Name="Cam" UId="151">
+        <Token Text="[" UId="152" />
+        <Access Scope="LocalVariable" UId="153">
+          <Symbol UId="154">
+            <Component Name="statNbPoint" UId="155" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="156" />
+      </Component>
+      <Token Text="." UId="157" />
+      <Component Name="OnPosition" UId="158" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="159" />
+  <Token Text=":=" UId="160" />
+  <Blank Num="1" UId="161" />
+  <Access Scope="LocalVariable" UId="162">
+    <Symbol UId="163">
+      <Component Name="Cam" UId="164">
+        <Token Text="[" UId="165" />
+        <Access Scope="LocalVariable" UId="166">
+          <Symbol UId="167">
+            <Component Name="statNbPoint" UId="168" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="169" />
+      </Component>
+      <Token Text="." UId="170" />
+      <Component Name="OnPosition" UId="171" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="172" />
+  <NewLine Num="1" UId="173" />
+  <Blank Num="8" UId="174" />
+  <Access Scope="LocalVariable" UId="175">
+    <Symbol UId="176">
+      <Component Name="CamTrack" UId="177" />
+      <Token Text="." UId="178" />
+      <Component Name="Parameter" UId="179" />
+      <Token Text="." UId="180" />
+      <Component Name="Cam" UId="181">
+        <Token Text="[" UId="182" />
+        <Access Scope="LocalVariable" UId="183">
+          <Symbol UId="184">
+            <Component Name="statNbPoint" UId="185" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="186" />
+      </Component>
+      <Token Text="." UId="187" />
+      <Component Name="OffPosition" UId="188" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="189" />
+  <Token Text=":=" UId="190" />
+  <Blank Num="1" UId="191" />
+  <Access Scope="LocalVariable" UId="192">
+    <Symbol UId="193">
+      <Component Name="Cam" UId="194">
+        <Token Text="[" UId="195" />
+        <Access Scope="LocalVariable" UId="196">
+          <Symbol UId="197">
+            <Component Name="statNbPoint" UId="198" />
+          </Symbol>
+        </Access>
+        <Token Text="]" UId="199" />
+      </Component>
+      <Token Text="." UId="200" />
+      <Component Name="OffPosition" UId="201" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="202" />
+  <NewLine Num="1" UId="203" />
+  <Blank Num="4" UId="204" />
+  <Token Text="END_FOR" UId="205" />
+  <Token Text=";" UId="206" />
+  <NewLine Num="1" UId="207" />
+  <Token Text="END_IF" UId="208" />
+  <Token Text=";" UId="209" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="1A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="1B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="1D" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="1E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Parameters management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="20" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="LocalVariable" UId="21">
+      <Symbol>
+        <Component Name="CamTrack" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="22">
+      <Symbol>
+        <Component Name="Enable" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>DInt</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="24">
+      <Constant>
+        <ConstantType>Bool</ConstantType>
+        <ConstantValue>FALSE</ConstantValue>
+      </Constant>
+    </Access>
+    <Part Name="MC_CAMTRACK" Version="5.0" UId="25">
+      <Instance Scope="LocalVariable" UId="26">
+        <Component Name="instMC_CAMTRACK" />
+      </Instance>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="31">
+      <Powerrail />
+      <NameCon UId="25" Name="en" />
+    </Wire>
+    <Wire UId="32">
+      <IdentCon UId="21" />
+      <NameCon UId="25" Name="CamTrack" />
+    </Wire>
+    <Wire UId="33">
+      <IdentCon UId="22" />
+      <NameCon UId="25" Name="Enable" />
+    </Wire>
+    <Wire UId="34">
+      <IdentCon UId="23" />
+      <NameCon UId="25" Name="Mode" />
+    </Wire>
+    <Wire UId="35">
+      <IdentCon UId="24" />
+      <NameCon UId="25" Name="InvertOutput" />
+    </Wire>
+    <Wire UId="36">
+      <NameCon UId="25" Name="TrackOutput" />
+      <OpenCon UId="27" />
+    </Wire>
+    <Wire UId="37">
+      <NameCon UId="25" Name="Busy" />
+      <OpenCon UId="28" />
+    </Wire>
+    <Wire UId="38">
+      <NameCon UId="25" Name="Error" />
+      <OpenCon UId="29" />
+    </Wire>
+    <Wire UId="39">
+      <NameCon UId="25" Name="ErrorId" />
+      <OpenCon UId="30" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="21" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="22" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="23" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="24" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="25" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Manage a cam track</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="26" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="27" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Access Scope="LocalVariable" UId="21">
+    <Symbol UId="22">
+      <Component Name="Command" UId="23" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="24" />
+  <Token Text=":=" UId="25" />
+  <Blank Num="1" UId="26" />
+  <Access Scope="LocalVariable" UId="27">
+    <Symbol UId="28">
+      <Component Name="instMC_CAMTRACK" UId="29" />
+      <Token Text="." UId="30" />
+      <Component Name="TrackOutput" UId="31" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="32" />
+  <NewLine Num="1" UId="33" />
+  <Access Scope="LocalVariable" UId="34">
+    <Symbol UId="35">
+      <Component Name="Synchronous" UId="36" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="37" />
+  <Token Text=":=" UId="38" />
+  <Blank Num="1" UId="39" />
+  <Access Scope="LocalVariable" UId="40">
+    <Symbol UId="41">
+      <Component Name="CamTrack" UId="42" />
+      <Token Text="." UId="43" />
+      <Component Name="StatusWord" UId="44" />
+      <Token Text="." UId="45" />
+      <Token Text="%X0" UId="46" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="47" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="28" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="29" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="2B" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="2C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Manage output</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="2E" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="2F" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="30" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

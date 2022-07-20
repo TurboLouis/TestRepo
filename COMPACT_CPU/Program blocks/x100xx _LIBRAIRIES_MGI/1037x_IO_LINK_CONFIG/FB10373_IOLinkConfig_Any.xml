@@ -1,0 +1,1453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V17" />
+  <DocumentInfo>
+    <Created>2022-07-20T07:02:34.5888701Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor />
+      <HeaderFamily />
+      <HeaderName />
+      <HeaderVersion>0.1</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input">
+    <Member Name="Ackowledge" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="PortDevice" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Id" Datatype="HW_IO" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RequestGetParamID" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="RequestSetParamID" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Index" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="SubIndex" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Length" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="ParamIdDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ParamConfigFault" Datatype="Array[0..231] of Byte" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Error" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Status" Datatype="Word" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="InOut">
+    <Member Name="Value" Datatype="Array[0..231] of Byte" Accessibility="Public" />
+  </Section>
+  <Section Name="Static">
+    <Member Name="CommandStruct" Datatype="Struct" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Member Name="In" Datatype="Struct"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Member Name="TrigStart_Pulse" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Id" Datatype="HW_IO"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="rw" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Port" Datatype="Int"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="index" Datatype="Int"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="subindex" Datatype="Int"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="length" Datatype="Int"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member></Member><Member Name="Out" Datatype="Struct"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Member Name="Done" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="busy" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Error" Datatype="Bool"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member><Member Name="Status" Datatype="Word"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member></Member><Member Name="InOut" Datatype="Struct"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList><Member Name="Data" Datatype="Array[0..231] of Byte"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member></Member></Member>
+    <Member Name="RequestPulseTrigStart" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="IoLinkConfigurationStateDiagram" Datatype="Int" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="ParameterDone" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="R_TRIG_RequestGetParamId" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="R_TRIG_RequestSetParamId" Datatype="R_TRIG" Version="1.0" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member>
+    <Member Name="FB10003_Pulse_Instance" Datatype="&quot;FB10003_Pulse&quot;" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /><Member Name="PT" Datatype="Time" /></Section><Section Name="Output"><Member Name="ET" Datatype="Time" /></Section><Section Name="InOut"><Member Name="Q" Datatype="Bool" /></Section><Section Name="Static"><Member Name="R_TRIG_Signal" Datatype="R_TRIG" Version="1.0"><Sections><Section Name="Input"><Member Name="CLK" Datatype="Bool" /></Section><Section Name="Output"><Member Name="Q" Datatype="Bool" /></Section><Section Name="InOut" /><Section Name="Static"><Member Name="Stat_Bit" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_Pulse" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member></Section></Sections></Member>
+    <Member Name="FB10370_IoLinkDevice_Instance_1" Datatype="&quot;FB10370_IoLinkDevice&quot;" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="Input"><Member Name="REQ" Datatype="Bool" /><Member Name="ID" Datatype="HW_IO" /><Member Name="CAP" Datatype="DInt" /><Member Name="RD_WR" Datatype="Bool" /><Member Name="PORT" Datatype="Int" /><Member Name="IOL_INDEX" Datatype="Int" /><Member Name="IOL_SUBINDEX" Datatype="Int" /><Member Name="LEN" Datatype="Int" /></Section><Section Name="Output"><Member Name="DONE_VALID" Datatype="Bool" /><Member Name="BUSY" Datatype="Bool" /><Member Name="ERROR" Datatype="Bool" /><Member Name="STATUS" Datatype="DWord" /><Member Name="IOL_STATUS" Datatype="DWord" /><Member Name="RD_LEN" Datatype="Int" /></Section><Section Name="InOut"><Member Name="RECORD_IOL_DATA" Datatype="Array[0..231] of Byte" /></Section><Section Name="Static"><Member Name="RDREC_Function" Datatype="RDREC" Version="1.0"><Sections><Section Name="Input"><Member Name="REQ" Datatype="Bool" /><Member Name="ID" Datatype="HW_IO" /><Member Name="INDEX" Datatype="DInt" /><Member Name="MLEN" Datatype="UInt" /></Section><Section Name="Output"><Member Name="VALID" Datatype="Bool" /><Member Name="BUSY" Datatype="Bool" /><Member Name="ERROR" Datatype="Bool" /><Member Name="STATUS" Datatype="DWord" /><Member Name="LEN" Datatype="UInt" /></Section><Section Name="InOut"><Member Name="RECORD" Datatype="Variant" /></Section><Section Name="Static" /></Sections></Member><Member Name="WRREC_Function" Datatype="WRREC" Version="1.1"><Sections><Section Name="Input"><Member Name="REQ" Datatype="Bool" /><Member Name="ID" Datatype="HW_IO" /><Member Name="INDEX" Datatype="DInt" /><Member Name="LEN" Datatype="UInt" /></Section><Section Name="Output"><Member Name="DONE" Datatype="Bool" /><Member Name="BUSY" Datatype="Bool" /><Member Name="ERROR" Datatype="Bool" /><Member Name="STATUS" Datatype="DWord" /></Section><Section Name="InOut"><Member Name="RECORD" Datatype="Variant" /></Section><Section Name="Static" /></Sections></Member><Member Name="TP_poll" Datatype="TP_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="TON_monitoring" Datatype="TON_TIME" Version="1.0"><Sections><Section Name="None"><Member Name="PT" Datatype="Time" /><Member Name="ET" Datatype="Time" /><Member Name="IN" Datatype="Bool" /><Member Name="Q" Datatype="Bool" /></Section></Sections></Member><Member Name="rdrec" Datatype="Struct"><Member Name="valid" Datatype="Bool" /><Member Name="busy" Datatype="Bool" /><Member Name="error" Datatype="Bool" /><Member Name="status" Datatype="DWord" /><Member Name="length" Datatype="UInt" /></Member><Member Name="wrrec" Datatype="Struct"><Member Name="length" Datatype="UInt" /><Member Name="done" Datatype="Bool" /><Member Name="busy" Datatype="Bool" /><Member Name="error" Datatype="Bool" /><Member Name="status" Datatype="DWord" /></Member><Member Name="read" Datatype="Struct"><Member Name="header" Datatype="Struct"><Member Name="CALL" Datatype="Struct"><Member Name="Extended_Function_Num" Datatype="Byte" /><Member Name="Port" Datatype="Byte" /><Member Name="FI_Index" Datatype="Word" /></Member><Member Name="IOL" Datatype="Struct"><Member Name="Control" Datatype="Byte" /><Member Name="Index_HighByte" Datatype="Byte" /><Member Name="Index_LowByte" Datatype="Byte" /><Member Name="Subindex" Datatype="Byte" /></Member></Member><Member Name="data" Datatype="Array[0..231] of Byte" /></Member><Member Name="write" Datatype="Struct"><Member Name="header" Datatype="Struct"><Member Name="CALL" Datatype="Struct"><Member Name="Extended_Function_Num" Datatype="Byte" /><Member Name="Port" Datatype="Byte" /><Member Name="FI_Index" Datatype="Word" /></Member><Member Name="IOL" Datatype="Struct"><Member Name="Control" Datatype="Byte" /><Member Name="Index_HighByte" Datatype="Byte" /><Member Name="Index_LowByte" Datatype="Byte" /><Member Name="Subindex" Datatype="Byte" /></Member></Member><Member Name="data" Datatype="Array[0..231] of Byte" /></Member><Member Name="sequencecontrol" Datatype="Int" /><Member Name="typeofrequest" Datatype="Int" /><Member Name="R_TRIG_REQ" Datatype="Bool" /><Member Name="R_TRIG_REQ_old" Datatype="Bool" /><Member Name="F_TRIG_poll" Datatype="Bool" /><Member Name="F_TRIG_poll_old" Datatype="Bool" /></Section></Sections></Member>
+  </Section>
+  <Section Name="Temp" />
+  <Section Name="Constant">
+    <Member Name="WAIT_FOR_IO_LINK_CONFIGURATION_COMMAND" Datatype="Int" Accessibility="Public">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="RESTORE_DEFAULT_SETTINGS_IN_PROGRESS" Datatype="Int" Accessibility="Public">
+      <StartValue>10</StartValue>
+    </Member>
+    <Member Name="GET_PARAM_ID_IN_PROGRESS" Datatype="Int" Accessibility="Public">
+      <StartValue>20</StartValue>
+    </Member>
+    <Member Name="SET_PARAM_ID_IN_PROGRESS" Datatype="Int" Accessibility="Public">
+      <StartValue>30</StartValue>
+    </Member>
+    <Member Name="READ_POWER_CYCLES_IN_PROGRESS" Datatype="Int" Accessibility="Public">
+      <StartValue>40</StartValue>
+    </Member>
+    <Member Name="IO_LINK_COMMAND_CONFIGURATION_DONE" Datatype="Int" Accessibility="Public">
+      <StartValue>100</StartValue>
+    </Member>
+    <Member Name="CAP_IO_LINK_IFM" Datatype="Int" Accessibility="Public">
+      <StartValue>19456</StartValue>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>FB10373_IOLinkConfig_Any</Name>
+      <Number>10373</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="GlobalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="FirstScan" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="THEN" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="4" UId="29" />
+  <Access Scope="LocalVariable" UId="30">
+    <Symbol UId="31">
+      <Component Name="ParamIdDone" UId="32" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="33" />
+  <Token Text=":=" UId="34" />
+  <Blank Num="1" UId="35" />
+  <Access Scope="LiteralConstant" UId="36">
+    <Constant UId="37">
+      <ConstantValue UId="39">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="40" />
+  <NewLine Num="1" UId="41" />
+  <Blank Num="4" UId="42" />
+  <Access Scope="LocalVariable" UId="43">
+    <Symbol UId="44">
+      <Component Name="IoLinkConfigurationStateDiagram" UId="45" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="46" />
+  <Token Text=":=" UId="47" />
+  <Blank Num="1" UId="48" />
+  <Access Scope="LocalConstant" UId="49">
+    <Constant Name="WAIT_FOR_IO_LINK_CONFIGURATION_COMMAND" UId="50" />
+  </Access>
+  <Token Text=";" UId="53" />
+  <NewLine Num="1" UId="54" />
+  <Token Text="END_IF" UId="55" />
+  <Token Text=";" UId="56" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>First Scan</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="REGION" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Text UId="23">EDGE SIGNALS </Text>
+  <NewLine Num="1" UId="24" />
+  <Blank Num="4" UId="25" />
+  <Access Scope="LocalVariable" UId="26">
+    <Symbol UId="27">
+      <Component Name="R_TRIG_RequestGetParamId" UId="28" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="29">
+    <Instruction UId="30">
+      <Token Text="(" UId="31" />
+      <Parameter Name="CLK" UId="32">
+        <Blank Num="1" UId="33" />
+        <Token Text=":=" UId="34" />
+        <Blank Num="1" UId="35" />
+        <Access Scope="LocalVariable" UId="36">
+          <Symbol UId="37">
+            <Component Name="RequestGetParamID" UId="38" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="39" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="40" />
+  <NewLine Num="1" UId="41" />
+  <Blank Num="4" UId="42" />
+  <Access Scope="LocalVariable" UId="43">
+    <Symbol UId="44">
+      <Component Name="R_TRIG_RequestSetParamId" UId="45" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="46">
+    <Instruction UId="47">
+      <Token Text="(" UId="48" />
+      <Parameter Name="CLK" UId="49">
+        <Blank Num="1" UId="50" />
+        <Token Text=":=" UId="51" />
+        <Blank Num="1" UId="52" />
+        <Access Scope="LocalVariable" UId="53">
+          <Symbol UId="54">
+            <Component Name="RequestSetParamID" UId="55" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="56" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="57" />
+  <NewLine Num="1" UId="58" />
+  <Blank Num="4" UId="59" />
+  <NewLine Num="1" UId="60" />
+  <Token Text="END_REGION" UId="61" />
+  <NewLine Num="2" UId="62" />
+  <Token Text="REGION" UId="63" />
+  <Blank Num="1" UId="64" />
+  <Text UId="65">TIMERS </Text>
+  <NewLine Num="1" UId="66" />
+  <Blank Num="4" UId="67" />
+  <NewLine Num="1" UId="68" />
+  <Token Text="END_REGION" UId="69" />
+  <NewLine Num="2" UId="70" />
+  <Token Text="REGION" UId="71" />
+  <Blank Num="1" UId="72" />
+  <Text UId="73">PULSE</Text>
+  <NewLine Num="1" UId="74" />
+  <Blank Num="4" UId="75" />
+  <Access Scope="Call" UId="76">
+    <CallInfo UId="77" BlockType="FB" Name="FB10003_Pulse">
+      <Instance Scope="LocalVariable" UId="78">
+        <Component Name="FB10003_Pulse_Instance" UId="79" />
+      </Instance>
+      <Token Text="(" UId="80" />
+      <Parameter Name="CLK" UId="81">
+        <Blank Num="1" UId="82" />
+        <Token Text=":=" UId="83" />
+        <Blank Num="1" UId="84" />
+        <Access Scope="LocalVariable" UId="85">
+          <Symbol UId="86">
+            <Component Name="RequestPulseTrigStart" UId="87" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="88" />
+      <NewLine Num="1" UId="89" />
+      <Blank Num="28" UId="90" />
+      <Parameter Name="PT" UId="91">
+        <Blank Num="1" UId="92" />
+        <Token Text=":=" UId="93" />
+        <Blank Num="1" UId="94" />
+        <Access Scope="TypedConstant" UId="95">
+          <Constant UId="96">
+            <ConstantValue UId="97">T#50ms</ConstantValue>
+          </Constant>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="98" />
+      <NewLine Num="1" UId="99" />
+      <Blank Num="28" UId="100" />
+      <Parameter Name="Q" UId="101">
+        <Blank Num="1" UId="102" />
+        <Token Text=":=" UId="103" />
+        <Blank Num="1" UId="104" />
+        <Access Scope="LocalVariable" UId="105">
+          <Symbol UId="106">
+            <Component Name="CommandStruct" UId="107" />
+            <Token Text="." UId="108" />
+            <Component Name="In" UId="109" />
+            <Token Text="." UId="110" />
+            <Component Name="TrigStart_Pulse" UId="111" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="113" />
+    </CallInfo>
+  </Access>
+  <Token Text=";" UId="114" />
+  <NewLine Num="1" UId="115" />
+  <Token Text="END_REGION" UId="116" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="F" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="10" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Edge Signals, Timers, Pulse</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="11" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="12" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Access Scope="LocalVariable" UId="21">
+    <Symbol UId="22">
+      <Component Name="CommandStruct" UId="23" />
+      <Token Text="." UId="24" />
+      <Component Name="In" UId="25" />
+      <Token Text="." UId="26" />
+      <Component Name="Port" UId="27" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="28" />
+  <Token Text=":=" UId="29" />
+  <Blank Num="1" UId="30" />
+  <Access Scope="LocalVariable" UId="31">
+    <Symbol UId="32">
+      <Component Name="PortDevice" UId="33" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="34" />
+  <NewLine Num="1" UId="35" />
+  <Access Scope="LocalVariable" UId="36">
+    <Symbol UId="37">
+      <Component Name="CommandStruct" UId="38" />
+      <Token Text="." UId="39" />
+      <Component Name="In" UId="40" />
+      <Token Text="." UId="41" />
+      <Component Name="Id" UId="42" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="43" />
+  <Token Text=":=" UId="44" />
+  <Blank Num="1" UId="45" />
+  <Access Scope="LocalVariable" UId="46">
+    <Symbol UId="47">
+      <Component Name="Id" UId="48" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="49" />
+  <NewLine Num="1" UId="50" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="13" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="14" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="15" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="16" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="17" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Io Link Commands Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="18" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="LocalVariable" UId="21">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="In" />
+        <Component Name="TrigStart_Pulse" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="22">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="In" />
+        <Component Name="Id" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>DInt</ConstantType>
+        <ConstantValue>16#B400</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LocalVariable" UId="24">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="In" />
+        <Component Name="rw" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="25">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="In" />
+        <Component Name="Port" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="26">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="In" />
+        <Component Name="index" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="27">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="In" />
+        <Component Name="subindex" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="28">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="In" />
+        <Component Name="length" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="29">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="InOut" />
+        <Component Name="Data" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="30">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="Out" />
+        <Component Name="Done" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="31">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="Out" />
+        <Component Name="busy" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="32">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="Out" />
+        <Component Name="Error" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="33">
+      <Symbol>
+        <Component Name="CommandStruct" />
+        <Component Name="Out" />
+        <Component Name="Status" />
+      </Symbol>
+    </Access>
+    <Call UId="34">
+      <CallInfo Name="FB10370_IoLinkDevice" BlockType="FB">
+        <Instance Scope="LocalVariable" UId="35">
+          <Component Name="FB10370_IoLinkDevice_Instance_1" />
+        </Instance>
+        <Parameter Name="REQ" Section="Input" Type="Bool" />
+        <Parameter Name="ID" Section="Input" Type="HW_IO" />
+        <Parameter Name="CAP" Section="Input" Type="DInt" />
+        <Parameter Name="RD_WR" Section="Input" Type="Bool" />
+        <Parameter Name="PORT" Section="Input" Type="Int" />
+        <Parameter Name="IOL_INDEX" Section="Input" Type="Int" />
+        <Parameter Name="IOL_SUBINDEX" Section="Input" Type="Int" />
+        <Parameter Name="LEN" Section="Input" Type="Int" />
+        <Parameter Name="DONE_VALID" Section="Output" Type="Bool" />
+        <Parameter Name="BUSY" Section="Output" Type="Bool" />
+        <Parameter Name="ERROR" Section="Output" Type="Bool" />
+        <Parameter Name="STATUS" Section="Output" Type="DWord" />
+        <Parameter Name="IOL_STATUS" Section="Output" Type="DWord" />
+        <Parameter Name="RD_LEN" Section="Output" Type="Int" />
+        <Parameter Name="RECORD_IOL_DATA" Section="InOut" Type="Array[0..231] of Byte" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="38">
+      <Powerrail />
+      <NameCon UId="34" Name="en" />
+    </Wire>
+    <Wire UId="39">
+      <IdentCon UId="21" />
+      <NameCon UId="34" Name="REQ" />
+    </Wire>
+    <Wire UId="40">
+      <IdentCon UId="22" />
+      <NameCon UId="34" Name="ID" />
+    </Wire>
+    <Wire UId="41">
+      <IdentCon UId="23" />
+      <NameCon UId="34" Name="CAP" />
+    </Wire>
+    <Wire UId="42">
+      <IdentCon UId="24" />
+      <NameCon UId="34" Name="RD_WR" />
+    </Wire>
+    <Wire UId="43">
+      <IdentCon UId="25" />
+      <NameCon UId="34" Name="PORT" />
+    </Wire>
+    <Wire UId="44">
+      <IdentCon UId="26" />
+      <NameCon UId="34" Name="IOL_INDEX" />
+    </Wire>
+    <Wire UId="45">
+      <IdentCon UId="27" />
+      <NameCon UId="34" Name="IOL_SUBINDEX" />
+    </Wire>
+    <Wire UId="46">
+      <IdentCon UId="28" />
+      <NameCon UId="34" Name="LEN" />
+    </Wire>
+    <Wire UId="47">
+      <IdentCon UId="29" />
+      <NameCon UId="34" Name="RECORD_IOL_DATA" />
+    </Wire>
+    <Wire UId="48">
+      <NameCon UId="34" Name="DONE_VALID" />
+      <IdentCon UId="30" />
+    </Wire>
+    <Wire UId="49">
+      <NameCon UId="34" Name="BUSY" />
+      <IdentCon UId="31" />
+    </Wire>
+    <Wire UId="50">
+      <NameCon UId="34" Name="ERROR" />
+      <IdentCon UId="32" />
+    </Wire>
+    <Wire UId="51">
+      <NameCon UId="34" Name="STATUS" />
+      <IdentCon UId="33" />
+    </Wire>
+    <Wire UId="52">
+      <NameCon UId="34" Name="IOL_STATUS" />
+      <OpenCon UId="36" />
+    </Wire>
+    <Wire UId="53">
+      <NameCon UId="34" Name="RD_LEN" />
+      <OpenCon UId="37" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="1A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="1B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="1D" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="1E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Io Link Configuration Manager</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="20" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="CASE" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="IoLinkConfigurationStateDiagram" UId="25" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="26" />
+  <Token Text="OF" UId="27" />
+  <NewLine Num="1" UId="28" />
+  <Blank Num="8" UId="29" />
+  <NewLine Num="1" UId="30" />
+  <Blank Num="4" UId="31" />
+  <Access Scope="LocalConstant" UId="32">
+    <Constant Name="WAIT_FOR_IO_LINK_CONFIGURATION_COMMAND" UId="33" />
+  </Access>
+  <Token Text=":" UId="36" />
+  <NewLine Num="1" UId="37" />
+  <Blank Num="8" UId="38" />
+  <Token Text="IF" UId="39" />
+  <Blank Num="1" UId="40" />
+  <Access Scope="LocalVariable" UId="41">
+    <Symbol UId="42">
+      <Component Name="R_TRIG_RequestGetParamId" UId="43" />
+      <Token Text="." UId="44" />
+      <Component Name="Q" UId="45" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="46" />
+  <Token Text="THEN" UId="47" />
+  <NewLine Num="1" UId="48" />
+  <Blank Num="12" UId="49" />
+  <Access Scope="LocalVariable" UId="50">
+    <Symbol UId="51">
+      <Component Name="ParamIdDone" UId="52" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="53" />
+  <Token Text=":=" UId="54" />
+  <Blank Num="1" UId="55" />
+  <Access Scope="LiteralConstant" UId="56">
+    <Constant UId="57">
+      <ConstantValue UId="59">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="60" />
+  <NewLine Num="1" UId="61" />
+  <Blank Num="12" UId="62" />
+  <Access Scope="LocalVariable" UId="63">
+    <Symbol UId="64">
+      <Component Name="CommandStruct" UId="65" />
+      <Token Text="." UId="66" />
+      <Component Name="In" UId="67" />
+      <Token Text="." UId="68" />
+      <Component Name="index" UId="69" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="70" />
+  <Token Text=":=" UId="71" />
+  <Blank Num="1" UId="72" />
+  <Access Scope="LocalVariable" UId="73">
+    <Symbol UId="74">
+      <Component Name="Index" UId="75" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="76" />
+  <NewLine Num="1" UId="77" />
+  <Blank Num="12" UId="78" />
+  <Access Scope="LocalVariable" UId="79">
+    <Symbol UId="80">
+      <Component Name="CommandStruct" UId="81" />
+      <Token Text="." UId="82" />
+      <Component Name="In" UId="83" />
+      <Token Text="." UId="84" />
+      <Component Name="subindex" UId="85" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="86" />
+  <Token Text=":=" UId="87" />
+  <Blank Num="1" UId="88" />
+  <Access Scope="LocalVariable" UId="89">
+    <Symbol UId="90">
+      <Component Name="SubIndex" UId="91" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="92" />
+  <NewLine Num="1" UId="93" />
+  <Blank Num="12" UId="94" />
+  <Access Scope="LocalVariable" UId="95">
+    <Symbol UId="96">
+      <Component Name="CommandStruct" UId="97" />
+      <Token Text="." UId="98" />
+      <Component Name="In" UId="99" />
+      <Token Text="." UId="100" />
+      <Component Name="rw" UId="101" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="102" />
+  <Token Text=":=" UId="103" />
+  <Blank Num="1" UId="104" />
+  <Access Scope="LiteralConstant" UId="105">
+    <Constant UId="106">
+      <ConstantValue UId="108">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="109" />
+  <NewLine Num="1" UId="110" />
+  <Blank Num="12" UId="111" />
+  <Access Scope="LocalVariable" UId="112">
+    <Symbol UId="113">
+      <Component Name="CommandStruct" UId="114" />
+      <Token Text="." UId="115" />
+      <Component Name="In" UId="116" />
+      <Token Text="." UId="117" />
+      <Component Name="length" UId="118" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="119" />
+  <Token Text=":=" UId="120" />
+  <Blank Num="1" UId="121" />
+  <Access Scope="LocalVariable" UId="122">
+    <Symbol UId="123">
+      <Component Name="Length" UId="124" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="125" />
+  <NewLine Num="2" UId="126" />
+  <Blank Num="12" UId="127" />
+  <Access Scope="LocalVariable" UId="128">
+    <Symbol UId="129">
+      <Component Name="Value" UId="130" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="131" />
+  <Token Text=":=" UId="132" />
+  <Blank Num="1" UId="133" />
+  <Access Scope="LocalVariable" UId="134">
+    <Symbol UId="135">
+      <Component Name="CommandStruct" UId="136" />
+      <Token Text="." UId="137" />
+      <Component Name="InOut" UId="138" />
+      <Token Text="." UId="139" />
+      <Component Name="Data" UId="140" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="141" />
+  <NewLine Num="1" UId="142" />
+  <Blank Num="12" UId="143" />
+  <Access Scope="LocalVariable" UId="144">
+    <Symbol UId="145">
+      <Component Name="IoLinkConfigurationStateDiagram" UId="146" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="147" />
+  <Token Text=":=" UId="148" />
+  <Blank Num="1" UId="149" />
+  <Access Scope="LocalConstant" UId="150">
+    <Constant Name="GET_PARAM_ID_IN_PROGRESS" UId="151" />
+  </Access>
+  <Token Text=";" UId="154" />
+  <NewLine Num="1" UId="155" />
+  <Blank Num="12" UId="156" />
+  <NewLine Num="1" UId="157" />
+  <Blank Num="8" UId="158" />
+  <Token Text="ELSIF" UId="159" />
+  <Blank Num="1" UId="160" />
+  <Access Scope="LocalVariable" UId="161">
+    <Symbol UId="162">
+      <Component Name="R_TRIG_RequestSetParamId" UId="163" />
+      <Token Text="." UId="164" />
+      <Component Name="Q" UId="165" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="166" />
+  <Token Text="THEN" UId="167" />
+  <NewLine Num="1" UId="168" />
+  <Blank Num="12" UId="169" />
+  <Access Scope="LocalVariable" UId="170">
+    <Symbol UId="171">
+      <Component Name="ParamIdDone" UId="172" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="173" />
+  <Token Text=":=" UId="174" />
+  <Blank Num="1" UId="175" />
+  <Access Scope="LiteralConstant" UId="176">
+    <Constant UId="177">
+      <ConstantValue UId="179">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="180" />
+  <NewLine Num="1" UId="181" />
+  <Blank Num="12" UId="182" />
+  <Access Scope="LocalVariable" UId="183">
+    <Symbol UId="184">
+      <Component Name="CommandStruct" UId="185" />
+      <Token Text="." UId="186" />
+      <Component Name="InOut" UId="187" />
+      <Token Text="." UId="188" />
+      <Component Name="Data" UId="189" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="190" />
+  <Token Text=":=" UId="191" />
+  <Blank Num="1" UId="192" />
+  <Access Scope="LocalVariable" UId="193">
+    <Symbol UId="194">
+      <Component Name="Value" UId="195" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="196" />
+  <NewLine Num="1" UId="197" />
+  <Blank Num="12" UId="198" />
+  <Access Scope="LocalVariable" UId="199">
+    <Symbol UId="200">
+      <Component Name="CommandStruct" UId="201" />
+      <Token Text="." UId="202" />
+      <Component Name="In" UId="203" />
+      <Token Text="." UId="204" />
+      <Component Name="index" UId="205" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="206" />
+  <Token Text=":=" UId="207" />
+  <Blank Num="1" UId="208" />
+  <Access Scope="LocalVariable" UId="209">
+    <Symbol UId="210">
+      <Component Name="Index" UId="211" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="212" />
+  <NewLine Num="1" UId="213" />
+  <Blank Num="12" UId="214" />
+  <Access Scope="LocalVariable" UId="215">
+    <Symbol UId="216">
+      <Component Name="CommandStruct" UId="217" />
+      <Token Text="." UId="218" />
+      <Component Name="In" UId="219" />
+      <Token Text="." UId="220" />
+      <Component Name="subindex" UId="221" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="222" />
+  <Token Text=":=" UId="223" />
+  <Blank Num="1" UId="224" />
+  <Access Scope="LocalVariable" UId="225">
+    <Symbol UId="226">
+      <Component Name="SubIndex" UId="227" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="228" />
+  <NewLine Num="1" UId="229" />
+  <Blank Num="12" UId="230" />
+  <Access Scope="LocalVariable" UId="231">
+    <Symbol UId="232">
+      <Component Name="CommandStruct" UId="233" />
+      <Token Text="." UId="234" />
+      <Component Name="In" UId="235" />
+      <Token Text="." UId="236" />
+      <Component Name="rw" UId="237" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="238" />
+  <Token Text=":=" UId="239" />
+  <Blank Num="1" UId="240" />
+  <Access Scope="LiteralConstant" UId="241">
+    <Constant UId="242">
+      <ConstantValue UId="244">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="245" />
+  <NewLine Num="1" UId="246" />
+  <Blank Num="12" UId="247" />
+  <Access Scope="LocalVariable" UId="248">
+    <Symbol UId="249">
+      <Component Name="CommandStruct" UId="250" />
+      <Token Text="." UId="251" />
+      <Component Name="In" UId="252" />
+      <Token Text="." UId="253" />
+      <Component Name="length" UId="254" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="255" />
+  <Token Text=":=" UId="256" />
+  <Blank Num="1" UId="257" />
+  <Access Scope="LocalVariable" UId="258">
+    <Symbol UId="259">
+      <Component Name="Length" UId="260" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="261" />
+  <NewLine Num="1" UId="262" />
+  <Blank Num="12" UId="263" />
+  <Access Scope="LocalVariable" UId="264">
+    <Symbol UId="265">
+      <Component Name="IoLinkConfigurationStateDiagram" UId="266" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="267" />
+  <Token Text=":=" UId="268" />
+  <Blank Num="1" UId="269" />
+  <Access Scope="LocalConstant" UId="270">
+    <Constant Name="SET_PARAM_ID_IN_PROGRESS" UId="271" />
+  </Access>
+  <Token Text=";" UId="274" />
+  <NewLine Num="1" UId="275" />
+  <Blank Num="8" UId="276" />
+  <Token Text="END_IF" UId="277" />
+  <Token Text=";" UId="278" />
+  <NewLine Num="1" UId="279" />
+  <Blank Num="8" UId="280" />
+  <NewLine Num="1" UId="281" />
+  <Blank Num="8" UId="282" />
+  <NewLine Num="1" UId="283" />
+  <Blank Num="4" UId="284" />
+  <Access Scope="LocalConstant" UId="285">
+    <Constant Name="GET_PARAM_ID_IN_PROGRESS" UId="286" />
+  </Access>
+  <Token Text=":" UId="289" />
+  <NewLine Num="1" UId="290" />
+  <Blank Num="8" UId="291" />
+  <Token Text="REGION" UId="292" />
+  <Blank Num="1" UId="293" />
+  <Text UId="294">State Action Management</Text>
+  <NewLine Num="1" UId="295" />
+  <Blank Num="12" UId="296" />
+  <Access Scope="LocalVariable" UId="297">
+    <Symbol UId="298">
+      <Component Name="RequestPulseTrigStart" UId="299" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="300" />
+  <Token Text=":=" UId="301" />
+  <Blank Num="1" UId="302" />
+  <Access Scope="LiteralConstant" UId="303">
+    <Constant UId="304">
+      <ConstantValue UId="306">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="307" />
+  <NewLine Num="1" UId="308" />
+  <Blank Num="11" UId="309" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="310">
+    <Text UId="311"> #CommandStruct.In.Data := #SP1_Value;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="312" />
+  <Blank Num="8" UId="313" />
+  <Token Text="END_REGION" UId="314" />
+  <NewLine Num="1" UId="315" />
+  <Blank Num="8" UId="316" />
+  <NewLine Num="1" UId="317" />
+  <Blank Num="8" UId="318" />
+  <Token Text="REGION" UId="319" />
+  <Blank Num="1" UId="320" />
+  <Text UId="321">State Exit Management</Text>
+  <NewLine Num="1" UId="322" />
+  <Blank Num="12" UId="323" />
+  <Token Text="IF" UId="324" />
+  <Blank Num="1" UId="325" />
+  <Access Scope="LocalVariable" UId="326">
+    <Symbol UId="327">
+      <Component Name="CommandStruct" UId="328" />
+      <Token Text="." UId="329" />
+      <Component Name="Out" UId="330" />
+      <Token Text="." UId="331" />
+      <Component Name="Done" UId="332" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="333" />
+  <Token Text="THEN" UId="334" />
+  <NewLine Num="1" UId="335" />
+  <Blank Num="16" UId="336" />
+  <Access Scope="LocalVariable" UId="337">
+    <Symbol UId="338">
+      <Component Name="ParamIdDone" UId="339" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="340" />
+  <Token Text=":=" UId="341" />
+  <Blank Num="1" UId="342" />
+  <Access Scope="LiteralConstant" UId="343">
+    <Constant UId="344">
+      <ConstantValue UId="346">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="347" />
+  <NewLine Num="1" UId="348" />
+  <Blank Num="16" UId="349" />
+  <Access Scope="LocalVariable" UId="350">
+    <Symbol UId="351">
+      <Component Name="RequestPulseTrigStart" UId="352" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="353" />
+  <Token Text=":=" UId="354" />
+  <Blank Num="1" UId="355" />
+  <Access Scope="LiteralConstant" UId="356">
+    <Constant UId="357">
+      <ConstantValue UId="359">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="360" />
+  <NewLine Num="1" UId="361" />
+  <Blank Num="16" UId="362" />
+  <Access Scope="LocalVariable" UId="363">
+    <Symbol UId="364">
+      <Component Name="IoLinkConfigurationStateDiagram" UId="365" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="366" />
+  <Token Text=":=" UId="367" />
+  <Blank Num="1" UId="368" />
+  <Access Scope="LocalConstant" UId="369">
+    <Constant Name="IO_LINK_COMMAND_CONFIGURATION_DONE" UId="370" />
+  </Access>
+  <Token Text=";" UId="373" />
+  <NewLine Num="1" UId="374" />
+  <Blank Num="12" UId="375" />
+  <Token Text="END_IF" UId="376" />
+  <Token Text=";" UId="377" />
+  <NewLine Num="1" UId="378" />
+  <Blank Num="8" UId="379" />
+  <Token Text="END_REGION" UId="380" />
+  <NewLine Num="1" UId="381" />
+  <Blank Num="8" UId="382" />
+  <NewLine Num="1" UId="383" />
+  <Blank Num="4" UId="384" />
+  <Access Scope="LocalConstant" UId="385">
+    <Constant Name="SET_PARAM_ID_IN_PROGRESS" UId="386" />
+  </Access>
+  <Token Text=":" UId="389" />
+  <NewLine Num="1" UId="390" />
+  <Blank Num="8" UId="391" />
+  <Token Text="REGION" UId="392" />
+  <Blank Num="1" UId="393" />
+  <Text UId="394">State Action Management</Text>
+  <NewLine Num="1" UId="395" />
+  <Blank Num="12" UId="396" />
+  <Access Scope="LocalVariable" UId="397">
+    <Symbol UId="398">
+      <Component Name="RequestPulseTrigStart" UId="399" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="400" />
+  <Token Text=":=" UId="401" />
+  <Blank Num="1" UId="402" />
+  <Access Scope="LiteralConstant" UId="403">
+    <Constant UId="404">
+      <ConstantValue UId="406">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="407" />
+  <NewLine Num="1" UId="408" />
+  <Blank Num="12" UId="409" />
+  <LineComment Inserted="false" NoClosingBracket="false" UId="410">
+    <Text UId="411"> #CommandStruct.In.Data := #SP1_Value;</Text>
+  </LineComment>
+  <NewLine Num="1" UId="412" />
+  <Blank Num="8" UId="413" />
+  <Token Text="END_REGION" UId="414" />
+  <NewLine Num="1" UId="415" />
+  <Blank Num="8" UId="416" />
+  <NewLine Num="1" UId="417" />
+  <Blank Num="8" UId="418" />
+  <Token Text="REGION" UId="419" />
+  <Blank Num="1" UId="420" />
+  <Text UId="421">State Exit Management</Text>
+  <NewLine Num="1" UId="422" />
+  <Blank Num="12" UId="423" />
+  <Token Text="IF" UId="424" />
+  <Blank Num="1" UId="425" />
+  <Access Scope="LocalVariable" UId="426">
+    <Symbol UId="427">
+      <Component Name="CommandStruct" UId="428" />
+      <Token Text="." UId="429" />
+      <Component Name="Out" UId="430" />
+      <Token Text="." UId="431" />
+      <Component Name="Done" UId="432" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="433" />
+  <Token Text="THEN" UId="434" />
+  <NewLine Num="1" UId="435" />
+  <Blank Num="16" UId="436" />
+  <Access Scope="LocalVariable" UId="437">
+    <Symbol UId="438">
+      <Component Name="ParamIdDone" UId="439" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="440" />
+  <Token Text=":=" UId="441" />
+  <Blank Num="1" UId="442" />
+  <Access Scope="LiteralConstant" UId="443">
+    <Constant UId="444">
+      <ConstantValue UId="446">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="447" />
+  <NewLine Num="1" UId="448" />
+  <Blank Num="16" UId="449" />
+  <Access Scope="LocalVariable" UId="450">
+    <Symbol UId="451">
+      <Component Name="RequestPulseTrigStart" UId="452" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="453" />
+  <Token Text=":=" UId="454" />
+  <Blank Num="1" UId="455" />
+  <Access Scope="LiteralConstant" UId="456">
+    <Constant UId="457">
+      <ConstantValue UId="459">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="460" />
+  <NewLine Num="1" UId="461" />
+  <Blank Num="16" UId="462" />
+  <Access Scope="LocalVariable" UId="463">
+    <Symbol UId="464">
+      <Component Name="IoLinkConfigurationStateDiagram" UId="465" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="466" />
+  <Token Text=":=" UId="467" />
+  <Blank Num="1" UId="468" />
+  <Access Scope="LocalConstant" UId="469">
+    <Constant Name="IO_LINK_COMMAND_CONFIGURATION_DONE" UId="470" />
+  </Access>
+  <Token Text=";" UId="473" />
+  <NewLine Num="1" UId="474" />
+  <Blank Num="12" UId="475" />
+  <Token Text="END_IF" UId="476" />
+  <Token Text=";" UId="477" />
+  <NewLine Num="1" UId="478" />
+  <Blank Num="8" UId="479" />
+  <Token Text="END_REGION" UId="480" />
+  <NewLine Num="1" UId="481" />
+  <Blank Num="8" UId="482" />
+  <NewLine Num="1" UId="483" />
+  <Blank Num="1" UId="484" />
+  <NewLine Num="1" UId="485" />
+  <Blank Num="4" UId="486" />
+  <Access Scope="LocalConstant" UId="487">
+    <Constant Name="IO_LINK_COMMAND_CONFIGURATION_DONE" UId="488" />
+  </Access>
+  <Token Text=":" UId="491" />
+  <NewLine Num="1" UId="492" />
+  <Blank Num="8" UId="493" />
+  <Access Scope="LocalVariable" UId="494">
+    <Symbol UId="495">
+      <Component Name="ParameterDone" UId="496" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="497" />
+  <Token Text=":=" UId="498" />
+  <Blank Num="1" UId="499" />
+  <Access Scope="LiteralConstant" UId="500">
+    <Constant UId="501">
+      <ConstantValue UId="503">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="504" />
+  <NewLine Num="1" UId="505" />
+  <Blank Num="8" UId="506" />
+  <Access Scope="LocalVariable" UId="507">
+    <Symbol UId="508">
+      <Component Name="IoLinkConfigurationStateDiagram" UId="509" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="510" />
+  <Token Text=":=" UId="511" />
+  <Blank Num="1" UId="512" />
+  <Access Scope="LocalConstant" UId="513">
+    <Constant Name="WAIT_FOR_IO_LINK_CONFIGURATION_COMMAND" UId="514" />
+  </Access>
+  <Token Text=";" UId="517" />
+  <NewLine Num="1" UId="518" />
+  <Token Text="END_CASE" UId="519" />
+  <Token Text=";" UId="520" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="21" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="22" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="23" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="24" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="25" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Io Link Commands Configuration Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="26" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="27" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+  <Token Text="IF" UId="21" />
+  <Blank Num="1" UId="22" />
+  <Access Scope="LocalVariable" UId="23">
+    <Symbol UId="24">
+      <Component Name="CommandStruct" UId="25" />
+      <Token Text="." UId="26" />
+      <Component Name="Out" UId="27" />
+      <Token Text="." UId="28" />
+      <Component Name="Error" UId="29" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="30" />
+  <Token Text="THEN" UId="31" />
+  <NewLine Num="1" UId="32" />
+  <Blank Num="4" UId="33" />
+  <Access Scope="LocalVariable" UId="34">
+    <Symbol UId="35">
+      <Component Name="IoLinkConfigurationStateDiagram" UId="36" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="37" />
+  <Token Text=":=" UId="38" />
+  <Blank Num="1" UId="39" />
+  <Access Scope="LocalConstant" UId="40">
+    <Constant Name="WAIT_FOR_IO_LINK_CONFIGURATION_COMMAND" UId="41" />
+  </Access>
+  <Token Text=";" UId="44" />
+  <NewLine Num="1" UId="45" />
+  <Blank Num="4" UId="46" />
+  <Access Scope="LocalVariable" UId="47">
+    <Symbol UId="48">
+      <Component Name="Error" UId="49" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="50" />
+  <Token Text=":=" UId="51" />
+  <Blank Num="1" UId="52" />
+  <Access Scope="LiteralConstant" UId="53">
+    <Constant UId="54">
+      <ConstantValue UId="56">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="57" />
+  <NewLine Num="1" UId="58" />
+  <Token Text="END_IF" UId="59" />
+  <Token Text=";" UId="60" />
+  <NewLine Num="2" UId="61" />
+  <Token Text="IF" UId="62" />
+  <Blank Num="1" UId="63" />
+  <Access Scope="LocalVariable" UId="64">
+    <Symbol UId="65">
+      <Component Name="Ackowledge" UId="66" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="67" />
+  <Token Text="THEN" UId="68" />
+  <NewLine Num="1" UId="69" />
+  <Blank Num="4" UId="70" />
+  <Access Scope="LocalVariable" UId="71">
+    <Symbol UId="72">
+      <Component Name="Error" UId="73" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="74" />
+  <Token Text=":=" UId="75" />
+  <Blank Num="1" UId="76" />
+  <Access Scope="LiteralConstant" UId="77">
+    <Constant UId="78">
+      <ConstantValue UId="80">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="81" />
+  <NewLine Num="1" UId="82" />
+  <Token Text="END_IF" UId="83" />
+  <Token Text=";" UId="84" />
+  <NewLine Num="1" UId="85" />
+  <Access Scope="LocalVariable" UId="86">
+    <Symbol UId="87">
+      <Component Name="Status" UId="88" />
+    </Symbol>
+  </Access>
+  <Blank Num="1" UId="89" />
+  <Token Text=":=" UId="90" />
+  <Blank Num="1" UId="91" />
+  <Access Scope="LocalVariable" UId="92">
+    <Symbol UId="93">
+      <Component Name="CommandStruct" UId="94" />
+      <Token Text="." UId="95" />
+      <Component Name="Out" UId="96" />
+      <Token Text="." UId="97" />
+      <Component Name="Status" UId="98" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="99" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="28" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="29" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="2B" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="2C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>fr-FR</Culture>
+                  <Text>Io Link Commands Error Management</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>de-DE</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="2E" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="2F" CompositionName="Items">
+            <AttributeList>
+              <Culture>fr-FR</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="30" CompositionName="Items">
+            <AttributeList>
+              <Culture>de-DE</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

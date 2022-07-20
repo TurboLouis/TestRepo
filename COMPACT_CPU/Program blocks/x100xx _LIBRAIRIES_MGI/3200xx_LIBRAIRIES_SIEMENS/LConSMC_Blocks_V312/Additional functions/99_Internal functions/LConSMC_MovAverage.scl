@@ -1,0 +1,150 @@
+﻿FUNCTION_BLOCK "LConSMC_MovAverage"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool := TRUE;
+      updateConfig : Bool;
+      sampleMode : UInt := "LCON_TIMEPERIOD_MODE";
+      inputSignal : LReal;
+      subsetLength : UInt := "LCON_STATEVAL_MAX_BUFFERLENGTH";
+      samplingFactor : UInt := #INIT_MULT_OF_SAMPLINGRATE;
+      setTimePeriod : Time := #INIT_TIMEPERIOD;
+      cycleTime : UDInt;
+   END_VAR
+
+   VAR_OUTPUT 
+      error : Bool;
+      errorID : DWord := 16#0000_0000;
+      samplingTime : LReal := 1.0;
+      timePeriod : LReal := 10.0;
+      shiftedInputSignal : LReal;
+      movingAverage : LReal;
+   END_VAR
+
+   VAR 
+      statUpdateConfigOld : Bool;
+      statEnableOld : Bool;
+      statError : Bool;
+      statSum : LReal;
+      statSignalBufferSum : Array[1.."LCON_STATEVAL_MAX_BUFFERLENGTH"] of LReal;
+      statSamplingFactor : UInt;
+      statSubsetLength : UInt;
+      instfbUpdateConfig : "LConSMC_UpdateConfigOfStatisticCalc";
+      instfbSumCalc : "LConSMC_SumCalc";
+      statEnableRisingEdge { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      statCurrentSubLen { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : UInt;
+   END_VAR
+
+   VAR CONSTANT 
+      FB_ID : DWord := 16#0426_0000;
+      INIT_TIMEPERIOD : Time := T#10MS;
+      INIT_MULT_OF_SAMPLINGRATE : UInt := 1;
+   END_VAR
+
+
+BEGIN
+	//===========================================================================================================
+	// SIEMENS AG
+	// (c)Copyright 2019  All Rights Reserved
+	//-----------------------------------------------------------------------------------------------------------
+	//  file name:      LDrvOpt_MovAverage (Motion Control Application Cycle)
+	//  library:        LDrvOpt
+	//  system:         SIMATIC TIA PORTAL V15
+	//  version:        V1.0.0   
+	//  restrictions:   Must be called in PreIpo
+	//  requirements:   /
+	//  functionality:  This function block calculates the moving average for any input signal by an user defined 
+	//                  subset n. It also delivers the centered input signal for the moving average.
+	//                  Any changes of the subset length during calculation causes no peak. It may be used to smooth
+	//                  loop control signals.    
+	//        
+	//                  The implemented algorithm calculates as shown in the following formula:            
+	//                  µ_(n)     =     (1 / n) * SUM[i = k-n...k] x_i
+	//------------------------------------------------------------------------------------------------------------
+	//  change log table:
+	//  version     date            experts in charge           changes applied
+	//  01.00.00    15.03.19        APC Erlangen                create
+	//============================================================================================================
+	
+	//----------------------------------------------------------------------
+	//RESET SETTINGS AND ERRORS AFTER RISING EDGE OF ENABLE
+	//----------------------------------------------------------------------
+	IF (#enable AND NOT #statEnableOld) THEN
+	    // start calculation in default mode after Reset und clear errors
+	    #statEnableOld := #enable;
+	    #statEnableRisingEdge := TRUE;
+	ELSE
+	    #statEnableRisingEdge := FALSE;
+	END_IF;
+	
+	IF (NOT #enable) THEN
+	    #statEnableOld := #enable;
+	    
+	    //Reset outputs
+	    #statError := FALSE;
+	    #error := FALSE;
+	    #errorID := 16#0000_0000;
+	    #samplingTime := 0.0;
+	    #timePeriod := 0.0;
+	    #shiftedInputSignal := 0.0;
+	    #movingAverage := 0.0;
+	END_IF;
+	
+	//----------------------------------------------------------------------
+	//UPDATE CONFIGURATION FOR AVERAGING
+	//----------------------------------------------------------------------
+	// Detect rising edge of UpdateConfig
+	IF ((#updateConfig AND NOT #statUpdateConfigOld) OR #statEnableRisingEdge) THEN
+	    
+	    #instfbUpdateConfig(
+	                        fb_ID := #FB_ID,
+	                        cascadeCalculation := FALSE,
+	                        sampleMode := #sampleMode,
+	                        maxBufferLengthMain := "LCON_STATEVAL_MAX_BUFFERLENGTH",
+	                        inSubsetLengthMain := #subsetLength,
+	                        setTimePeriod := #setTimePeriod,
+	                        inSamplingFactor := #samplingFactor,
+	                        cycleTime := #cycleTime,
+	                        error => #statError,
+	                        errorID => #errorID,
+	                        outSamplingFactorMain => #statSamplingFactor,
+	                        outSubsetLengthMain => #statSubsetLength,
+	                        samplingTime => #samplingTime,
+	                        timePeriod => #timePeriod
+	    );
+	    
+	    #statUpdateConfigOld := #updateConfig;
+	    
+	END_IF;
+	
+	IF (NOT #updateConfig) THEN
+	    #statUpdateConfigOld := #updateConfig;
+	END_IF;
+	
+	//----------------------------------------------------------------------
+	//DETERMINE MOVING AVERAGE
+	//----------------------------------------------------------------------
+	// If an error is queued the calculation will be stopped to prevent CPU stopp
+	IF (NOT #statError AND #enable) THEN
+	    
+	    // Calculate Average (a wrong configuration doesn't stopp the calculation)
+	    #instfbSumCalc(
+	                   enable := #enable,
+	                   inputSignal := #inputSignal,
+	                   inSubsetLength := #statSubsetLength,
+	                   inRateOfSumCalc := #statSamplingFactor,
+	                   signalBuffer := #statSignalBufferSum,
+	                   sum => #statSum,
+	                   shiftedInputSignal => #shiftedInputSignal,
+	                   outSubsetLength => #statCurrentSubLen
+	    );
+	    
+	    // Calculate moving average of sum
+	    #movingAverage := (1.0 / #statCurrentSubLen) * #statSum;
+	    
+	    // determine the current time periode of the subset
+	    //#timePeriod := #samplingTime * #statCurrentSubLen;    //actual time period during init
+	END_IF;
+	#error := #statError;
+END_FUNCTION_BLOCK
+

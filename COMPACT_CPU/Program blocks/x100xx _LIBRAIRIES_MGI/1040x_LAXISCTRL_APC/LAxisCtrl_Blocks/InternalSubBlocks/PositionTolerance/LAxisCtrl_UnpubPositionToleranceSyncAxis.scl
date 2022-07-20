@@ -1,0 +1,15 @@
+﻿FUNCTION "LAxisCtrl_UnpubPositionToleranceSyncAxis" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis {InstructionName := 'TO_SynchronousAxis'; LibVersion := '5.0'} : TO_SynchronousAxis;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	#LAxisCtrl_UnpubPositionToleranceSyncAxis := #axis.Clamping.PositionTolerance;
+END_FUNCTION
+

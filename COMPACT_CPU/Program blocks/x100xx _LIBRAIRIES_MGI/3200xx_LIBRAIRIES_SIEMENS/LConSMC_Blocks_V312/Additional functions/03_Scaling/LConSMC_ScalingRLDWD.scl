@@ -1,0 +1,38 @@
+﻿FUNCTION "LConSMC_ScalingRLDWD" : DWord
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      x : Real;
+      maxValue : Real;
+      base : Real;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#0007_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : ScalingRLDWD
+	//functionality : Converts and scales REAL to DWORD
+	//assignment    : Any
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge              changes applied
+	//V1.0      27.07.2012    APC GMC group                 Creation
+	//=========================================================================================================================
+	
+	IF (#maxValue = 0.0) THEN
+	  #LConSMC_ScalingRLDWD := REAL_TO_DWORD(0);                                       // Convert REAL Value to DWORD
+	ELSE
+	  #LConSMC_ScalingRLDWD := REAL_TO_DWORD(LIMIT(MN := -2 * #maxValue,
+	                                                                                      IN := (#x / #maxValue * #base),
+	                                                                                      MX := 2 * #maxValue));                         // Convert REAL Value to DWORD
+	END_IF;
+	
+END_FUNCTION
+

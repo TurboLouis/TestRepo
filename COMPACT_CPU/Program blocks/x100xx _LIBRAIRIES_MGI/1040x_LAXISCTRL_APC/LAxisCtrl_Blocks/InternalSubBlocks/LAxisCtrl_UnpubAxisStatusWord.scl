@@ -1,0 +1,30 @@
+﻿FUNCTION "LAxisCtrl_UnpubAxisStatusWord" : DWord
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis : DB_ANY;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	CASE TypeOfDB(#axis) OF
+	  TO_ExternalEncoder:
+	    #LAxisCtrl_UnpubAxisStatusWord := "LAnyAxis_UnpubStatusWordExtEncoder"(#axis);
+	    
+	  TO_SpeedAxis:
+	    #LAxisCtrl_UnpubAxisStatusWord := "LAnyAxis_UnpubStatusWordSpeedAxis"(#axis);
+	    
+	  TO_PositioningAxis:
+	    #LAxisCtrl_UnpubAxisStatusWord := "LAnyAxis_UnpubStatusWordPosAxis"(#axis);
+	    
+	  TO_SynchronousAxis:
+	    #LAxisCtrl_UnpubAxisStatusWord := "LAnyAxis_UnpubStatusWordSyncAxis"(#axis);
+	    
+	  ELSE
+	    #LAxisCtrl_UnpubAxisStatusWord := 16#0000_0000; // Invalid TO specification
+	END_CASE;
+END_FUNCTION
+

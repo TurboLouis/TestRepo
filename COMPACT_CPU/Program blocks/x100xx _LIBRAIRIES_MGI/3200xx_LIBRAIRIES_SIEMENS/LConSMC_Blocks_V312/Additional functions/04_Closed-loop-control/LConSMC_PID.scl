@@ -1,0 +1,255 @@
+﻿FUNCTION_BLOCK "LConSMC_PID"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool := FALSE;
+      reset : Bool := FALSE;
+      setpointValue : LReal := 0.0;
+      actualValue : LReal := 0.0;
+      preControl : LReal := 0.0;
+      propGain : LReal := 2.0;
+      integTime : LReal := 999.0;
+      derivTime : LReal := 0.0;
+      filterTime : LReal := 10.0;
+      upperLimit : LReal := 100.0;
+      lowerLimit : LReal := 0.0;
+      intSetValue : LReal := 0.0;
+      holdIntChannel : Bool := FALSE;
+      setIntChannel : Bool := FALSE;
+      controlMode : Bool := FALSE;
+      deadBand { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : LReal := 0.0;
+      actualValueFactor : LReal := 1.0;
+      actualValueOffset : LReal := 0.0;
+      outValueFactor : LReal := 1.0;
+      outValueOffset : LReal := 0.0;
+      tCycle : Real := 0.0;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool := FALSE;
+      error : Bool := FALSE;
+      errorID : DWord := 16#0000_0000;
+      upperLimitReached : Bool := FALSE;
+      lowerLimitReached : Bool := FALSE;
+      deviationValue : LReal := 0.0;
+      pOutValue : LReal := 0.0;
+      iOutValue : LReal;
+      dOutValue : LReal;
+      outValue : LReal := 0.0;
+   END_VAR
+
+   VAR 
+      statDeviationPrev : LReal := 0.0;
+      statActPT1Prev : LReal := 0.0;
+      statFirstRun : Bool := TRUE;
+      statError : Bool;
+      statBusy : Bool;
+      statErrorID : DWord;
+      statDiff : LReal;
+      statActualVal : LReal;
+      statTi : LReal;
+      statTd : LReal;
+      statEnableOld : Bool;
+      statOBnumberInternal : Int;
+      statSet : Bool := FALSE;
+      statX : LReal := 0.0;
+      statSetvalue : LReal := 0.0;
+      statSmoothingTime : LReal := 100.0;
+      statY : LReal := 0.0;
+      statTmax : LReal;
+      statXkm1 : LReal;
+      statYkm1 : LReal;
+      statIOutValue : LReal := 0.0;
+      statDOutValue : LReal := 0.0;
+   END_VAR
+
+   VAR_TEMP 
+      tmpDenom : LReal;
+      tmpEnum : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#1105_0000;
+      NO_ERROR : DWord := 16#0000_0000;
+      MAX_SMOOTHING : Real := 5000.0;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : PID
+	//functionality : PID controller
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge            changes applied
+	//V1.0      10.07.2012    APC GMC group               Creation
+	//V1.1      17.11.2016    APC ERL                     adapted to styleguide; warning "variable might not be initialized" removed
+	//========================================================================================================================
+	
+	#busy := true;                                        //Function block activated
+	IF (#statEnableOld = false) AND (#enable = false) THEN       //When FB not enabled then reset all outputs and return
+	    #error := false;
+	    #errorID := #NO_ERROR;
+	    #upperLimitReached := false;
+	    #lowerLimitReached := false;
+	    #deviationValue := 0.0;
+	    #pOutValue := 0.0;
+	    #statIOutValue := 0.0;
+	    #statDOutValue := 0.0;
+	    #outValue := 0.0;
+	    RETURN;
+	END_IF;
+	
+	
+	IF #statFirstRun THEN
+	    #statFirstRun := false;
+	    #statDeviationPrev := 0.0;                                         //No previous values 
+	    #statActPT1Prev := 0.0;
+	END_IF;
+	
+	
+	
+	IF (#tCycle = 0.0) THEN
+	    #statError := TRUE;
+	    #statErrorID := #UNIT_ID OR "LCON_ERROR_CYCLE_TIME_ZERO";                             // FB NOT running IN cyclic task (81)
+	    #busy := FALSE;
+	END_IF;
+	
+	
+	IF (#lowerLimit > #upperLimit) THEN                                           // Defined limiting not valid, error
+	    #statError := TRUE;
+	    #statErrorID := #UNIT_ID OR "LCON_ERROR_INVALID_CONFIGURATION";
+	    #busy := FALSE;
+	    #upperLimitReached := FALSE;
+	    #lowerLimitReached := FALSE;
+	    #deviationValue := 0.0;
+	    #pOutValue := 0.0;
+	    #statIOutValue := 0.0;
+	    #statDOutValue := 0.0;
+	    #outValue := 0.0;
+	END_IF;
+	
+	IF (#reset OR (#enable AND NOT #statEnableOld)) THEN                               // Restart and initialization at rising edge
+	    #busy := FALSE;
+	    #statError := FALSE;                                         //  False: no error
+	    #statErrorID := #NO_ERROR;                                     //  error identification
+	    #statFirstRun := TRUE;                                         // for next start
+	    #upperLimitReached := FALSE;                                         // upper limit of output reached
+	    #lowerLimitReached := FALSE;                                         // lower limit of output reached
+	    #deviationValue := 0.0;                                         // error signal difference bteween setpoint and actual
+	    #pOutValue := 0.0;                                         // proportionality component
+	    #statIOutValue := 0.0;                                         // integral component
+	    #statDOutValue := 0.0;                                         // derivative component
+	    #outValue := 0.0;                                         // manipulated value
+	    #statDeviationPrev := 0.0;                                         // deviation value from previous cycle
+	    #statActPT1Prev := #actualValue;
+	    
+	ELSIF NOT (#statError) THEN                                                   // Determine integration and derivation time constant
+	    #statTd := ABS(#derivTime);
+	    #statTi := ABS(#integTime);
+	    
+	    
+	    
+	    
+	    // Start of PT1- BLock program
+	    //It is required because of S7-1200 call nesting limitation
+	    //This block is called in WinderControl FB & T_PID, which increases the nesting count so a detail program is written in this FB         
+	    #statSet := (#reset OR (#enable AND NOT #statEnableOld));
+	    #statX := #actualValue * #actualValueFactor + #actualValueOffset;
+	    #statSetvalue := #statX;
+	    #statSmoothingTime := #filterTime;
+	    
+	    IF (NOT #statError) THEN
+	        
+	        IF (#statSmoothingTime <= 0.0) THEN
+	            #statY := #statX;
+	        ELSE
+	            #statTmax := 2.0 * LIMIT(MN := #tCycle,                                // Tmax=2TS
+	                                     IN := #statSmoothingTime,
+	                                     MX := #MAX_SMOOTHING);
+	            IF (#statSet) THEN               // Check for active SET-command: if active, set Xkm1, y  to SV.                                                     
+	                #statY := #statSetvalue;
+	                #statXkm1 := #statSetvalue;
+	            ELSE
+	                #tmpEnum := #statTmax - #tCycle;
+	                #tmpDenom := #statTmax + #tCycle;
+	                //FILTERED OUTPUT OF PT1 FILTER = y           
+	                #statY := (#tmpEnum * #statYkm1 + #tCycle * (#statX + #statXkm1)) / #tmpDenom;
+	                #statXkm1 := #statX;
+	            END_IF;
+	            #statYkm1 := #statY;            // previous value same as present
+	        END_IF;
+	    ELSE
+	        #statY := 0.0;
+	    END_IF;
+	    //End of PT-1 block       
+	    
+	    
+	    
+	    IF ((#controlMode) AND (#statTd > 0.0)) THEN                                            //Derivative in actual value branch activation
+	        #statActualVal := #statY + (#statY - #statActPT1Prev) * #statTd / #tCycle;
+	    ELSE
+	        #statActualVal := #statY;                                                        //Td equal to zero
+	    END_IF;
+	    
+	    #statActPT1Prev := #statY;
+	    
+	    
+	    #deviationValue := "LConSMC_DeadBand"(x := (#setpointValue - #statActualVal),              // Evaluate dead-zone
+	                                          bandborder := #deadBand);
+	    
+	    #pOutValue := #deviationValue * #propGain;                                       //Output for contolmode=true
+	    
+	    IF (#statTd > 0.0)                                                           // Calculate D-channel
+	        AND ((#pOutValue + #preControl) < #upperLimit)
+	        AND ((#pOutValue + #preControl) > #lowerLimit)
+	        AND NOT (#controlMode)
+	    THEN                                                                    // Disable derivative action if P-channel in limit
+	        #statDOutValue := (#pOutValue - #statDeviationPrev) * #statTd / #tCycle;
+	    ELSE
+	        #statDOutValue := 0.0;
+	    END_IF;
+	    IF (#statTi > 0.0) THEN                                                      // Calculate I-channel
+	        IF (#setIntChannel) THEN                                            // Setting initial value for I-channel
+	            #statIOutValue := #intSetValue;
+	        ELSE
+	            #statDiff := ((#tCycle / #statTi) * ((#pOutValue + #statDeviationPrev) * 0.5));// Integrating with trapeze rule
+	            IF #holdIntChannel THEN
+	                #statDiff := 0.0;
+	            END_IF;
+	            
+	            #statIOutValue := LIMIT(MX := #upperLimit - #pOutValue,// Refresh I channel output
+	                                    IN := #statIOutValue + #statDiff,
+	                                    MN := #lowerLimit - #pOutValue);
+	        END_IF;
+	    ELSE
+	        #statIOutValue := 0.0;
+	    END_IF;
+	    #statDeviationPrev := #pOutValue;                                              // Save for next cycle
+	    
+	    #outValue := #pOutValue + #statIOutValue + #statDOutValue + #preControl;             // Add together the output of different channels
+	    #outValue := #outValue * #outValueFactor + #outValueOffset;                // Normalize
+	    
+	    #outValue := "LConSMC_Limiter"(x := #outValue,
+	                                   UpperLimit := #upperLimit,
+	                                   LowerLimit := #lowerLimit,
+	                                   UpperLimitReached => #upperLimitReached,
+	                                   LowerLimitReached => #lowerLimitReached);
+	ELSIF #statError THEN
+	    #busy := FALSE;
+	END_IF;
+	
+	// set outputs
+	#iOutValue := #statIOutValue;
+	#dOutValue := #statDOutValue;
+	#error := #statError;
+	#errorID := #statErrorID;
+	#statEnableOld := #enable;
+	
+	
+END_FUNCTION_BLOCK
+

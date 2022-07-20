@@ -1,0 +1,446 @@
+﻿FUNCTION_BLOCK "FB10370_IoLinkDevice"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      REQ : Bool;
+      ID : HW_IO;
+      CAP : DInt;
+      RD_WR : Bool;
+      PORT : Int;
+      IOL_INDEX : Int;
+      IOL_SUBINDEX : Int;
+      LEN : Int;
+   END_VAR
+
+   VAR_OUTPUT 
+      DONE_VALID : Bool;
+      BUSY : Bool;
+      ERROR : Bool;
+      STATUS : DWord;
+      IOL_STATUS : DWord;
+      RD_LEN : Int;
+   END_VAR
+
+   VAR_IN_OUT 
+      RECORD_IOL_DATA : Array[0..231] of Byte;
+   END_VAR
+
+   VAR 
+      RDREC_Function {InstructionName := 'RDREC'; LibVersion := '1.0'; S7_SetPoint := 'False'} : RDREC;
+      WRREC_Function {InstructionName := 'WRREC'; LibVersion := '1.1'; S7_SetPoint := 'False'} : WRREC;
+      TP_poll {InstructionName := 'TP_TIME'; LibVersion := '1.0'; S7_SetPoint := 'False'} : TP_TIME;
+      TON_monitoring {InstructionName := 'TON_TIME'; LibVersion := '1.0'; S7_SetPoint := 'False'} : TON_TIME;
+      rdrec : Struct
+         valid : Bool;
+         busy : Bool;
+         error : Bool;
+         status : DWord;
+         length : UInt;
+      END_STRUCT;
+      wrrec : Struct
+         length : UInt;
+         done : Bool;
+         busy : Bool;
+         error : Bool;
+         status : DWord;
+      END_STRUCT;
+      read : Struct
+         header : Struct
+            CALL : Struct
+               Extended_Function_Num : Byte := 16#08;
+               Port : Byte;
+               FI_Index : Word := 16#FE4A;
+            END_STRUCT;
+            IOL : Struct
+               Control : Byte;
+               Index_HighByte : Byte;
+               Index_LowByte : Byte;
+               Subindex : Byte;
+            END_STRUCT;
+         END_STRUCT;
+         data : Array[0..231] of Byte;
+      END_STRUCT;
+      write : Struct
+         header : Struct
+            CALL : Struct
+               Extended_Function_Num : Byte := 16#08;
+               Port : Byte;
+               FI_Index : Word := 16#FE4A;
+            END_STRUCT;
+            IOL : Struct
+               Control : Byte;
+               Index_HighByte : Byte;
+               Index_LowByte : Byte;
+               Subindex : Byte;
+            END_STRUCT;
+         END_STRUCT;
+         data : Array[0..231] of Byte;
+      END_STRUCT;
+      sequencecontrol : Int;
+      typeofrequest : Int;
+      R_TRIG_REQ : Bool;
+      R_TRIG_REQ_old : Bool;
+      F_TRIG_poll : Bool;
+      F_TRIG_poll_old : Bool;
+   END_VAR
+
+   VAR_TEMP 
+      retval : Int;
+      tmpWORD : Word;
+      tmpDWORD : DWord;
+      tmpINT : Int;
+      i : Int;
+   END_VAR
+
+
+BEGIN
+	(*---------------------------------------------------------------------------------------------------------------------
+	SIEMENS AG
+	©Copyright 2017. All Rights Reserved.
+	-----------------------------------------------------------------------------------------------------------------------
+	Limitation of liability
+	This software was developed with largest care. However, the author can not guarantee, that the software runs under
+	each version of STEP7 on each PLC flawlessly.
+	There is no warranty for the software, to the extent permitted by applicable law. The copyright holder provides the
+	software "as is" without warranty of any kind, either expressed or implied, including, but not limited to, the implied
+	warranties of merchantability and fitness for a particular purpose. The entire risk as to the quality and performance
+	of the software is with you. Should the software prove defective, you assume the cost of all necessary servicing,
+	repair or correction. In no event unless required by applicable law will the copyright holder be liable to you for
+	damages, including any general, special, incidental or consequential damages arising out of the use or inability to
+	use the software (including but not limited to loss of data or data being rendered inaccurate or losses sustained by
+	you or third parties or a failure of the software to operate with any other programs), even if such holder or other
+	party has been advised of the possibility of such damages.
+	Permission to use or copy this software for any purpose is hereby granted without fee, provided the above notices are
+	retained on all copies. Permission to modify the code and to distribute modified code is granted, provided the above
+	notices are retained, and a notice that the code was modified is included with the above copyright notice.
+	-----------------------------------------------------------------------------------------------------------------------
+	Functionality provided by this source (short description):
+	Function block IO_LINK_DEVICE - used to read and write of acyclic data records on devices with IO-Link.
+	Note:
+	To read data records, the IO-Link master modules needs to know which data record is required. Therefore it is necessary
+	to send at first a request via write data record (only header of 8 byte). As response the IO-Link master module
+	will send the required data record.
+	
+	Status:     Released (tested)
+	File name:  IO_LINK_DEVICE
+	System :    SIMATIC S7-1200
+	Version :   3.0
+	-----------------------------------------------------------------------------------------------------------------------
+	Script to be stored on level ... in project (mark appropriate levels with [x] below)
+	[ ] External
+	[ ] All levels possible
+	[x] Project level
+	[ ] Controller level
+	[ ] Device level
+	[ ] Subobject level
+	-----------------------------------------------------------------------------------------------------------------------
+	Restrictions, known limitations:
+	The limitation of 240 byte is based on PROFIBUS DP protocol. With PROFINET IO there wouldn't no limit but because of 
+	compatibility reason it wasn't changed.
+	  - header =   8 byte
+	  - data   = 232 byte
+	-----------------------------------------------------------------------------------------------------------------------
+	Requirements, prerequisites, External resources used: nothing
+	-----------------------------------------------------------------------------------------------------------------------
+	Change log table (latest change is at the bottom OF the list):
+	Version Date Changes applied
+	V2.0.0 <2013-09-30> First created with TIA Portal V12 SP1
+	V2.1.0 <2014-03-14> Upgrade system function 'WRREC' from V1.0 to V1.1 and released for TIA Portal V13
+	V3.0.0 <2015-02-28> Upgrade and released for TIA Portal V13 SP1 (without backup/restore master parameter)
+	V3.0.2 <2015-07-07> Change of #IOL_INDEX and #Port lower boundry to 0
+	V3.0.3 <2017-03-13> Compilation ready for TIA Portal Basic, especially S7-1200 controllers
+	---------------------------------------------------------------------------------------------------------------------*)
+	
+	(*---------------------------------------------------------------------------------------------------------------------
+	Description of programmed IO-Link error codes
+	8000 = time out
+	8001 = wrong port
+	8002 = wrong index
+	8003 = wrong subindex
+	8005 = wrong length for write data record
+	8006 = wrong length for read data record
+	8052 = error during reading data record
+	8053 = error during writing data record
+	All other codes are coming from a higher level!
+	---------------------------------------------------------------------------------------------------------------------*)
+	
+	(*---------------------------------------------------------------------------------------------------------------------
+	            NEW REQUEST
+	---------------------------------------------------------------------------------------------------------------------*)
+	// detection rising edge of "REQ"
+	#R_TRIG_REQ := #REQ = TRUE AND #R_TRIG_REQ_old = FALSE;
+	#R_TRIG_REQ_old := #REQ = TRUE;
+	
+	// start new request if not busy
+	IF #R_TRIG_REQ = TRUE AND #sequencecontrol = 0 THEN
+	    // Freeze record ID and CAP
+	    #WRREC_Function.ID := #ID;
+	    #WRREC_Function.INDEX := #CAP;
+	    #RDREC_Function.ID := #ID;
+	    #RDREC_Function.INDEX := #CAP;
+	    
+	    // Initialize outputs
+	    #DONE_VALID := FALSE;
+	    #BUSY := TRUE;
+	    #ERROR := FALSE;
+	    #STATUS := DW#16#00000000;
+	    #IOL_STATUS := DW#16#00000000;
+	    #RD_LEN := INT#0;
+	    
+	    // Initialize data area
+	    #read.header."CALL"."Port" := B#16#0;
+	    #read.header.IOL.Index_LowByte := B#16#0;
+	    #read.header.IOL.Index_HighByte := B#16#0;
+	    #read.header.IOL.Subindex := B#16#0;
+	    #i := INT#0; // initialize loop counter      
+	    FOR #i := 0 TO 231 DO
+	        #write.data[#i] := B#16#0;
+	        #read.data[#i] := B#16#0;
+	    END_FOR;
+	    
+	(*---------------------------------------------------------------------------------------------------------------------
+	    Setup IO-LINK Call needs a specific header
+	---------------------------------------------------------------------------------------------------------------------*)
+	// setup CALL header
+	#write.header."CALL".Extended_Function_Num := 16#08;  // extended function number (fix coded 08h)
+	#write.header."CALL"."Port" := INT_TO_BYTE(#PORT);  // 1..63 = PORT number, 64..255=reserved
+	#write.header."CALL".FI_Index := 65098;  // IOL-Header is following (fix coded 65098)
+	
+	// setup IOL header 
+	// CONTROL = please see below at BODY
+	// INDEX
+	#write.header.IOL.Index_LowByte := INT_TO_BYTE(#IOL_INDEX);
+	#tmpWORD := INT_TO_WORD(#IOL_INDEX);
+	#tmpWORD := SHR(IN := #tmpWORD, N := 8);
+	#write.header.IOL.Index_HighByte := WORD_TO_BYTE(#tmpWORD);
+	// SUBINDEX
+	#write.header.IOL.Subindex := INT_TO_BYTE(#IOL_SUBINDEX);
+	
+	// BODY (data max. 232 Byte, Array 0..231 of Byte) 
+	IF #RD_WR = TRUE THEN
+	    // IO-Link write data record requested, copy data from "RECORD_IOL_DATA"
+	    #write.header.IOL.Control := B#16#02; // CONTROL B#16#02 = write data record
+	    #wrrec.length := INT_TO_UINT(#LEN) + UINT#8;  // data length header + data = IO-Link write data record
+	    #typeofrequest := 2; // write data record
+	    // copy IOL_RECORD_DATA in working area
+	    #i := INT#0;    // initialize loop counter 
+	    FOR #i := 0 TO #LEN - 1 DO
+	        #write.data[#i] := #RECORD_IOL_DATA[#i];
+	    END_FOR;
+	ELSE
+	    // IO-Link read data record requested
+	    #write.header.IOL.Control := 16#03;  // CONTROL 16#03 = read data record
+	    #wrrec.length := UINT#8; // data length only header = IO-Link read data record
+	    #typeofrequest := 1; // read data record        
+	END_IF;
+	#sequencecontrol := 1;  // Start sequence
+	ELSE
+	    ;
+	END_IF;
+	
+	(*---------------------------------------------------------------------------------------------------------------------
+	            SEQUENCE CONTROL
+	---------------------------------------------------------------------------------------------------------------------*)
+	CASE #sequencecontrol OF
+	    1:  // Check input parameter        
+	        IF #PORT < INT#0 OR #PORT > INT#63 THEN // PORT (Wrong port address = 0x8001)
+	            #ERROR := TRUE;
+	            #IOL_STATUS := DW#16#80010000;
+	            #sequencecontrol := 99; // aborting function with error
+	        ELSIF #IOL_INDEX < INT#0 OR #IOL_INDEX > INT#32767 THEN    // INDEX (Wrong index = 0x8002)
+	            #ERROR := TRUE;
+	            #IOL_STATUS := DW#16#80020000;
+	            #sequencecontrol := 99; // aborting function with error
+	        ELSIF #IOL_SUBINDEX < INT#0 OR #IOL_SUBINDEX > INT#255 THEN    // SUBINDEX (Wrong subindex = 0x8003)
+	            #ERROR := TRUE;
+	            #IOL_STATUS := DW#16#80030000;
+	            #sequencecontrol := 99; // aborting function with error
+	        ELSIF #typeofrequest = 2 AND (#LEN < 1 OR #LEN > 232) THEN  // LEN (wrong length for write data record = 0x8004)
+	            #ERROR := TRUE;
+	            #IOL_STATUS := DW#16#80050000;
+	            #sequencecontrol := 99; // aborting function with error
+	        ELSIF #typeofrequest = 1 AND (#LEN < 0 OR #LEN > 232) THEN  // LEN (wrong length for read data record = 0x8005)
+	            #ERROR := TRUE;
+	            #IOL_STATUS := DW#16#80060000;
+	            #sequencecontrol := 99; // aborting function with error
+	        ELSE    // all input parameter are right
+	            #sequencecontrol := 2;
+	        END_IF;
+	        
+	    2:  (*-------------------------------------------------------------------------------------------------------------
+	        WRREC = Write Data Record
+	        Note:
+	        To read data records, the IO-Link master modules needs to know which PORT is required. Therefore it is necessary
+	        to send at first a request via write data record (header, 8 byte). As response the IO-Link master module will 
+	        send the required data record.
+	        -------------------------------------------------------------------------------------------------------------*)
+	        #WRREC_Function(REQ := TRUE,
+	                        LEN := #wrrec.length,
+	                        DONE => #wrrec.done,
+	                        BUSY => #wrrec.busy,
+	                        ERROR => #wrrec.error,
+	                        STATUS => #wrrec.status,
+	                        RECORD := #write);
+	        // output status during write data record
+	        IF #wrrec.busy THEN
+	            #STATUS := #wrrec.status;
+	            #IOL_STATUS := DW#16#00020000;  // 0002 = writing in progress 
+	        ELSIF #wrrec.error THEN
+	            #tmpDWORD := #wrrec.status AND DW#16#00FFFF00;  // filter status
+	            IF #tmpDWORD = DW#16#0080C200 THEN    // if resource #BUSY (#STATUS=80C2), then ... 
+	                #sequencecontrol := 3;  // ... repeat write data record
+	            ELSE
+	                #ERROR := TRUE;
+	                #STATUS := #wrrec.status;   // ... otherwise output error status of "WRREC"
+	                #IOL_STATUS := DW#16#80530000;  // ... with note '8053' = error status of "WRREC"
+	                #sequencecontrol := 99; // aborting function with error
+	            END_IF;
+	        ELSIF #wrrec.done = TRUE THEN   // wait for write data record finish without error
+	            #TP_poll(IN := TRUE,
+	                     PT := T#100ms);    // poll for response
+	            #sequencecontrol := 4;
+	        ELSE
+	            ;
+	        END_IF;
+	        
+	    3:  // repeat write data record because resource was busy
+	        #WRREC_Function(REQ := FALSE);
+	        #sequencecontrol := 2;
+	        
+	    4:  // wait and poll for response = Read Data Record (RDREC)
+	        #WRREC_Function(REQ := FALSE);
+	        #TP_poll(IN := TRUE,
+	                 PT := T#100ms);
+	        
+	        // if poll rate executed then start read data record (on falling edge)
+	        #F_TRIG_poll := #TP_poll.Q = FALSE AND #F_TRIG_poll_old = TRUE;
+	        #F_TRIG_poll_old := #TP_poll.Q = TRUE;
+	        
+	        // RDREC = Read Data Record
+	        #RDREC_Function(REQ := #F_TRIG_poll,
+	                        MLEN := UINT#0, // length = 0 = read all data which are available
+	                        VALID => #rdrec.valid,
+	                        BUSY => #rdrec.busy,
+	                        ERROR => #rdrec.error,
+	                        STATUS => #rdrec.status,
+	                        LEN => #rdrec.length,
+	                        RECORD := #read);
+	        // output status during read data record
+	        IF #rdrec.busy THEN
+	            #STATUS := #rdrec.status;
+	            #IOL_STATUS := DW#16#00030000; // 16#0003 = reading in progress
+	        ELSIF #rdrec.error = TRUE THEN
+	            #tmpDWORD := #rdrec.status AND DW#16#00FFFF00;  // filter status
+	            IF #tmpDWORD = DW#16#0080C200 THEN  // if resource busy (status=80C2), then ... 
+	                #sequencecontrol := 5;  // ... repeat read data record / continue polling
+	            ELSE
+	                #ERROR := TRUE;
+	                #STATUS := #rdrec.status;   // ... otherwise output error code of "RDREC"
+	                #IOL_STATUS := DW#16#80520000;  // ... with note '8052' = error status of "RDREC"
+	                #sequencecontrol := 99; // aborting function with error
+	            END_IF;
+	        ELSIF #rdrec.valid THEN
+	            IF  // check the response wether it matches the request (compare PORT, INDEX and SUBINDEX)
+	                (#write.header."CALL"."Port" <> #read.header."CALL"."Port") OR
+	                (#write.header.IOL.Index_HighByte <> #read.header.IOL.Index_HighByte) OR
+	                (#write.header.IOL.Index_LowByte <> #read.header.IOL.Index_LowByte) OR
+	                (#write.header.IOL.Subindex <> #read.header.IOL.Subindex)
+	            THEN    // read data record don't match the request
+	                #ERROR := TRUE;
+	                #STATUS := #rdrec.status;
+	                #IOL_STATUS := DW#16#70000000;  // output status '7000', no consistent data
+	                #sequencecontrol := 99; // aborting function with error
+	            ELSIF #read.header.IOL.Control = B#16#80 THEN   // check the response for IO-Link errors
+	                // State 0x80 = IOL_CALL_RES PDU shows IO-Link error detect
+	                #ERROR := TRUE;
+	                #STATUS := DW#16#00000000;
+	                #IOL_STATUS.%B3 := #read.data[0];   // IO-Link master error code
+	                #IOL_STATUS.%B2 := #read.data[1];   // IO-Link master error code
+	                #IOL_STATUS.%B1 := #read.data[2];  // IO-Link device error code
+	                #IOL_STATUS.%B0 := #read.data[3];  // IO-Link device additional error code
+	                
+	                #sequencecontrol := 99; // aborting function with error
+	            ELSE    // read data are valid = output
+	                #DONE_VALID := TRUE;
+	                #BUSY := FALSE;
+	                #ERROR := FALSE;
+	                #STATUS := DW#16#00000000;
+	                #IOL_STATUS := DW#16#00000000;  // request finished
+	                
+	                IF #typeofrequest = 1 THEN
+	                    #RD_LEN := UINT_TO_INT(#rdrec.length - UINT#8);  // device parameter cover header and data,
+	                    // only data will be output
+	                    #i := INT#0; // initialize loop counter
+	                    FOR #i := 0 TO UINT_TO_INT(#rdrec.length - UINT#8 - UINT#1) DO
+	                        #RECORD_IOL_DATA[#i] := #read.data[#i];
+	                    END_FOR;
+	                ELSE
+	                    ;
+	                END_IF;
+	                #sequencecontrol := 98;
+	            END_IF;
+	        ELSE
+	            ;
+	        END_IF;
+	        
+	    5:  // poll again for response because resource was busy
+	        #TP_poll(IN := FALSE,
+	                 PT := T#100ms);
+	        #RDREC_Function(REQ := FALSE,
+	                        RECORD := #read);
+	        #sequencecontrol := 4;  // ... repeat read data record / continue polling   
+	        
+	    98: // request done successfully
+	        #TP_poll(IN := FALSE,
+	                 PT := T#100ms);
+	        #RDREC_Function(REQ := FALSE,
+	                        RECORD := #read);
+	        IF #REQ = FALSE THEN
+	            #DONE_VALID := FALSE;
+	            #BUSY := FALSE;
+	            #ERROR := FALSE;
+	            #RD_LEN := INT#0;
+	            #STATUS := DW#16#00000000;
+	            #IOL_STATUS := DW#16#00010000; // ready for new request
+	            #sequencecontrol := 0;
+	            #typeofrequest := 0;
+	        ELSE
+	            ;
+	        END_IF;
+	        
+	    99: // Function aborted with error
+	        #TP_poll(IN := FALSE,
+	                 PT := T#100ms);
+	        #WRREC_Function(REQ := FALSE);
+	        #RDREC_Function(REQ := FALSE,
+	                        RECORD := #read);
+	        #DONE_VALID := FALSE;
+	        #BUSY := FALSE;
+	        #RD_LEN := INT#0;
+	        #sequencecontrol := 0;
+	        #typeofrequest := 0;
+	        
+	    ELSE  // no relevant case, ready for new request
+	        #WRREC_Function(REQ := FALSE);
+	        #RDREC_Function(REQ := FALSE,
+	                        RECORD := #read);
+	        #TP_poll(IN := FALSE,
+	                 PT := T#100ms);
+	        #TON_monitoring(IN := FALSE,
+	                        PT := T#20s);
+	        #sequencecontrol := 0;
+	        #typeofrequest := 0;
+	END_CASE;
+	
+	(*---------------------------------------------------------------------------------------------------------------------
+	            MONITORING
+	---------------------------------------------------------------------------------------------------------------------*)
+	#TON_monitoring(IN := #sequencecontrol > 0 AND #sequencecontrol < 98,
+	                PT := T#20s);
+	IF #TON_monitoring.Q THEN
+	    #ERROR := TRUE;
+	    #IOL_STATUS := DW#16#80000000; // request time out       
+	    #sequencecontrol := 99; // aborting function with error
+	END_IF;
+END_FUNCTION_BLOCK
+

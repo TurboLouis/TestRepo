@@ -1,0 +1,246 @@
+﻿FUNCTION_BLOCK "LConSMC_EnableInterface"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      enable : Bool;
+      executeMoveVelocity : Bool;
+      writeTorqueLimit : Bool;
+      writeAdditiveTorque : Bool;
+      positionControlled : Bool;
+      referenceVelocity : LReal;
+      override : LReal;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool;
+      error : Bool;
+      errorID : DWord;
+      subfunctionState : Word;
+      MCInterfaceActive : Bool;
+      additiveTorqueActive : Bool;
+      torqueLimitActive : Bool;
+   END_VAR
+
+   VAR_IN_OUT 
+      axis {InstructionName := 'TO_SpeedAxis'; LibVersion := '5.0'} : TO_SpeedAxis;
+      motionVector : "LConSMC_typeActualDynamics";
+      torqueValues : "LConSMC_typeTorqueValues";
+   END_VAR
+
+   VAR 
+      statErrorID : DWord;
+      statVelocity : LReal;
+      statDeceleration { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : LReal;
+      statAcceleration { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : LReal;
+      statJerk : LReal;
+      statReferenceVelocityOld : LReal;
+      instRTrigEnable {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      instRTrigError {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      instFTrigEnable {InstructionName := 'F_TRIG'; LibVersion := '1.0'} : F_TRIG;
+      instStop {InstructionName := 'MC_HALT'; LibVersion := '5.0'} : MC_HALT;
+      instMoveVelocity {InstructionName := 'MC_MOVEVELOCITY'; LibVersion := '5.0'} : MC_MOVEVELOCITY;
+      instTorqueAdditive {InstructionName := 'MC_TORQUEADDITIVE'; LibVersion := '5.0'} : MC_TORQUEADDITIVE;
+      instTorqueRange {InstructionName := 'MC_TORQUERANGE'; LibVersion := '5.0'} : MC_TORQUERANGE;
+      statError : Bool;
+      statBusy : Bool;
+      statEnableMoveVelocity : Bool;
+      statEnableAdditiveTorque : Bool;
+      statExecuteMoveVelocity { S7_SetPoint := 'True'} : Bool;
+      statExecuteStop : Bool;
+      statEnableTorqueLimit : Bool;
+      StatExecuteStopOld : Bool;
+      statDecelerationOld : LReal;
+      statAccelerationOld : LReal;
+      statJerkOld : LReal;
+   END_VAR
+
+   VAR CONSTANT 
+      FB_ID : DWord := 16#3107_0000;
+      PI : Real := 3.141593;
+   END_VAR
+
+
+BEGIN
+	//----------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Erlangen, Germany
+	//----------------------------------------------------------------------------------------------------------------------
+	//functionality : Enable motion and torque interface
+	//assignment    : OB6x/PostServo-OB     
+	//======================================================================================================================
+	//change log table:
+	//version       date            expert in charge        changes applied
+	//01.00.00      23.10.2019      APC Erlangen            Creation
+	//01.00.01      21.01.2020      APC Erlangen            Bugfix: moveVelocity and stop will be resetted with enable (*c_00022*)
+	//01.00.02      31.08.2020      APC Erlangen            Bugfix: Parametrizable deceleration possible via new datatype
+	//                                                      for motionVector (*c_00029*)
+	//                                                      Rename: moveVelocityActive -> MCInterfaceActive. MCInterfaceActive is
+	//                                                      TRUE if MC_MoveVelocity OR MC_Halt ist active! (*c_00026*)
+	//                                                      Bugfix: Cycledelay between calculated and executed motion profile
+	//                                                      has been removed(*c_00028*)
+	//                                                      New ErrorMessage/Tag if MC_Halt has an error. (*c_00030*)
+	//01.00.03      27.01.2021      APC Erlangen            Removed warning "Parameter might not be initialized"
+	//01.00.04      22.06.2021      APC Erlangen            Bugfix setting the override to a value bigger 100% (*c_00037*)
+	//======================================================================================================================
+	#instRTrigEnable(CLK := #enable);
+	#instFTrigEnable(CLK := #enable);
+	REGION Initialization
+	    IF #instRTrigEnable.Q THEN
+	        // Reset error output
+	        #error := FALSE;
+	        #statError := FALSE;
+	        #errorID := 16#0000_0000;
+	        #statErrorID := #errorID;
+	        #subfunctionState := 16#0000;
+	        #statExecuteMoveVelocity := False;
+	        #statEnableAdditiveTorque := FALSE;
+	        #statEnableTorqueLimit := FALSE;
+	        #MCInterfaceActive := FALSE;
+	        #torqueLimitActive := FALSE;
+	        #additiveTorqueActive := FALSE;
+	        #statExecuteStop := FALSE;
+	        #statReferenceVelocityOld := 0.0;
+	        // Reset additive torque command
+	        #instTorqueAdditive(Axis := #axis,
+	                            Enable := FALSE);
+	        // Reset torque range command    
+	        #instTorqueRange(Axis := #axis,
+	                         Enable := FALSE);
+	        //Reset moving commands (*c_00022*)
+	        #instStop(Axis := #axis,
+	                  Execute := FALSE);
+	        #instMoveVelocity(Axis := #axis,
+	                          Execute := FALSE);
+	        
+	        #statBusy := TRUE;
+	    END_IF;
+	END_REGION
+	REGION Cyclic part
+	    (*c_00028*) //this region has to be executed bevore MC_Functions
+	    IF #statBusy AND NOT #statError THEN
+	        //Enable/Disable TorqueCommands   
+	        #statEnableAdditiveTorque := #writeAdditiveTorque;
+	        #statEnableTorqueLimit := #writeTorqueLimit;
+	        //If overrideVelocity OR the dynamics will change, a new MoveVelocity Execute has to be set in same cycle
+	        IF #executeMoveVelocity AND
+	            (#statReferenceVelocityOld <> #referenceVelocity
+	            OR #statAccelerationOld <> #motionVector.a
+	            OR #statJerkOld <> #motionVector.j
+	            OR #statDecelerationOld <> #motionVector.d) THEN(*c_00029*)
+	            #statExecuteMoveVelocity := TRUE;
+	        END_IF;
+	        #statReferenceVelocityOld := #referenceVelocity;
+	        #statAccelerationOld := #motionVector.a;
+	        #statDecelerationOld := #motionVector.d;
+	        #statJerkOld := #motionVector.j;
+	    END_IF;
+	    IF #instFTrigEnable.Q OR #instRTrigError.Q THEN
+	        // Disable MoveVelocity
+	        #statExecuteMoveVelocity := FALSE;
+	        //If axis should stop not planned because of an error or FB disabled
+	        #statExecuteStop := TRUE;
+	        // Disable additive torque/ torque limits
+	        #statEnableAdditiveTorque := FALSE;
+	        #statEnableTorqueLimit := FALSE;
+	    END_IF;
+	    // instStop and so MCInterfaceActive can be busy if enable is false. 
+	    IF NOT (#instMoveVelocity.Busy OR #instStop.Busy) AND NOT #enable THEN
+	        #statBusy := FALSE;
+	    END_IF;
+	END_REGION
+	REGION MoveVelocity/Torque values
+	    //Stop if executeStop is true
+	    IF #statExecuteStop OR #instStop.Busy THEN
+	        #instStop(Axis := #axis,
+	                  Execute := #statExecuteStop,
+	                  AbortAcceleration := TRUE,
+	                  Deceleration := #motionVector.d,(*c_00029*)
+	                  Jerk := #motionVector.j
+	        );
+	        #statExecuteStop := FALSE;
+	    END_IF;
+	    
+	    IF #enable OR #instMoveVelocity.Busy OR #instTorqueAdditive.Busy OR #instTorqueRange.Busy THEN
+	        //Set move only once, with referenceVelocity. Final velocity at axis will be set by override
+	        
+	        IF #statExecuteMoveVelocity OR #instMoveVelocity.Busy THEN
+	            #instMoveVelocity(Axis := #axis,
+	                              Execute := #statExecuteMoveVelocity AND NOT #instStop.Busy,//set only one time
+	                              Velocity := #referenceVelocity,
+	                              Acceleration := #motionVector.a,
+	                              Deceleration := #motionVector.d,(*c_00029*)
+	                              Jerk := #motionVector.j,
+	                              PositionControlled := #positionControlled
+	            );
+	            #statExecuteMoveVelocity := FALSE;
+	        END_IF;
+	        
+	        //set overrideVelocity value
+	        #statVelocity := #motionVector.v; //for traceability
+	        #statAcceleration := #motionVector.a;
+	        #statDeceleration := #motionVector.d;(*c_00029*)
+	        #statJerk := #motionVector.j;
+	        #axis.Override.Velocity := LIMIT(MN := 0.0,
+	                                         IN := #override,
+	                                         MX := 200.0); (*c_00037*)
+	        IF #instTorqueAdditive.Busy OR #statEnableAdditiveTorque THEN
+	            #instTorqueAdditive(Axis := #axis,
+	                                Enable := #statEnableAdditiveTorque,
+	                                Value := #torqueValues.additiveTorque);
+	        END_IF;
+	        IF #instTorqueRange.Busy OR #statEnableTorqueLimit THEN
+	            #instTorqueRange(Axis := #axis,
+	                             Enable := #statEnableTorqueLimit,
+	                             UpperLimit := #torqueValues.upperTorqueLimit,
+	                             LowerLimit := #torqueValues.lowerTorqueLimit);
+	        END_IF;
+	    END_IF;
+	END_REGION
+	REGION Error
+	    IF #instMoveVelocity.Error OR (#statErrorID = (#FB_ID OR "LCON_ERROR_MOVEVELOCITY")) THEN (*c_00028*) //will be reseted with enableinterface.enable = false
+	        #statError := TRUE;
+	        #statErrorID := #FB_ID OR "LCON_ERROR_MOVEVELOCITY";
+	        #subfunctionState := #instMoveVelocity.ErrorId;
+	    ELSIF #instStop.Error OR (#statErrorID = (#FB_ID OR "LCON_ERROR_STOP")) THEN (*c_00030*)(*c_00028*) //will be reseted with enableinterface.enable = false
+	        #statError := TRUE;
+	        #statErrorID := #FB_ID OR "LCON_ERROR_STOP";
+	        #subfunctionState := #instStop.ErrorId;
+	    ELSIF #instTorqueAdditive.Error THEN
+	        #statError := TRUE;
+	        #statErrorID := #FB_ID OR "LCON_ERROR_ADDITIVE_TORQUE";
+	        #subfunctionState := #instTorqueAdditive.ErrorId;
+	    ELSIF #instTorqueRange.Error THEN
+	        #statError := TRUE;
+	        #statErrorID := #FB_ID OR "LCON_ERROR_TORQUE_RANGE";
+	        #subfunctionState := #instTorqueRange.ErrorId;
+	    ELSE //reset errors
+	        #statError := FALSE;
+	        #statErrorID := 16#0;
+	    END_IF;
+	    #instRTrigError(CLK := #statError);
+	    
+	    IF NOT #enable THEN
+	        // Reset error output
+	        #statError := FALSE;
+	        #errorID := 16#0000_0000;
+	        #subfunctionState := 16#0000;
+	    END_IF;
+	END_REGION
+	REGION Set outputs
+	    #busy := #statBusy;
+	    #MCInterfaceActive := #instMoveVelocity.Busy OR #instStop.Busy; (*c_00026*)
+	    #additiveTorqueActive := #instTorqueAdditive.Busy;
+	    #torqueLimitActive := #instTorqueRange.Busy;
+	    #error := #statError;
+	    #errorID := #statErrorID;
+	END_REGION
+	REGION Reset MC_Commands (cyclic)
+	    (*c_00028*) //execute has to be set to false in SAME cycle. But after error status check.
+	    //If this execute would not be set to zero in same cycle and if there are two executes following after two cycles,
+	    //the second execute would be not considerd.
+	    #instStop(Axis := #axis,
+	              Execute := FALSE);
+	    #instMoveVelocity(Axis := #axis,
+	                      Execute := FALSE);
+	END_REGION
+END_FUNCTION_BLOCK
+

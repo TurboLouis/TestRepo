@@ -1,0 +1,226 @@
+﻿FUNCTION_BLOCK "FB10093_GefranCommunication"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      Record1_Var_1_DeviceState_Status3 : Word;
+      Record1_Var_2_DeviceState_Status4 : Word;
+      Record1_Var_3_DeviceState_StatusW_RO : Word;
+      Record1_Var_4_DeviceState_LoadVoltage_1 : Word;
+      Record1_Var_5_DeviceState_LoadCurrent_1 : Word;
+      Record1_Var_6_DeviceState_LoadPower_1 : Word;
+      Record1_Var_7_ControlOutputValue : Word;
+      Record1_Var_8_ProcessVariable : Word;
+      Record2_Var_1_DeviceState_Status3 : Word;
+      Record2_Var_2_DeviceState_Status4 : Word;
+      Record2_Var_3_DeviceState_StatusW_RO : Word;
+      Record2_Var_4_DeviceState_LoadVoltage_1 : Word;
+      Record2_Var_5_DeviceState_LoadCurrent_1 : Word;
+      Record2_Var_6_DeviceState_LoadPower_1 : Word;
+      Record2_Var_7_ControlOutputValue : Word;
+      Record2_Var_8_na : Word;
+      Record3_Var_1_DeviceState_Status3 : Word;
+      Record3_Var_2_DeviceState_Status4 : Word;
+      Record3_Var_3_DeviceState_StatusW_RO : Word;
+      Record3_Var_4_DeviceState_LoadVoltage_1 : Word;
+      Record3_Var_5_DeviceState_LoadCurrent_1 : Word;
+      Record3_Var_6_DeviceState_LoadPower_1 : Word;
+      Record3_Var_7_ControlOutputValue : Word;
+      Comm_Out : "stGefranModuleComOut";
+   END_VAR
+
+   VAR_OUTPUT 
+      Record1_Var_1_DeviceState_StatusW : Word;
+      Record1_Var_2_DeviceState_ManualPower : Word;
+      Record1_Var_3_na : Word;
+      Record1_Var_4_LocalSetpoint_SP : Word;
+      Record1_Var_5_Setpoint_SP1 : Word;
+      Record1_Var_6_Setpoint_SP2 : Word;
+      Record1_Var_7_na : Word;
+      Record1_Var_8_na : Word;
+      Record2_Var_1_DeviceState_StatusW : Word;
+      Record2_Var_2_DeviceState_ManualPower : Word;
+      Record3_Var_1_DeviceState_StatusW : Word;
+      Record3_Var_2_DeviceState_ManualPower : Word;
+      Comm_In : "stGefranModuleComIn";
+   END_VAR
+
+
+BEGIN
+	REGION MODULE MASTER
+	    // Status 3 - Module Master
+	    #Comm_In.Module[0].Status3_633.Value := #Record1_Var_1_DeviceState_Status3;
+	    #Comm_In.Module[0].Status3_633.SSR_SHORT1 := #Record1_Var_1_DeviceState_Status3.%X3;
+	    #Comm_In.Module[0].Status3_633.SSR_SHORT2 := #Record1_Var_1_DeviceState_Status3.%X4;
+	    #Comm_In.Module[0].Status3_633.SSR_SHORT3 := #Record1_Var_1_DeviceState_Status3.%X5;
+	    #Comm_In.Module[0].Status3_633.NO_VOLTAGE1 := #Record1_Var_1_DeviceState_Status3.%X6;
+	    #Comm_In.Module[0].Status3_633.NO_VOLTAGE2 := #Record1_Var_1_DeviceState_Status3.%X7;
+	    #Comm_In.Module[0].Status3_633.NO_VOLTAGE3 := #Record1_Var_1_DeviceState_Status3.%X8;
+	    #Comm_In.Module[0].Status3_633.NO_CURRENT1 := #Record1_Var_1_DeviceState_Status3.%X9;
+	    #Comm_In.Module[0].Status3_633.NO_CURRENT2 := #Record1_Var_1_DeviceState_Status3.%X10;
+	    #Comm_In.Module[0].Status3_633.NO_CURRENT3 := #Record1_Var_1_DeviceState_Status3.%X11;
+	    
+	    // Status 4 - Module Master
+	    #Comm_In.Module[0].Status4_634.Value := #Record1_Var_2_DeviceState_Status4;
+	    #Comm_In.Module[0].Status4_634.Temperature_Sensor_Broken := #Record1_Var_2_DeviceState_Status4.%X0;
+	    #Comm_In.Module[0].Status4_634.OverHeat := #Record1_Var_2_DeviceState_Status4.%X1;
+	    #Comm_In.Module[0].Status4_634.Phase_SoftstartActive := #Record1_Var_2_DeviceState_Status4.%X2;
+	    #Comm_In.Module[0].Status4_634.Phase_SoftstartEnd := #Record1_Var_2_DeviceState_Status4.%X3;
+	    #Comm_In.Module[0].Status4_634.Frequency_Error := #Record1_Var_2_DeviceState_Status4.%X4;
+	    #Comm_In.Module[0].Status4_634."60Hz" := #Record1_Var_2_DeviceState_Status4.%X5;
+	    #Comm_In.Module[0].Status4_634.Short_Circuit_Current := #Record1_Var_2_DeviceState_Status4.%X6;
+	    #Comm_In.Module[0].Status4_634.Over_Peak_Current := #Record1_Var_2_DeviceState_Status4.%X7;
+	    #Comm_In.Module[0].Status4_634.Over_RMS_Current := #Record1_Var_2_DeviceState_Status4.%X8;
+	    #Comm_In.Module[0].Status4_634.Fuse_open := #Record1_Var_2_DeviceState_Status4.%X9;
+	    
+	    
+	    // Status W Read Only - Module Master
+	    #Comm_In.Module[0].StatusW_RO_463.Value := #Record1_Var_3_DeviceState_StatusW_RO;
+	    #Comm_In.Module[0].StatusW_RO_463.SP1_SP2 := #Record1_Var_3_DeviceState_StatusW_RO.%X1;
+	    #Comm_In.Module[0].StatusW_RO_463.Start_Stop_Selftuning := #Record1_Var_3_DeviceState_StatusW_RO.%X2;
+	    #Comm_In.Module[0].StatusW_RO_463.ON_OFF := #Record1_Var_3_DeviceState_StatusW_RO.%X3;
+	    #Comm_In.Module[0].StatusW_RO_463.Auto_Manual := #Record1_Var_3_DeviceState_StatusW_RO.%X4;
+	    #Comm_In.Module[0].StatusW_RO_463.Start_Stop_Autotuning := #Record1_Var_3_DeviceState_StatusW_RO.%X5;
+	    #Comm_In.Module[0].StatusW_RO_463.Loc_Rem := #Record1_Var_3_DeviceState_StatusW_RO.%X6;
+	    
+	    // Load data - Module Master
+	    #Comm_In.Module[0].Load.Voltage := WORD_TO_INT(#Record1_Var_4_DeviceState_LoadVoltage_1) / 10.0;
+	    #Comm_In.Module[0].Load.Current := WORD_TO_INT(#Record1_Var_5_DeviceState_LoadCurrent_1) / 10.0;
+	    #Comm_In.Module[0].Load.Power := WORD_TO_INT(#Record1_Var_6_DeviceState_LoadPower_1) / 100.0;
+	    
+	    
+	    #Comm_In.Module[0].Load.Output_Control_Value := WORD_TO_INT(#Record1_Var_7_ControlOutputValue) / 10.0;
+	    
+	    
+	    // Status RW - Module Master
+	    #Record1_Var_1_DeviceState_StatusW.%X1 := #Comm_Out.Module[0].Status_RW_305.SP1_SP2;
+	    #Record1_Var_1_DeviceState_StatusW.%X2 := #Comm_Out.Module[0].Status_RW_305.Start_Stop_SelfTuning;
+	    #Record1_Var_1_DeviceState_StatusW.%X3 := #Comm_Out.Module[0].Status_RW_305.ON_OFF;
+	    #Record1_Var_1_DeviceState_StatusW.%X4 := #Comm_Out.Module[0].Status_RW_305.Auto_Manual;
+	    #Record1_Var_1_DeviceState_StatusW.%X5 := #Comm_Out.Module[0].Status_RW_305.Start_Stop_AutoTuning;
+	    #Record1_Var_1_DeviceState_StatusW.%X6 := #Comm_Out.Module[0].Status_RW_305.Loc_Rem;
+	    
+	    // Manual Power - Module Master
+	    #Record1_Var_2_DeviceState_ManualPower := TRUNC(#Comm_Out.Module[0].Manual_Power * 10.0);
+	    
+	    // Setpoint - Module Master - Common
+	    #Record1_Var_4_LocalSetpoint_SP := TRUNC(#Comm_Out.LocalSetpoint * 1.0);     //dpS
+	    #Record1_Var_5_Setpoint_SP1 := TRUNC(#Comm_Out.Setpoint1 * 1.0);         //dpS
+	    #Record1_Var_6_Setpoint_SP2 := TRUNC(#Comm_Out.Setpoint2 * 1.0);         //dpS
+	END_REGION
+	
+	REGION MODULE SLAVE 1
+	    
+	    // Status 3 - Module Slave 1
+	    #Comm_In.Module[1].Status3_633.Value := #Record2_Var_1_DeviceState_Status3;
+	    #Comm_In.Module[1].Status3_633.SSR_SHORT1 := #Record2_Var_1_DeviceState_Status3.%X3;
+	    #Comm_In.Module[1].Status3_633.SSR_SHORT2 := #Record2_Var_1_DeviceState_Status3.%X4;
+	    #Comm_In.Module[1].Status3_633.SSR_SHORT3 := #Record2_Var_1_DeviceState_Status3.%X5;
+	    #Comm_In.Module[1].Status3_633.NO_VOLTAGE1 := #Record2_Var_1_DeviceState_Status3.%X6;
+	    #Comm_In.Module[1].Status3_633.NO_VOLTAGE2 := #Record2_Var_1_DeviceState_Status3.%X7;
+	    #Comm_In.Module[1].Status3_633.NO_VOLTAGE3 := #Record2_Var_1_DeviceState_Status3.%X8;
+	    #Comm_In.Module[1].Status3_633.NO_CURRENT1 := #Record2_Var_1_DeviceState_Status3.%X9;
+	    #Comm_In.Module[1].Status3_633.NO_CURRENT2 := #Record2_Var_1_DeviceState_Status3.%X10;
+	    #Comm_In.Module[1].Status3_633.NO_CURRENT3 := #Record2_Var_1_DeviceState_Status3.%X11;
+	    
+	    // Status 4 - Module Slave 1
+	    #Comm_In.Module[1].Status4_634.Value := #Record2_Var_2_DeviceState_Status4;
+	    #Comm_In.Module[1].Status4_634.Temperature_Sensor_Broken := #Record2_Var_2_DeviceState_Status4.%X0;
+	    #Comm_In.Module[1].Status4_634.OverHeat := #Record2_Var_2_DeviceState_Status4.%X1;
+	    #Comm_In.Module[1].Status4_634.Phase_SoftstartActive := #Record2_Var_2_DeviceState_Status4.%X2;
+	    #Comm_In.Module[1].Status4_634.Phase_SoftstartEnd := #Record2_Var_2_DeviceState_Status4.%X3;
+	    #Comm_In.Module[1].Status4_634.Frequency_Error := #Record2_Var_2_DeviceState_Status4.%X4;
+	    #Comm_In.Module[1].Status4_634."60Hz" := #Record2_Var_2_DeviceState_Status4.%X5;
+	    #Comm_In.Module[1].Status4_634.Short_Circuit_Current := #Record2_Var_2_DeviceState_Status4.%X6;
+	    #Comm_In.Module[1].Status4_634.Over_Peak_Current := #Record2_Var_2_DeviceState_Status4.%X7;
+	    #Comm_In.Module[1].Status4_634.Over_RMS_Current := #Record2_Var_2_DeviceState_Status4.%X8;
+	    #Comm_In.Module[1].Status4_634.Fuse_open := #Record2_Var_2_DeviceState_Status4.%X9;
+	    
+	    
+	    // Status W Read Only - Module Slave 1
+	    #Comm_In.Module[1].StatusW_RO_463.Value := #Record2_Var_3_DeviceState_StatusW_RO;
+	    #Comm_In.Module[1].StatusW_RO_463.SP1_SP2 := #Record2_Var_3_DeviceState_StatusW_RO.%X1;
+	    #Comm_In.Module[1].StatusW_RO_463.Start_Stop_Selftuning := #Record2_Var_3_DeviceState_StatusW_RO.%X2;
+	    #Comm_In.Module[1].StatusW_RO_463.ON_OFF := #Record2_Var_3_DeviceState_StatusW_RO.%X3;
+	    #Comm_In.Module[1].StatusW_RO_463.Auto_Manual := #Record2_Var_3_DeviceState_StatusW_RO.%X4;
+	    #Comm_In.Module[1].StatusW_RO_463.Start_Stop_Autotuning := #Record2_Var_3_DeviceState_StatusW_RO.%X5;
+	    #Comm_In.Module[1].StatusW_RO_463.Loc_Rem := #Record2_Var_3_DeviceState_StatusW_RO.%X6;
+	    
+	    // Load data - Module Slave 1
+	    #Comm_In.Module[1].Load.Voltage := WORD_TO_INT(#Record2_Var_4_DeviceState_LoadVoltage_1) / 10.0;
+	    #Comm_In.Module[1].Load.Current := WORD_TO_INT(#Record2_Var_5_DeviceState_LoadCurrent_1) / 10.0;
+	    #Comm_In.Module[1].Load.Power := WORD_TO_INT(#Record2_Var_6_DeviceState_LoadPower_1) / 100.0;
+	    
+	    
+	    #Comm_In.Module[1].Load.Output_Control_Value := WORD_TO_INT(#Record2_Var_7_ControlOutputValue) / 10.0;
+	    
+	    
+	    // Status RW - Module Slave 1
+	    #Record2_Var_1_DeviceState_StatusW.%X1 := #Comm_Out.Module[1].Status_RW_305.SP1_SP2;
+	    #Record2_Var_1_DeviceState_StatusW.%X2 := #Comm_Out.Module[1].Status_RW_305.Start_Stop_SelfTuning;
+	    #Record2_Var_1_DeviceState_StatusW.%X3 := #Comm_Out.Module[1].Status_RW_305.ON_OFF;
+	    #Record2_Var_1_DeviceState_StatusW.%X4 := #Comm_Out.Module[1].Status_RW_305.Auto_Manual;
+	    #Record2_Var_1_DeviceState_StatusW.%X5 := #Comm_Out.Module[1].Status_RW_305.Start_Stop_AutoTuning;
+	    #Record2_Var_1_DeviceState_StatusW.%X6 := #Comm_Out.Module[1].Status_RW_305.Loc_Rem;
+	    
+	    // Manual Power - Module Slave 1
+	    #Record2_Var_2_DeviceState_ManualPower := TRUNC(#Comm_Out.Module[1].Manual_Power * 10.0);
+	END_REGION
+	
+	REGION MODULE SLAVE 2
+	    // Status 3 - Module Slave 2
+	    #Comm_In.Module[2].Status3_633.Value := #Record3_Var_1_DeviceState_Status3;
+	    #Comm_In.Module[2].Status3_633.SSR_SHORT1 := #Record3_Var_1_DeviceState_Status3.%X3;
+	    #Comm_In.Module[2].Status3_633.SSR_SHORT2 := #Record3_Var_1_DeviceState_Status3.%X4;
+	    #Comm_In.Module[2].Status3_633.SSR_SHORT3 := #Record3_Var_1_DeviceState_Status3.%X5;
+	    #Comm_In.Module[2].Status3_633.NO_VOLTAGE1 := #Record3_Var_1_DeviceState_Status3.%X6;
+	    #Comm_In.Module[2].Status3_633.NO_VOLTAGE2 := #Record3_Var_1_DeviceState_Status3.%X7;
+	    #Comm_In.Module[2].Status3_633.NO_VOLTAGE3 := #Record3_Var_1_DeviceState_Status3.%X8;
+	    #Comm_In.Module[2].Status3_633.NO_CURRENT1 := #Record3_Var_1_DeviceState_Status3.%X9;
+	    #Comm_In.Module[2].Status3_633.NO_CURRENT2 := #Record3_Var_1_DeviceState_Status3.%X10;
+	    #Comm_In.Module[2].Status3_633.NO_CURRENT3 := #Record3_Var_1_DeviceState_Status3.%X11;
+	    
+	    // Status 4 - Module Slave 2
+	    #Comm_In.Module[2].Status4_634.Value := #Record3_Var_2_DeviceState_Status4;
+	    #Comm_In.Module[2].Status4_634.Temperature_Sensor_Broken := #Record3_Var_2_DeviceState_Status4.%X0;
+	    #Comm_In.Module[2].Status4_634.OverHeat := #Record3_Var_2_DeviceState_Status4.%X1;
+	    #Comm_In.Module[2].Status4_634.Phase_SoftstartActive := #Record3_Var_2_DeviceState_Status4.%X2;
+	    #Comm_In.Module[2].Status4_634.Phase_SoftstartEnd := #Record3_Var_2_DeviceState_Status4.%X3;
+	    #Comm_In.Module[2].Status4_634.Frequency_Error := #Record3_Var_2_DeviceState_Status4.%X4;
+	    #Comm_In.Module[2].Status4_634."60Hz" := #Record3_Var_2_DeviceState_Status4.%X5;
+	    #Comm_In.Module[2].Status4_634.Short_Circuit_Current := #Record3_Var_2_DeviceState_Status4.%X6;
+	    #Comm_In.Module[2].Status4_634.Over_Peak_Current := #Record3_Var_2_DeviceState_Status4.%X7;
+	    #Comm_In.Module[2].Status4_634.Over_RMS_Current := #Record3_Var_2_DeviceState_Status4.%X8;
+	    #Comm_In.Module[2].Status4_634.Fuse_open := #Record3_Var_2_DeviceState_Status4.%X9;
+	    
+	    
+	    // Status W Read Only - Module Slave 2
+	    #Comm_In.Module[2].StatusW_RO_463.Value := #Record3_Var_3_DeviceState_StatusW_RO;
+	    #Comm_In.Module[2].StatusW_RO_463.SP1_SP2 := #Record3_Var_3_DeviceState_StatusW_RO.%X1;
+	    #Comm_In.Module[2].StatusW_RO_463.Start_Stop_Selftuning := #Record3_Var_3_DeviceState_StatusW_RO.%X2;
+	    #Comm_In.Module[2].StatusW_RO_463.ON_OFF := #Record3_Var_3_DeviceState_StatusW_RO.%X3;
+	    #Comm_In.Module[2].StatusW_RO_463.Auto_Manual := #Record3_Var_3_DeviceState_StatusW_RO.%X4;
+	    #Comm_In.Module[2].StatusW_RO_463.Start_Stop_Autotuning := #Record3_Var_3_DeviceState_StatusW_RO.%X5;
+	    #Comm_In.Module[2].StatusW_RO_463.Loc_Rem := #Record3_Var_3_DeviceState_StatusW_RO.%X6;
+	    
+	    // Load data - Module Slave 2
+	    #Comm_In.Module[2].Load.Voltage := WORD_TO_INT(#Record3_Var_4_DeviceState_LoadVoltage_1) / 10.0;
+	    #Comm_In.Module[2].Load.Current := WORD_TO_INT(#Record3_Var_5_DeviceState_LoadCurrent_1) / 10.0;
+	    #Comm_In.Module[2].Load.Power := WORD_TO_INT(#Record3_Var_6_DeviceState_LoadPower_1) / 100.0;
+	    
+	    
+	    #Comm_In.Module[2].Load.Output_Control_Value := WORD_TO_INT(#Record3_Var_7_ControlOutputValue) / 10.0;
+	    
+	    
+	    // Status RW - Module Slave 2
+	    #Record3_Var_1_DeviceState_StatusW.%X1 := #Comm_Out.Module[2].Status_RW_305.SP1_SP2;
+	    #Record3_Var_1_DeviceState_StatusW.%X2 := #Comm_Out.Module[2].Status_RW_305.Start_Stop_SelfTuning;
+	    #Record3_Var_1_DeviceState_StatusW.%X3 := #Comm_Out.Module[2].Status_RW_305.ON_OFF;
+	    #Record3_Var_1_DeviceState_StatusW.%X4 := #Comm_Out.Module[2].Status_RW_305.Auto_Manual;
+	    #Record3_Var_1_DeviceState_StatusW.%X5 := #Comm_Out.Module[2].Status_RW_305.Start_Stop_AutoTuning;
+	    #Record3_Var_1_DeviceState_StatusW.%X6 := #Comm_Out.Module[2].Status_RW_305.Loc_Rem;
+	    
+	    // Manual Power - Module Slave 2
+	    #Record3_Var_2_DeviceState_ManualPower := TRUNC(#Comm_Out.Module[2].Manual_Power * 10.0);
+	END_REGION
+END_FUNCTION_BLOCK
+

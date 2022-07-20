@@ -1,0 +1,80 @@
+﻿FUNCTION_BLOCK "LConSMC_GetAxisConfiguration"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      execute : Bool;
+      axis : DB_ANY;
+   END_VAR
+
+   VAR_OUTPUT 
+      busy : Bool;
+      done : Bool;
+      error : Bool;
+   END_VAR
+
+   VAR_IN_OUT 
+      referenceTorque : LReal;
+      loadGear : "LConSMC_typeLoadGear";
+      velocityUnit : UDInt;
+      torqueUnit : UDInt;
+   END_VAR
+
+   VAR 
+      instGetSpeedAxisConfig : "LConSMC_GetAxisConfigurationSpeed";
+      instGetPosAxisConfig : "LConSMC_GetAxisConfigurationPos";
+      instGetSyncAxisConfig : "LConSMC_GetAxisConfigurationSync";
+   END_VAR
+
+
+BEGIN
+	//----------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Erlangen, Germany
+	//----------------------------------------------------------------------------------------------------------------------
+	//functionality : Get necessary TO configuration for winder/sectional drive
+	//assignment    : OB6x/PostServo-OB     
+	//======================================================================================================================
+	//change log table:
+	//version     date          expert in charge          changes applied
+	//01.00.00    23.10.2019    APC Erlangen              Creation
+	//======================================================================================================================
+	//
+	
+	CASE TypeOfDB(#axis) OF
+	    TO_SpeedAxis:
+	        #instGetSpeedAxisConfig(execute := #execute,
+	                                axis := #axis,
+	                                busy => #busy,
+	                                done => #done,
+	                                error => #error,
+	                                referenceTorque := #referenceTorque,
+	                                loadGear := #loadGear,
+	                                velocityUnit := #velocityUnit,
+	                                torqueUnit := #torqueUnit);
+	        
+	    TO_PositioningAxis:
+	        #instGetPosAxisConfig(execute := #execute,
+	                              axis := #axis,
+	                              busy => #busy,
+	                              done => #done,
+	                              error => #error,
+	                              referenceTorque := #referenceTorque,
+	                              loadGear := #loadGear,
+	                              velocityUnit := #velocityUnit,
+	                              torqueUnit := #torqueUnit);
+	        
+	    TO_SynchronousAxis:
+	        #instGetSyncAxisConfig(execute := #execute,
+	                               axis := #axis,
+	                               busy => #busy,
+	                               done => #done,
+	                               error => #error,
+	                               referenceTorque := #referenceTorque,
+	                               loadGear := #loadGear,
+	                               velocityUnit := #velocityUnit,
+	                               torqueUnit := #torqueUnit);
+	        
+	    ELSE
+	        #error := TRUE;
+	END_CASE;
+END_FUNCTION_BLOCK
+

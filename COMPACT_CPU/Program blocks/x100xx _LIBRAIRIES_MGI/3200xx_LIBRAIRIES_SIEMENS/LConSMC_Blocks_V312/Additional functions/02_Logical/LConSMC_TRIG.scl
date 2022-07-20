@@ -1,0 +1,42 @@
+﻿FUNCTION_BLOCK "LConSMC_TRIG"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      CLK : Bool;
+   END_VAR
+
+   VAR_OUTPUT 
+      QF : Bool;
+      QR : Bool;
+   END_VAR
+
+   VAR 
+      statEdge : Bool;
+   END_VAR
+
+   VAR CONSTANT 
+      UNIT_ID : DWord := 16#0103_0000;
+   END_VAR
+
+
+BEGIN
+	//------------------------------------------------------------------------------------------------------------------------
+	//SIEMENS DF FA PMA APC / Mumbai,India | Erlangen, Germany
+	//------------------------------------------------------------------------------------------------------------------------
+	//name          : TRIG
+	//functionality : edge detection
+	//assignment    : OB3x (cyclic interupt), OB6x (synchronous operation)
+	//library       : LCon
+	//------------------------------------------------------------------------------------------------------------------------
+	//change log table:
+	//version   date          expert in charge            changes applied
+	//V1.0      01.07.2012    APC GMC group               Creation
+	//V1.1      17.11.2016    APC ERL                     adapted to styleguide
+	//========================================================================================================================
+	
+	#QF := NOT #CLK AND #statEdge;
+	#QR := #CLK AND NOT #statEdge;
+	#statEdge := #CLK;
+	
+END_FUNCTION_BLOCK
+

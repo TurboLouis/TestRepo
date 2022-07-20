@@ -1,0 +1,24 @@
+﻿FUNCTION "LAxisCtrl_UnpubAxisPositionTolerance" : LReal
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'tech.team.motioncontrol@siemens.com'
+FAMILY : AxisCtrl
+VERSION : 1.1
+   VAR_INPUT 
+      axis : DB_ANY;
+   END_VAR
+
+
+BEGIN
+	// Read axis parameter
+	CASE TypeOfDB(#axis) OF
+	  TO_PositioningAxis:
+	    #LAxisCtrl_UnpubAxisPositionTolerance := "LAxisCtrl_UnpubPositionTolerancePosAxis"(#axis);
+	    
+	  TO_SynchronousAxis:
+	    #LAxisCtrl_UnpubAxisPositionTolerance := "LAxisCtrl_UnpubPositionToleranceSyncAxis"(#axis);
+	    
+	  ELSE
+	    #LAxisCtrl_UnpubAxisPositionTolerance := 0.0;
+	END_CASE;
+END_FUNCTION
+
